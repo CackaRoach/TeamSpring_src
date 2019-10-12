@@ -28,6 +28,11 @@ public class GetBoardListController {
 	@Autowired
 	private BoardService boardService;
 
+	@ModelAttribute 
+	public UserVO userVO() {
+		UserVO userVO = new UserVO();
+		return userVO;
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showGetBoardList(@ModelAttribute("userVO") UserVO userVO, Model model) {
@@ -37,6 +42,7 @@ public class GetBoardListController {
 			return "redirect:login.do";
 		} else {
 			model.addAttribute("boardList", boardService.getBoardList());
+			model.addAttribute("boardListDAO", boardService.getBoardList().get(0));
 		}
 		
 		
