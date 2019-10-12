@@ -6,6 +6,17 @@
 <head>
 <meta charset="Shift_JIS">
 <title>Board</title>
+<script type="text/javascript">
+window.onload = function() {
+	var list = ${boardList};
+
+	for(var temp in keys) {
+		console.log("key = "+ keys[temp]+ ",  data = " + obj[keys[temp]]);
+	}
+}
+
+
+</script>
 </head>
 <body>
 	<div align="center">
