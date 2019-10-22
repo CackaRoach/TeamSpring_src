@@ -19,7 +19,6 @@ import com.test.springboard.vo.UserVO;
 
 @Controller
 @RequestMapping("/addBoard.do")
-@SessionAttributes({"userVO"})
 public class AddBoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AddBoardController.class);

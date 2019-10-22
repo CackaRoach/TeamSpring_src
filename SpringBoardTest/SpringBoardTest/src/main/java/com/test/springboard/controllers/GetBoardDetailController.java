@@ -20,7 +20,6 @@ import com.test.springboard.vo.UserVO;
 
 @Controller
 @RequestMapping("/getBoardDetail.do")
-@SessionAttributes({"userVO", "author_id"})
 public class GetBoardDetailController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(GetBoardDetailController.class);

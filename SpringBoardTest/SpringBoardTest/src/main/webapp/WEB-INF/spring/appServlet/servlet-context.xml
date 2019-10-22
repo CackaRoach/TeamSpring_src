@@ -25,7 +25,5 @@
 
 	
 	<context:component-scan base-package="com.test.springboard.*" />
-
-	
 	
 </beans:beans>

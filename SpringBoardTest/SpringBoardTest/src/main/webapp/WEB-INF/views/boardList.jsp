@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div align="center">
-		<h3>Hi, ${userVO.name}!</h3>
+		<h3>Hi, ${Name}!</h3>
 		<a href="logout.do">Logout</a>
 	</div>
 	<hr>

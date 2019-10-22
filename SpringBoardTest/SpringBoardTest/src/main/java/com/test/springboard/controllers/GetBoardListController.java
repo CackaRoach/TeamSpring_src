@@ -4,6 +4,8 @@ package com.test.springboard.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,6 @@ import com.test.springboard.vo.UserVO;
 
 @Controller
 @RequestMapping("/getBoardList.do")
-@SessionAttributes({"userVO"})
 public class GetBoardListController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(GetBoardListController.class);
@@ -28,29 +29,22 @@ public class GetBoardListController {
 	@Autowired
 	private BoardService boardService;
 
-	@ModelAttribute 
-	public UserVO userVO() {
-		UserVO userVO = new UserVO();
-		return userVO;
-	}
-	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showGetBoardList(@ModelAttribute("userVO") UserVO userVO, Model model) {
-		logger.info("Call : GetBoardList - GET NAME : " + userVO.getName());
+	public String showGetBoardList(HttpSession httpSession, Model model) {
+		logger.info("Call : GetBoardList - GET NAME : " + httpSession.getAttribute("Id"));
 		
-		if(userVO.getId() == null) {
+		if(httpSession.getAttribute("Id") == null) {
 			return "redirect:login.do";
 		} else {
 			model.addAttribute("boardList", boardService.getBoardList());
 			model.addAttribute("boardListDAO", boardService.getBoardList().get(0));
 		}
 		
-		
 		return "boardList";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String getBoardList(@ModelAttribute("userVO") UserVO userVO,
+	public String getBoardList(HttpSession httpSession,
 								String searchCondition,
 								 String searchKeyword, 
 								  Model model) {
@@ -60,7 +54,7 @@ public class GetBoardListController {
 		logger.info("Call : GetBoardList - POST searchCondition : " + searchCondition);
 		logger.info("Call : GetBoardList - POST searchKeyword : " + searchKeyword);
 		
-		if(userVO.getId() == null) {
+		if(httpSession.getAttribute("Id") == null) {
 			return "redirect:login.do";
 		} else {
 		

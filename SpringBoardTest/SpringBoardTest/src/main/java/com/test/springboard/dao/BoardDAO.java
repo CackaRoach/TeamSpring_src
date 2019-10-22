@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.test.springboard.vo.BoardVO;
 
+// TODO : Logging
+
 @Mapper
 public interface BoardDAO {
 	// Board CRUD
