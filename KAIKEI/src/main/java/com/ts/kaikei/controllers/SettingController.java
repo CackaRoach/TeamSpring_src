@@ -26,6 +26,5 @@ public class SettingController {
 		logger.info("Call : Test");
 
 		return "login";
-		
 	}
 }

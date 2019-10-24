@@ -28,6 +28,5 @@ public class ManageController {
 		logger.info("Call : Test");
 
 		return "login";
-		
 	}
 }

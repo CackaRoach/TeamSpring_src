@@ -25,6 +25,5 @@ public class ReportController {
 		logger.info("Call : Test");
 
 		return "login";
-		
 	}
 }
