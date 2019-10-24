@@ -22,9 +22,9 @@ public class CommonController {
 	@Autowired
 	private CommonService commonService;
 
-	// index CALL
+	
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
-	public String showLogin(Model model) {
+	public String login(Model model) {
 		logger.info("Call : login.jsp - GET");
 		
 		return "login";

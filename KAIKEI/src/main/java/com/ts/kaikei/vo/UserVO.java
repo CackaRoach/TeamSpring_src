@@ -4,21 +4,21 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("UserVO")
 public class UserVO {
-	String id;
-	String password;
-	String company_cd;
-	String posit_cd;
-	String auth_cd;
-	String state_cd;
-	String name;
-	String email;
-	String phone;
-	String ent_id;
-	String ent_date;
-	String ent_prog;
-	String mod_id;
-	String mod_date;
-	String mod_prog;
+	private String id;
+	private String password;
+	private String company_cd;
+	private String posit_cd;
+	private String auth_cd;
+	private String state_cd;
+	private String name;
+	private String email;
+	private String phone;
+	private String ent_id;
+	private String ent_date;
+	private String ent_prog;
+	private String mod_id;
+	private String mod_date;
+	private String mod_prog;
 	
 	public String getId() {
 		return id;

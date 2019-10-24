@@ -4,14 +4,23 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("AccountVO")
 public class AccountVO {
-	String acc_cd; // Account code --> (0101 - Cash)
-	String title; // Account title
-	String ent_id;
-	String ent_date;
-	String ent_prog;
-	String mod_id;
-	String mod_date;
-	String mod_prog;
+	private String company_cd;
+	private String acc_cd; // Account code --> (0101 - Cash)
+	private String title; // Account title
+	private String ent_id;
+	private String ent_date;
+	private String ent_prog;
+	private String mod_id;
+	private String mod_date;
+	private String mod_prog;
+	
+	public String getCompany_cd() {
+		return company_cd;
+	}
+	
+	public void setCompany_cd(String company_cd) {
+		this.company_cd = company_cd;
+	}
 	
 	public String getAcc_cd() {
 		return acc_cd;

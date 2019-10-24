@@ -4,21 +4,21 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("CompanyVO")
 public class CompanyVO {
-	String company_cd;
-	String state_cd;
-	String name;
-	String regist_cd;
-	String fax;
-	String phone;
-	String domain;
-	String bank_title;
-	String bank_acc;
-	String ent_id;
-	String ent_date;
-	String ent_prog;
-	String mod_id;
-	String mod_date;
-	String mod_prog;
+	private String company_cd;
+	private String state_cd;
+	private String title;
+	private String regist_cd;
+	private String fax;
+	private String phone;
+	private String domain;
+	private String bank_title;
+	private String bank_acc;
+	private String ent_id;
+	private String ent_date;
+	private String ent_prog;
+	private String mod_id;
+	private String mod_date;
+	private String mod_prog;
 	
 	public String getCompany_cd() {
 		return company_cd;
@@ -36,12 +36,12 @@ public class CompanyVO {
 		this.state_cd = state_cd;
 	}
 	
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	public String getRegist_cd() {
@@ -139,4 +139,6 @@ public class CompanyVO {
 	public void setMod_prog(String mod_prog) {
 		this.mod_prog = mod_prog;
 	}
+	
+	
 }
