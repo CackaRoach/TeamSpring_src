@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ts.kaikei.dao.UserDAO">
-
-    <select id="getUser" parameterType="UserVO" resultType="UserVO" >
-    
-        SELECT *
-        FROM users
-        WHERE 1=1
-        AND id = #{id}
-        AND password = #{password}
-        
-    </select>
+<mapper namespace="com.ts.kaikei.dao.StatementDAO">
     
 </mapper>

@@ -2,7 +2,7 @@ package com.ts.kaikei.vo;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("ComapnayVO")
+@Alias("CompanyVO")
 public class CompanyVO {
 	String company_cd;
 	String state_cd;

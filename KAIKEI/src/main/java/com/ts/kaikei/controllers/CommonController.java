@@ -41,13 +41,10 @@ public class CommonController {
 			logger.info("Login Err");
 			model.addAttribute("state", "Login Fail!");
 			return "login";
-			
 		}
 
 		logger.info("Company_CD : " + user.getCompany_cd());
 		model.addAttribute("state", "Login Success!");
-		return "login";
-		
+		return "login";	
 	}
-	
 }

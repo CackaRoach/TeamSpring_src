@@ -25,6 +25,5 @@ public class AccountController {
 		logger.info("Call : Test");
 
 		return "login";
-		
 	}
 }
