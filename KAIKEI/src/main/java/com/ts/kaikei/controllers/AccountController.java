@@ -19,11 +19,4 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
-	// Submit
-	@RequestMapping(value = "test.do", method = RequestMethod.POST)
-	public String test(Model model) {
-		logger.info("Call : Test");
-
-		return "login";
-	}
 }

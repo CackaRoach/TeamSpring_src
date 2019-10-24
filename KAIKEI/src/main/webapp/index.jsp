@@ -8,12 +8,11 @@
 <script type="text/javascript">
 	function goLoginPage()
 	{
-	 		location.href="login.do";
+	 		location.href="loginForward.do";
 	}
 </script>
 
 <body onload="goLoginPage()">
-<h1>Hello</h1>
 </body>
 </head>
 </html>

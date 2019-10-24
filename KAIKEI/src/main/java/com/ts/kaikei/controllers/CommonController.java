@@ -14,7 +14,7 @@ import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.UserVO;
 
 @Controller
-@RequestMapping("/")
+
 public class CommonController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
@@ -23,15 +23,15 @@ public class CommonController {
 	private CommonService commonService;
 
 	
-	@RequestMapping(value = "login.do", method = RequestMethod.GET)
-	public String login(Model model) {
+	@RequestMapping(value = "/loginForward.do", method = RequestMethod.GET)
+	public String loginForward(Model model) {
 		logger.info("Call : login.jsp - GET");
 		
 		return "login";
 	}
 	
-	// Submit
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String login(UserVO userVO, HttpSession httpSession, Model model) {
 		logger.info("Call : login.jsp - POST" + userVO.getId() + userVO.getPassword());
 		
@@ -45,6 +45,6 @@ public class CommonController {
 
 		logger.info("Company_CD : " + user.getCompany_cd());
 		model.addAttribute("state", "Login Success!");
-		return "login";	
+		return "samplePage";	
 	}
 }

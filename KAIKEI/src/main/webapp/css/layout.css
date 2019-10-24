@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#header {
+	border: 1px solid #999;
+    margin: 5px;
+    padding: 10px;
+    height: 20%;
+    background-color: red;
+}
+
+#nav {
+	border: 1px solid #999;
+    margin: 5px;
+    padding: 10px;
+    background-color: goldenrod;
+    width: 20.5%;
+    border: 1px solid #999;
+    float: left;
+    height: 60%;
+}
+
+#section {
+	border: 1px solid #999;
+    margin: 5px;
+    padding: 10px;
+    background-color: green;   
+    width: 74%;
+    float: right;
+    height: 60%;
+}
+
+#footer {
+	border: 1px solid #999;
+    margin: 5px;
+    padding: 10px;
+    height: 10%;
+    background-color: blue;
+    position: relatiev;
+    clear: both;
+}
+

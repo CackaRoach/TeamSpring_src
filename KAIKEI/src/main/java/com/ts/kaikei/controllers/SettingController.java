@@ -20,11 +20,4 @@ public class SettingController {
 	@Autowired
 	private SettingService settingService;
 
-	// Submit
-	@RequestMapping(value = "test.do", method = RequestMethod.POST)
-	public String test(Model model) {
-		logger.info("Call : Test");
-
-		return "login";
-	}
 }
