@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +28,8 @@ public class UserController {
 	// index CALL
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String showLogin(Model model) {
-
+		logger.info("Call : login.jsp - GET");
+		
 		return "login";
 	}
 	
@@ -54,23 +54,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
-	public String showLogout(Model model) {
+	public String showLogout(HttpSession httpSession, Model model) {
 		logger.info("Call : logout.jsp - GET");
 		
-		return "redirect:login.do";
-	}
-	
-	@RequestMapping(value = "logout.do", method = RequestMethod.POST)
-	public String logout(Model model) {
-		logger.info("Call : login.jsp - POST");
+		httpSession.invalidate();
 		
 		return "redirect:login.do";
-	}
-	
-	@RequestMapping(value = "regist.do", method = RequestMethod.GET)
-	public String showRegist(Model model) {
-
-		return "register";
 	}
 	
 	// Submit
