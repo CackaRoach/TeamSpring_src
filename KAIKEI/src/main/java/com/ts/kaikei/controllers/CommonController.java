@@ -14,7 +14,6 @@ import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.UserVO;
 
 @Controller
-
 public class CommonController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);

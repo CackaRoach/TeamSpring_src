@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ts.kaikei.services.SettingService;
 
 @Controller
-@RequestMapping("/setting/")
 public class SettingController {
 
 	
@@ -20,4 +19,7 @@ public class SettingController {
 	@Autowired
 	private SettingService settingService;
 
+	/*
+	 * @RequestMapping(value = "/setting/*.do")
+	 */
 }

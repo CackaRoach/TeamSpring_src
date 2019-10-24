@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ts.kaikei.services.ReportService;
 
 @Controller
-@RequestMapping("/report/")
 public class ReportController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReportController.class);
@@ -19,4 +18,7 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 
+	/*
+	 * @RequestMapping(value = "/report/*.do")
+	 */
 }

@@ -10,7 +10,6 @@ import com.ts.kaikei.services.ManageService;
 
 
 @Controller
-@RequestMapping("/manage/")
 public class ManageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ManageController.class);
@@ -18,4 +17,7 @@ public class ManageController {
 	@Autowired
 	private ManageService manageService;
 
+	/*
+	 * @RequestMapping(value = "/manage/*.do")
+	 */
 }

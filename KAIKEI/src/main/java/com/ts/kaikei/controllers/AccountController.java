@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ts.kaikei.services.AccountService;
 
 @Controller
-@RequestMapping("/account/")
 public class AccountController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
@@ -19,4 +18,7 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
+	/*
+	 * @RequestMapping(value = "/account/*.do")
+	 */
 }
