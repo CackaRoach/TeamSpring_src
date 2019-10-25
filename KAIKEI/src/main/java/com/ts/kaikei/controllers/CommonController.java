@@ -22,28 +22,26 @@ public class CommonController {
 	private CommonService commonService;
 
 	
-	@RequestMapping(value = "/loginForward.do", method = RequestMethod.GET)
-	public String loginForward(Model model) {
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String login(Model model) {
 		logger.info("Call : login.jsp - GET");
 		
 		return "login";
 	}
 	
 
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(UserVO userVO, HttpSession httpSession, Model model) {
+	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
+	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
 		logger.info("Call : login.jsp - POST" + userVO.getId() + userVO.getPassword());
 		
 		UserVO user = commonService.getUser(userVO); 
 			
 		if(user == null) {
 			logger.info("Login Err");
-			model.addAttribute("state", "Login Fail!");
 			return "login";
 		}
 
 		logger.info("Company_CD : " + user.getCompany_cd());
-		model.addAttribute("state", "Login Success!");
-		return "samplePage";	
+		return "main";	
 	}
 }

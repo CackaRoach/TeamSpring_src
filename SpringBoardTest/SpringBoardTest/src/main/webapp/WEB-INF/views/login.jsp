@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div align="center">
-		<form action="login.do" method="post">
+		<form action="loginExc.do" method="post">
 			<h6>ID</h6><input type="text" name="id" value="${userId}" >
 			<h6>Password</h6><input type="password" name="passwd">
 			<h5 style="color:red">${state}</h5>

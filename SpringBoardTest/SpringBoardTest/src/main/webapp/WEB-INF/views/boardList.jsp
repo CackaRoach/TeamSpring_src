@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div align="center">
-		<h3>Hi, ${Name}!</h3>
+		<h3>Hi, ${name}!</h3>
 		<a href="logout.do">Logout</a>
 	</div>
 	<hr>
@@ -39,7 +39,7 @@
 		<p></p>
 		</div>
 		<div align="center">
-			<form action="getBoardList.do" method="Post">
+			<form action="getBoardListCond.do" method="Post">
 				<select name="searchCondition">
 					<option value="title" <c:if test="${searchCondition == 'title'}">selected</c:if>>Title</option>
 					<option value="contents" <c:if test="${searchCondition == 'contents'}">selected</c:if>>Contents</option>

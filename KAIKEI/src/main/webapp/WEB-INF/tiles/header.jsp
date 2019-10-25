@@ -1,3 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
-<div>header</div>
+		<div align="center">
+			<h1>TITLE</h1>
+		</div>

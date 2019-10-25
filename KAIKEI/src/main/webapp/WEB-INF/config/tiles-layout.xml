@@ -4,14 +4,23 @@
  
 <tiles-definitions>
 
-    <definition name="base" template="/WEB-INF/tiles/layout.jsp">
+    <definition name=".user" template="/WEB-INF/tiles/layout.jsp">
         <put-attribute name="nav"   value="/WEB-INF/tiles/nav.jsp" />
         <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
     </definition>
  
-    <definition name="*" extends="base">
-        <put-attribute name="section" value="/WEB-INF/views/{1}.jsp" />
+    <definition name="main" extends=".user">
+        <put-attribute name="section" value="/WEB-INF/views/main.jsp" />
+    </definition>
+    
+    <definition name=".login" template="/WEB-INF/tiles/login-layout.jsp">
+    <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+    </definition>
+ 
+    <definition name="login" extends=".login">
+        <put-attribute name="section" value="/WEB-INF/views/login.jsp" />
     </definition>
         
 </tiles-definitions>

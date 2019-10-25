@@ -25,10 +25,10 @@
 		</table>
 	</div>
 	<div align="center">
-		<c:if test="${boardVO.author_id == userVO.id}">
+		<c:if test="${boardVO.author_id == id}">
 		<a href="deleteBoard.do?idx=${boardVO.idx}">[Delete]</a>
 		</c:if>
-	    <c:if test="${boardVO.author_id == userVO.id}"> <a href="updateBoard.do">[Modify]</a> </c:if>
+	    <c:if test="${boardVO.author_id == id}"> <a href="updateBoard.do">[Modify]</a> </c:if>
 		<a href="getBoardList.do">[List]</a>
 	</div>
 </body>

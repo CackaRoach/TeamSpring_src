@@ -25,31 +25,31 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	// index CALL
+
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
-	public String showLogin(Model model) {
-		logger.info("Call : login.jsp - GET");
+	public String login(Model model) {
+		logger.info("Call : loginForawrd.jsp - GET");
 		
 		return "login";
 	}
 	
-	// Submit
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(UserVO userVO, HttpSession httpSession, Model model) {
+	@RequestMapping(value = "loginExc.do", method = RequestMethod.POST)
+	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
 		logger.info("Call : login.jsp - POST");
 
 		UserVO loginResult = userService.getUser(userVO); 
 		
 		if(loginResult == null) {
 			model.addAttribute("userVO", userVO);
-			model.addAttribute("state", "Incorrect username or password");
 			
 			return "login";
 		}
 		
-		httpSession.setAttribute("Id", loginResult.getId());
-		httpSession.setAttribute("Name", loginResult.getName());
+		// Session Set
+		httpSession.setAttribute("id", loginResult.getId());
+		httpSession.setAttribute("name", loginResult.getName());
 		model.addAttribute("userVO", loginResult);
+		
 		return "redirect:getBoardList.do";
 	}
 	
@@ -57,23 +57,34 @@ public class UserController {
 	public String showLogout(HttpSession httpSession, Model model) {
 		logger.info("Call : logout.jsp - GET");
 		
-		httpSession.invalidate();
+		httpSession.invalidate();								// Session Delete
 		
 		return "redirect:login.do";
 	}
 	
-	// Submit
 	@RequestMapping(value = "regist.do", method = RequestMethod.POST)
-	public String regist(UserVO userVO, Model model) {
+	public String regist(UserVO userVO, 
+						  HttpSession httpSession,
+						   Model model) {
+		
 		logger.info("Call : regist - POST");
 		logger.info("UserVO Id = " + userVO.getId());
 		logger.info("UserVO Name = " + userVO.getName());
-
+		
+		// Logic
+		
+		// Regist
 		userService.registUser(userVO); 
-
-		return "redirect:login.do";
+		
+		// Session Set
+		httpSession.setAttribute("id", userVO.getId());
+		httpSession.setAttribute("name", userVO.getName());
+		
+		return "redirect:getBoardList.do";
 	}
 	
+	
+	// Ajax
 	@RequestMapping(value = "regist/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String userId, Model model) {

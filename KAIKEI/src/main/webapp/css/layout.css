@@ -1,41 +1,93 @@
 @charset "UTF-8";
 
 #header {
-	border: 1px solid #999;
+	border: 1px solid black;
     margin: 5px;
     padding: 10px;
     height: 20%;
-    background-color: red;
 }
 
 #nav {
-	border: 1px solid #999;
+	border: 1px solid black;
     margin: 5px;
     padding: 10px;
-    background-color: goldenrod;
     width: 20.5%;
-    border: 1px solid #999;
     float: left;
     height: 60%;
 }
 
 #section {
-	border: 1px solid #999;
+	border: 1px solid black;
     margin: 5px;
     padding: 10px;
-    background-color: green;   
-    width: 74%;
+    width: 73%;
     float: right;
     height: 60%;
 }
 
+#section-only {
+    height: 60%;
+}
+
+
 #footer {
-	border: 1px solid #999;
+	border: 1px solid black;
     margin: 5px;
     padding: 10px;
     height: 10%;
-    background-color: blue;
     position: relatiev;
     clear: both;
+}
+
+#ul-list {
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}
+
+#button {
+	width: 250px;
+	background-color: #c0c0c0;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+#div-gray {
+	background-color: #eeeeee;
+}
+
+#div-space {
+	height: 50px;
+}
+
+#input-box {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0px;
+  box-sizing: border-box;
+  border: 2px solid #c0c0c0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+td {
+	padding: 10px;
+}
+
+table {
+	padding: 10px;
+}
+
+li {
+	list-style-type : none
 }
 
