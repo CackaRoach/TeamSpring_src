@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.UserVO;
 
-// TODO : ·Î±×¾Æ¿ô - Layout(height, width %) ¼öÁ¤
+// TODO : ë¡œê·¸ì•„ì›ƒ - Layout(height, width %) ìˆ˜ì •
 
 @Controller
 public class CommonController {
@@ -34,8 +34,9 @@ public class CommonController {
 
 	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
 	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
-		// TODO : È¸»ç ½ÂÀÎ JoinÇØ¼­ ¹Ì½ÂÀÎ½Ã ·Î±×ÀÎÃ³¸® ±¸Çö
+		// TODO : íšŒì‚¬ ìŠ¹ì¸ Joiní•´ì„œ ë¯¸ìŠ¹ì¸ì‹œ ë¡œê·¸ì¸ì²˜ë¦¬ êµ¬í˜„
 		logger.info("Call : /loginExc.do - POST");
+		logger.info("Test Method");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
 			
@@ -67,8 +68,8 @@ public class CommonController {
 	
 	@RequestMapping(value = "/signupExc.do", method = RequestMethod.POST)
 	public String signupExc(Model model) {
-		// TODO : È¸¿ø°¡ÀÔ ±¸Çö - »õ È¸»ç 
-		// TODO : È¸¿ø°¡ÀÔ ±¸Çö - ±âÁ¸È¸»ç
+		// TODO : íšŒì›ê°€ì… êµ¬í˜„ - ìƒˆ íšŒì‚¬ 
+		// TODO : íšŒì›ê°€ì… êµ¬í˜„ - ê¸°ì¡´íšŒì‚¬
 		logger.info("Call : /signup.do - GET");
 		  
 		
@@ -77,7 +78,7 @@ public class CommonController {
 	
 	@RequestMapping(value = "/forgot.do", method = RequestMethod.GET)
 	public String forgot(Model model) {
-		// TODO : ID, ºñ¹Ğ¹øÈ£ Ã£±â ±¸Çö
+		// TODO : ID, ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° êµ¬í˜„
 		logger.info("Call : /forgot.do - GET");
 		
 		
