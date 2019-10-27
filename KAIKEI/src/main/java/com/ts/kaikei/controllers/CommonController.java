@@ -30,7 +30,7 @@ public class CommonController {
 		
 		return "/login";
 	}
-	
+	 
 
 	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
 	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
