@@ -16,10 +16,10 @@
     </definition>
  
  
-    <definition name="login" extends=".defalut">
-        <put-attribute name="section" value="/WEB-INF/views/login.jsp" />
+    <definition name="/*" extends=".defalut">
+        <put-attribute name="section" value="/WEB-INF/views/{1}.jsp" />
     </definition>
- 
+
 	<definition name="/*/*" extends=".nav">
         <put-attribute name="section" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.UserVO;
 
+// TODO : 로그아웃 - Layout(height, width %) 수정
+
 @Controller
 public class CommonController {
 	
@@ -26,13 +28,14 @@ public class CommonController {
 	public String login(Model model) {
 		logger.info("Call : /login.do - GET");
 		
-		return "login";
+		return "/login";
 	}
 	
 
-	@RequestMapping(value = "/main.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
 	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
-		logger.info("Call : /main.do - POST");
+		// TODO : 회사 승인 Join해서 미승인시 로그인처리 구현
+		logger.info("Call : /loginExc.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
 			
@@ -42,7 +45,43 @@ public class CommonController {
 		}
 
 		httpSession.setAttribute("userVO", getUserVO);
-		return "/common/main";	
+		return "redirect:home.do";	
+	}
+	
+	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
+	public String home(HttpSession httpSession, Model model) {
+		logger.info("Call : /home.do - GET");
+		
+		if(httpSession.getAttribute("userVO") == null)
+			return "error";
+		
+		return "/common/home";	
+	}
+	
+	@RequestMapping(value = "/signup.do", method = RequestMethod.GET)
+	public String signup(Model model) {
+		logger.info("Call : /signup.do - GET");
+		
+		return "/signup";	
+	}
+	
+	@RequestMapping(value = "/signupExc.do", method = RequestMethod.POST)
+	public String signupExc(Model model) {
+		// TODO : 회원가입 구현 - 새 회사 
+		// TODO : 회원가입 구현 - 기존회사
+		logger.info("Call : /signup.do - GET");
+		
+		
+		return "/signup";	
+	}
+	
+	@RequestMapping(value = "/forgot.do", method = RequestMethod.GET)
+	public String forgot(Model model) {
+		// TODO : ID, 비밀번호 찾기 구현
+		logger.info("Call : /forgot.do - GET");
+		
+		
+		return "/forgot";	
 	}
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
@@ -51,13 +90,13 @@ public class CommonController {
 		
 		httpSession.invalidate();
 		
-		return "login";	
+		return "/login";	
 	}
 	
 	@RequestMapping(value = "/error.do", method = RequestMethod.GET)
 	public String error(HttpSession httpSession, Model model) {
 		logger.info("Call : /error.do - GET");
 		
-		return "error";	
+		return "/error";	
 	}
 }

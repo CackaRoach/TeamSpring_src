@@ -2,8 +2,8 @@
     pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<div id="div-gray" align="center">
-			<form action="main.do" method="post">
-				<div id="div-space">
+			<form action="loginExc.do" method="post">
+				<div id="div-rowspace">
 				</div>
 				<h3>Login</h3>
 				<table>
@@ -16,8 +16,8 @@
 						<td><input id="input-box" type="password" name="password"></td>
 					</tr>
 					<tr style="text-align:right">
-						<td>Sign Up</td>
-						<td>forgot Password</td>
+						<td><a href="signup.do">Sign Up</a></td>
+						<td><a href="forgot.do">forgot ID, Password</a></td>
 					</tr>
 				</table>
 				<input id="button" type="submit" value="Login">

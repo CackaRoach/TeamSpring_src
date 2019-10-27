@@ -8,6 +8,22 @@
     <title>Title</title>
     <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
 </head>
+<script>
+	function changeForm(form) {
+		if(form == 'exist') {
+			document.getElementById('exist').style.display = 'block';
+			document.getElementById('new').style.display = 'none';
+		} else {
+			document.getElementById('exist').style.display = 'none';
+			document.getElementById('new').style.display = 'block';
+		}
+	}
+
+	function submitSignForm() {
+		var array;
+		arrat
+	}
+</script>
 <body>
     <div id="header"><tiles:insertAttribute name="header" />
     </div>
