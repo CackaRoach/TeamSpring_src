@@ -9,18 +9,18 @@
 				<table>
 					<tr>
 						<td style="text-align:center">ID</td>
-						<td><input id="input-box" type="text" name="id" ></td>
+						<td><input class="input-box" type="text" name="id" ></td>
 					</tr>
 					<tr>
 						<td>Password</td>
-						<td><input id="input-box" type="password" name="password"></td>
+						<td><input class="input-box" type="password" name="password"></td>
 					</tr>
 					<tr style="text-align:right">
 						<td><a href="signup.do">Sign Up</a></td>
 						<td><a href="forgot.do">forgot ID, Password</a></td>
 					</tr>
 				</table>
-				<input id="button" type="submit" value="Login">
+				<input class="button" type="submit" value="Login">
 				<div id="div-space">
 				</div>
 			</form>

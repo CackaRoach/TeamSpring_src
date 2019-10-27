@@ -19,9 +19,10 @@
 		}
 	}
 
-	function submitSignForm() {
-		var array;
-		arrat
+	function formCheck() {
+		console.log(register.id.value);
+		console.log(register.companycode.value);
+		return true;
 	}
 </script>
 <body>

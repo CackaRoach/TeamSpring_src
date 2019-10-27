@@ -46,7 +46,7 @@
     font-size: 12px;
 }
 
-#button {
+.button {
 	width: 250px;
 	background-color: #c0c0c0;
 	border: none;
@@ -76,7 +76,7 @@
 	margin: 5px
 }
 
-#input-box {
+.input-box {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0px;

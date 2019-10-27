@@ -3,5 +3,25 @@
 
 <mapper namespace="com.ts.kaikei.dao.CompanyDAO">
 
+	<select id="checkCode" parameterType="String" resultType="int" >
+    
+        SELECT count(*)
+        FROM users
+        WHERE 1=1
+        AND id = #{id}
+        
+    </select>
+
+	<insert id="signUpCompany" parameterType="CompanyVO" >
+    
+        INSERT INTO company
+        VALUES(
+        #{company_cd}, #{state_cd}, #{title}, 
+        #{regist_cd}, #{fax}, #{phone}, 
+        #{domain}, #{bank_title}, #{bank_acc}, 
+        #{ent_id}, NOW(), #{ent_prog},
+        #{mod_id}, NOW(), #{mod_prog})
+        
+	</insert>
     
 </mapper>
