@@ -19,6 +19,7 @@
 		
 		<table>
 			<tr>
+				<th></th>
 				<th>Code</th>
 				<th>Company</th>
 				<th>CEO</th>
@@ -28,6 +29,18 @@
 			</tr>
 			<c:forEach items = "" var = "">
 				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
 					<td>
 					</td>
 				</tr>

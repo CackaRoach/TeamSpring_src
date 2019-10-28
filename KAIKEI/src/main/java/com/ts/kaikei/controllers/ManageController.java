@@ -35,7 +35,13 @@ public class ManageController {
 	@RequestMapping(value = "/manage/users.do", method = RequestMethod.GET)
 	public String userList(Model model) {
 		
-		return "/manage/users";
+		return "/manage/user";
 	} 
 	
+	//3. CODE MANAGEMENT
+	@RequestMapping(value = "/manage/code.do", method = RequestMethod.GET)
+	public String codeList(Model model) {
+		
+		return "/manage/code";
+	}
 }
