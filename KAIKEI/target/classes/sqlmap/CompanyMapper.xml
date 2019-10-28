@@ -6,9 +6,9 @@
 	<select id="checkCode" parameterType="String" resultType="int" >
     
         SELECT count(*)
-        FROM users
+        FROM company
         WHERE 1=1
-        AND id = #{id}
+        AND company_cd = #{code}
         
     </select>
 

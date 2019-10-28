@@ -47,7 +47,7 @@
 }
 
 .button {
-	width: 250px;
+	width: 330px;
 	background-color: #c0c0c0;
 	border: none;
 	color: white;
@@ -60,6 +60,7 @@
 
 #div-gray {
 	background-color: #eeeeee;
+    padding: 5px 0px 20px 0px;
 }
 
 #div-rowspace {
@@ -77,20 +78,28 @@
 }
 
 .input-box {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0px;
-  box-sizing: border-box;
-  border: 2px solid #c0c0c0;
+	height: 40px;
+	width: 100%;
+	padding: 6px 20px;
+	margin: 4px 10px;
+	box-sizing: border-box;
+	border: 2px solid #c0c0c0;
+}
+
+.spanLogin {
+	color:red;
+	display:none;
+	font-size: 0.80em;
+	font-weight: bold;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
 td {
-	padding: 10px;
+	padding: 0px 5px;
 }
 
 table {

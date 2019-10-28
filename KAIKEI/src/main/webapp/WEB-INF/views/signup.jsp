@@ -11,22 +11,22 @@
 				<div>
 					<table>
 						<tr>
-							<td style="text-align:center">ID*</td>
-							<td><input class="input-box" type="text" name="id"></td>
-							<td></td>
+							<td style="text-align:center">ID<span style="color:red">*</span></td>
+							<td><input class="input-box" type="text" id="id" name="id"></td>
+							<td style="width:100px"><h6 id="id_check"></h6></td>
 						</tr>
 						<tr>
-							<td style="text-align:center">Password*</td>
+							<td style="text-align:center">Password<span style="color:red">*</span></td>
 							<td><input class="input-box" type="password" name="password"></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td style="text-align:center">Confirm Password*</td>
+							<td style="text-align:center">Confirm Password<span style="color:red">*</span></td>
 							<td><input class="input-box" type="password" name="passwordconfirm"></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td style="text-align:center">E-mail*</td>
+							<td style="text-align:center">E-mail<span style="color:red">*</span></td>
 							<td><input class="input-box" type="text" name="email"></td>
 							<td></td>
 						</tr>
@@ -49,37 +49,44 @@
 					<table>
 						<tr>
 							<td><input type="radio" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');"></td>
-							<td style="text-align:center">Existing Company Code*</td>
+							<td style="text-align:center">Existing Company Code<span style="color:red">*</span></td>
 						</tr>
 						<tr>
 							<td><input type="radio" name="companyState" value="new" onclick="changeForm('new');"></td>
-							<td style="text-align:center">Create New Company Code*</td>
+							<td style="text-align:center">Create New Company Code<span style="color:red">*</span></td>
 						</tr>
 					</table>
 				</div>
 				<div id="exist">
 					<table>
 						<tr>
-							<td style="text-align:center">Company Code</td><td><input class="input-box" type="text" name="company_cd"></td>
+							<td style="text-align:center">Company Code<span style="color:red">*</span></td>
+							<td><input class="input-box" type="text" id="company_cd" name="company_cd"></td>
+							<td><h6 id="code_check"></h6></td>
 						</tr>
 					</table>
 				</div>
 				<div id="new" style="display:none">
 					<table>
 						<tr>
-							<td style="text-align:right">Business license Code*</td><td><input class="input-box" type="text" name="reg_cd"></td>
+							<td style="text-align:right">Business license Code<span style="color:red">*</span></td>
+							<td><input class="input-box" type="text" name="regist_cd"></td>
 						</tr>
 						<tr>
-							<td style="text-align:right">Company title</td><td><input class="input-box" type="text" name="title"></td>
+							<td style="text-align:right">Company title</td>
+							<td><input class="input-box" type="text" name="title"></td>
 						</tr>
 						<tr>
-							<td style="text-align:right">CEO Name</td><td><input class="input-box" type="text" name="ceo_name"></td>
+							<td style="text-align:right">Phone</td>
+							<td><input class="input-box" type="text" name="phone"></td>
 						</tr>
 						<tr>
-							<td style="text-align:right">Fax</td><td><input class="input-box" type="text" name="fax"></td>
+							<td style="text-align:right">Fax</td>
+							<td><input class="input-box" type="text" name="fax"></td>
 						</tr>
 						<tr>
-							<td style="text-align:right">Domain</td><td><input class="input-box" type="text" name="domain"></td>
+							<td style="text-align:right">Domain</td>
+							<td><input class="input-box" type="text" name="domain"></td>
 						</tr>
 					</table>
 				</div>
@@ -89,3 +96,46 @@
 				</div>
 			</form>
 		</div>
+    	<script>
+			$(window).load(function(){
+				$("#id").blur(function() {
+					var userId = $('#id').val();
+					$.ajax({
+						url : '/kaikei/checkId.do?id=' + userId,
+						type : 'get',
+						success : function(data) {					
+							
+							if (data == 1) {
+									$("#id_check").text("Exist ID");
+									$("#id_check").css("color", "red");
+								} else {
+									$('#id_check').text("Available ID");	
+									$("#id_check").css("color", "green");
+								}
+							}, error : function() {
+									console.log("Fail");
+							}
+						});
+					});
+
+				$("#company_cd").blur(function() {
+					var company_cd = $('#company_cd').val();
+					$.ajax({
+						url : '/kaikei/checkCode.do?company_cd=' + company_cd,
+						type : 'get',
+						success : function(data) {					
+							
+							if (data == 1) {
+									$("#code_check").text("Exist Code");
+									$("#code_check").css("color", "red");
+								} else {
+									$('#code_check').text("Available Code");	
+									$("#code_check").css("color", "green");
+								}
+							}, error : function() {
+									console.log("Fail");
+							}
+						});
+					});
+			});
+		</script>

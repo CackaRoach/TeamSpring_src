@@ -15,7 +15,7 @@ import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
-//TODO : 로그아웃 - Layout(height, width %) 수정
+// TODO : 로그아웃 - Layout(height, width %) 수정
 @Controller
 public class CommonController {
 	
@@ -46,14 +46,15 @@ public class CommonController {
 	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
 	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
 		// TODO : 회사 승인 Join해서 미승인시 로그인처리 구현
-		// TODO : 보안강화
+		// TODO : 보안강화 - 보안로그, 틀릴시 시간부여, 문자열최대치 설정
 		
 		logger.info("Call : /loginExc.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
 			
 		if(getUserVO == null) {
-			logger.info("Login Err");
+			logger.info("Login Fail");
+			model.addAttribute("state", "block");
 			return "/login";
 		}
 
@@ -85,7 +86,7 @@ public class CommonController {
 	public String signupExc(UserVO userVO, CompanyVO companyVO, String companyState, Model model) {
 		logger.info("Call : /signExc.do - GET");
 
-		// TODO : 보안강화
+		// TODO : 보안강화 - 문자열최대치 설정
 		
 		if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
 			// TODO : 회사중복코드 에러처리 구현
@@ -107,8 +108,8 @@ public class CommonController {
 		return "/login";
 	}
 	
-	// TODO : 중복아이디 체크 ajax 구현(front)
-	@RequestMapping(value = "/checkId.do", method = RequestMethod.POST)
+	// TODO : 중복아이디 체크 ajax length비교 + 에러메시지
+	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {
 		logger.info("Call : /checkId.do ajax id : " + id);
@@ -117,12 +118,12 @@ public class CommonController {
 	}
 	
 	// TODO : 중복회사코드 체크 ajax 구현(front)
-	@RequestMapping(value = "/checkCode.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkCode.do", method = RequestMethod.GET)
 	@ResponseBody
-	public int checkCode(String code, Model model) {
-		logger.info("Call : /checkCode.do ajax code : " + code);
-
-		return commonService.checkCode(code);
+	public int checkCode(String company_cd, Model model) {
+		logger.info("Call : /checkCode.do ajax code : " + company_cd);
+		return 1;
+		//return commonService.checkCode(company_cd);
 	}
 	
 	// 아이디 비밀번호 찾기 페이지 포워딩
