@@ -23,10 +23,19 @@ public class ManageController {
 	 *  @RequestMapping(value = "/manage/*.do")
 	 */
 	
+	//1. COMPANY MANAGEMENT
 	@RequestMapping(value = "/manage/company.do", method = RequestMethod.GET)
 	public String ledger(Model model) {
 		logger.info("Call : /manage/company.do - GET");
-
+		
 		return "/manage/company";
 	}
+	
+	//2. USER MANAGEMENT
+	@RequestMapping(value = "/manage/users.do", method = RequestMethod.GET)
+	public String userList(Model model) {
+		
+		return "/manage/users";
+	}
+	
 }
