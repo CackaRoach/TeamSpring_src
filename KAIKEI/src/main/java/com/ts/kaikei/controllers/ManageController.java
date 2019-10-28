@@ -36,6 +36,6 @@ public class ManageController {
 	public String userList(Model model) {
 		
 		return "/manage/users";
-	}
+	} 
 	
 }
