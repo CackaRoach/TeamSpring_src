@@ -29,7 +29,7 @@ public class ManageController {
 		logger.info("Call : /manage/company.do - GET");
 		
 		return "/manage/company";
-	}
+	} 
 	
 	//2. USER MANAGEMENT
 	@RequestMapping(value = "/manage/users.do", method = RequestMethod.GET)
