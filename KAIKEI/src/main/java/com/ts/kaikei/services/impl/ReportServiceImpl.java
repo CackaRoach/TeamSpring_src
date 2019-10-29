@@ -3,50 +3,48 @@ package com.ts.kaikei.services.impl;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ts.kaikei.dao.StatementDAO;
 import com.ts.kaikei.services.ReportService;
 import com.ts.kaikei.vo.StatementVO;
 
 @Service("reportService")
 public class ReportServiceImpl implements ReportService {
-
+	
+	@Autowired
+	private StatementDAO statementDAO;
+	
 	@Override
-	public void addStatement(StatementVO boardVO) {
-		// TODO Auto-generated method stub
-		
+	public void addStatement(StatementVO statementVO) {
+		statementDAO.addStatement(statementVO);
 	}
 
 	@Override
 	public void deleteStatement(int idx) {
-		// TODO Auto-generated method stub
-		
+		statementDAO.deleteStatement(idx);
 	}
 
 	@Override
 	public ArrayList<StatementVO> getStatementList() {
-		// TODO Auto-generated method stub
-		return null;
+		return statementDAO.getStatementList();
+		
 	}
 
 	@Override
 	public ArrayList<StatementVO> getStatementListCond(Map<String, String> searchParams) {
-		// TODO Auto-generated method stub
-		return null;
+		return statementDAO.getStatementListCond(searchParams);
 	}
 
 	@Override
 	public StatementVO getStatementDetail(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		return statementDAO.getStatementDetail(idx);
 	}
 
 	@Override
-	public void updateStatement(StatementVO boardVO) {
-		// TODO Auto-generated method stub
-		
+	public void updateStatement(StatementVO statementVO) {
+		statementDAO.updateStatement(statementVO);
 	}
-
-	
 	
 }
