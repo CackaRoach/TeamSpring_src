@@ -25,7 +25,7 @@ public class ManageController {
 	
 	//1. COMPANY MANAGEMENT
 	@RequestMapping(value = "/manage/company.do", method = RequestMethod.GET)
-	public String ledger(Model model) {
+	public String ledger( Model model ) {
 		logger.info("Call : /manage/company.do - GET");
 		
 		return "/manage/company";
@@ -33,15 +33,15 @@ public class ManageController {
 	
 	//2. USER MANAGEMENT
 	@RequestMapping(value = "/manage/users.do", method = RequestMethod.GET)
-	public String userList(Model model) {
+	public String userList( Model model ) {
 		
 		return "/manage/user";
 	} 
 	
 	//3. CODE MANAGEMENT
 	@RequestMapping(value = "/manage/code.do", method = RequestMethod.GET)
-	public String codeList(Model model) {
+	public String codeList( Model model ) {
 		
-		return "/manage/code";
+		return "/manage/code"; //commit
 	}
 }
