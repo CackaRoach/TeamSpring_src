@@ -12,10 +12,22 @@ import com.ts.kaikei.vo.StatementVO;
 
 @Service("reportService")
 public class ReportServiceImpl implements ReportService {
-	
+
+	@Override
+	public ArrayList<StatementVO> getStatementList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/*
 	@Autowired
 	private StatementDAO statementDAO;
 	
+	@Override
+	public ArrayList<StatementVO> getStatementList() {
+		return statementDAO.getStatementList();
+		
+	}
+	/*
 	@Override
 	public void addStatement(StatementVO statementVO) {
 		statementDAO.addStatement(statementVO);
@@ -46,5 +58,5 @@ public class ReportServiceImpl implements ReportService {
 	public void updateStatement(StatementVO statementVO) {
 		statementDAO.updateStatement(statementVO);
 	}
-	
+	*/
 }
