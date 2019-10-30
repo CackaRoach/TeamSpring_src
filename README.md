@@ -58,6 +58,7 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 date : varchar(8) --> date()
   
 debetor : not null --> null
+  
 creditor : varchar --> integer
 </div>
 </details>
