@@ -56,7 +56,9 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 <div markdown="1">
 <h3>statement table 변경</h3>
 date : varchar(8) --> date()
+  
 debetor : not null --> null
+
 creditor : varchar --> integer
 </div>
 </details>
