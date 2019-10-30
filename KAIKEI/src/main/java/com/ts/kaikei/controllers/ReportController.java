@@ -49,12 +49,12 @@ public class ReportController {
 		return "/report/ctb";
 	}
 	
-	@RequestMapping(value = "/report/ps.do", method = RequestMethod.GET)
-	public String ledgerPS(Model model) {
-		logger.info("Call : /report/ps.do - GET");
+	@RequestMapping(value = "/report/pl.do", method = RequestMethod.GET)
+	public String ledgerPL(Model model) {
+		logger.info("Call : /report/pl.do - GET");
 		
 		model.addAttribute("StatementList", reportService.getStatementList());
 		
-		return "/report/ps";
+		return "/report/pl";
 	}
 }

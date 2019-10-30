@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
-    pageEncoding="Shift_JIS"%><%-- 
+    pageEncoding="Shift_JIS"%>
 		<div>
-			<h3>PS</h3>
+			<h3>Reports - Profit and loss</h3>
 		</div>
 		<div align="center">
 		<table border="1" style="border-collapse:collapse; text-align:center">
@@ -27,4 +27,4 @@
 				<input type="button" onClick="location.href = 'addBoard.do'" value="Post">
 			</div>
 		<p></p>
-		</div> --%>
+		</div>
