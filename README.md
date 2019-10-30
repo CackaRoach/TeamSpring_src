@@ -64,3 +64,16 @@ debetor : not null --> null
 creditor : varchar --> integer
 </div>
 </details>
+
+<details>
+<summary>10/31 변경사항</summary>
+<div markdown="1">
+  <h3>merge완료</h3>
+  <h3>.gitignore 파일 추가</h3>
+    target/
+
+    root-context.xml
+    pom.xml
+
+</div>
+</details>
