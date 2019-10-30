@@ -50,3 +50,11 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 
 </div>
 </details>
+
+<details>
+<summary>10/30일 변경사항</summary>
+<div markdown="1">
+<h3>statement table 변경</h3>
+date : varchar(8) --> date()
+</div>
+</details>
