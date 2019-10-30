@@ -54,7 +54,7 @@ SQL파일 Teamspring/구현에 있습니다.
 </details>
 
 <details>
-<summary>10/30일 변경사항</summary>
+<summary>10/30 변경사항</summary>
 <div markdown="1">
 <h3>statement table 변경</h3>
 date : varchar(8) --> date()
