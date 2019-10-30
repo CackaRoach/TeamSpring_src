@@ -28,29 +28,8 @@
     	<property name="mapperInterface" value="com.ts.kaikei.dao.UserDAO" />
  		<property name="sqlSessionTemplate" ref="sqlSession" />
     </bean>
-<<<<<<< .mine
- 
-	<bean id="statementMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	   <property name="mapperInterface" value="com.ts.kaikei.dao.StatementDAO" />
-	   <property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-	
-	<bean id="customerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	   <property name="mapperInterface" value="com.ts.kaikei.dao.CustomerDAO" />
-	   <property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-	
-	<bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	   <property name="mapperInterface" value="com.ts.kaikei.dao.AccountDAO" />
-	   <property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-	
-	<bean id="companyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	   <property name="mapperInterface" value="com.ts.kaikei.dao.CompanyDAO" />
-	   <property name="sqlSessionTemplate" ref="sqlSession" />
-	</bean>
-=======
-   <bean id="statementMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    
+    <bean id="statementMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
        <property name="mapperInterface" value="com.ts.kaikei.dao.StatementDAO" />
        <property name="sqlSessionTemplate" ref="sqlSession" />
     </bean>
@@ -70,7 +49,6 @@
        <property name="sqlSessionTemplate" ref="sqlSession" />
     </bean>
 
->>>>>>> .theirs
 
 	<bean id="sqlSession" name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
     <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
