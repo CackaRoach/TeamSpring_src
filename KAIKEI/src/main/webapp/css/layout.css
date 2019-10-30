@@ -81,16 +81,21 @@
 	height: 40px;
 	width: 100%;
 	padding: 6px 20px;
-	margin: 4px 10px;
+	margin: 4px 6px;
 	box-sizing: border-box;
 	border: 2px solid #c0c0c0;
 }
 
-.spanLogin {
+.spanLoginFont {
 	color:red;
 	display:none;
 	font-size: 0.80em;
 	font-weight: bold;
+}
+
+.h6Font {
+    font-size: 0.67em;
+    font-weight: bold;
 }
 
 body {
@@ -99,7 +104,7 @@ body {
 }
 
 td {
-	padding: 0px 5px;
+	padding: 3px 5px;
 }
 
 table {

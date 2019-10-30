@@ -4,16 +4,16 @@
 			<div>
 				<h1>Sign Up</h1>
 			</div>
-			<form name="register" action="signupExc.do" method="post" onsubmit="return formCheck()">
+			<form name="register" action="signupExe.do" method="post" onsubmit="return formCheck()">
 				<div>
 					<h2>Create your Account</h2>
 				</div>
 				<div>
 					<table>
-						<tr>
+						<tr style="height:45px">
 							<td style="text-align:center">ID<span style="color:red">*</span></td>
 							<td><input class="input-box" type="text" id="id" name="id"></td>
-							<td style="width:100px"><h6 id="id_check"></h6></td>
+							<td style="width:100px"><span id="id_check" class="h6Font"></span></td>
 						</tr>
 						<tr>
 							<td style="text-align:center">Password<span style="color:red">*</span></td>

@@ -15,7 +15,10 @@ import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
-// TODO : 로그아웃 - Layout(height, width %) 수정
+
+// TODO : Security - bufferOverflow
+// TODO : Logout - Layout(height, width %) modify
+
 @Controller
 public class CommonController {
 	
@@ -25,7 +28,7 @@ public class CommonController {
 	private CommonService commonService;
 
 	
-	// 회원가입페이지 포워딩
+	// Login Page Forwarding
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String login(Model model) {
 		logger.info("Call : /login.do - GET");
@@ -33,7 +36,7 @@ public class CommonController {
 		return "/login";
 	}
 	
-	// 실험용
+	// Testing
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginP(CompanyVO companyVO, Model model) {
 		logger.info("Call : /login.do - POST");
@@ -42,13 +45,13 @@ public class CommonController {
 		return "/login";
 	}
 	 
-	// 로그인실행
-	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
-	public String loginExc(UserVO userVO, HttpSession httpSession, Model model) {
-		// TODO : 회사 승인 Join해서 미승인시 로그인처리 구현
-		// TODO : 보안강화 - 보안로그, 틀릴시 시간부여, 문자열최대치 설정
+	// Login Execution
+	@RequestMapping(value = "/loginExe.do", method = RequestMethod.POST)
+	public String loginExe(UserVO userVO, HttpSession httpSession, Model model) {
+		// TODO : Company AUT Join LoginExecution
+		// TODO : Security - Log, time
 		
-		logger.info("Call : /loginExc.do - POST");
+		logger.info("Call : /loginExe.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
 			
@@ -62,7 +65,7 @@ public class CommonController {
 		return "redirect:home.do";	
 	}
 	
-	// 로그인 후 기본 페이지 출력
+	// Home Page Forwarding
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public String home(HttpSession httpSession, Model model) {
 		logger.info("Call : /home.do - GET");
@@ -73,7 +76,7 @@ public class CommonController {
 		return "/common/home";	
 	}
 	
-	// 회원가입페이지 포워딩
+	// SignUp Page Forwarding
 	@RequestMapping(value = "/signup.do", method = RequestMethod.GET)
 	public String signup(Model model) {
 		logger.info("Call : /signup.do - GET");
@@ -81,12 +84,10 @@ public class CommonController {
 		return "/signup";	
 	}
 	
-	// TODO : 회원가입 실행
-	@RequestMapping(value = "/signupExc.do", method = RequestMethod.POST)
-	public String signupExc(UserVO userVO, CompanyVO companyVO, String companyState, Model model) {
-		logger.info("Call : /signExc.do - GET");
-
-		// TODO : 보안강화 - 문자열최대치 설정
+	// TODO : SignUp Execution
+	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
+	public String signupExe(UserVO userVO, CompanyVO companyVO, String companyState, Model model) {
+		logger.info("Call : /signExe.do - GET");
 		
 		if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
 			// TODO : 회사중복코드 에러처리 구현
