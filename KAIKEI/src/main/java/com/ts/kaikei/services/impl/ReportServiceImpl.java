@@ -37,5 +37,8 @@ public class ReportServiceImpl implements ReportService {
 	public StatementVO getStatementDetail(int idx) {
 		return statementDAO.getStatementDetail(idx);
 	}
-
+	@Override
+	public void updateStatement(StatementVO statementVO) {
+		statementDAO.updateStatement(statementVO);
+	}
 }

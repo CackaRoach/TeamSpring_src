@@ -12,5 +12,5 @@ public interface ReportService {
 	public ArrayList<StatementVO> getStatementList();
 	public ArrayList<StatementVO> getStatementListCond(Map<String, String> searchParams);
 	public StatementVO getStatementDetail(int idx);
-	  
+	public void updateStatement(StatementVO statementVO);
 }
