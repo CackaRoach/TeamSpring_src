@@ -22,39 +22,10 @@ public class ReportController {
 	 *  @RequestMapping(value = "/report/*.do")
 	 */
 	
-	@RequestMapping(value = "/report/bs.do", method = RequestMethod.GET)
-	public String ledgerBS(Model model) {
-		logger.info("Call : /report/bs.do - GET");
-		
-		model.addAttribute("StatementList", reportService.getStatementList());
-		
-		return "/report/bs";
-	}
-	
-	@RequestMapping(value = "/report/gl.do", method = RequestMethod.GET)
-	public String ledgerGL(Model model) {
-		logger.info("Call : /report/gl.do - GET");
+	@RequestMapping(value = "/report/ps.do", method = RequestMethod.GET)
+	public String ledger(Model model) {
+		logger.info("Call : /report/ps.do - GET");
 
-		model.addAttribute("StatementList", reportService.getStatementList());
-		
-		return "/report/gl";
-	}
-	
-	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
-	public String ledgerCTB(Model model) {
-		logger.info("Call : /report/ctb.do - GET");
-		
-		model.addAttribute("StatementList", reportService.getStatementList());
-		
-		return "/report/ctb";
-	}
-	
-	@RequestMapping(value = "/report/pl.do", method = RequestMethod.GET)
-	public String ledgerPL(Model model) {
-		logger.info("Call : /report/pl.do - GET");
-		
-		model.addAttribute("StatementList", reportService.getStatementList());
-		
-		return "/report/pl";
+		return "/report/ps";
 	}
 }
