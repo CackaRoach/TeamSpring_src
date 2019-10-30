@@ -24,8 +24,29 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 </details>
 
 <details>
-<summary>10/30 변경사항</summary>
+<summary>10/29 변경사항</summary>
 <div markdown="1">
+  <h3>src -> main -> webapp -> WEB-INF -> spring -> root-context.xml userMapper밑에 추가</h3>
+  
+    <bean id="statementMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <property name="mapperInterface" value="com.ts.kaikei.dao.StatementDAO" />
+       <property name="sqlSessionTemplate" ref="sqlSession" />
+    </bean>
+    
+    <bean id="customerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <property name="mapperInterface" value="com.ts.kaikei.dao.CustomerDAO" />
+       <property name="sqlSessionTemplate" ref="sqlSession" />
+    </bean>
+    
+    <bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <property name="mapperInterface" value="com.ts.kaikei.dao.AccountDAO" />
+       <property name="sqlSessionTemplate" ref="sqlSession" />
+    </bean>
+    
+    <bean id="companyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <property name="mapperInterface" value="com.ts.kaikei.dao.CompanyDAO" />
+       <property name="sqlSessionTemplate" ref="sqlSession" />
+    </bean>
 
 </div>
 </details>
