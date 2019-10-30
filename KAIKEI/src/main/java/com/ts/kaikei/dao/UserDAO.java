@@ -7,4 +7,6 @@ import com.ts.kaikei.vo.UserVO;
 @Mapper
 public interface UserDAO {
 	public UserVO getUser(UserVO userVO);
+	public void signUpUser(UserVO userVO);
+	public int checkId(String id);
 }

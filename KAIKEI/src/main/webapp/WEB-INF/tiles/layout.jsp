@@ -8,6 +8,7 @@
     <title>Title</title>
     <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 	function changeForm(form) {
 		if(form == 'exist') {
@@ -19,10 +20,12 @@
 		}
 	}
 
-	function submitSignForm() {
-		var array;
-		arrat
+	function formCheck() {
+		console.log(register.id.value);
+		console.log(register.companycode.value);
+		return true;
 	}
+	
 </script>
 <body>
     <div id="header"><tiles:insertAttribute name="header" />

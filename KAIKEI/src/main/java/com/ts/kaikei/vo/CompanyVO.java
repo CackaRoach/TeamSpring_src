@@ -4,7 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("CompanyVO")
 public class CompanyVO {
-	private String company_cd;
+	private String company_cd; // to_char(nextval('seq_company'), '00000')
 	private String state_cd;
 	private String title;
 	private String regist_cd;

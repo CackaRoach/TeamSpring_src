@@ -2,27 +2,35 @@
     pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<div id="div-gray" align="center">
-			<form action="loginExc.do" method="post">
-				<div id="div-rowspace">
-				</div>
-				<h3>Login</h3>
+			<form action="loginExe.do" method="post">
+				<h2>Login</h2>
 				<table>
 					<tr>
 						<td style="text-align:center">ID</td>
-						<td><input id="input-box" type="text" name="id" ></td>
+						<td><input class="input-box" type="text" name="id" maxlength="15"></td>
+					</tr>
+					<tr>
+						<td style="height:20px"></td>
+						<td style="text-align:center"><span class="spanLoginFont" style="display:${state}">Incorrect ID, Password</span></td>
 					</tr>
 					<tr>
 						<td>Password</td>
-						<td><input id="input-box" type="password" name="password"></td>
-					</tr>
-					<tr style="text-align:right">
-						<td><a href="signup.do">Sign Up</a></td>
-						<td><a href="forgot.do">forgot ID, Password</a></td>
+						<td><input class="input-box" type="password" name="password" maxlength="20"></td>
 					</tr>
 				</table>
-				<input id="button" type="submit" value="Login">
-				<div id="div-space">
+				<div style="height:20px">
 				</div>
+				<input class="button" type="submit" value="Login">
+				<div style="height:20px">
+				</div>
+				<table style="text-align:center">
+					<tr>
+						<td style="padding:10px 0px"><a href="signup.do">Sign Up</a></td>
+					</tr>
+					<tr>
+						<td style="padding:10px 0px"><a href="forgot.do">forgot ID,Password</a></td>
+					</tr>
+				</table>
 			</form>
 		</div>
 

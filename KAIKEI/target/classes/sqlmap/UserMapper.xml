@@ -3,14 +3,35 @@
 
 <mapper namespace="com.ts.kaikei.dao.UserDAO">
 
-    <select id="getUser" parameterType="UserVO" resultType="UserVO" >
+	<select id="getUser" parameterType="UserVO" resultType="UserVO" >
     
-        SELECT *
+		SELECT *
+		FROM users
+		WHERE 1=1
+		AND id = #{id}
+		AND password = #{password}
+        
+	</select>
+    
+	<select id="checkId" parameterType="String" resultType="int" >
+    
+        SELECT count(*)
         FROM users
         WHERE 1=1
         AND id = #{id}
-        AND password = #{password}
         
     </select>
+    
+    <insert id="signUpUser" parameterType="UserVO" >
+    
+        INSERT INTO users
+        VALUES(
+        #{id}, #{password}, #{company_cd}, 
+        #{posit_cd}, #{auth_cd}, #{state_cd}, 
+        #{name}, #{email}, #{phone}, 
+        #{ent_id}, NOW(), #{ent_prog},
+        #{mod_id}, NOW(), #{mod_prog})
+        
+    </insert>
     
 </mapper>
