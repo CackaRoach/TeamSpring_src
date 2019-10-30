@@ -20,7 +20,7 @@
 				<li class="report">> <a href="/kaikei/report/ps.do">P/S</a></li>
 				<li class="report">> <a href="/kaikei/report/bs.do">B/S</a></li>
 				<li class="report">> <a href="/kaikei/report/gl.do">General Ledger</a></li>
-				<li class="report">> <a href="/kaikei/report/gtb.do">Compound Trial Balance</a></li>
+				<li class="report">> <a href="/kaikei/report/ctb.do">Compound Trial Balance</a></li>
 			</ul>
 			<ul class="ul-list">
 				<li><a href="javascript:menuExtend('setting');">Å§ Setting</a></li>

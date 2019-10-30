@@ -40,13 +40,13 @@ public class ReportController {
 		return "/report/gl";
 	}
 	
-	@RequestMapping(value = "/report/gtb.do", method = RequestMethod.GET)
-	public String ledgerGTB(Model model) {
-		logger.info("Call : /report/gtb.do - GET");
+	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
+	public String ledgerCTB(Model model) {
+		logger.info("Call : /report/ctb.do - GET");
 		
 		model.addAttribute("StatementList", reportService.getStatementList());
 		
-		return "/report/gtb";
+		return "/report/ctb";
 	}
 	
 	@RequestMapping(value = "/report/ps.do", method = RequestMethod.GET)
