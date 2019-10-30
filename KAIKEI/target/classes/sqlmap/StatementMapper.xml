@@ -2,5 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
+
+    <select id="getStatementList" resultType="StatementVO">
+    SELECT company_cd, seq, account_cd, customer_cd, date, classify, debtor, creditor, abs, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog
+    FROM statements
+    ORDER BY seq ASC
+    </select>
     
 </mapper>
