@@ -3,11 +3,11 @@
 <details>
 <summary>Git 관리법</summary>
 <div markdown="1">
-## master <-- Branch(Commit)
+<h3>master <-- Branch(Commit)</h3>
 
 PPT참조
 
-master --> Branch (Rebase) 하는법
+<h3>master --> Branch (Rebase) 하는법</h3>
 
 Spring --> Window --> Show view --> other --> git Repositories 추가
 
@@ -16,9 +16,12 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 </div>
 </details>
 
-## SQL문 -  구현에 올렸습니다.
+<details>
+<summary>SQL테이블 구조, SQL문</summary>
+<div markdown="1">
 
-KAIKEI.sql
+</div>
+</details>
 
 <details>
 <summary>10/30 변경사항</summary>
