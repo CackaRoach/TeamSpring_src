@@ -20,6 +20,8 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 <summary>SQL테이블 구조</summary>
 <div markdown="1">
 <img src="https://user-images.githubusercontent.com/54826450/67838268-41a95b80-fb34-11e9-84c8-2604f8c3e7ff.PNG">
+
+SQL파일 Teamspring/구현에 있습니다.
 </div>
 </details>
 
