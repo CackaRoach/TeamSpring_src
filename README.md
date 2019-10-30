@@ -19,7 +19,7 @@ git Repositories --> TeamSpring_src --> Branches --> Local --> (자신의 Branch
 <details>
 <summary>SQL테이블 구조, SQL문</summary>
 <div markdown="1">
-<img src="https://user-images.githubusercontent.com/54826450/67837236-ef673b00-fb31-11e9-8493-c95b94855613.PNG">
+<img src="https://user-images.githubusercontent.com/54826450/67838268-41a95b80-fb34-11e9-84c8-2604f8c3e7ff.PNG">
 </div>
 </details>
 
