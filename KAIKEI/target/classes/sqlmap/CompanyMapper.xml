@@ -23,5 +23,13 @@
         #{mod_id}, NOW(), #{mod_prog})
         
 	</insert>
+	
+	<select id="selectCompany" parameterType="map" resultType="CompanyVO">
+		
+		SELECT company_cd, title, phone, auth_cd 
+		FROM company
+		
+	
+	</select>
     
 </mapper>
