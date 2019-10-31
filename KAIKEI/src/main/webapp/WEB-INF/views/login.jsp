@@ -1,21 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="Shift_JIS">
+    <title>KAIKEI</title>
+    <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
+</head>
+<body>
+    <div id="header">
+    	<div align="center">
+			<h1>KAIKEI</h1>
+		</div>
+    </div>
+    <div id="section-only">
 		<div id="div-gray" align="center">
 			<form action="loginExe.do" method="post">
 				<h2>Login</h2>
 				<table>
 					<tr>
-						<td style="text-align:center">ID</td>
-						<td><input class="input-box" type="text" name="id" maxlength="15"></td>
+						<td><input class="input-box" type="text" name="id" placeholder="ID" maxlength="15"></td>
 					</tr>
 					<tr>
-						<td style="height:20px"></td>
-						<td style="text-align:center"><span class="spanLoginFont" style="display:${state}">Incorrect ID, Password</span></td>
+						<td style="height:20px; text-align:center"><span class="spanLoginFont" style="display:${state}">Incorrect ID, Password</span></td>
 					</tr>
 					<tr>
-						<td>Password</td>
-						<td><input class="input-box" type="password" name="password" maxlength="20"></td>
+						<td><input class="input-box" type="password" name="password" placeholder="Password" maxlength="20"></td>
 					</tr>
 				</table>
 				<div style="height:20px">
@@ -33,5 +44,12 @@
 				</table>
 			</form>
 		</div>
-
+    </div>    
+    <div id="footer">
+    	<div>
+			<h6>footer</h6>
+		</div>
+   	</div>    
+</body>
+</html>
 		

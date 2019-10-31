@@ -47,7 +47,7 @@
 }
 
 .button {
-	width: 330px;
+	width: 300px;
 	background-color: #c0c0c0;
 	border: none;
 	color: white;
@@ -79,7 +79,7 @@
 
 .input-box {
 	height: 40px;
-	width: 100%;
+	width: 300px;
 	padding: 6px 20px;
 	margin: 4px 6px;
 	box-sizing: border-box;

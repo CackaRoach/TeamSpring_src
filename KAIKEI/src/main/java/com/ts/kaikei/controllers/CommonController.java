@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.CommonService;
+import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
@@ -32,15 +33,6 @@ public class CommonController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String login(Model model) {
 		logger.info("Call : /login.do - GET");
-		
-		return "/login";
-	}
-	
-	// Testing
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginP(CompanyVO companyVO, Model model) {
-		logger.info("Call : /login.do - POST");
-		logger.info("Company Code : " + companyVO.getCompany_cd());
 		
 		return "/login";
 	}
@@ -86,30 +78,33 @@ public class CommonController {
 	
 	// TODO : SignUp Execution
 	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
-	public String signupExe(UserVO userVO, CompanyVO companyVO, String companyState, Model model) {
+	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
 		logger.info("Call : /signExe.do - GET");
 		
-		if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
-			// TODO : 회사중복코드 에러처리 구현
-			return "/error";
-		}
-		
-		if(companyState.equals("new")) {
-			// TODO : 회원가입 구현 - 새 회사 추가
-			commonService.signUpCompany(companyVO);
-		}
-		
+		// TODO : overlap preprocessing (front)
 		if(commonService.checkId(userVO.getId()) != 0) {
-			// TODO : 중복아이디 에러처리 구현
+			// TODO : UserID overlap - exception
 			return "/error";
 		}
 		
-		commonService.signUpUser(userVO, companyVO.getCompany_cd());
+		//if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
+			// TODO : Company overlap - exception
+			//return "/error";
+		//}
 		
+		// Select : Create New Company
+		if(companyState.equals("new")) {
+			commonService.signUpCompany(companyRegistVO);
+			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd_new());
+			
+		// Select : Exist Company
+		} else {
+			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd_ex());
+		}
 		return "/login";
 	}
 	
-	// TODO : 중복아이디 체크 ajax length비교 + 에러메시지
+	// TODO : Overlap ID check ajax length compare + error message print
 	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {
@@ -118,7 +113,7 @@ public class CommonController {
 		return commonService.checkId(id);
 	}
 	
-	// TODO : 중복회사코드 체크 ajax 구현(front)
+	// TODO : Overlap Comapny_cd check ajax (front)
 	@RequestMapping(value = "/checkCode.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkCode(String company_cd, Model model) {
@@ -127,7 +122,7 @@ public class CommonController {
 		//return commonService.checkCode(company_cd);
 	}
 	
-	// 아이디 비밀번호 찾기 페이지 포워딩
+	// Forgot Page Forawarding
 	@RequestMapping(value = "/forgot.do", method = RequestMethod.GET)
 	public String forgot(Model model) {
 		logger.info("Call : /forgot.do - GET");
@@ -135,7 +130,7 @@ public class CommonController {
 		return "/forgot";	
 	}
 	
-	// TODO : ID, 비밀번호 찾기 구현
+	// TODO : ID, Password Search
 	@RequestMapping(value = "/forgotExc.do", method = RequestMethod.POST)
 	public String forgotExc(Model model) {
 		logger.info("Call : /forgotExc.do - POST");
@@ -144,7 +139,7 @@ public class CommonController {
 		return "/forgot";	
 	}
 	
-	// 로그아웃
+	// Logout
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession httpSession, Model model) {
 		logger.info("Call : /logout.do - GET");
@@ -154,7 +149,7 @@ public class CommonController {
 		return "/login";	
 	}
 	
-	// 에러페이지 포워딩
+	// Error Page Forwarding
 	@RequestMapping(value = "/error.do", method = RequestMethod.GET)
 	public String error(HttpSession httpSession, Model model) {
 		logger.info("Call : /error.do - GET");

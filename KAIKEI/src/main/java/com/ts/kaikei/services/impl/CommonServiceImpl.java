@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.ts.kaikei.dao.CompanyDAO;
 import com.ts.kaikei.dao.UserDAO;
 import com.ts.kaikei.services.CommonService;
+import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
@@ -15,6 +16,7 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
 	private CompanyDAO companyDAO;
 	
 	@Override
@@ -42,8 +44,17 @@ public class CommonServiceImpl implements CommonService {
 	}
 	
 	@Override
-	public void signUpCompany(CompanyVO companyVO) {
-		companyDAO.signUpCompany(companyVO);
+	public void signUpCompany(CompanyRegistVO companyRegisterVO) {
+	
+		companyRegisterVO.setAuth_cd("AUT003");
+		
+		companyRegisterVO.setEnt_id(companyRegisterVO.getId());
+		companyRegisterVO.setMod_id(companyRegisterVO.getId());
+		
+		companyRegisterVO.setEnt_prog("General-Web-SignUp");
+		companyRegisterVO.setMod_prog("General-Web-SignUp");
+		
+		companyDAO.signUpCompany(companyRegisterVO);
 	}
 	
 	@Override

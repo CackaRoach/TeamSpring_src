@@ -4,8 +4,8 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("CompanyVO")
 public class CompanyVO {
-	private String company_cd; // to_char(nextval('seq_company'), '00000')
-	private String state_cd;
+	private String company_cd;
+	private String auth_cd;
 	private String title;
 	private String regist_cd;
 	private String fax;
@@ -28,12 +28,12 @@ public class CompanyVO {
 		this.company_cd = company_cd;
 	}
 	
-	public String getState_cd() {
-		return state_cd;
+	public String getAuth_cd() {
+		return auth_cd;
 	}
 	
-	public void setState_cd(String state_cd) {
-		this.state_cd = state_cd;
+	public void setAuth_cd(String auth_cd) {
+		this.auth_cd = auth_cd;
 	}
 	
 	public String getTitle() {
