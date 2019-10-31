@@ -77,3 +77,11 @@ creditor : varchar --> integer
 
 </div>
 </details>
+
+<details>
+<summary>11/01 변경사항</summary>
+<div markdown="1">
+<h3>company table 변경</h3>
+state_cd : auth_cd
+</div>
+</details>
