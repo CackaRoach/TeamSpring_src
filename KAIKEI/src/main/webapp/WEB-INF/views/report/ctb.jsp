@@ -22,6 +22,15 @@
 					<th bgcolor="#F5D0A9">Total</th>
 					<th bgcolor="#F5D0A9">Balance</th>
 				</tr>
+				<c:forEach var="jasan" items="${jasan}">
+					<tr>
+						<td>${jasan.}</td>
+						<td>${jasan.}</td>
+						<td>${jasan.account_cd}</td>
+						<td>${jasan.}</td>
+						<td>${jasan.}</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td bgcolor="#A4A4A4"></td>
 					<td bgcolor="#A4A4A4"></td>
