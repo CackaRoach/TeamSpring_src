@@ -47,51 +47,93 @@ public class ReportController {
 	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
 	public String ledgerCTB(Model model) {
 		logger.info("Call : /report/ctb.do - GET");
-		
+		int data[] = new int[4];
+		int total[] = new int[4];
+		ArrayList<int[]> dataList = new ArrayList<int[]>();
+		ArrayList<String> Act_cd = new ArrayList<String>();
 		ArrayList<StatementVO> jasan = null, buche = null, jabon = null, suick = null, biyong = null;
-		int jasanDebSum = 0, bucheDebSUM = 0, jabonDebSUM = 0, susickDebSUM = 0, biyongDebSUM = 0;
-		int jasanCreSum = 0, bucheCreSUM = 0, jabonCreSUM = 0, susickCreSUM = 0, biyongCreSUM = 0;
-		int jasanDebBalance = 0, bucheDebBalance = 0, jabonDebBalance = 0, susickDebBalance = 0, biyongDebBalance = 0;
-		int jasanCreBalance = 0, bucheCreBalance = 0, jabonCreBalance = 0, susickCreBalance = 0, biyongCreBalance = 0;
-		int DebBalanceTotal = 0, DebSumTotal = 0, CreBalanceTotal = 0, CreSumTotal = 0;
 		ArrayList<StatementVO> statList = reportService.getStatementList();
 		
-		for(int i=0;i<statList.size();i++) {
+		for(int i = 0; i< 4; i++) {
+			data[i] = 0;
+		}
+		//sorting Account & insert Account Title
+		for(int i=0; i<statList.size(); i++) {
+			boolean flag = true;
+			for(int j=0; j<Act_cd.size(); j++) {
+				if(statList.get(i).getAccount_cd() == Act_cd.get(j)) {
+					flag = false;
+					break;
+				}
+			}
+			if(flag) {
+				Act_cd.add(statList.get(i).getAccount_cd());
+			}
+			
 			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 240) {
-				jasanDebSum += statList.get(i).getDebtor();
-				jasanCreSum += statList.get(i).getCreditor();
 				jasan.add(statList.get(i));
 			}
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 251 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 305) {
-				bucheDebSUM += statList.get(i).getDebtor();
-				bucheCreSUM += statList.get(i).getCreditor();
 				buche.add(statList.get(i));
 			}
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 331 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 380) {
-				jabonDebSUM += statList.get(i).getDebtor();
-				jabonCreSUM += statList.get(i).getCreditor();
 				jabon.add(statList.get(i));
 			}
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 401 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 412) {
-				susickDebSUM += statList.get(i).getDebtor();
-				susickCreSUM += statList.get(i).getCreditor();
 				suick.add(statList.get(i));
 			}
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 451 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 999) {
-				biyongDebSUM += statList.get(i).getDebtor();
-				biyongCreSUM += statList.get(i).getCreditor();
 				biyong.add(statList.get(i));
 			}
+			
 		}
 		
-		DebSumTotal = jasanDebSum + bucheDebSUM + jabonDebSUM + susickDebSUM +biyongDebSUM;
-		CreSumTotal = jasanCreSum + bucheCreSUM + jabonCreSUM + susickCreSUM + biyongCreSUM;
+		//Calcluator 
+		//Reference by : http://m.blog.daum.net/_blog/_m/articleView.do?blogid=0DCZr&articleno=17492948
+		// https://modules.tistory.com/141
+		
+		for(int i = 0, j=0, k=0,l=0,m=0,n=0;i < Act_cd.size();i++) {
+			if(Act_cd.get(i) == jasan.get(i).getAccount_cd()) {
+				data[1] = jasan.get(j).getDebtor();
+				data[2] = jasan.get(j++).getCreditor();
+				data[0] = data[1] - data[2];
+			}
+			else if(Act_cd.get(i) == buche.get(i).getAccount_cd()) {
+				data[1] = buche.get(k).getDebtor();
+				data[2] = buche.get(k++).getCreditor();
+				data[3] = data[2] - data[1];
+			}
+			else if(Act_cd.get(i) == jabon.get(i).getAccount_cd()) {
+				data[1] = jabon.get(l).getDebtor();
+				data[2] = jabon.get(l++).getCreditor();
+				data[3] = data[2] - data[1];
+			}
+			else if(Act_cd.get(i) == suick.get(i).getAccount_cd()) {
+				data[1] = suick.get(m).getDebtor();
+				data[2] = suick.get(m++).getCreditor();
+				data[3] = data[2] - data[1];
+			}
+			else if(Act_cd.get(i) == biyong.get(i).getAccount_cd()) {
+				data[1] = biyong.get(n).getDebtor();
+				data[2] = biyong.get(n++).getCreditor();
+				data[0] = data[1] - data[2];
+			}
+			dataList.add(data);
+		}
+		
+		//total Calcluator
+		for(int i =0 ; i < dataList.size();i++) {
+			for(int j = 0; j<4;j++) {
+				total[j] += dataList.get(i)[j];
+			}
+		}
 		
 		model.addAttribute("jasan", jasan);
 		model.addAttribute("buche", buche);
 		model.addAttribute("jabon", jabon);
 		model.addAttribute("suick", suick);
 		model.addAttribute("biyong", biyong);
+		model.addAttribute("dataList", dataList);
 		
 		return "/report/ctb";
 	}
