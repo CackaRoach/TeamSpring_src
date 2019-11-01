@@ -16,7 +16,6 @@ import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.UserVO;
 
 
-// TODO : Security - bufferOverflow
 // TODO : Logout - Layout(height, width %) modify
 
 @Controller
@@ -39,16 +38,17 @@ public class CommonController {
 	// Login Execution
 	@RequestMapping(value = "/loginExe.do", method = RequestMethod.POST)
 	public String loginExe(UserVO userVO, HttpSession httpSession, Model model) {
-		// TODO : Company AUT Join LoginExecution
-		// TODO : Security - Log, time
+		// TODO : Security - Log or time
 		
 		logger.info("Call : /loginExe.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
-			
+		
 		if(getUserVO == null) {
-			logger.info("Login Fail");
-			model.addAttribute("state", "block");
+			model.addAttribute("loginState", "Incorrect ID, Password");
+			return "/login";
+		} else if(getUserVO.getAuth_cd().equals("AUT003")) {
+			model.addAttribute("loginState", "Unapproved Account");
 			return "/login";
 		}
 
@@ -75,7 +75,6 @@ public class CommonController {
 		return "/signup";	
 	}
 	
-	// TODO : SignUp Execution
 	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
 	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
 		logger.info("Call : /signExe.do - POST");
@@ -93,18 +92,27 @@ public class CommonController {
 				return "/error";
 			}
 			
-			commonService.signUpCompany(companyRegistVO);
-			commonService.signUpUser(userVO, "POS002");
+			if(!commonService.signUpCompany(companyRegistVO)) {
+				model.addAttribute("errorMsg", "REGIST COMPANY ERROR!");
+				return "/error";
+			}
+			if(!commonService.signUpUser(userVO, "POS002")) {
+				model.addAttribute("errorMsg", "REGIST USER ERROR!");
+				return "/error";
+			}
 			
 		// Select : Exist Company
 		} else {
-			commonService.signUpUser(userVO, "POS003");
+			if(!commonService.signUpUser(userVO, "POS003")) {
+				model.addAttribute("errorMsg", "REGIST USER ERROR!");
+				return "/error";
+			}
 		}
 		
 		return "/login";
+		
 	}
 	
-	// TODO : Overlap ID check ajax length compare + error message print
 	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {
@@ -113,7 +121,6 @@ public class CommonController {
 		return commonService.checkId(id);
 	}
 	
-	// TODO : Overlap Comapny_cd check ajax (front)
 	@RequestMapping(value = "/checkCode.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkCode(String company_cd, Model model) {

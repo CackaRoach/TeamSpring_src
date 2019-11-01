@@ -43,7 +43,6 @@
 			return false;
 		}
 		
-		$("#register").submit();
 	}
 	
 	
@@ -161,7 +160,7 @@
 					</table>
 				</div>
 				<div>
-					<input class="button" type="button" value="Confirm" onclick="formCheck();">
+					<input class="button" type="submit" value="Confirm" onclick="return formCheck();">
 					<input class="button" type="button" onclick="location.href='login.do'" value="Cancel">
 				</div>
 			</form>

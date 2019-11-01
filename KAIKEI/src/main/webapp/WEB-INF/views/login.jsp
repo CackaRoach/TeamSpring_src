@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +19,13 @@
 				<h2>Login</h2>
 				<table>
 					<tr>
-						<td><input class="input-box" type="text" name="id" placeholder="ID" maxlength="15"></td>
+						<td><input class="input-box" type="text" name="id" placeholder="Enter ID" maxlength="15"></td>
 					</tr>
 					<tr>
-						<td style="height:20px; text-align:center"><span class="spanLoginFont" style="display:${state}">Incorrect ID, Password</span></td>
+						<td style="height:20px; text-align:center"><span class="spanLoginFont">${loginState}</span></td>
 					</tr>
 					<tr>
-						<td><input class="input-box" type="password" name="password" placeholder="Password" maxlength="20"></td>
+						<td><input class="input-box" type="password" name="password" placeholder="Enter Password" maxlength="15"></td>
 					</tr>
 				</table>
 				<div style="height:20px">
@@ -39,7 +38,7 @@
 						<td style="padding:10px 0px"><a href="signup.do">Sign Up</a></td>
 					</tr>
 					<tr>
-						<td style="padding:10px 0px"><a href="forgot.do">forgot ID,Password</a></td>
+						<td style="padding:10px 0px"><!--<a href="forgot.do"></a>-->forgot ID,Password</td>
 					</tr>
 				</table>
 			</form>

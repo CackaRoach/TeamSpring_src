@@ -7,8 +7,9 @@ import com.ts.kaikei.vo.UserVO;
 public interface CommonService {
 	
 	public UserVO getUser(UserVO userVO);
-	public void signUpUser(UserVO userVO, String posit_cd);
-	public void signUpCompany(CompanyRegistVO companyRegistVO);
+	public boolean signUpUser(UserVO userVO, String posit_cd);
+	public boolean signUpCompany(CompanyRegistVO companyRegistVO);
+	public boolean forgotId(String email);
 	public int checkId(String id);
 	public int checkCode(String code);
 	

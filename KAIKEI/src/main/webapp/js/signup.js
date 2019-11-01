@@ -102,7 +102,7 @@
 			$("#id_error").css("color", "red");
 			return false;
 		} else if(userId.match(/[^a-z0-9]/gi,'')) {
-			$("#id_error").text("ID must be English");
+			$("#id_error").text("ID must be English - lowercase");
 			$("#id_error").css("color", "red");
 			return false;
 		}
