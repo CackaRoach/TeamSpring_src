@@ -28,7 +28,6 @@
 		
 		SELECT company_cd, title, phone, auth_cd 
 		FROM company
-		
 	
 	</select>
     

@@ -39,11 +39,4 @@
 		<appender-ref ref="console" />
 	</root>
 	
-	<!-- Query Loggers --> 
-	<logger name="jdbc.sqlonly" additivity="false"> 
-		<level value="INFO"/> 
-		<appender-ref ref="console-infolog"/> 
-	</logger>
-
-	
 </log4j:configuration>
