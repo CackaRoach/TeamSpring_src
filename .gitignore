@@ -1,7 +1,0 @@
-### Java-Web ###
-## ignoring target file
-# properties file
-pom.properties
-
-# class file
-*.class

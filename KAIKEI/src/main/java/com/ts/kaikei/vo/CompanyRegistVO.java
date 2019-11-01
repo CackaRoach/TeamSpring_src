@@ -7,8 +7,7 @@ import org.apache.ibatis.type.Alias;
 public class CompanyRegistVO {
 	private String id;
 	private String auth_cd;
-	private String company_cd_ex;
-	private String company_cd_new;
+	private String company_cd;
 	private String company_title;
 	private String company_regist_cd;
 	private String company_fax;
@@ -34,18 +33,13 @@ public class CompanyRegistVO {
 		this.auth_cd = auth_cd;
 	}
 
-	public String getCompany_cd_ex() {
-		return company_cd_ex;
+	public String getCompany_cd() {
+		return company_cd;
 	}
-	public void setCompany_cd_ex(String company_cd_ex) {
-		this.company_cd_ex = company_cd_ex;
+	public void setCompany_cd(String company_cd) {
+		this.company_cd = company_cd;
 	}
-	public String getCompany_cd_new() {
-		return company_cd_new;
-	}
-	public void setCompany_cd_new(String company_cd_new) {
-		this.company_cd_new = company_cd_new;
-	}
+
 	public String getCompany_title() {
 		return company_title;
 	}

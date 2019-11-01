@@ -1,0 +1,5 @@
+### Java-Web ###
+## ignoring target file
+
+# properties file
+target/

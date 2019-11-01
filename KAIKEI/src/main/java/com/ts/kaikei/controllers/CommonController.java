@@ -87,19 +87,19 @@ public class CommonController {
 			return "/error";
 		}
 		
-		//if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
+		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
 			// TODO : Company overlap - exception
-			//return "/error";
-		//}
+			return "/error";
+		}
 		
 		// Select : Create New Company
 		if(companyState.equals("new")) {
 			commonService.signUpCompany(companyRegistVO);
-			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd_new());
+			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd());
 			
 		// Select : Exist Company
 		} else {
-			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd_ex());
+			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd());
 		}
 		return "/login";
 	}
@@ -118,8 +118,8 @@ public class CommonController {
 	@ResponseBody
 	public int checkCode(String company_cd, Model model) {
 		logger.info("Call : /checkCode.do ajax code : " + company_cd);
-		return 1;
-		//return commonService.checkCode(company_cd);
+		
+		return commonService.checkCode(company_cd);
 	}
 	
 	// Forgot Page Forawarding
