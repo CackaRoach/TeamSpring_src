@@ -1,7 +1,0 @@
-### Java-Web ###
-## ignoring target file
-target/
-
-root-context.xml
-pom.xml
-
