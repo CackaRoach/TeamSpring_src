@@ -1,7 +1,7 @@
 ### Java-Web ###
 ## ignoring target file
-target/
+# properties file
+pom.properties
 
-root-context.xml
-pom.xml
-
+# class file
+*.class
