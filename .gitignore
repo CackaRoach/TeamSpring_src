@@ -1,4 +1,7 @@
-target/
+###Java-Web###
+##ignoring target file
+# properties file
+pop.properties
 
-root-context.xml
-pom.xml
+#class file
+*.class
