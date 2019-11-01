@@ -22,6 +22,8 @@ public class Interception extends HandlerInterceptorAdapter {
             return true;
         }
 
+        
+        request.setAttribute("errorMsg", "SESSION ERROR!");
         request.getRequestDispatcher("/error.do").forward(request, response);
 
         return false;

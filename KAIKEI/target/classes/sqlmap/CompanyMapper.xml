@@ -12,14 +12,14 @@
         
     </select>
 
-	<insert id="signUpCompany" parameterType="CompanyVO" >
+	<insert id="signUpCompany" parameterType="CompanyRegistVO" >
     
         INSERT INTO company(company_cd, auth_cd, title, reg_cd, fax, phone, 
         					domain, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog)
         VALUES(
-        #{company_cd_new}, #{auth_cd}, #{company_title}, #{company_regist_cd}, #{company_fax}, #{company_phone}, 
+        #{company_cd}, #{auth_cd}, #{company_title}, #{company_regist_cd}, #{company_fax}, #{company_phone}, 
         #{company_domain}, #{ent_id}, NOW(), #{ent_prog}, #{mod_id}, NOW(), #{mod_prog})
         
 	</insert>
-    
+
 </mapper>

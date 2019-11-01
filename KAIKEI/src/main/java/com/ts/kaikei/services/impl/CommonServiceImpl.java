@@ -8,7 +8,6 @@ import com.ts.kaikei.dao.CompanyDAO;
 import com.ts.kaikei.dao.UserDAO;
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 @Service("commonService")
@@ -25,11 +24,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 	
 	@Override
-	public void signUpUser(UserVO userVO, String company_cd) {
+	public void signUpUser(UserVO userVO, String posit_cd) {
 		
-		userVO.setCompany_cd(company_cd);
-		
-		userVO.setPosit_cd("POS003");
+		userVO.setPosit_cd(posit_cd);
 		userVO.setAuth_cd("AUT003");
 		userVO.setState_cd("STT001");
 		

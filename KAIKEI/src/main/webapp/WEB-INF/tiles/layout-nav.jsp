@@ -8,7 +8,7 @@
     <title>KAIKEI</title>
     <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
 </head>
-<script type="text/javascript" src="/kaikei/js/common.js"></script>
+<script type="text/javascript" src="/kaikei/js/common.js" ></script>
 <script type="text/javascript">
 	function menuExtend(menu) {
 		var list = document.getElementsByClassName(menu);

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 
@@ -79,28 +78,29 @@ public class CommonController {
 	// TODO : SignUp Execution
 	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
 	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
-		logger.info("Call : /signExe.do - GET");
+		logger.info("Call : /signExe.do - POST");
 		
-		// TODO : overlap preprocessing (front)
+		// overlapping check
 		if(commonService.checkId(userVO.getId()) != 0) {
-			// TODO : UserID overlap - exception
-			return "/error";
-		}
-		
-		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
-			// TODO : Company overlap - exception
+			model.addAttribute("errorMsg", "REGIST ID ERROR!");
 			return "/error";
 		}
 		
 		// Select : Create New Company
 		if(companyState.equals("new")) {
+			if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
+				model.addAttribute("errorMsg", "REGIST CODE ERROR!");
+				return "/error";
+			}
+			
 			commonService.signUpCompany(companyRegistVO);
-			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd());
+			commonService.signUpUser(userVO, "POS002");
 			
 		// Select : Exist Company
 		} else {
-			commonService.signUpUser(userVO, companyRegistVO.getCompany_cd());
+			commonService.signUpUser(userVO, "POS003");
 		}
+		
 		return "/login";
 	}
 	

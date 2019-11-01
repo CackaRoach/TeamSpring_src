@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,84 +8,43 @@
     <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/kaikei/js/signup.js" ></script>
 <script>
-	$(window).load(function(){
-		$("#id").blur(function() {
-			var userId = $('#id').val();
-			$.ajax({
-				url : '/kaikei/checkId.do?id=' + userId,
-				type : 'get',
-				success : function(data) {					
-					
-					if (data == 1) {
-							$("#id_check").text("Exist ID");
-							$("#id_check").css("color", "red");
-						} else {
-							$("#id_check").text("Available ID");	
-							$("#id_check").css("color", "green");
-						}
-					}, error : function() {
-							console.log("Fail");
-					}
-				});
-			});
-	
-		$("#company_cd_ex").blur(function() {
-			var company_cd = $('#company_cd').val();
-			$.ajax({
-				url : '/kaikei/checkCode.do?company_cd=' + company_cd,
-				type : 'get',
-				success : function(data) {					
-					
-					if (data == 1) {
-							$("#code_check_ex").text("Exist Code");
-							$("#code_check_ex").css("color", "red");
-						} else {
-							$("#code_check_ex").text("Available Code");	
-							$("#code_check_ex").css("color", "green");
-						}
-					}, error : function() {
-							console.log("Fail");
-					}
-				});
-			});
-
-		$("#company_cd_new").blur(function() {
-			var company_cd = $('#company_cd').val();
-			$.ajax({
-				url : '/kaikei/checkCode.do?company_cd=' + company_cd,
-				type : 'get',
-				success : function(data) {					
-					
-					if (data == 1) {
-							$("#code_check_new").text("Exist Code");
-							$("#code_check_new").css("color", "red");
-						} else {
-							$("#code_check_new").text("Available Code");	
-							$("#code_check_new").css("color", "green");
-						}
-					}, error : function() {
-							console.log("Fail");
-					}
-				});
-			});
-	});
 
 	function changeForm(form) {
 		if(form == "exist") {
-			document.getElementById("exist").style.display = "block";
+			$("#code_error").text("");
 			document.getElementById("new").style.display = "none";
 		} else {
-			document.getElementById("exist").style.display = "none";
+			$("#code_error").text("");
 			document.getElementById("new").style.display = "block";
 		}
 	}
 
 	function formCheck() {
+		
+		if($("#id_error").html() != "Available ID") {
+			$("#id").focus();
+			return false;
+		}
 
-		return true;
+		if($("#password").val() != $("#passwordConfirm").val()) {
+			$("#password").focus();
+			return false;
+		}
+
+		if($("#email").val() == "") {
+			$("#email").focus();
+			return false;
+		}
+
+		if($("#code_error").css("color") != "rgb(0, 128, 0)") {
+			$("#company_cd").focus();
+			return false;
+		}
+		
+		$("#register").submit();
 	}
-
 	
 	
 </script>
@@ -101,36 +59,43 @@
 			<div>
 				<h1>Sign Up</h1>
 			</div>
-			<form name="register" action="signupExe.do" method="post" onsubmit="return formCheck()">
+			<form id="register" name="register" action="signupExe.do" method="post">
 				<div>
 					<h2>Create your Account</h2>
 				</div>
 				<div>
 					<table>
-						<tr style="height:45px">
+						<tr>
 							<td style="text-align:center">ID<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="id" name="id"></td>
-							<td style="width:100px"><span id="id_check" class="h6Font"></span></td>
+							<td><input class="input-box" type="text" id="id" name="id" maxlength="15"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td style="width:100px; text-align:center"><span id="id_error" class="h6error"></span></td>
 						</tr>
 						<tr>
 							<td style="text-align:center">Password<span style="color:red">*</span></td>
-							<td><input class="input-box" type="password" name="password"></td>
+							<td><input class="input-box" type="password" id="password" name="password"></td>
+						</tr>
+						<tr>
 							<td></td>
+							<td style="width:100px; text-align:center"><span id="pass_error" class="h6error"></span></td>
 						</tr>
 						<tr>
 							<td style="text-align:center">Confirm Password<span style="color:red">*</span></td>
-							<td><input class="input-box" type="password" name="passwordconfirm"></td>
+							<td><input class="input-box" type="password" id="passwordConfirm" name="passwordConfirm"></td>
+						</tr>
+						<tr>
 							<td></td>
+							<td style="width:100px; text-align:center"><span id="passConf_error" class="h6error"></span></td>
 						</tr>
 						<tr>
 							<td style="text-align:center">E-mail<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" name="email"></td>
-							<td></td>
+							<td><input class="input-box" type="text" id="email" name="email"></td>
 						</tr>
 						<tr>
 							<td style="text-align:center">Name</td>
 							<td><input class="input-box" type="text" name="name"></td>
-							<td></td>
 						</tr>
 						<tr>
 							<td style="text-align:center">Phone</td>
@@ -145,11 +110,11 @@
 				<div>
 					<table>
 						<tr>
-							<td><input type="radio" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');"></td>
+							<td><input type="radio" class="companyState" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');"></td>
 							<td style="text-align:center">Existing Company Code<span style="color:red">*</span></td>
 						</tr>
 						<tr>
-							<td><input type="radio" name="companyState" value="new" onclick="changeForm('new');"></td>
+							<td><input type="radio" class="companyState" name="companyState" value="new" onclick="changeForm('new');"></td>
 							<td style="text-align:center">Create New Company Code<span style="color:red">*</span></td>
 						</tr>
 					</table>
@@ -158,25 +123,23 @@
 					<table>
 						<tr>
 							<td style="text-align:center">Company Code<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="company_cd_ex" name="company_cd_ex"></td>
-							<td><h6 id="code_check_ex"></h6></td>
+							<td><input class="input-box" type="text" id="company_cd" name="company_cd"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td style="text-align:center"><span id="code_error" class="h6error"></span></td>
 						</tr>
 					</table>
 				</div>
 				<div id="new" style="display:none">
 					<table>
 						<tr>
-							<td style="text-align:center">Company Code<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="company_cd_new" name="company_cd_new"></td>
-							<td><h6 id="code_check_new"></h6></td>
-						</tr>
-						<tr>
 							<td style="text-align:right">Company title</td>
 							<td><input class="input-box" type="text" name="company_title"></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td style="text-align:right">Business license Code</td>
+							<td style="text-align:right">Business license</td>
 							<td><input class="input-box" type="text" name="company_regist_cd"></td>
 							<td></td>
 						</tr>
@@ -198,7 +161,7 @@
 					</table>
 				</div>
 				<div>
-					<input class="button" type="submit" value="Confirm">
+					<input class="button" type="button" value="Confirm" onclick="formCheck();">
 					<input class="button" type="button" onclick="location.href='login.do'" value="Cancel">
 				</div>
 			</form>
