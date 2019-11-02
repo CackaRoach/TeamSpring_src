@@ -6,7 +6,14 @@
     <meta charset="Shift_JIS">
     <title>Err</title>
 </head>
-<body>
+<script>
+	function forawrd() {
+		setTimeout(function() {
+			location.href="/kaikei/index.jsp";
+		}, 2000);
+	}
+</script>
+<body onload="forawrd()">
     <div align="center">
     		<h1>${errorMsg}</h1>
     </div> 

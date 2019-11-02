@@ -2,7 +2,6 @@ package com.ts.kaikei.vo;
 
 import org.apache.ibatis.type.Alias;
 
-// Company Regist Only VO Object
 @Alias("CompanyRegistVO")
 public class CompanyRegistVO {
 	private String id;

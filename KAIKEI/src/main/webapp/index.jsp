@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	function goLoginPage()
 	{
-	 		location.href="login.do";
+	 	location.href="/kaikei/login.do";
 	}
 </script>
 

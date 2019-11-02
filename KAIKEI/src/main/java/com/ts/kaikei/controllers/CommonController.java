@@ -16,8 +16,6 @@ import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.UserVO;
 
 
-// TODO : Logout - Layout(height, width %) modify
-
 @Controller
 public class CommonController {
 	
@@ -47,6 +45,7 @@ public class CommonController {
 		if(getUserVO == null) {
 			model.addAttribute("loginState", "Incorrect ID, Password");
 			return "/login";
+			
 		} else if(getUserVO.getAuth_cd().equals("AUT003")) {
 			model.addAttribute("loginState", "Unapproved Account");
 			return "/login";
@@ -79,7 +78,7 @@ public class CommonController {
 	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
 		logger.info("Call : /signExe.do - POST");
 		
-		// overlapping check
+		// overlapping check(id)
 		if(commonService.checkId(userVO.getId()) != 0) {
 			model.addAttribute("errorMsg", "REGIST ID ERROR!");
 			return "/error";
@@ -87,6 +86,7 @@ public class CommonController {
 		
 		// Select : Create New Company
 		if(companyState.equals("new")) {
+			// overlapping check(code)
 			if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
 				model.addAttribute("errorMsg", "REGIST CODE ERROR!");
 				return "/error";
@@ -96,6 +96,7 @@ public class CommonController {
 				model.addAttribute("errorMsg", "REGIST COMPANY ERROR!");
 				return "/error";
 			}
+			
 			if(!commonService.signUpUser(userVO, "POS002")) {
 				model.addAttribute("errorMsg", "REGIST USER ERROR!");
 				return "/error";
@@ -141,7 +142,6 @@ public class CommonController {
 	@RequestMapping(value = "/forgotExc.do", method = RequestMethod.POST)
 	public String forgotExc(Model model) {
 		logger.info("Call : /forgotExc.do - POST");
-		
 		
 		return "/forgot";	
 	}

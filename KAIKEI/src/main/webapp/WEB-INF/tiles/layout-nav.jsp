@@ -22,14 +22,20 @@
 		}
 	}
 </script>
-<body>
-    <div id="header"><tiles:insertAttribute name="header" />
+<body style="max-width: 100%">
+    <div id="header">
+	    <div class="div-header"><tiles:insertAttribute name="header" /></div>
     </div>
-    <div id="nav"><tiles:insertAttribute name="nav" />
+    <div id="nav">
+	    <div class="div-nav"><tiles:insertAttribute name="nav" /></div>
     </div>
-    <div id="section"><tiles:insertAttribute name="section" />
+    <div id="section">
+    	<div class="div-section">
+    		<div class="div-section-contents"><tiles:insertAttribute name="section" /></div>
+   		</div>
     </div>    
-    <div id="footer"><tiles:insertAttribute name="footer" />
+    <div id="footer">
+	    <div class="div-footer"><tiles:insertAttribute name="footer" /></div>
    	</div>    
 </body>
 </html>

@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
-    	<div id="div-component">
+    	<div class="div-nav-component">
+    		<div align="center">
+    			<img src="/kaikei/images/hallym.png">
+    		</div>
+    		<div style="background-color: #eeeeee;">
+    			<p>Company : </p>
+    			<p>Domain :</p>
+    		</div>
     	</div>
-		<div id="div-component">
+		<div class="div-nav-component">
 			<ul class="ul-list">
 				<li>> <a href="/kaikei/home.do">Home</a></li>
 			</ul>
@@ -33,5 +40,9 @@
 				<li class="manage">> <a href="/kaikei/manage/company.do">Company(admin)</a></li>
 				<li class="manage">> <a href="/kaikei/manage/users.do">Users(admin)</a></li>
 				<li class="manage">> <a href="/kaikei/manage/code.do">Code(temp)</a></li>
+			</ul>
+			<ul class="ul-list">
+				<li><a href="javascript:menuExtend('chart');">Å§ Chart</a></li>
+				<li class="chart">> <a href="/kaikei/chart/pl.do">P/L</a></li>
 			</ul>
 		</div>
