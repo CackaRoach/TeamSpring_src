@@ -1,11 +1,9 @@
 package com.ts.kaikei.dao;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-
-import com.ts.kaikei.vo.StatementVO;
+import java.util.*;
+import com.ts.kaikei.vo.*;
 
 
 @Mapper
@@ -16,4 +14,8 @@ public interface StatementDAO {
 	public ArrayList<StatementVO> getStatementListCond(Map<String, String> searchParams);
 	public StatementVO getStatementDetail(int idx);
 	public void updateStatement(StatementVO statementVO);
+	
+	public List<StatementVO> getStatements(StatementKeyVO keyword);
+	public List<StatementVO> getStatements();
+	public List<StatementVO> getStatementAt(int idx);
 }
