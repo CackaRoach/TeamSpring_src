@@ -14,15 +14,16 @@
 	function changeForm(form) {
 		if(form == "exist") {
 			$("#code_error").text("");
-			document.getElementById("new").style.display = "none";
+			$("#new").style.display = "none";
 		} else {
 			$("#code_error").text("");
-			document.getElementById("new").style.display = "block";
+			$("#new").style.display = "block";
 		}
 	}
 
 	function formCheck() {
-		
+
+		// TODO : Change to Uncheck String
 		if($("#id_error").html() != "Available ID") {
 			$("#id").focus();
 			return false;
@@ -38,6 +39,7 @@
 			return false;
 		}
 
+		// TODO : Change to Unckeck Color
 		if($("#code_error").css("color") != "rgb(0, 128, 0)") {
 			$("#company_cd").focus();
 			return false;

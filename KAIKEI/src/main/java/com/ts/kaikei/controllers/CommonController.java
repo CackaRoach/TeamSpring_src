@@ -1,5 +1,6 @@
 package com.ts.kaikei.controllers;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
+import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 
@@ -41,7 +43,8 @@ public class CommonController {
 		logger.info("Call : /loginExe.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
-		
+
+		// ERROR
 		if(getUserVO == null) {
 			model.addAttribute("loginState", "Incorrect ID, Password");
 			return "/login";
@@ -50,8 +53,13 @@ public class CommonController {
 			model.addAttribute("loginState", "Unapproved Account");
 			return "/login";
 		}
-
+	
+		CompanyVO companyVO = commonService.getCompany(getUserVO.getCompany_cd());
+		
 		httpSession.setAttribute("userVO", getUserVO);
+		httpSession.setAttribute("companyTitle", companyVO.getTitle());
+		httpSession.setAttribute("companyDomain", companyVO.getDomain());
+		
 		return "redirect:home.do";	
 	}
 	
@@ -86,6 +94,7 @@ public class CommonController {
 		
 		// Select : Create New Company
 		if(companyState.equals("new")) {
+			
 			// overlapping check(code)
 			if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
 				model.addAttribute("errorMsg", "REGIST CODE ERROR!");

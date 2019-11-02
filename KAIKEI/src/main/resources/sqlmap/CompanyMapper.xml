@@ -8,7 +8,16 @@
         SELECT count(*)
         FROM company
         WHERE 1=1
-        AND company_cd = #{code}
+        AND company_cd = #{company_cd}
+        
+    </select>
+    
+    <select id="getCompany" parameterType="String" resultType="CompanyVO" >
+    
+        SELECT title, domain
+        FROM company
+        WHERE 1=1
+        AND company_cd = #{company_cd}
         
     </select>
 

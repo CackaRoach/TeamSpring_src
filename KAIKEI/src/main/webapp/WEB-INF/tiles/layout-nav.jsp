@@ -10,6 +10,7 @@
 </head>
 <script type="text/javascript" src="/kaikei/js/common.js" ></script>
 <script type="text/javascript">
+
 	function menuExtend(menu) {
 		var list = document.getElementsByClassName(menu);
 		
@@ -21,6 +22,7 @@
 				list[i].style.display = "block";
 		}
 	}
+	
 </script>
 <body style="max-width: 100%">
     <div id="header">

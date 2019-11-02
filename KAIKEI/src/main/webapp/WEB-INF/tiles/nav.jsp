@@ -2,11 +2,11 @@
     pageEncoding="Shift_JIS"%>
     	<div class="div-nav-component">
     		<div align="center">
-    			<img src="/kaikei/images/hallym.png">
+    			<img src="/kaikei/images/${userVO.company_cd}.png">
     		</div>
     		<div style="background-color: #eeeeee;">
-    			<p>Company : </p>
-    			<p>Domain :</p>
+    			<h6 id="navCompanyTitle">Company :  ${companyTitle}</h6>
+    			<h6 id="navCompanyDomain">Domain : ${companyDomain}</h6>
     		</div>
     	</div>
 		<div class="div-nav-component">
