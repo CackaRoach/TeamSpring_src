@@ -14,14 +14,14 @@
 				animationEnabled: true,
 				theme: "light2",
 				title: {
-					text: "P/L"
+					text: "B/S"
 				},
 				axisX: {
 					title: "Quarter",
 					crosshair: {
 						enabled: true,
 						snapToDataPoint: true
-					}
+					}	
 				},
 				axisY: {
 					includeZero: false
@@ -32,7 +32,7 @@
 				data: [{        
 					type: "line",
 					name: "2019",
-					lineColor: "blue",
+					lineColor: "red", 
 					showInLegend: true,
 					legendText: "2019",
 					dataPoints: [
@@ -41,18 +41,18 @@
 						{ y: 1520000, label: "Q3", markerColor: "black"},
 						{ y: 1460000, label: "Q4", markerColor: "black"}
 					]
-				}, 
+				},
 				{        
 					type: "line",
 					name: "2018",
-					lineColor: "green",
+					lineColor: "green", 
 					showInLegend: true,
 					legendText: "2018",
 					dataPoints: [
-						{ y: 1350000, label: "Q1", markerColor: "black"},
+						{ y: 1520000, label: "Q1", markerColor: "black"},
 						{ y: 1510000, label: "Q2", markerColor: "black"},
-						{ y: 1120000, label: "Q3", markerColor: "black"},
-						{ y: 1260000, label: "Q4", markerColor: "black"}
+						{ y: 1410000, label: "Q3", markerColor: "black"},
+						{ y: 1370000, label: "Q4", markerColor: "black"}
 					]
 				}]
 			});
