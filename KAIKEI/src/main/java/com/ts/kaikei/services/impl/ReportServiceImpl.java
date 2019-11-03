@@ -16,10 +16,32 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private StatementDAO statementDAO;
 	private ArrayList<String> Act_cd = new ArrayList<String>();
+	ArrayList<StatementVO> statList = getStatementList();	
+
+	//CTB
 	private ArrayList<StatementVO> jasan = null, buche = null, jabon = null, suick = null, biyong = null;
-	ArrayList<int[]> dataList = new ArrayList<int[]>();
-	int total[] = new int[4];
+	ArrayList<int[]> CTB_dataList = new ArrayList<int[]>();
+	int CTB_total[] = new int[4];
 	
+	//GL
+	private ArrayList<ArrayList<String>> GL_dataList = null;
+	private ArrayList<ArrayList<Integer>> GL_MonthlyTotal = null;
+	private ArrayList<ArrayList<Integer>> GL_Total = null;
+	
+	@Override
+	public ArrayList<ArrayList<String>> getGL_dataList() {
+		return GL_dataList;
+	}
+
+	@Override
+	public ArrayList<ArrayList<Integer>> getGL_MonthlyTotal() {
+		return GL_MonthlyTotal;
+	}
+
+	@Override
+	public ArrayList<ArrayList<Integer>> getGL_Total() {
+		return GL_Total;
+	}
 	
 	@Override
 	public ArrayList<StatementVO> getStatementList() {
@@ -54,17 +76,18 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public ArrayList<int[]> getDataList() {
-		return dataList;
+		return CTB_dataList;
 	}
 
 	@Override
 	public int[] getTotal() {
-		return total;
+		return CTB_total;
 	}
 	
 	@Override
+	//sort for CTB
 	public void StatementSort() {
-		ArrayList<StatementVO> statList = getStatementList();
+		
 		int data[] = new int[4];
 		
 		//sorting Account & insert Account Title
@@ -128,14 +151,77 @@ public class ReportServiceImpl implements ReportService {
 				data[2] = biyong.get(n++).getCreditor();
 				data[0] = data[1] - data[2];
 			}
-			dataList.add(data);
+			CTB_dataList.add(data);
 		}
 
 		//total Calcluator
-		for(int i =0 ; i < dataList.size();i++) {
+		for(int i =0 ; i < CTB_dataList.size();i++) {
 			for(int j = 0; j<4;j++) {
-				total[j] += dataList.get(i)[j];
+				CTB_total[j] += CTB_dataList.get(i)[j];
 			}
 		}
+	}
+
+	@Override
+	//GL data find
+	public void GLinit() {
+		int balance = getForwardBalance();
+		//input GL data line
+		for(int i =0; i< Act_cd.size();i++) {
+			
+			for(int j =0;j<getStatementList().size();j++) {
+				if(Act_cd.get(i) == statList.get(j).getAccount_cd()) {
+					ArrayList<String> data = null;
+					data.add(statList.get(j).getDate());
+					data.add(statList.get(j).getAbs());
+					data.add(statList.get(j).getCustomer_cd());
+					data.add(Integer.toString(statList.get(j).getDebtor()));
+					data.add(Integer.toString(statList.get(j).getCreditor()));
+					balance += statList.get(j).getDebtor() + statList.get(j).getCreditor();
+					data.add(Integer.toString(balance));
+					GL_dataList.add(data);
+				}
+			}
+			
+			//calc monthly total
+			int lastMonth = 0;
+			ArrayList<Integer> mothlyData = null;
+			for(int j=0;j<GL_dataList.size();j++) {
+				String month = GL_dataList.get(j).get(0).substring(3, 4); // get month
+				int month_deb = 0;
+				int month_cre = 0;
+				if(Integer.parseInt(month) != lastMonth) {
+					lastMonth = Integer.parseInt(month);
+					month_deb += Integer.parseInt(GL_dataList.get(j).get(3)); //deb
+					month_cre += Integer.parseInt(GL_dataList.get(j).get(4)); //cer				
+				}
+				mothlyData.add(Integer.parseInt(month));
+				mothlyData.add(month_deb);
+				mothlyData.add(month_cre);
+				GL_MonthlyTotal.add(mothlyData);
+			}
+
+			int total_deb = 0 ;
+			int total_cre = 0;
+			int total_balance = 0;
+			ArrayList<Integer> total_data = null;
+			//calc total
+			for(int j =0;j<GL_MonthlyTotal.size();i++) {
+				total_deb += GL_MonthlyTotal.get(j).get(1);
+				total_cre += GL_MonthlyTotal.get(j).get(2);
+				total_balance = total_deb + total_cre;
+				total_data.add(total_deb);
+				total_data.add(total_cre);
+				total_data.add(total_balance);
+				GL_Total.add(total_data);
+			}
+
+		}
+		
+	}
+
+	private int getForwardBalance() {
+		// TODO FowardBalance 
+		return 0;
 	}
 }

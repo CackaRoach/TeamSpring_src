@@ -34,20 +34,25 @@ public class ReportController {
 		return "/report/bs";
 	}
 	
+	//GL page
 	@RequestMapping(value = "/report/gl.do", method = RequestMethod.GET)
 	public String ledgerGL(Model model) {
 		logger.info("Call : /report/gl.do - GET");
-
-		model.addAttribute("StatementList", reportService.getStatementList());
+		reportService.GLinit();
+		
+		model.addAttribute("dataList", reportService.getGL_dataList());
+		model.addAttribute("MonthlyTotal", reportService.getGL_MonthlyTotal());
+		model.addAttribute("Total", reportService.getGL_Total());
 		
 		return "/report/gl";
 	}
 	
-	//CTB Print
+	//CTB page
 	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
 	public String ledgerCTB(Model model) {
 		logger.info("Call : /report/ctb.do - GET");
 		
+		reportService.StatementSort();
 		model.addAttribute("jasan", reportService.getJasanList());
 		model.addAttribute("buche", reportService.getBucheList());
 		model.addAttribute("jabon", reportService.getJabonList());
