@@ -7,48 +7,39 @@
     <title>KAIKEI</title>
     <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
 </head>
+<script>
+</script>
 <body>
-    <div id="header">
-    	<div align="center">
-			<h1>KAIKEI</h1>
-		</div>
+   	<div align="center" style="min-width:400px; padding: 100px 0px; margin: 0% 20%;">
+		<div style="font-size: 40px; font-style: italic;">K A I K E I</div>
+	</div>
+	<div align="center" style="min-width:400px; background-color: #EEEEEE; padding: 30px;">
+		<form action="loginExe.do" method="post">
+			<table>
+				<tr>
+					<td><input class="input-box" type="text" name="id" placeholder="Enter ID" maxlength="15"></td>
+				</tr>
+				<tr>
+					<td style="text-align:center;"><span class="spanLoginFont">${loginState}</span></td>
+				</tr>
+				<tr>
+					<td><input class="input-box" type="password" name="password" placeholder="Enter Password" maxlength="15"></td>
+				</tr>
+			</table>
+			<div style="height:20px">
+			</div>
+			<input class="button button-login" type="submit" value="Login">
+		</form>
+		<table style="text-align:center">
+			<tr>
+				<td style="padding:10px 0px"><a href="signup.do">Sign Up</a></td>
+			</tr>
+			<tr>
+				<td style="padding:10px 0px"><!--<a href="forgot.do"></a>-->forgot ID,Password</td>
+			</tr>
+		</table>
     </div>
-    <div id="section-only">
-		<div id="div-gray" align="center">
-			<form action="loginExe.do" method="post">
-				<h2>Login</h2>
-				<table>
-					<tr>
-						<td><input class="input-box" type="text" name="id" placeholder="Enter ID" maxlength="15"></td>
-					</tr>
-					<tr>
-						<td style="height:20px; text-align:center"><span class="spanLoginFont">${loginState}</span></td>
-					</tr>
-					<tr>
-						<td><input class="input-box" type="password" name="password" placeholder="Enter Password" maxlength="15"></td>
-					</tr>
-				</table>
-				<div style="height:20px">
-				</div>
-				<input class="button" type="submit" value="Login">
-				<div style="height:20px">
-				</div>
-				<table style="text-align:center">
-					<tr>
-						<td style="padding:10px 0px"><a href="signup.do">Sign Up</a></td>
-					</tr>
-					<tr>
-						<td style="padding:10px 0px"><!--<a href="forgot.do"></a>-->forgot ID,Password</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-    </div>    
-    <div id="footer">
-    	<div>
-			<h6>footer</h6>
-		</div>
-   	</div>    
+    <div align="center">asd, asd = Admin Page<br>qwe, qwe = CEO Page<br>zxc, zxc = é–àıÉyÅ[ÉW</div>
 </body>
 </html>
 		

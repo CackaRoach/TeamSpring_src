@@ -14,10 +14,10 @@
 	function changeForm(form) {
 		if(form == "exist") {
 			$("#code_error").text("");
-			$("#new").style.display = "none";
+			$("#new").css("display", "none");
 		} else {
 			$("#code_error").text("");
-			$("#new").style.display = "block";
+			$("#new").css("display", "block");
 		}
 	}
 
@@ -51,123 +51,109 @@
 </script>
 <body>
     <div id="header">
-    	<div align="center">
-			<h1>KAIKEI</h1>
-		</div>
+    	<div align="center" style="font-size: 40px; font-style: italic; padding:30px;">K A I K E I</div>
     </div>
-    	<div id="section-only">
-        	<div id="div-gray" align="center">
-			<div>
-				<h1>Sign Up</h1>
-			</div>
+   	<div style="background-color: #EEEEEE; padding:0% 30%;">
+       	<div style="padding:30px 0px;">
+			<div style="padding:10px 0px;"><span style="font-size:2em">Sign Up</span></div>
 			<form id="register" name="register" action="signupExe.do" method="post">
-				<div>
-					<h2>Create your Account</h2>
+				<div style="background-color: white">
+					<div style="padding: 10px 30px;"><span style="font-size:1.5em">Account</span></div>
+					<div align="center" style="background-color: white;">
+						<table>
+							<tr>
+								<td style="text-align:center">ID<span style="color:red">*</span></td>
+								<td><input class="input-box" type="text" id="id" name="id" maxlength="15"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="id_error" class="h6error"></span></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Password<span style="color:red">*</span></td>
+								<td><input class="input-box" type="password" id="password" name="password" maxlength="15"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="pass_error" class="h6error"></span></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Confirm Password<span style="color:red">*</span></td>
+								<td><input class="input-box" type="password" id="passwordConfirm" name="passwordConfirm" maxlength="15"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="passConf_error" class="h6error"></span></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">E-mail<span style="color:red">*</span></td>
+								<td><input class="input-box" type="text" id="email" name="email"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Name</td>
+								<td><input class="input-box" type="text" name="name"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Phone</td>
+								<td><input class="input-box" type="text" name="phone"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
-				<div>
-					<table>
-						<tr>
-							<td style="text-align:center">ID<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="id" name="id" maxlength="15"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td style="width:100px; text-align:center"><span id="id_error" class="h6error"></span></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Password<span style="color:red">*</span></td>
-							<td><input class="input-box" type="password" id="password" name="password"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td style="width:100px; text-align:center"><span id="pass_error" class="h6error"></span></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Confirm Password<span style="color:red">*</span></td>
-							<td><input class="input-box" type="password" id="passwordConfirm" name="passwordConfirm"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td style="width:100px; text-align:center"><span id="passConf_error" class="h6error"></span></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">E-mail<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="email" name="email"></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Name</td>
-							<td><input class="input-box" type="text" name="name"></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Phone</td>
-							<td><input class="input-box" type="text" name="phone"></td>
-							<td></td>
-						</tr>
-					</table>
+				<div style="background-color: white;">
+					<div style="padding: 10px 30px;"><span style="font-size:1.5em">Company</span></div>
+					<div style="padding: 5px 60px;">
+						<input type="radio" class="companyState" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');">
+						Existing Company Code<span style="color:red">*</span>
+					</div>
+					<div style="padding: 5px 60px;">
+						<input type="radio" class="companyState" name="companyState" value="new" onclick="changeForm('new');">
+						Create New Company Code<span style="color:red">*</span>
+					</div>
+					<div style="padding: 20px;" align="center">
+						<table>
+							<tr>
+								<td style="text-align:center">Company Code<span style="color:red">*</span></td>
+								<td><input class="input-box" type="text" id="company_cd" name="company_cd"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="code_error" class="h6error"></span></td>
+							</tr>
+						</table>
+						<div id="new" style="display:none">
+							<table>
+								<tr>
+									<td style="text-align:right">Company title</td>
+									<td><input class="input-box" type="text" name="company_title"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Business license</td>
+									<td><input class="input-box" type="text" name="company_regist_cd"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Phone</td>
+									<td><input class="input-box" type="text" name="company_phone"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Fax</td>
+									<td><input class="input-box" type="text" name="company_fax"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Domain</td>
+									<td><input class="input-box" type="text" name="company_domain"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
-				<div>
-					<h2>Company</h2>
-				</div>
-				<div>
-					<table>
-						<tr>
-							<td><input type="radio" class="companyState" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');"></td>
-							<td style="text-align:center">Existing Company Code<span style="color:red">*</span></td>
-						</tr>
-						<tr>
-							<td><input type="radio" class="companyState" name="companyState" value="new" onclick="changeForm('new');"></td>
-							<td style="text-align:center">Create New Company Code<span style="color:red">*</span></td>
-						</tr>
-					</table>
-				</div>
-				<div id="exist">
-					<table>
-						<tr>
-							<td style="text-align:center">Company Code<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="company_cd" name="company_cd"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td style="text-align:center"><span id="code_error" class="h6error"></span></td>
-						</tr>
-					</table>
-				</div>
-				<div id="new" style="display:none">
-					<table>
-						<tr>
-							<td style="text-align:right">Company title</td>
-							<td><input class="input-box" type="text" name="company_title"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Business license</td>
-							<td><input class="input-box" type="text" name="company_regist_cd"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Phone</td>
-							<td><input class="input-box" type="text" name="company_phone"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Fax</td>
-							<td><input class="input-box" type="text" name="company_fax"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Domain</td>
-							<td><input class="input-box" type="text" name="company_domain"></td>
-							<td></td>
-						</tr>
-					</table>
-				</div>
-				<div>
+				<div style="background-color: white; padding:10px 0px;" align="center">
 					<input class="button" type="submit" value="Confirm" onclick="return formCheck();">
 					<input class="button" type="button" onclick="location.href='login.do'" value="Cancel">
 				</div>
 			</form>
 		</div>
-    </div>    
+   	</div>    
     <div id="footer">
     	<div>
 			<h6>footer</h6>
