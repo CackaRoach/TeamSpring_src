@@ -1,7 +1,6 @@
 package com.ts.kaikei.services.impl;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +26,14 @@ public class ReportServiceImpl implements ReportService {
 	private ArrayList<ArrayList<String>> GL_dataList = null;
 	private ArrayList<ArrayList<Integer>> GL_MonthlyTotal = null;
 	private ArrayList<ArrayList<Integer>> GL_Total = null;
+	
+	//BS
+	private ArrayList<Integer> BS_dataList = null;
+	
+	@Override
+	public ArrayList<Integer> getBS_dataList(){
+		return BS_dataList;
+	}
 	
 	@Override
 	public ArrayList<ArrayList<String>> getGL_dataList() {
@@ -103,10 +110,10 @@ public class ReportServiceImpl implements ReportService {
 				Act_cd.add(statList.get(i).getAccount_cd());
 			}
 			
-			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 240) {
+			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 250 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 961 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 980) {
 				jasan.add(statList.get(i));
 			}
-			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 251 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 305) {
+			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 251 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 330) {
 				buche.add(statList.get(i));
 			}
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 331 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 380) {
@@ -115,7 +122,7 @@ public class ReportServiceImpl implements ReportService {
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 401 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 412) {
 				suick.add(statList.get(i));
 			}
-			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 451 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 999) {
+			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 451 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 960 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 981 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 999) {
 				biyong.add(statList.get(i));
 			}
 			
@@ -164,7 +171,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	//GL data find
-	public void GLinit() {
+	public void GL_Calculator() {
 		int balance = getForwardBalance();
 		//input GL data line
 		for(int i =0; i< Act_cd.size();i++) {
@@ -172,6 +179,7 @@ public class ReportServiceImpl implements ReportService {
 			for(int j =0;j<getStatementList().size();j++) {
 				if(Act_cd.get(i) == statList.get(j).getAccount_cd()) {
 					ArrayList<String> data = null;
+					data.add(Integer.toString(balance));
 					data.add(statList.get(j).getDate());
 					data.add(statList.get(j).getAbs());
 					data.add(statList.get(j).getCustomer_cd());
@@ -187,7 +195,7 @@ public class ReportServiceImpl implements ReportService {
 			int lastMonth = 0;
 			ArrayList<Integer> mothlyData = null;
 			for(int j=0;j<GL_dataList.size();j++) {
-				String month = GL_dataList.get(j).get(0).substring(3, 4); // get month
+				String month = GL_dataList.get(j).get(1).substring(3, 4); // get month
 				int month_deb = 0;
 				int month_cre = 0;
 				if(Integer.parseInt(month) != lastMonth) {
@@ -219,7 +227,58 @@ public class ReportServiceImpl implements ReportService {
 		}
 		
 	}
-
+	
+	@Override
+	public void BS_Calculator() {
+		//jasan split
+		int data1 = 0, data2 = 0;
+		for(int i=0;i< jasan.size();i++) {
+			
+			if(Integer.parseInt(jasan.get(i).getAccount_cd()) >= 101 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 145) {
+				data1 += jasan.get(i).getDebtor(); 
+			}	
+			if(Integer.parseInt(jasan.get(i).getAccount_cd()) >= 176 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 250 || Integer.parseInt(jasan.get(i).getAccount_cd()) >= 961 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 980) {
+				data2 += jasan.get(i).getDebtor(); 
+			}	
+		}
+		BS_dataList.add(data1);
+		BS_dataList.add(data2);
+		
+		//buche split
+		data1 = data2 = 0;
+		for(int i=0;i< buche.size();i++) {
+			
+			if(Integer.parseInt(buche.get(i).getAccount_cd()) >= 251 && Integer.parseInt(buche.get(i).getAccount_cd()) <= 290) {
+				data1 += buche.get(i).getDebtor(); 
+			}	
+			if(Integer.parseInt(buche.get(i).getAccount_cd()) >= 291 && Integer.parseInt(buche.get(i).getAccount_cd()) <= 330) {
+				data2 += buche.get(i).getDebtor(); 
+			}	
+		}
+		BS_dataList.add(data1);
+		BS_dataList.add(data2);
+		
+		//jabon split
+		data1 = data2 = 0;
+		for(int i=0;i< jabon.size();i++) {
+			
+			if(Integer.parseInt(jabon.get(i).getAccount_cd()) == 331) {
+				data1 += jabon.get(i).getDebtor(); 
+			}	
+			if(Integer.parseInt(jabon.get(i).getAccount_cd()) >= 351 && Integer.parseInt(jabon.get(i).getAccount_cd()) <= 371) {
+				data2 += jabon.get(i).getDebtor(); 
+			}	
+		}
+		BS_dataList.add(data1);
+		BS_dataList.add(data2);
+	}
+	
+	@Override
+	public void PL_Calculator() {
+		
+	}
+	
+	//public void 
 	private int getForwardBalance() {
 		// TODO FowardBalance 
 		return 0;

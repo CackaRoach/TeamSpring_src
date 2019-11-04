@@ -16,8 +16,13 @@ public interface ReportService {
 	public ArrayList<ArrayList<String>> getGL_dataList();
 	public ArrayList<ArrayList<Integer>> getGL_MonthlyTotal();
 	public ArrayList<ArrayList<Integer>> getGL_Total();
-	public void GLinit();
+	public ArrayList<Integer> getBS_dataList();
 	public ArrayList<int[]> getDataList();
+	
+	public void GL_Calculator();
+	public void PL_Calculator();
+	public void BS_Calculator();
 	public int[] getTotal();
 	public void StatementSort();
+	
 }
