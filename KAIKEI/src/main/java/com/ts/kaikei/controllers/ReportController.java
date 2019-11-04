@@ -70,7 +70,9 @@ public class ReportController {
 	public String ledgerPL(Model model) {
 		logger.info("Call : /report/pl.do - GET");
 		
-		model.addAttribute("StatementList", reportService.getStatementList());
+		reportService.PL_Calculator();
+		
+		model.addAttribute("dataList", reportService.getPL_dataList());
 		
 		return "/report/pl";
 	}

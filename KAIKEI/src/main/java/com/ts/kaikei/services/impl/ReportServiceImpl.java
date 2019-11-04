@@ -30,6 +30,15 @@ public class ReportServiceImpl implements ReportService {
 	//BS
 	private ArrayList<Integer> BS_dataList = null;
 	
+	//PL
+	private ArrayList<Integer> PL_dataList = null;
+	
+	
+	@Override
+	public ArrayList<Integer> getPL_dataList() {
+		return PL_dataList;
+	}
+	
 	@Override
 	public ArrayList<Integer> getBS_dataList(){
 		return BS_dataList;
@@ -109,19 +118,23 @@ public class ReportServiceImpl implements ReportService {
 			if(flag) {
 				Act_cd.add(statList.get(i).getAccount_cd());
 			}
-			
+			// jasan 101 ~ 250, 961 ~ 980
 			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 250 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 961 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 980) {
 				jasan.add(statList.get(i));
 			}
+			// buche 251 ~ 330
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 251 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 330) {
 				buche.add(statList.get(i));
 			}
+			// jabon 331 ~ 380
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 331 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 380) {
 				jabon.add(statList.get(i));
 			}
-			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 401 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 412) {
+			// suick 401 ~ 420
+			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 401 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 420) {
 				suick.add(statList.get(i));
 			}
+			// biyong 451 ~ 960, 981~ 999
 			else if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 451 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 960 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 981 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 999) {
 				biyong.add(statList.get(i));
 			}
@@ -228,15 +241,20 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 	
+	// Balance sheet Logic
+	// ref :
+	// http://blog.naver.com/PostView.nhn?blogId=ako92&logNo=220534204188&parentCategoryNo=&categoryNo=22&viewDate=&isShowPopularPosts=false&from=postView
+	// https://post.naver.com/viewer/postView.nhn?volumeNo=15893236&memberNo=9353678
 	@Override
 	public void BS_Calculator() {
-		//jasan split
+		//jasan split 
 		int data1 = 0, data2 = 0;
 		for(int i=0;i< jasan.size();i++) {
-			
+			// 101 ~ 145
 			if(Integer.parseInt(jasan.get(i).getAccount_cd()) >= 101 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 145) {
 				data1 += jasan.get(i).getDebtor(); 
 			}	
+			//  176 ~ 250,  961 ~ 980
 			if(Integer.parseInt(jasan.get(i).getAccount_cd()) >= 176 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 250 || Integer.parseInt(jasan.get(i).getAccount_cd()) >= 961 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 980) {
 				data2 += jasan.get(i).getDebtor(); 
 			}	
@@ -247,12 +265,13 @@ public class ReportServiceImpl implements ReportService {
 		//buche split
 		data1 = data2 = 0;
 		for(int i=0;i< buche.size();i++) {
-			
+			// 251 ~ 290
 			if(Integer.parseInt(buche.get(i).getAccount_cd()) >= 251 && Integer.parseInt(buche.get(i).getAccount_cd()) <= 290) {
-				data1 += buche.get(i).getDebtor(); 
+				data1 += buche.get(i).getCreditor(); 
 			}	
+			// 291 ~ 330
 			if(Integer.parseInt(buche.get(i).getAccount_cd()) >= 291 && Integer.parseInt(buche.get(i).getAccount_cd()) <= 330) {
-				data2 += buche.get(i).getDebtor(); 
+				data2 += buche.get(i).getCreditor(); 
 			}	
 		}
 		BS_dataList.add(data1);
@@ -261,20 +280,117 @@ public class ReportServiceImpl implements ReportService {
 		//jabon split
 		data1 = data2 = 0;
 		for(int i=0;i< jabon.size();i++) {
-			
+			// 331
 			if(Integer.parseInt(jabon.get(i).getAccount_cd()) == 331) {
-				data1 += jabon.get(i).getDebtor(); 
+				data1 += jabon.get(i).getCreditor(); 
 			}	
+			// 351 ~ 371
 			if(Integer.parseInt(jabon.get(i).getAccount_cd()) >= 351 && Integer.parseInt(jabon.get(i).getAccount_cd()) <= 371) {
-				data2 += jabon.get(i).getDebtor(); 
+				data2 += jabon.get(i).getCreditor(); 
 			}	
 		}
 		BS_dataList.add(data1);
 		BS_dataList.add(data2);
 	}
 	
+	// PL Logic 
+	// ref : https://j-dono.tistory.com/entry/%EC%86%90%EC%9D%B5%EA%B3%84%EC%82%B0%EC%84%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EC%84%B1%ED%95%A0%EA%B9%8C
+	//
 	@Override
 	public void PL_Calculator() {
+		int data1 = 0;
+		for(int i=0;i< suick.size();i++) {
+			// sales(0) 401 ~ 420 
+			if(Integer.parseInt(suick.get(i).getAccount_cd()) >= 401 && Integer.parseInt(suick.get(i).getAccount_cd()) <= 420) {
+				data1 += suick.get(i).getDebtor();
+				data1 += suick.get(i).getCreditor();
+			}	
+		}
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< biyong.size();i++) {
+			// wonga(1) 451 ~ 470
+			if(Integer.parseInt(biyong.get(i).getAccount_cd()) >= 451 && Integer.parseInt(biyong.get(i).getAccount_cd()) <= 470) {
+				data1 += biyong.get(i).getDebtor();
+				data1 += biyong.get(i).getCreditor();
+			}	
+		}
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< biyong.size();i++) {
+			// Gross profit(2) : sales - wonga
+				data1 = BS_dataList.get(0) - BS_dataList.get(1);
+		}
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< biyong.size();i++) {
+			// Selling and administrative(3) 801 ~ 848
+			if(Integer.parseInt(biyong.get(i).getAccount_cd()) >= 801 && Integer.parseInt(biyong.get(i).getAccount_cd()) <= 848) {
+				data1 += biyong.get(i).getDebtor();
+				data1 += biyong.get(i).getCreditor();
+			}	
+		}
+		
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< biyong.size();i++) {
+			// Operating profit(4) : Gross profit sales - Selling and administrative 
+			data1 = BS_dataList.get(2) - BS_dataList.get(3);
+		}
+		
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< suick.size();i++) {
+			// Non-operating Income(5) 901 ~ 930
+			if(Integer.parseInt(jasan.get(i).getAccount_cd()) >= 901 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 930) {
+				data1 += jasan.get(i).getDebtor();
+				data1 += jasan.get(i).getCreditor();
+			}	
+		}
+		
+		BS_dataList.add(data1);
+		data1 = 0;
+		for(int i=0;i< suick.size();i++) {
+			// Non-operating expenses(6) 931 ~ 960
+			if(Integer.parseInt(jasan.get(i).getAccount_cd()) >= 931 && Integer.parseInt(jasan.get(i).getAccount_cd()) <= 960) {
+				data1 += jasan.get(i).getDebtor();
+				data1 += jasan.get(i).getCreditor();
+			}	
+		}
+		
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< suick.size();i++) {
+			// Income before Tax(7) : Operating profit - Non-operating expenses
+			data1 = BS_dataList.get(4) - BS_dataList.get(6);
+		}
+		
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< suick.size();i++) {
+			// Income Tax(8) : 998
+			if(Integer.parseInt(jasan.get(i).getAccount_cd()) == 998) {
+				data1 += jasan.get(i).getDebtor();
+				data1 += jasan.get(i).getCreditor();
+			}	
+		}
+		
+		BS_dataList.add(data1);
+		
+		data1 = 0;
+		for(int i=0;i< suick.size();i++) {
+			// Net Income(9) : Income before Tax - Income Tax
+			data1 = BS_dataList.get(7) - BS_dataList.get(8);
+		}
+		
+		BS_dataList.add(data1);
 		
 	}
 	

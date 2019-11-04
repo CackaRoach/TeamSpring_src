@@ -10,7 +10,7 @@ import com.ts.kaikei.vo.StatementVO;
 
 @Mapper
 public interface StatementDAO {
-	
+
 	public ArrayList<StatementVO> getStatementList();
 	public ArrayList<StatementVO> getJasanList();
 	public ArrayList<StatementVO> getBucheList();
@@ -21,6 +21,7 @@ public interface StatementDAO {
 	public ArrayList<ArrayList<Integer>> getGL_MonthlyTotal();
 	public ArrayList<ArrayList<Integer>> getGL_Total();
 	public ArrayList<Integer> getBS_dataList();
+	public ArrayList<Integer> getPL_dataList();
 	public ArrayList<int[]> getDataList();
 	
 	public void GL_Calculator();
