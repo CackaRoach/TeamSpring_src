@@ -95,9 +95,11 @@
 						if (data == 1) {
 							$("#cus_cd_error").text("Exist CODE");
 							$("#cus_cd_error").css("color", "red");
+							$("#cus_cd_error").css("display", "block");
 						} else {
 							$("#cus_cd_error").text("Available CODE");	
 							$("#cus_cd_error").css("color", "green");
+							$("#cus_cd_error").css("display", "block");
 						}
 					}, error : function() {
 						console.log("Fail");
