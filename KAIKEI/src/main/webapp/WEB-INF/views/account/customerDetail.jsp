@@ -49,7 +49,18 @@
 		        </div>
 		        <div style="float:right;">
 		            <input type="button" style="margin:5px" class="button" value="MODIFY" onclick="location.href='/kaikei/account/customerModify.do?cus_cd=${customerVO.cus_cd}'">
-		            <input type="button" style="margin:5px" class="button" value="DELETE" onclick="location.href='/kaikei/account/customerDelete.do?cus_cd=${customerVO.cus_cd}'">
+		            <input type="button" style="margin:5px" class="button" value="DELETE" onclick="isDelete();">
 		        </div>
 		    </div>
 		</div>
+		<script>
+			function isDelete() {
+				if(confirm("Are you sure?")) {
+					location.href='/kaikei/account/customerDelete.do?cus_cd=${customerVO.cus_cd}';
+					return true;
+				}
+
+				return false;
+			}
+
+		</script>

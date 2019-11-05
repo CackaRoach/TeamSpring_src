@@ -50,7 +50,7 @@ public class AccountController {
 	@RequestMapping(value = "/account/customerCodeCheck.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int customerCodeCheck(String cus_cd, HttpSession httpSession, Model model) {
-		logger.info("Call : /account/customerCodeCheck.do - GET");
+		logger.info("Call : /account/customerCodeCheck.do - GET" + accountService.customerCodeCheck(cus_cd, ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd()));
 		
 		return accountService.customerCodeCheck(cus_cd, ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd());
 		

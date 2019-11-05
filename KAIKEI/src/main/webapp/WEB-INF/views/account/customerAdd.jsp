@@ -14,7 +14,7 @@
 		                    </tr>
 		                    <tr>
 		                        <td></td>
-		                        <td style="text-align:center"><span id="title_error" class="h6error" style="color:red; display:none">Input Title</span></td>
+		                        <td style="text-align:center"><span id="title_error" class="h6error" style="color:red; display:none"></span></td>
 		                    </tr>
 		                    <tr>
 		                        <td>Customer Code<span style="color:red">*</span></td>
@@ -67,18 +67,23 @@
 			
 			$("#title").blur(function() {
 
-				if($("#title").val() == "")
+				if($("#title").val() == "") {
+					$("#title_error").text("Input Title");
 					$("#title_error").css("display", "block");
-				else
+				} else {
+					$("#title_error").text("");
 					$("#title_error").css("display", "none");
+				}
 			});
 
 			$("#cus_cd").blur(function() {
 
 				if($("#cus_cd").val() == "") {
+					$("#cus_cd_error").text("Input Code");
 					$("#cus_cd_error").css("display", "block");
 					return false;
 				} else {
+					$("#cus_cd_error").text("");
 					$("#cus_cd_error").css("display", "none");
 				}
 
@@ -86,7 +91,7 @@
 					url : "/kaikei/account/customerCodeCheck.do?cus_cd=" + $("#cus_cd").val(),
 					type : "get",
 					success : function(data) {					
-						
+						console.log(data);
 						if (data == 1) {
 							$("#cus_cd_error").text("Exist CODE");
 							$("#cus_cd_error").css("color", "red");
