@@ -16,52 +16,60 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ts.kaikei.services.AccountService;
 import com.ts.kaikei.services.ManageService;
+import com.ts.kaikei.vo.CompanyListVO;
 import com.ts.kaikei.vo.CompanyVO;
 
 @Controller
 public class ManageController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ManageController.class);
-	
+
 	@Autowired
 	private ManageService manageService;
 
 	/*
-	 *  @RequestMapping(value = "/manage/*.do")
+	 * @RequestMapping(value = "/manage/*.do")
 	 */
-	
-	//COMPANY - LIST(FIND)
+
+	// COMPANY - LIST(FIND)
 	@RequestMapping(value = "/manage/company.do", method = RequestMethod.GET)
-	public ModelAndView ledger(	ModelAndView model,
-							@RequestParam(value = "mPAGE", required = false) String PAGE,
-							@RequestParam(value = "mFIND", required = false) String FIND,
-							@RequestParam(value = "mSTAT", required = false) String STAT_op
-						) {
+	public ModelAndView ledger(	@RequestParam(value = "mPAGE", required = false) String mPAGE,
+								@RequestParam(value = "mINPUT", required = false) String mINPUT,
+								@RequestParam(value = "STAT_op", required = false) String STAT_op, 
+								ModelAndView model) {
+
 		logger.info("Call : /manage/company.do - GET");
-		
-		
-		if(PAGE == null || PAGE == "") PAGE = "1";
-		if(STAT_op == null || STAT_op == "")  STAT_op = "00";
-		
+
+		if (mPAGE == null || mPAGE == "") {
+			mPAGE = "1";
+		}
+		if (STAT_op == null || STAT_op == "") {
+			STAT_op = "00";
+		}
+		if (mINPUT == null || mINPUT == "") {
+			mINPUT = "";
+		}
+
 		Map<String, Object> Params = new HashMap<String, Object>();
-		Params.put("PAGE", PAGE);
-		Params.put("FIND", FIND);
+
+		Params.put("mPAGE", mPAGE);
 		Params.put("STAT_op", STAT_op);
-		
-		List<CompanyVO> companyList = manageService.selectCompany(Params);
-		
+		Params.put("mINPUT", mINPUT);
+
+		List<CompanyListVO> companyList = manageService.selectCompany(Params);
+
 		model.addObject("companyList", companyList);
 		model.setViewName("/manage/company");
+
 		return model;
 	}
-	
-	//COMPANY - DETAIL
+
+	// COMPANY - DETAIL
 	@RequestMapping(value = "/manage/companyDetail.do", method = RequestMethod.GET)
 	public String ledger1(Model model) {
 		logger.info("Call : /manage/company.do - GET");
 
 		return "/manage/company";
 	}
-	
-	
+
 }

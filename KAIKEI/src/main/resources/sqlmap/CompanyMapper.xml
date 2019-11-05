@@ -24,11 +24,33 @@
         
 	</insert>
 	
-	<select id="selectCompany" parameterType="map" resultType="CompanyVO">
+	<select id="selectCompany" parameterType="hashmap" resultType="CompanyListVO">
+		SELECT * FROM(
+		SELECT (ROW_NUMBER() OVER()) AS RN, A.company_cd, A.title, A.phone, A.auth_cd, B.name, A.domain
+		FROM company A, users B
+		WHERE 1=1
+		AND A.company_cd = B.company_cd
+		AND B.posit_cd = 'POS002'
+		AND A.title LIKE '%' || #{mINPUT} || '%'
+		 <if test = "STAT_op != '00'">
+		 	<choose>
+				<when test = "STAT_op == '01'">
+					AND A.auth_cd = 'AUT001'
+				</when>
+				<when  test = "STAT_op == '02'">
+					AND A.auth_cd = 'AUT002'
+				</when>
+				<when test = "STAT_op == '03'">
+					AND A.auth_cd = 'AUT003'
+				</when>
+			</choose>
+		</if>
 		
-		SELECT company_cd, title, phone, auth_cd 
-		FROM company
-	
+		ORDER BY RN ASC
+		) SUBTABLE 
+		WHERE 1=1
+		AND RN BETWEEN (CAST(#{mPAGE} AS INTEGER) - 1) * 10 + 1 AND CAST(#{mPAGE} AS INTEGER) * 10
+		
 	</select>
     
 </mapper>
