@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ts.kaikei.services.AccountService;
+import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.UserVO;
 
 @Controller
@@ -27,8 +28,76 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(HttpSession httpSession, Model model) {
-		logger.info("Call : /account/ledger.jsp - GET");
+		logger.info("Call : /account/ledger.do - GET");
 		
 		return "/account/ledger";
+	}
+	
+	@RequestMapping(value = "/account/customer.do", method = RequestMethod.GET)
+	public String customer(String searchParam, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customer.do - GET");
+		
+		model.addAttribute("customerList", accountService.getCustomerList(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), searchParam));
+		
+		return "/account/customer";
+	}
+	
+	@RequestMapping(value = "/account/customerAdd.do", method = RequestMethod.GET)
+	public String customerAdd(CustomerVO customerVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerAdd.do - GET");
+		
+		return "/account/customerAdd";
+	}
+	
+	@RequestMapping(value = "/account/customerAddExc.do", method = RequestMethod.POST)
+	public String customerAddExc(CustomerVO customerVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerAddExc.do - GET");
+		 
+		if(!accountService.addCustomer(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), customerVO, ((UserVO)httpSession.getAttribute("userVO")).getId())) {
+			model.addAttribute("errorMsg", "REGIST CUSTOMER ERROR");
+			return "/error";
+		}
+		
+		return "redirect:/account/customer.do";
+	}
+	
+	@RequestMapping(value = "/account/customerDetail.do", method = RequestMethod.GET)
+	public String customerDetail(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerDetail.do - GET");
+		
+		model.addAttribute("customerVO", accountService.getCustomerDetail(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), cus_cd));
+		
+		return "/account/customerDetail";
+	}
+	
+	@RequestMapping(value = "/account/customerModify.do", method = RequestMethod.GET)
+	public String customerModify(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerModify.do - GET");
+		
+		model.addAttribute("customerVO", accountService.getCustomerDetail(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), cus_cd));
+		
+		return "/account/customerModify";
+	}
+	
+	@RequestMapping(value = "/account/customerModifyExc.do", method = RequestMethod.POST)
+	public String customerModify(CustomerVO customerVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerModifyExc.do - GET");
+		
+		if(!accountService.updateCustomer(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), customerVO,
+				((UserVO)httpSession.getAttribute("userVO")).getId())) {
+			model.addAttribute("errorMsg", "UPDATE CUSTOMER ERROR");
+			return "/error";
+		}
+		
+		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
+	}
+	
+	@RequestMapping(value = "/account/customerDelete.do", method = RequestMethod.GET)
+	public String customerDelete(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerDelete.do - GET");
+		
+		if(accountService.deleteCustomer(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), cus_cd));
+		
+		return "redirect:/account/customer.do";
 	}
 }

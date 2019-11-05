@@ -3,4 +3,64 @@
 
 <mapper namespace="com.ts.kaikei.dao.CustomerDAO">
     
+    <insert id="addCustomer" parameterType="CustomerVO">
+    
+        INSERT INTO customer(company_cd, cus_cd, title, reg_cd, 
+        					domain, fax, ceo_name, ceo_phone, 
+        					ceo_email, worker_name, worker_phone, worker_email, 
+        					memo, ent_id, entdate, ent_prog,
+        					mod_id, mod_date, mod_prog)
+        VALUES(#{company_cd}, #{cus_cd}, #{title}, #{reg_cd}, 
+        		#{domain}, #{fax}, #{ceo_name}, #{ceo_phone},
+        		#{ceo_email}, #{worker_name}, #{worker_phone}, #{worker_email},
+        		#{memo}, #{ent_id}, NOW(), #{ent_prog},
+        		#{mod_id}, NOW(), #{mod_prog})
+        
+    </insert>
+    
+    <select id="getCustomerList" parameterType="map" resultType="CustomerVO" >
+    
+        SELECT cus_cd, title, ceo_name, memo
+        FROM customer
+        WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND cus_cd LIKE '%${searchParam}%'
+        OR title LIKE '%${searchParam}%'
+        OR ceo_name LIKE '%${searchParam}%'
+        OR memo LIKE '%${searchParam}%'
+        
+    </select>
+    
+    <select id="getCustomerDetail" parameterType="map" resultType="CustomerVO" >
+    
+        SELECT cus_cd, title, reg_cd, domain, fax, ceo_name, ceo_phone, ceo_email, worker_name, worker_phone, worker_email, memo
+        FROM customer
+        WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND cus_cd = #{cus_cd}
+        
+    </select>
+    
+    <update id="updateCustomer" parameterType="CustomerVO">
+    
+    	UPDATE customer
+    	SET title = #{title}, reg_cd = #{reg_cd}, domain = #{domain}, fax = #{fax},
+    		ceo_name = #{ceo_name}, ceo_phone = #{ceo_phone}, ceo_email = #{ceo_email}, worker_name = #{worker_name},
+    		worker_phone = #{worker_phone}, worker_email = #{worker_email}, memo = #{memo},
+    		mod_id = #{mod_id}, mod_date = NOW(), mod_prog = #{mod_prog}
+    	WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND cus_cd = #{cus_cd}
+    
+    </update>
+    
+    <delete id="deleteCustomer" parameterType="map" >
+    
+        DELETE FROM customer 
+        WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND cus_cd = #{cus_cd}
+        
+    </delete>
+    
 </mapper>

@@ -49,8 +49,8 @@ public class CommonServiceImpl implements CommonService {
 		userVO.setEnt_id(userVO.getId());
 		userVO.setMod_id(userVO.getId());
 		
-		userVO.setEnt_prog("General-Web-SignUp");
-		userVO.setMod_prog("General-Web-SignUp");
+		userVO.setEnt_prog("Web-kaikei");
+		userVO.setMod_prog("Web-kaikei");
 		
 		
 		userDAO.signUpUser(userVO);
@@ -73,8 +73,8 @@ public class CommonServiceImpl implements CommonService {
 		companyRegisterVO.setEnt_id(companyRegisterVO.getId());
 		companyRegisterVO.setMod_id(companyRegisterVO.getId());
 		
-		companyRegisterVO.setEnt_prog("General-Web-SignUp");
-		companyRegisterVO.setMod_prog("General-Web-SignUp");
+		companyRegisterVO.setEnt_prog("Web-kaikei");
+		companyRegisterVO.setMod_prog("Web-kaikeip");
 		
 		companyDAO.signUpCompany(companyRegisterVO);
 		

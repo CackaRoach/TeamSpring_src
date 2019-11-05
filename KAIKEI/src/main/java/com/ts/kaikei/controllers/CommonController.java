@@ -1,6 +1,5 @@
 package com.ts.kaikei.controllers;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
