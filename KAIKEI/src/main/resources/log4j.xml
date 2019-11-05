@@ -11,7 +11,7 @@
 	</appender>
 
 	<logger name="com.ts.kaikei">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<!-- 3rdparty Loggers -->
