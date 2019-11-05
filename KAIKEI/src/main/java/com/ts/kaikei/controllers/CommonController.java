@@ -90,17 +90,17 @@ public class CommonController {
 		logger.info("Call : /signExe.do - GET");
 		
 		if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
-			// TODO : 회사중복코드 에러처리 구현
+			// TODO : �쉶�궗以묐났肄붾뱶 �뿉�윭泥섎━ 援ы쁽
 			return "/error";
 		}
 		
 		if(companyState.equals("new")) {
-			// TODO : 회원가입 구현 - 새 회사 추가
+			// TODO : �쉶�썝媛��엯 援ы쁽 - �깉 �쉶�궗 異붽�
 			commonService.signUpCompany(companyVO);
 		}
 		
 		if(commonService.checkId(userVO.getId()) != 0) {
-			// TODO : 중복아이디 에러처리 구현
+			// TODO : 以묐났�븘�씠�뵒 �뿉�윭泥섎━ 援ы쁽
 			return "/error";
 		}
 		
@@ -109,7 +109,7 @@ public class CommonController {
 		return "/login";
 	}
 	
-	// TODO : 중복아이디 체크 ajax length비교 + 에러메시지
+	// TODO : 以묐났�븘�씠�뵒 泥댄겕 ajax length鍮꾧탳 + �뿉�윭硫붿떆吏�
 	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {
@@ -118,7 +118,7 @@ public class CommonController {
 		return commonService.checkId(id);
 	}
 	
-	// TODO : 중복회사코드 체크 ajax 구현(front)
+	// TODO : 以묐났�쉶�궗肄붾뱶 泥댄겕 ajax 援ы쁽(front)
 	@RequestMapping(value = "/checkCode.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkCode(String company_cd, Model model) {
@@ -127,7 +127,7 @@ public class CommonController {
 		//return commonService.checkCode(company_cd);
 	}
 	
-	// 아이디 비밀번호 찾기 페이지 포워딩
+	// �븘�씠�뵒 鍮꾨�踰덊샇 李얘린 �럹�씠吏� �룷�썙�뵫
 	@RequestMapping(value = "/forgot.do", method = RequestMethod.GET)
 	public String forgot(Model model) {
 		logger.info("Call : /forgot.do - GET");
@@ -135,7 +135,7 @@ public class CommonController {
 		return "/forgot";	
 	}
 	
-	// TODO : ID, 비밀번호 찾기 구현
+	// TODO : ID, 鍮꾨�踰덊샇 李얘린 援ы쁽
 	@RequestMapping(value = "/forgotExc.do", method = RequestMethod.POST)
 	public String forgotExc(Model model) {
 		logger.info("Call : /forgotExc.do - POST");
@@ -144,7 +144,7 @@ public class CommonController {
 		return "/forgot";	
 	}
 	
-	// 로그아웃
+	// 濡쒓렇�븘�썐
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession httpSession, Model model) {
 		logger.info("Call : /logout.do - GET");
@@ -154,7 +154,7 @@ public class CommonController {
 		return "/login";	
 	}
 	
-	// 에러페이지 포워딩
+	// �뿉�윭�럹�씠吏� �룷�썙�뵫
 	@RequestMapping(value = "/error.do", method = RequestMethod.GET)
 	public String error(HttpSession httpSession, Model model) {
 		logger.info("Call : /error.do - GET");
