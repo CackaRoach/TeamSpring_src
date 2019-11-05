@@ -11,5 +11,6 @@ public interface AccountService {
 	CustomerVO getCustomerDetail(String company_cd, String cus_cd);
 	boolean updateCustomer(String company_cd, CustomerVO customerVO, String userId);
 	boolean deleteCustomer(String company_cd, String cus_cd);
+	int customerCodeCheck(String cus_cd, String company_cd);
 
 }

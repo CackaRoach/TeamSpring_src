@@ -28,6 +28,7 @@
         OR title LIKE '%${searchParam}%'
         OR ceo_name LIKE '%${searchParam}%'
         OR memo LIKE '%${searchParam}%'
+        ORDER BY cus_cd ASC
         
     </select>
     
@@ -62,5 +63,15 @@
         AND cus_cd = #{cus_cd}
         
     </delete>
+    
+        <select id="customerCodeCheck" parameterType="map" resultType="int" >
+    
+        SELECT count(*)
+        FROM customer
+        WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND cus_cd = #{cus_cd}
+        
+    </select>
     
 </mapper>

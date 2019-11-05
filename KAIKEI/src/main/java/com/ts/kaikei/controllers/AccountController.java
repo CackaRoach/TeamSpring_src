@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.AccountService;
 import com.ts.kaikei.vo.CustomerVO;
@@ -22,9 +23,6 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
-	/*
-	 *  @RequestMapping(value = "/account/*.do")
-	 */
 	
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(HttpSession httpSession, Model model) {
@@ -47,6 +45,15 @@ public class AccountController {
 		logger.info("Call : /account/customerAdd.do - GET");
 		
 		return "/account/customerAdd";
+	}
+	
+	@RequestMapping(value = "/account/customerCodeCheck.do", method = RequestMethod.GET)
+	@ResponseBody
+	public int customerCodeCheck(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerCodeCheck.do - GET");
+		
+		return accountService.customerCodeCheck(cus_cd, ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd());
+		
 	}
 	
 	@RequestMapping(value = "/account/customerAddExc.do", method = RequestMethod.POST)

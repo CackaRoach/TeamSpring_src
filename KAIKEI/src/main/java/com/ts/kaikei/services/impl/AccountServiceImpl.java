@@ -86,7 +86,15 @@ public class AccountServiceImpl implements AccountService {
 		return true;
 	}
 
-	
+	@Override
+	public int customerCodeCheck(String cus_cd, String company_cd) {
+		
+		Map<String, String>param = new HashMap<String, String>();
+		param.put("company_cd", company_cd);
+		param.put("cus_cd", cus_cd);
+		
+		return customerDAO.customerCodeCheck(param);
+	}
 	
 
 }

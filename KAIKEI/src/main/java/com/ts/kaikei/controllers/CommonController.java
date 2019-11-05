@@ -48,7 +48,7 @@ public class CommonController {
 			model.addAttribute("loginState", "Incorrect ID, Password");
 			return "/login";
 			
-		} else if(getUserVO.getAuth_cd().equals("AUT003")) {
+		} else if(!getUserVO.getAuth_cd().equals("AUT001")) {
 			model.addAttribute("loginState", "Unapproved Account");
 			return "/login";
 		}

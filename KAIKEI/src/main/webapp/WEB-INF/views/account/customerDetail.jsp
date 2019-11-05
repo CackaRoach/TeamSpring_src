@@ -6,7 +6,7 @@
 		    </div>
 		    <div style="border:1px solid black; padding:15px; margin: 5px; height:400px; ">
 		        <div>
-		            <table style="text-align:center; padding:10px">
+		            <table style="text-align:center; padding:10px; margin:10px">
 		                <tbody>
 		                    <tr>
 		                        <td>Customer</td>

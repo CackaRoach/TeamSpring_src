@@ -14,4 +14,5 @@ public interface CustomerDAO {
 	void addCustomer(CustomerVO customerVO);
 	void deleteCustomer(Map<String, String> param);
 	void updateCustomer(CustomerVO customerVO);
+	int customerCodeCheck(Map<String, String> param);
 }

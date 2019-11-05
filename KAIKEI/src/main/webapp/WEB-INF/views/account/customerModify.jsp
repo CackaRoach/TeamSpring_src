@@ -13,6 +13,10 @@
 		                        <td><input type="text" class="input-box" name="title" value="${customerVO.title}"></td>
 		                    </tr>
 		                    <tr>
+		                        <td></td>
+		                        <td><span id="title_error" class="h6error" style="color:red; display:none">Input Title</span></td>
+		                    </tr>
+		                    <tr>
 		                        <td>Customer Code<span style="color:red">*</span></td>
 		                        <td>${customerVO.cus_cd}<input type="hidden" name="cus_cd" value="${customerVO.cus_cd}"></td>
 		                    </tr>
@@ -44,8 +48,8 @@
 		                        <td>Worker Email</td>
 		                        <td><input type="text" class="input-box" name="worker_email" value="${customerVO.worker_email}"></td>
 		                    </tr>
-		          	      </tbody>
-		         	    </table>
+		          	    </tbody>
+		         	</table>
 		         	<div style="float:right;">
 			            <input type="submit" style="margin:3px" class="button" value="MODIFY">
 			            <input type="button" style="margin:3px" class="button" value="CANCEL" onclick="location.href='/kaikei/account/customer.do'">
@@ -53,3 +57,28 @@
 	         	</div>
 		    </form>
 		</div>
+		
+		<script>
+		
+		$(window).load(function() {
+			
+			$("#title").blur(function() {
+
+				if($("#title").val() == "")
+					$("#title_error").css("display", "block");
+				else
+					$("#title_error").css("display", "none");
+			});
+			
+		})
+			
+			
+		function formCheck() {
+			if($("#title").val() == "") {
+				$("#title").focus();
+				return false;
+			}
+
+			return true;
+		}
+		</script>

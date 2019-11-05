@@ -5,16 +5,24 @@
 		        <span style="font-size: 2em;">Customer</span>
 		    </div>
 		    <form action="/kaikei/account/customerAddExc.do" method="post">
-		    	<div style="border:1px solid black; padding:15px; margin:5px; height:600px;">
+		    	<div style="border:1px solid black; padding:15px; margin:5px; height:650px;">
 		            <table>
 		                <tbody>
 		                    <tr>
 		                        <td>Customer<span style="color:red">*</span></td>
-		                        <td><input type="text" class="input-box" name="title"></td>
+		                        <td><input type="text" class="input-box" id="title" name="title"></td>
+		                    </tr>
+		                    <tr>
+		                        <td></td>
+		                        <td style="text-align:center"><span id="title_error" class="h6error" style="color:red; display:none">Input Title</span></td>
 		                    </tr>
 		                    <tr>
 		                        <td>Customer Code<span style="color:red">*</span></td>
-		                        <td><input type="text" class="input-box" name="cus_cd"></td>
+		                        <td><input type="text" class="input-box" id="cus_cd" name="cus_cd"></td>
+		                    </tr>
+		                    <tr>
+		                        <td></td>
+		                        <td style="text-align:center"><span id="cus_cd_error" class="h6error" style="color:red; display:none">Input Code</span></td>
 		                    </tr>
 		                    <tr>
 		                        <td>Business License Number</td>
@@ -47,9 +55,66 @@
 		          	      </tbody>
 		         	    </table>
 		         	<div style="float:right;">
-			            <input type="submit" style="margin:3px" class="button" value="Add"><br>
+			            <input type="submit" style="margin:3px" class="button" value="Add" onclick="return formCheck();"><br>
 			            <input type="button" style="margin:3px" class="button" value="CANCEL" onclick="location.href='/kaikei/account/customer.do'">
 			        </div>
 	         	</div>
 		    </form>
 		</div>
+		<script>
+		
+		$(window).load(function() {
+			
+			$("#title").blur(function() {
+
+				if($("#title").val() == "")
+					$("#title_error").css("display", "block");
+				else
+					$("#title_error").css("display", "none");
+			});
+
+			$("#cus_cd").blur(function() {
+
+				if($("#cus_cd").val() == "") {
+					$("#cus_cd_error").css("display", "block");
+					return false;
+				} else {
+					$("#cus_cd_error").css("display", "none");
+				}
+
+				$.ajax({
+					url : "/kaikei/account/customerCodeCheck.do?cus_cd=" + $("#cus_cd").val(),
+					type : "get",
+					success : function(data) {					
+						
+						if (data == 1) {
+							$("#cus_cd_error").text("Exist CODE");
+							$("#cus_cd_error").css("color", "red");
+						} else {
+							$("#cus_cd_error").text("Available CODE");	
+							$("#cus_cd_error").css("color", "green");
+						}
+					}, error : function() {
+						console.log("Fail");
+					}
+				});
+			});
+			
+		})
+			
+			
+		function formCheck() {
+			if($("#title").val() == "") {
+				$("#title").focus();
+				return false;
+			}
+
+			if($("#cus_cd").val() == "") {
+				$("#cus_cd").focus();
+				return false;
+			}
+
+			return true;
+		}
+
+		</script>
