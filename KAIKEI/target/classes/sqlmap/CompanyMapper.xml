@@ -8,20 +8,27 @@
         SELECT count(*)
         FROM company
         WHERE 1=1
-        AND company_cd = #{code}
+        AND company_cd = #{company_cd}
+        
+    </select>
+    
+    <select id="getCompany" parameterType="String" resultType="CompanyVO" >
+    
+        SELECT title, domain
+        FROM company
+        WHERE 1=1
+        AND company_cd = #{company_cd}
         
     </select>
 
-	<insert id="signUpCompany" parameterType="CompanyVO" >
+	<insert id="signUpCompany" parameterType="CompanyRegistVO" >
     
-        INSERT INTO company
+        INSERT INTO company(company_cd, auth_cd, title, reg_cd, fax, phone, 
+        					domain, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog)
         VALUES(
-        #{company_cd}, #{state_cd}, #{title}, 
-        #{regist_cd}, #{fax}, #{phone}, 
-        #{domain}, #{bank_title}, #{bank_acc}, 
-        #{ent_id}, NOW(), #{ent_prog},
-        #{mod_id}, NOW(), #{mod_prog})
+        #{company_cd}, #{auth_cd}, #{company_title}, #{company_regist_cd}, #{company_fax}, #{company_phone}, 
+        #{company_domain}, #{ent_id}, NOW(), #{ent_prog}, #{mod_id}, NOW(), #{mod_prog})
         
 	</insert>
-    
+
 </mapper>

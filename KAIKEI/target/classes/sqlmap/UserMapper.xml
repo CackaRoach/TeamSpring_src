@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ts.kaikei.dao.UserDAO">
-
+	 
 	<select id="getUser" parameterType="UserVO" resultType="UserVO" >
 	
 		SELECT *
@@ -24,14 +24,14 @@
     
     <insert id="signUpUser" parameterType="UserVO" >
     
-        INSERT INTO users
+        INSERT INTO users(id, password, company_cd, posit_cd, auth_cd, state_cd,
+        				  name, email, phone, ent_id, ent_date, ent_prog,
+        				  mod_id, mod_date, mod_prog)
         VALUES(
-        #{id}, #{password}, #{company_cd}, 
-        #{posit_cd}, #{auth_cd}, #{state_cd}, 
-        #{name}, #{email}, #{phone}, 
-        #{ent_id}, NOW(), #{ent_prog},
+        #{id}, #{password}, #{company_cd}, #{posit_cd}, #{auth_cd}, #{state_cd}, 
+        #{name}, #{email}, #{phone}, #{ent_id}, NOW(), #{ent_prog},
         #{mod_id}, NOW(), #{mod_prog})
         
     </insert>
-    
+  
 </mapper>

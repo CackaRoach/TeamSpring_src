@@ -1,141 +1,163 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
-    	<div id="div-gray" align="center">
-			<div>
-				<h1>Sign Up</h1>
-			</div>
-			<form name="register" action="signupExe.do" method="post" onsubmit="return formCheck()">
-				<div>
-					<h2>Create your Account</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="Shift_JIS">
+    <title>KAIKEI</title>
+    <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/kaikei/js/signup.js" ></script>
+<script>
+
+	function changeForm(form) {
+		if(form == "exist") {
+			$("#code_error").text("");
+			$("#new").css("display", "none");
+		} else {
+			$("#code_error").text("");
+			$("#new").css("display", "block");
+		}
+	}
+
+	function formCheck() {
+
+		// TODO : Change to Uncheck String
+		if($("#id_error").html() != "Available ID") {
+			$("#id").focus();
+			return false;
+		}
+
+		if($("#password").val() != $("#passwordConfirm").val()) {
+			$("#password").focus();
+			return false;
+		}
+
+		if($("#email").val() == "") {
+			$("#email").focus();
+			return false;
+		}
+
+		// TODO : Change to Unckeck Color
+		if($("#code_error").css("color") != "rgb(0, 128, 0)") {
+			$("#company_cd").focus();
+			return false;
+		}
+		
+	}
+	
+	
+</script>
+<body>
+    <div id="header">
+    	<div align="center" style="font-size: 40px; font-style: italic; padding:30px;">K A I K E I</div>
+    </div>
+   	<div style="background-color: #EEEEEE; padding:0% 30%;">
+       	<div style="padding:30px 0px;">
+			<div style="padding:10px 0px;"><span style="font-size:2em">Sign Up</span></div>
+			<form id="register" name="register" action="signupExe.do" method="post">
+				<div style="background-color: white">
+					<div style="padding: 10px 30px;"><span style="font-size:1.5em">Account</span></div>
+					<div align="center" style="background-color: white;">
+						<table>
+							<tr>
+								<td style="text-align:center">ID<span style="color:red">*</span></td>
+								<td><input class="input-box" type="text" id="id" name="id" maxlength="15"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="id_error" class="h6error"></span></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Password<span style="color:red">*</span></td>
+								<td><input class="input-box" type="password" id="password" name="password" maxlength="15"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="pass_error" class="h6error"></span></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Confirm Password<span style="color:red">*</span></td>
+								<td><input class="input-box" type="password" id="passwordConfirm" name="passwordConfirm" maxlength="15"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="passConf_error" class="h6error"></span></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">E-mail<span style="color:red">*</span></td>
+								<td><input class="input-box" type="text" id="email" name="email"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Name</td>
+								<td><input class="input-box" type="text" name="name"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center">Phone</td>
+								<td><input class="input-box" type="text" name="phone"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
-				<div>
-					<table>
-						<tr style="height:45px">
-							<td style="text-align:center">ID<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="id" name="id"></td>
-							<td style="width:100px"><span id="id_check" class="h6Font"></span></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Password<span style="color:red">*</span></td>
-							<td><input class="input-box" type="password" name="password"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Confirm Password<span style="color:red">*</span></td>
-							<td><input class="input-box" type="password" name="passwordconfirm"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">E-mail<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" name="email"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Name</td>
-							<td><input class="input-box" type="text" name="name"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td style="text-align:center">Phone</td>
-							<td><input class="input-box" type="text" name="phone"></td>
-							<td></td>
-						</tr>
-					</table>
+				<div style="background-color: white;">
+					<div style="padding: 10px 30px;"><span style="font-size:1.5em">Company</span></div>
+					<div style="padding: 5px 60px;">
+						<input type="radio" class="companyState" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');">
+						Existing Company Code<span style="color:red">*</span>
+					</div>
+					<div style="padding: 5px 60px;">
+						<input type="radio" class="companyState" name="companyState" value="new" onclick="changeForm('new');">
+						Create New Company Code<span style="color:red">*</span>
+					</div>
+					<div style="padding: 20px;" align="center">
+						<table>
+							<tr>
+								<td style="text-align:center">Company Code<span style="color:red">*</span></td>
+								<td><input class="input-box" type="text" id="company_cd" name="company_cd"></td>
+							</tr>
+							<tr>
+								<td style="padding:0px;"></td>
+								<td style="padding:0px; text-align:center"><span id="code_error" class="h6error"></span></td>
+							</tr>
+						</table>
+						<div id="new" style="display:none">
+							<table>
+								<tr>
+									<td style="text-align:right">Company title</td>
+									<td><input class="input-box" type="text" name="company_title"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Business license</td>
+									<td><input class="input-box" type="text" name="company_regist_cd"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Phone</td>
+									<td><input class="input-box" type="text" name="company_phone"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Fax</td>
+									<td><input class="input-box" type="text" name="company_fax"></td>
+								</tr>
+								<tr>
+									<td style="text-align:right">Domain</td>
+									<td><input class="input-box" type="text" name="company_domain"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
-				<div>
-					<h2>Company</h2>
-				</div>
-				<div>
-					<table>
-						<tr>
-							<td><input type="radio" name="companyState" value="exist" checked="checked" onclick="changeForm('exist');"></td>
-							<td style="text-align:center">Existing Company Code<span style="color:red">*</span></td>
-						</tr>
-						<tr>
-							<td><input type="radio" name="companyState" value="new" onclick="changeForm('new');"></td>
-							<td style="text-align:center">Create New Company Code<span style="color:red">*</span></td>
-						</tr>
-					</table>
-				</div>
-				<div id="exist">
-					<table>
-						<tr>
-							<td style="text-align:center">Company Code<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" id="company_cd" name="company_cd"></td>
-							<td><h6 id="code_check"></h6></td>
-						</tr>
-					</table>
-				</div>
-				<div id="new" style="display:none">
-					<table>
-						<tr>
-							<td style="text-align:right">Business license Code<span style="color:red">*</span></td>
-							<td><input class="input-box" type="text" name="regist_cd"></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Company title</td>
-							<td><input class="input-box" type="text" name="title"></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Phone</td>
-							<td><input class="input-box" type="text" name="phone"></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Fax</td>
-							<td><input class="input-box" type="text" name="fax"></td>
-						</tr>
-						<tr>
-							<td style="text-align:right">Domain</td>
-							<td><input class="input-box" type="text" name="domain"></td>
-						</tr>
-					</table>
-				</div>
-				<div>
-					<input class="button" type="submit" value="Confirm">
+				<div style="background-color: white; padding:10px 0px;" align="center">
+					<input class="button" type="submit" value="Confirm" onclick="return formCheck();">
 					<input class="button" type="button" onclick="location.href='login.do'" value="Cancel">
 				</div>
 			</form>
 		</div>
-    	<script>
-			$(window).load(function(){
-				$("#id").blur(function() {
-					var userId = $('#id').val();
-					$.ajax({
-						url : '/kaikei/checkId.do?id=' + userId,
-						type : 'get',
-						success : function(data) {					
-							
-							if (data == 1) {
-									$("#id_check").text("Exist ID");
-									$("#id_check").css("color", "red");
-								} else {
-									$('#id_check').text("Available ID");	
-									$("#id_check").css("color", "green");
-								}
-							}, error : function() {
-									console.log("Fail");
-							}
-						});
-					});
-
-				$("#company_cd").blur(function() {
-					var company_cd = $('#company_cd').val();
-					$.ajax({
-						url : '/kaikei/checkCode.do?company_cd=' + company_cd,
-						type : 'get',
-						success : function(data) {					
-							
-							if (data == 1) {
-									$("#code_check").text("Exist Code");
-									$("#code_check").css("color", "red");
-								} else {
-									$('#code_check').text("Available Code");	
-									$("#code_check").css("color", "green");
-								}
-							}, error : function() {
-									console.log("Fail");
-							}
-						});
-					});
-			});
-		</script>
+   	</div>    
+    <div id="footer">
+    	<div>
+			<h6>footer</h6>
+		</div>
+   	</div>    
+</body>
+</html>

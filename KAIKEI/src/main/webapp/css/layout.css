@@ -1,66 +1,47 @@
 @charset "UTF-8";
 
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+table {
+	padding: 0px;
+}
+
+td {
+	min-width: 150px;
+	padding: 3px 5px;
+}
+
+li {
+	list-style-type: none;
+}
+
+a {
+	text-decoration:none;
+}
+
+
 #header {
-	border: 1px solid black;
-    margin: 5px;
-    padding: 10px;
-    height: 20%;
+    width: 100%;
 }
 
 #nav {
-	border: 1px solid black;
-    margin: 5px;
-    padding: 10px;
-    width: 20.5%;
+    width: 220px;
     float: left;
-    height: 60%;
 }
 
 #section {
-	border: 1px solid black;
-    margin: 5px;
-    padding: 10px;
-    width: 73%;
-    float: right;
-    height: 60%;
+    width: calc(100% - 220px);;
+    float: left;
 }
-
-#section-only {
-    height: 60%;
-}
-
 
 #footer {
-	border: 1px solid black;
-    margin: 5px;
-    padding: 10px;
-    height: 10%;
+    width: 100%;
+    height: 100px;
     position: relatiev;
     clear: both;
-}
-
-.ul-list {
-    padding: 5px 0px 5px 5px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #efefef;
-    font-size: 12px;
-}
-
-.button {
-	width: 330px;
-	background-color: #c0c0c0;
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-}
-
-#div-gray {
-	background-color: #eeeeee;
-    padding: 5px 0px 20px 0px;
 }
 
 #div-rowspace {
@@ -71,15 +52,67 @@
 	width: 100px;
 }
 
-#div-component {
-	padding: 5px;
-	border: 1px solid black;
-	margin: 5px
+.div-header {
+	
 }
+
+.div-nav {
+	
+}
+
+.div-nav-item {
+	margin: 5px 0px;
+	padding: 0px 0px 0px 10px;
+	font-size: 13px;
+}
+
+.div-nav-component {
+	padding: 10px;
+	border: 2px solid #969696;
+	margin: 5px;
+}
+
+.div-section {
+	
+}
+
+.div-section-contents {
+	padding: 5px;
+	border: 2px solid #969696;
+	margin: 5px;
+}
+
+.div-footer {
+	
+}
+
+.ul-list {
+    padding: 5px;
+    margin: 4px 0px;
+    border-bottom: 1px solid #c0c0c0;
+    font-size: 16px;
+}
+
+.button {
+	width: 200px;
+	background-color: #c0c0c0;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.button-login {
+	width: 300px;
+}
+
 
 .input-box {
 	height: 40px;
-	width: 100%;
+	width: 300px;
 	padding: 6px 20px;
 	margin: 4px 6px;
 	box-sizing: border-box;
@@ -88,30 +121,15 @@
 
 .spanLoginFont {
 	color:red;
-	display:none;
 	font-size: 0.80em;
 	font-weight: bold;
 }
 
-.h6Font {
+.h6error {
     font-size: 0.67em;
     font-weight: bold;
 }
 
-body {
-    margin: 0px;
-    padding: 0px;
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #c0c0c0;
 }
-
-td {
-	padding: 3px 5px;
-}
-
-table {
-	padding: 10px;
-}
-
-li {
-	list-style-type : none
-}
-
