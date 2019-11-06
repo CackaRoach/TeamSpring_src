@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.ts.kaikei.dao.AccountDAO;
 import com.ts.kaikei.dao.CustomerDAO;
+import com.ts.kaikei.dao.StatementDAO;
+
 import com.ts.kaikei.services.AccountService;
+
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementVO;
-import com.ts.kaikei.dao.*;
+
+
 
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
@@ -23,6 +27,7 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	CustomerDAO customerDAO;
 
+	
 	@Override
 	public List<StatementVO> getStatements(String company_cd) {
 		return statementDAO.getStatements(company_cd);

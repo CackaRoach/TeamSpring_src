@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.AccountService;
+
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementVO;
 import com.ts.kaikei.vo.UserVO;
@@ -27,7 +28,7 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
-	public String ledger(StatementVO sVO, HttpSession httpSession, Model model) {
+	public String ledger(HttpSession httpSession, Model model) {
 		logger.info("Call : /account/ledger.do - GET");
 		
 		String company_cd = ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd();

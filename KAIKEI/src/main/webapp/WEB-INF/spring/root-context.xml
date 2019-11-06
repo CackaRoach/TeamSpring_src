@@ -29,8 +29,8 @@
     </bean>
     
     <bean id="statementMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-       <property name="mapperInterface" value="com.ts.kaikei.dao.StatementDAO" />
-       <property name="sqlSessionTemplate" ref="sqlSession" />
+		<property name="mapperInterface" value="com.ts.kaikei.dao.StatementDAO" />
+		<property name="sqlSessionTemplate" ref="sqlSession" />
 	</bean>
 	
 	<bean id="customerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">

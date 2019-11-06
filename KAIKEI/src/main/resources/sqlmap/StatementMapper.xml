@@ -22,9 +22,11 @@
     </select>
 
     <select id="getStatements" parameterType="String" resultType="StatementVO">
+    
     	select *
     	from statements
     	where company_cd = #{company_cd}
+
     </select>
-    
+   
 </mapper>
