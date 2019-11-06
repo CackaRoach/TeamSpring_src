@@ -105,6 +105,7 @@ public class StatementVO {
 	}
 	
 	public void setEnt_date(String ent_date) {
+		
 		this.ent_date = ent_date;
 	}
 	

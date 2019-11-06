@@ -27,7 +27,7 @@
     <select id="getCompanyOf" resultType="CompanyVO" parameterType="String">
 	    SELECT *
 	    from company
-	    where company_cd like '00000'
+	    where company_cd like #{value}
     </select>
     
 </mapper>

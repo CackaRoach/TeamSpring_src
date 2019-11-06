@@ -9,6 +9,7 @@ public interface AccountService {
 	public List<StatementVO> codeToName(List<StatementVO> list);
 	public void addStatement(StatementVO statement);
 	public int getMaxSeq(String company_cd);
-	public CompanyVO getCompanyOfCode(String company_cd);	
-	public CustomerVO getCustomerOfCode(String customer_cd);
+	public CompanyVO getCompanyOf(String company_cd);	
+	public CustomerVO getCustomerOf(String customer_cd);
+	public AccountVO getAccountOf(String account_cd);
 }

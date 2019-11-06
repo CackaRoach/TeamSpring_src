@@ -20,9 +20,17 @@
     	from statements
     	where company_cd = #{value}
     </select>
-        
-    <insert id="insertRandom">    
+    
+    <insert id="addStatement" parameterType="StatementVO" >
+    
         INSERT INTO statements
-        VALUES('company', 0, 'account', 'customer', 'date', 'classify', 100, 1000, 'abs', '20101010', '20101010', '20101010', '20101010', '20101010', '20101010')        
+        VALUES(
+        #{company_cd}, #{seq}, #{account_cd}, 
+        #{customer_cd}, to_date(#{date},'YYYY-MM-DD'), #{classify}, 
+        #{debtor}, #{creditor}, #{abs}, 
+        #{ent_id}, NOW(), #{ent_prog},
+        #{mod_id}, NOW(), #{mod_prog})
+        
     </insert>
+    
 </mapper>

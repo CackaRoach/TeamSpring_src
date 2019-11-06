@@ -31,9 +31,8 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(StatementVO sVO, HttpSession httpSession, Model model) {
-		String ccd = getCompanyCode(httpSession);
-		logger.info("Call : /account/ledger.jsp - GET of " + ccd);
-		CompanyVO ctl = accountService.getCompanyOfCode(ccd);
+		CompanyVO ctl = accountService.getCompanyOf(getCompanyCode(httpSession));
+		logger.info("Call : /account/ledger.jsp - GET by " + ctl.getTitle());
 		
 		String company_cd = getCompanyCode(httpSession);		
 		List<StatementVO> list = accountService.getStatements(company_cd);
@@ -48,12 +47,16 @@ public class AccountController {
 	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
 	public String addStatement(StatementVO sVO, HttpSession httpSession) {
 		String ccd = getCompanyCode(httpSession);
-		CompanyVO ctl = accountService.getCompanyOfCode(ccd);
-		
-		logger.info("Call : /account/addStatement.jsp - POST of " + ctl);
+		CompanyVO ctl = accountService.getCompanyOf(ccd);		
+		logger.info("Call : /account/addStatement.jsp - POST by " + ctl);
 		
 		sVO.setCompany_cd(ccd);
-		sVO.setSeq(accountService.getMaxSeq(ccd));
+		sVO.setSeq(accountService.getMaxSeq(ccd) + 1);
+		sVO.setEnt_id(getUserVO(httpSession).getId());
+		sVO.setEnt_prog("web_kaikei");
+		sVO.setMod_id(getUserVO(httpSession).getId());
+		sVO.setMod_prog("web_kaikei");
+		
 		accountService.addStatement(sVO);
 		
 		return "/account/ledger";
@@ -61,5 +64,9 @@ public class AccountController {
 	
 	private String getCompanyCode(HttpSession httpSession) {
 		return ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd();
+	}
+	
+	private UserVO getUserVO(HttpSession httpSession) {
+		return ((UserVO)httpSession.getAttribute("userVO"));
 	}
 }

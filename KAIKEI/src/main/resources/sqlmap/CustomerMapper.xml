@@ -5,6 +5,6 @@
     <select id="getCustomerOf" resultType="CustomerVO" parameterType="String">
 	    SELECT *
 	    from customer
-	    where customer_cd = #{value}
+	    where cus_cd = #{value}
     </select>
 </mapper>

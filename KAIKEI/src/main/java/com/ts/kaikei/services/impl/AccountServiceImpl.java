@@ -14,8 +14,12 @@ import com.ts.kaikei.dao.*;
 public class AccountServiceImpl implements AccountService {
 	@Autowired
 	StatementDAO sDAO;
+	@Autowired
 	CustomerDAO cDAO;
+	@Autowired
 	CompanyDAO cmDAO;
+	@Autowired
+	AccountDAO aDAO;
 	
 	public List<StatementVO> getStatements(String company_cd) {
 		return sDAO.getStatements(company_cd);
@@ -42,7 +46,12 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 	
-	public List<StatementVO> codeToName(List<StatementVO> list) {		
+	public List<StatementVO> codeToName(List<StatementVO> list) {
+		for(StatementVO svo : list) {
+			svo.setCustomer_cd(getCustomerOf(svo.getCustomer_cd()).getTitle());
+			svo.setAccount_cd(getAccountOf(svo.getAccount_cd()).getTitle());
+		}
+		
 		return list;
 	}
 	
@@ -54,11 +63,15 @@ public class AccountServiceImpl implements AccountService {
 		return sDAO.getMaxSeq(company_cd);
 	}
 	
-	public CompanyVO getCompanyOfCode(String company_cd) {
+	public CompanyVO getCompanyOf(String company_cd) {
 		return cmDAO.getCompanyOf(company_cd);
 	}
 	
-	public CustomerVO getCustomerOfCode(String customer_cd) {
+	public CustomerVO getCustomerOf(String customer_cd) {
 		return cDAO.getCustomerOf(customer_cd);
+	}
+	
+	public AccountVO getAccountOf(String account_cd) {
+		return aDAO.getAccountOf(account_cd);
 	}
 }

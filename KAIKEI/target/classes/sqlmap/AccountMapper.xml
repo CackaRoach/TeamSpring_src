@@ -2,5 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ts.kaikei.dao.AccountDAO">
-    
+        <select id="getAccountOf" resultType="AccountVO" parameterType="String">
+	    SELECT *
+	    from account
+	    where acc_cd like #{value}
+    </select>
 </mapper>

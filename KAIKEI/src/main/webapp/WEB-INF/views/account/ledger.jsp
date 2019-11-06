@@ -30,6 +30,7 @@
 			<input type="submit" value="Search"/>
 		</form>
 		
+	<form action="/kaikei/account/addStatement.do" method="POST">
 		<table id="StatementList">
 		<tr class="title">
 			<td>Date</td>
@@ -52,7 +53,6 @@
     			<td><input type="text" value="${item.abs}" /></td>
 			</tr>
 		</c:forEach>
-	<form action="/kaikei/account/addStatement.do" method="POST">
 			<tr>
     				<td><input type="text" name="date" placeholder="Date"/></td>
     				<td><input type="text" name="account_cd" placeholder="Account"/></td>
@@ -62,7 +62,7 @@
     				<td><input type="text" name="creditor" placeholder="Creditor"/></td>
     				<td><input type="text" name="abs" placeholder="ABS"/></td>
 			</tr>
-		<input id="saveBtn" type="submit" value="저장"/>
-    </form>
 		</table>
+		<input id="saveBtn" type="submit" value="Save"/>
+    </form>
 		
