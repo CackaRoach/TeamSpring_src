@@ -22,17 +22,7 @@
 					<th bgcolor="#F5D0A9">Total</th>
 					<th bgcolor="#F5D0A9">Balance</th>
 				</tr>
-				<c:forEach var="dataSet" items="${dataList}">
-					<c:forEach var="data" items="${dataSet}" varStatus="status">
-						<tr>
-							<td bgcolor="#A4A4A4">${status.index}</td>
-							<td bgcolor="#A4A4A4">${data[1]}</td>
-							<th bgcolor="#A4A4A4">${jasan[status.count]}</th>
-							<td bgcolor="#A4A4A4">${data[2]}</td>
-							<td bgcolor="#A4A4A4">${data[3]}</td>
-						</tr>
-					</c:forEach>
-				</c:forEach>
+				
 				<tr>
 					<td bgcolor="#CED8F6"></td>
 					<td bgcolor="#CED8F6"></td>

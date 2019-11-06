@@ -14,9 +14,11 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	private StatementDAO statementDAO;
+	
 	private ArrayList<String> Act_cd = new ArrayList<String>();
-	ArrayList<StatementVO> statList = getStatementList();	
-
+	ArrayList<StatementVO> statList = statementDAO.getStatementList();	//error
+	//ArrayList<StatementVO> statList;	//no error
+	
 	//CTB
 	private ArrayList<StatementVO> jasan = null, buche = null, jabon = null, suick = null, biyong = null;
 	ArrayList<int[]> CTB_dataList = new ArrayList<int[]>();
@@ -32,8 +34,7 @@ public class ReportServiceImpl implements ReportService {
 	
 	//PL
 	private ArrayList<Integer> PL_dataList = null;
-	
-	
+
 	@Override
 	public ArrayList<Integer> getPL_dataList() {
 		return PL_dataList;
@@ -48,7 +49,7 @@ public class ReportServiceImpl implements ReportService {
 	public ArrayList<ArrayList<String>> getGL_dataList() {
 		return GL_dataList;
 	}
-
+	
 	@Override
 	public ArrayList<ArrayList<Integer>> getGL_MonthlyTotal() {
 		return GL_MonthlyTotal;
@@ -58,6 +59,7 @@ public class ReportServiceImpl implements ReportService {
 	public ArrayList<ArrayList<Integer>> getGL_Total() {
 		return GL_Total;
 	}
+
 	
 	@Override
 	public ArrayList<StatementVO> getStatementList() {
@@ -241,10 +243,17 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 	
+	private int getForwardBalance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 	// Balance sheet Logic
 	// ref :
 	// http://blog.naver.com/PostView.nhn?blogId=ako92&logNo=220534204188&parentCategoryNo=&categoryNo=22&viewDate=&isShowPopularPosts=false&from=postView
 	// https://post.naver.com/viewer/postView.nhn?volumeNo=15893236&memberNo=9353678
+	
 	@Override
 	public void BS_Calculator() {
 		//jasan split 
@@ -394,9 +403,5 @@ public class ReportServiceImpl implements ReportService {
 		
 	}
 	
-	//public void 
-	private int getForwardBalance() {
-		// TODO FowardBalance 
-		return 0;
-	}
+	
 }

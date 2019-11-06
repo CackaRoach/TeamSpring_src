@@ -8,6 +8,7 @@ import com.ts.kaikei.vo.StatementVO;
 public interface ReportService {
 	
 	public ArrayList<StatementVO> getStatementList();
+
 	public ArrayList<StatementVO> getJasanList();
 	public ArrayList<StatementVO> getBucheList();
 	public ArrayList<StatementVO> getJabonList();

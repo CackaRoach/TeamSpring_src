@@ -29,10 +29,11 @@ public class ReportController {
 	@RequestMapping(value = "/report/bs.do", method = RequestMethod.GET)
 	public String ledgerBS(Model model) {
 		logger.info("Call : /report/bs.do - GET");
+		/*
 		reportService.BS_Calculator();
 		
 		model.addAttribute("dataList", reportService.getBS_dataList());
-		
+		*/
 		return "/report/bs";
 	}
 	
@@ -40,11 +41,12 @@ public class ReportController {
 	@RequestMapping(value = "/report/gl.do", method = RequestMethod.GET)
 	public String ledgerGL(Model model) {
 		logger.info("Call : /report/gl.do - GET");
+		/*
 		reportService.GL_Calculator();
 		model.addAttribute("dataList", reportService.getGL_dataList());
 		model.addAttribute("MonthlyTotal", reportService.getGL_MonthlyTotal());
 		model.addAttribute("Total", reportService.getGL_Total());
-		
+		*/
 		return "/report/gl";
 	}
 	
@@ -52,7 +54,7 @@ public class ReportController {
 	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
 	public String ledgerCTB(Model model) {
 		logger.info("Call : /report/ctb.do - GET");
-		
+		/*
 		reportService.StatementSort();
 		model.addAttribute("jasan", reportService.getJasanList());
 		model.addAttribute("buche", reportService.getBucheList());
@@ -61,7 +63,7 @@ public class ReportController {
 		model.addAttribute("biyong", reportService.getBiyongList());
 		model.addAttribute("dataList", reportService.getDataList());
 		model.addAttribute("dataTotal", reportService.getTotal());
-		
+		*/
 		return "/report/ctb";
 	}
 	
@@ -69,11 +71,11 @@ public class ReportController {
 	@RequestMapping(value = "/report/pl.do", method = RequestMethod.GET)
 	public String ledgerPL(Model model) {
 		logger.info("Call : /report/pl.do - GET");
-		
+		/*
 		reportService.PL_Calculator();
 		
 		model.addAttribute("dataList", reportService.getPL_dataList());
-		
+		*/
 		return "/report/pl";
 	}
 }
