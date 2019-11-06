@@ -42,7 +42,7 @@ public class ManageController {
 
 		if (mPAGE == null || mPAGE == "") {
 			mPAGE = "1";
-		}
+		} 
 		if (STAT_op == null || STAT_op == "") {
 			STAT_op = "00";
 		}

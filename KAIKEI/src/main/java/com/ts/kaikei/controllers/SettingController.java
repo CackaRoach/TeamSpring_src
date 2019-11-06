@@ -22,7 +22,7 @@ public class SettingController {
 	/*
 	 *  @RequestMapping(value = "/setting/*.do")
 	 */
-	
+	 
 	@RequestMapping(value = "/setting/personal.do", method = RequestMethod.GET)
 	public String ledger(Model model) {
 		logger.info("Call : /setting/personal.do - GET");

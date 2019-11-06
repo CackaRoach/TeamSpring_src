@@ -10,3 +10,4 @@ public interface UserDAO {
 	public void signUpUser(UserVO userVO);
 	public int checkId(String id);
 }
+ 

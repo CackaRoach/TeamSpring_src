@@ -23,7 +23,7 @@ public class ChartController {
 		
 		//model.addAttribute("chartList", chartService.getChart(year));
 		
-		return "/chart/pl";
+		return "/chart/pl"; 
 	}
 	
 	@RequestMapping(value = "/chart/bs.do", method = RequestMethod.GET)

@@ -94,7 +94,7 @@ public class AccountServiceImpl implements AccountService {
 		param.put("company_cd", company_cd);
 		param.put("cus_cd", cus_cd);
 		
-		customerDAO.deleteCustomer(param);
+		customerDAO.deleteCustomer(param); 
 		
 		return true;
 	}

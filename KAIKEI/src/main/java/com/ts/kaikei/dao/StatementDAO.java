@@ -12,4 +12,4 @@ public interface StatementDAO {
 	public ArrayList<StatementVO> getStatementListCond(Map<String, String> searchParams);
 	
 	public List<StatementVO> getStatements(String company_cd);
-}
+} 

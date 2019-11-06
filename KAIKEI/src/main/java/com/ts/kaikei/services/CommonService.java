@@ -16,3 +16,4 @@ public interface CommonService {
 	public int checkCode(String code);
 	
 }
+ 

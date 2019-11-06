@@ -32,7 +32,7 @@ public class CommonController {
 		logger.info("Call : /login.do - GET");
 		
 		return "/login";
-	}
+	} 
 	 
 	// Login Execution
 	@RequestMapping(value = "/loginExe.do", method = RequestMethod.POST)

@@ -16,3 +16,4 @@ public interface CustomerDAO {
 	void updateCustomer(CustomerVO customerVO);
 	int customerCodeCheck(Map<String, String> param);
 }
+ 

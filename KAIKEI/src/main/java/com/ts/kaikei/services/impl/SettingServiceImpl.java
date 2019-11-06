@@ -8,3 +8,4 @@ import com.ts.kaikei.services.SettingService;
 public class SettingServiceImpl implements SettingService {
 
 }
+ 

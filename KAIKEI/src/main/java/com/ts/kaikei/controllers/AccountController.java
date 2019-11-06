@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+ 
 import com.ts.kaikei.services.AccountService;
 
 import com.ts.kaikei.vo.CustomerVO;
@@ -24,7 +24,7 @@ public class AccountController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 	
-	@Autowired
+	@Autowired 
 	private AccountService accountService;
 	
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
