@@ -55,6 +55,15 @@ public class AccountController {
 
 	}
 	
+	@RequestMapping(value = "/account/customer.do", method = RequestMethod.GET)
+	public String customer(String searchParam, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customer.do - GET");
+		
+		model.addAttribute("customerList", accountService.getCustomerList(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), searchParam));
+		
+		return "/account/customer";
+	}
+	
 	@RequestMapping(value = "/account/customerAdd.do", method = RequestMethod.GET)
 	public String customerAdd(CustomerVO customerVO, HttpSession httpSession, Model model) {
 		logger.info("Call : /account/customerAdd.do - GET");

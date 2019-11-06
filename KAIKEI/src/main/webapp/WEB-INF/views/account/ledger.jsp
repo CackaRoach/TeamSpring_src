@@ -21,7 +21,7 @@
 			<td>Date</td>
 			<td>Account</td>
 			<td>Customer</td>
-			<td>Class</td>
+			<td>Classify</td>
 			<td>Debtor</td>
 			<td>Creditor</td>
 			<td>ABS</td>

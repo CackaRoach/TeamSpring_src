@@ -18,31 +18,31 @@
 		                    </tr>
 		                    <tr>
 		                        <td>Business License Number</td>
-		                        <td>${customerVO.reg_cd}</td>
+		                        <td>${empty customerVO.reg_cd ? "" : customerVO.reg_cd}</td>
 		                    </tr>
 		                    <tr>
 		                        <td>FAX</td>
-		                        <td>${customerVO.fax}</td>
+		                        <td>${empty customerVO.fax ? "" : customerVO.fax}</td>
 		                    </tr>
 		                    <tr>
 		                        <td>Domain</td>
-		                        <td>${customerVO.domain}</td>
+		                        <td>${empty customerVO.domain ? "" : customerVO.domain}</td>
 		                    </tr>
 		                    <tr>
 		                        <td>CEO</td>
-		                        <td>${customerVO.ceo_name}</td>
+		                        <td>${empty customerVO.ceo_name ? "" : customerVO.ceo_name}</td>
 		                    </tr>
 		                    <tr>
 		                        <td>CEO E-mail</td>
-		                        <td>${customerVO.ceo_email}</td>
+		                        <td>${empty customerVO.ceo_email ? "" : customerVO.ceo_email}</td>
 		                    </tr>
 		                    <tr>
 		                        <td>Worker</td>
-		                        <td>${customerVO.worker_name}</td>
+		                        <td>${empty customerVO.worker_name ? "" : customerVO.worker_name}</td>
 		                    </tr>
 		                    <tr>
 		                        <td>Worker E-mail</td>
-		                        <td>${customerVO.worker_email}</td>
+		                        <td>${empty customerVO.worker_email ? "" : customerVO.worker_email}</td>
 		                    </tr>
 		                </tbody>
 		            </table>
