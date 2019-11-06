@@ -5,10 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-<<<<<<< HEAD
 import com.ts.kaikei.vo.CompanyListVO;
-=======
->>>>>>> refs/remotes/origin/김민재
 import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.CompanyVO;
 
