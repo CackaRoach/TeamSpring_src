@@ -23,5 +23,11 @@
         #{mod_id}, NOW(), #{mod_prog})
         
 	</insert>
+	
+    <select id="getCompanyOf" resultType="CompanyVO" parameterType="String">
+	    SELECT *
+	    from company
+	    where company_cd like '00000'
+    </select>
     
 </mapper>

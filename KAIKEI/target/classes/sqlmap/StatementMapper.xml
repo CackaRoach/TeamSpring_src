@@ -4,9 +4,25 @@
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
 
     <select id="getStatementList" resultType="StatementVO">
-    SELECT company_cd, seq, account_cd, customer_cd, date, classify, debtor, creditor, abs, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog
-    FROM statements
-    ORDER BY seq ASC
+	    SELECT company_cd, seq, account_cd, customer_cd, date, classify, debtor, creditor, abs
+	    FROM statements
+	    ORDER BY seq ASC
     </select>
     
+    <select id="getStatements" parameterType="String" resultType="StatementVO">
+    	select *
+    	from statements
+    	where company_cd = #{value}
+    </select>
+    
+    <select id="getMaxSeq" parameterType="String" resultType="Integer">
+    	select Max(seq)
+    	from statements
+    	where company_cd = #{value}
+    </select>
+        
+    <insert id="insertRandom">    
+        INSERT INTO statements
+        VALUES('company', 0, 'account', 'customer', 'date', 'classify', 100, 1000, 'abs', '20101010', '20101010', '20101010', '20101010', '20101010', '20101010')        
+    </insert>
 </mapper>

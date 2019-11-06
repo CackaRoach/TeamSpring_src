@@ -10,7 +10,25 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<bean id="statementMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="mapperInterface" value="com.ts.kaikei.dao.StatementDAO" />
+	   <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
+	<bean id="customerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="mapperInterface" value="com.ts.kaikei.dao.CustomerDAO" />
+	   <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
+	<bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="mapperInterface" value="com.ts.kaikei.dao.AccountDAO" />
+	   <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
+	<bean id="companyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="mapperInterface" value="com.ts.kaikei.dao.CompanyDAO" />
+	   <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
 	<bean id="dataSourcePostgre" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver"/>
 		<property name="url" value="jdbc:postgresql://210.115.230.213:5432/kaikeiTest"/>
