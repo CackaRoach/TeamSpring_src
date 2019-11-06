@@ -26,12 +26,18 @@
 	<logger name="org.springframework.context">
 		<level value="info" />
 	</logger>
-
+     
+    <logger name="jdbc.resultsettable" additivity="false">  
+        <level value="INFO"/>  
+        <appender-ref ref="console"/>  
+    </logger> 
+	
 	<!-- 
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
  	-->
+ 	
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 ### Java-Web ###
 ## ignoring target file
 
 # target file
 target/
 
+=======
+### Java-Web ###
+## ignoring target file
+target/
+
+##target properties
+pom.properties
+
+##class file
+*.class
+>>>>>>> refs/remotes/origin/한이슬

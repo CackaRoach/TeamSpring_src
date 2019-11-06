@@ -16,8 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ts.kaikei.services.ManageService;
 
-import com.ts.kaikei.vo.CompanyListVO;
-
+import com.ts.kaikei.vo.CompanyVO;
 
 @Controller
 public class ManageController {
@@ -26,10 +25,6 @@ public class ManageController {
 
 	@Autowired
 	private ManageService manageService;
-
-	/*
-	 * @RequestMapping(value = "/manage/*.do")
-	 */
 
 	// COMPANY - LIST(FIND)
 	@RequestMapping(value = "/manage/company.do", method = RequestMethod.GET)
@@ -42,7 +37,7 @@ public class ManageController {
 
 		if (mPAGE == null || mPAGE == "") {
 			mPAGE = "1";
-		} 
+		}
 		if (STAT_op == null || STAT_op == "") {
 			STAT_op = "00";
 		}
@@ -56,7 +51,7 @@ public class ManageController {
 		Params.put("STAT_op", STAT_op);
 		Params.put("mINPUT", mINPUT);
 
-		List<CompanyListVO> companyList = manageService.selectCompany(Params);
+		List<CompanyVO> companyList = manageService.selectCompany(Params);
 
 		model.addObject("companyList", companyList);
 		model.setViewName("/manage/company");
@@ -66,10 +61,11 @@ public class ManageController {
 
 	// COMPANY - DETAIL
 	@RequestMapping(value = "/manage/companyDetail.do", method = RequestMethod.GET)
-	public String ledger1(Model model) {
+	public String ledger1(	@RequestParam(value = "code", required = false) String code,
+							Model model) {
 		logger.info("Call : /manage/company.do - GET");
 
-		return "/manage/company";
+		return "/manage/companyDetail";
 	}
 
 }

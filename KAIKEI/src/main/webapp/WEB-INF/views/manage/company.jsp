@@ -55,8 +55,12 @@
 			<c:forEach items='${companyList}' var="item" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
-					<td><a>${item.company_cd}</a></td>
-					<td>${item.title}</td>
+					<td>${item.company_cd}</td>
+					<td>
+						<a href="/kaikei/manage/companyDetail.do?id=${item.company_cd}">
+						${item.title}
+						</a>
+					</td>
 					<td>${item.name}</td>
 					<td>${item.domain}</td>
 					<td>${item.phone}</td>
