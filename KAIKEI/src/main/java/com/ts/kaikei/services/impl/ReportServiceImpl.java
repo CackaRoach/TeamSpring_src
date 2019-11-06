@@ -49,6 +49,28 @@ public class ReportServiceImpl implements ReportService {
 		ArrayList<StatementVO>  biyong = new ArrayList<StatementVO>();
 		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = new ArrayList<ArrayList<StatementVO>>();
 		
+		statList = statementDAO.getStatementList();
+		
+		StatementVO test = new StatementVO();
+		test.setCompany_cd("101");
+		test.setSeq(3);
+		test.setAccount_cd("101");
+		test.setCustomer_cd("asd");
+		test.setDate("asd");
+		test.setDebtor("5000");
+		test.setClassify("asd");
+		test.setCreditor("32000");
+		test.setAbs("101");
+		test.setEnt_id("asd");
+		test.setEnt_date("asd");
+		test.setEnt_prog("asd");
+		test.setMod_id("asd");
+		test.setMod_date("asd");
+		test.setMod_prog("asd");
+		
+		statList.add(test);
+		
+		
 		for(int i=0; i<statList.size(); i++) {
 			// jasan 101 ~ 250, 961 ~ 980
 			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 250 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 961 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 980) {
