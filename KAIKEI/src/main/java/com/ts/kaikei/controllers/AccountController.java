@@ -1,7 +1,8 @@
 package com.ts.kaikei.controllers;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.AccountService;
 import com.ts.kaikei.vo.CustomerVO;
+import com.ts.kaikei.vo.StatementVO;
 import com.ts.kaikei.vo.UserVO;
 
 @Controller
@@ -23,8 +25,6 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
-	private CustomerDAO customerDAO;
-
 	
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(StatementVO sVO, HttpSession httpSession, Model model) {
@@ -33,7 +33,6 @@ public class AccountController {
 		String company_cd = ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd();
 		
 		List<StatementVO> list = accountService.getStatements(company_cd);
-		list = codeToName(list);
 		
 		model.addAttribute("statements", list);
 		

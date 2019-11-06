@@ -17,14 +17,6 @@ public class ReportServiceImpl implements ReportService {
 	private StatementDAO statementDAO;
 	
 	@Override
-	public void addStatement(StatementVO statementVO) {
-		statementDAO.addStatement(statementVO);
-	}
-	@Override
-	public void deleteStatement(int idx) {
-		statementDAO.deleteStatement(idx);
-	}
-	@Override
 	public ArrayList<StatementVO> getStatementList() {
 		return statementDAO.getStatementList();
 		
@@ -32,13 +24,5 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public ArrayList<StatementVO> getStatementListCond(Map<String, String> searchParams) {
 		return statementDAO.getStatementListCond(searchParams);
-	}
-	@Override
-	public StatementVO getStatementDetail(int idx) {
-		return statementDAO.getStatementDetail(idx);
-	}
-	@Override
-	public void updateStatement(StatementVO statementVO) {
-		statementDAO.updateStatement(statementVO);
 	}
 }
