@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-### Java-Web ###
-## ignoring target file
-target/
-
-##target properties
-pom.properties
-
-##class file
-*.class
-=======
 ### Java-Web ###
 ## ignoring target file
 
 # target file
 target/
->>>>>>> refs/remotes/origin/김민재
+
