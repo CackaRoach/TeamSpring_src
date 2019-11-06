@@ -29,11 +29,9 @@ public class ReportController {
 	@RequestMapping(value = "/report/bs.do", method = RequestMethod.GET)
 	public String ledgerBS(Model model) {
 		logger.info("Call : /report/bs.do - GET");
-		/*
-		reportService.BS_Calculator();
 		
-		model.addAttribute("dataList", reportService.getBS_dataList());
-		*/
+		model.addAttribute("BS_dataList", reportService.BS_Calculator());
+		
 		return "/report/bs";
 	}
 	
