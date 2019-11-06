@@ -66,10 +66,11 @@ public class ManageController {
 
 	// COMPANY - DETAIL
 	@RequestMapping(value = "/manage/companyDetail.do", method = RequestMethod.GET)
-	public String ledger1(Model model) {
+	public String ledger1(	@RequestParam(value = "code", required = false) String code,
+							Model model) {
 		logger.info("Call : /manage/company.do - GET");
 
-		return "/manage/company";
+		return "/manage/companyDetail";
 	}
 
 }
