@@ -3,5 +3,4 @@
 
 <mapper namespace="com.ts.kaikei.dao.AccountDAO">
 
-    
 </mapper>

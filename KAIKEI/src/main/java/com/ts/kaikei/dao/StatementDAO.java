@@ -8,8 +8,7 @@ import com.ts.kaikei.vo.*;
 @Mapper
 public interface StatementDAO {
 
-	public ArrayList<StatementVO> getStatementList();
-	public ArrayList<StatementVO> getStatementListCond(Map<String, String> searchParams);
-	
-	public List<StatementVO> getStatements(String company_cd);
-} 
+	public ArrayList<StatementListVO> getStatementList(String company_cd);
+	public void addStatement(StatementVO statementVO);
+}
+

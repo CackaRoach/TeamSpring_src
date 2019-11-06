@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ts.kaikei.services.AccountService;
 import com.ts.kaikei.services.ManageService;
+
 import com.ts.kaikei.vo.CompanyListVO;
-import com.ts.kaikei.vo.CompanyVO;
+
 
 @Controller
 public class ManageController {

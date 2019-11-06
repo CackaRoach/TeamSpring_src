@@ -52,6 +52,22 @@ a {
 	width: 100px;
 }
 
+#StatementList td input[type='text'] {
+	border:1px solid white;
+	padding:10px;
+}
+#StatementList td input[type='text']:hover {
+	border:1px solid #bbbbbb;
+}
+#StatementList td input[type='text']:focus {
+	background-color:#eeeeee;
+}
+#StatementList .title td {
+	font-weight: 900;
+	font-size: 16px;
+	text-align:center;
+}
+
 .div-header {
 	
 }

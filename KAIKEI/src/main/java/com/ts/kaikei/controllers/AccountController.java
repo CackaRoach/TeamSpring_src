@@ -16,37 +16,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ts.kaikei.services.AccountService;
 
 import com.ts.kaikei.vo.CustomerVO;
+import com.ts.kaikei.vo.StatementListVO;
 import com.ts.kaikei.vo.StatementVO;
 import com.ts.kaikei.vo.UserVO;
 
 @Controller
 public class AccountController {
-
+	
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 	
 	@Autowired 
 	private AccountService accountService;
 	
+
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(HttpSession httpSession, Model model) {
 		logger.info("Call : /account/ledger.do - GET");
-		
+
 		String company_cd = ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd();
-		
-		List<StatementVO> list = accountService.getStatements(company_cd);
+
+		List<StatementListVO> list = accountService.getStatements(company_cd);
 		
 		model.addAttribute("statements", list);
 		
 		return "/account/ledger";
 	}
-	
-	@RequestMapping(value = "/account/customer.do", method = RequestMethod.GET)
-	public String customer(String searchParam, HttpSession httpSession, Model model) {
-		logger.info("Call : /account/customer.do - GET");
+
+	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
+	public String addStatement(StatementVO statementVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/addStatement.do - POST");
 		
-		model.addAttribute("customerList", accountService.getCustomerList(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), searchParam));
+		String userId = ((UserVO)httpSession.getAttribute("userVO")).getId();
+		String company_cd = ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd();
 		
-		return "/account/customer";
+		accountService.addStatement(statementVO, userId, company_cd);
+		
+		return "redirect:/account/ledger.do";
+
 	}
 	
 	@RequestMapping(value = "/account/customerAdd.do", method = RequestMethod.GET)

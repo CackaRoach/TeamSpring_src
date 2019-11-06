@@ -2,31 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
-	
-    <select id="getStatementList" resultType="StatementVO">
-    
-	    SELECT company_cd, seq, account_cd, customer_cd, date, classify, debtor, creditor, abs, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog
-	    FROM statements
-	    ORDER BY seq ASC
-	    
-    </select>
-    
-    <select id="getStatementListCond" parameterType="String" resultType="StatementVO">
-    
-    	SELECT SUM(debtor) AS qDeb, SUM(creditor) AS qCre
-		FROM statements
-		WHERE 1=1
-		AND company_cd = #{company_cd}
-		AND date between #{date1} AND #{date2}
-		
-    </select>
 
-    <select id="getStatements" parameterType="String" resultType="StatementVO">
+    <select id="getStatementList" parameterType="String" resultType="StatementListVO">
     
-    	select *
-    	from statements
-    	where company_cd = #{company_cd}
+    	SELECT STT.account_cd, ACC.title, STT.customer_cd, STT.date, 
+    			STT.classify, STT.debtor, STT.creditor, STT.abs
+    	FROM statements AS STT, account AS ACC
+    	WHERE 1=1
+    	AND STT.company_cd = #{company_cd}
+    	AND STT.account_cd = ACC.acc_cd
 
     </select>
-   
+    
+    <insert id="addStatement" parameterType="StatementVO" >
+    
+        INSERT INTO statements
+        VALUES(
+        #{company_cd}, nextval('seq_company_${company_cd}'), #{account_cd}, 
+        #{customer_cd}, to_date(#{date},'YYYY-MM-DD'), #{classify}, 
+        #{debtor}, #{creditor}, #{abs}, 
+        #{ent_id}, NOW(), #{ent_prog},
+        #{mod_id}, NOW(), #{mod_prog})
+        
+    </insert>
+
 </mapper>

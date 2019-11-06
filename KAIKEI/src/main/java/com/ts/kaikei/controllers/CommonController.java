@@ -86,8 +86,18 @@ public class CommonController {
 		logger.info("Call : /signExe.do - POST");
 		
 		// overlapping check(id)
+		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
+			return "/error";
+		}
+		
+		if(companyState.equals("new")) {
+			commonService.signUpCompany(companyRegistVO);
+		}
+		
+
 		if(commonService.checkId(userVO.getId()) != 0) {
 			model.addAttribute("errorMsg", "REGIST ID ERROR!");
+
 			return "/error";
 		}
 		
@@ -122,6 +132,7 @@ public class CommonController {
 		
 	}
 	
+
 	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {

@@ -74,4 +74,10 @@
         
     </select>
     
+    <select id="getCustomerOf" resultType="CustomerVO" parameterType="String">
+	    SELECT *
+	    from customer
+	    where cus_cd = #{value}
+    </select>
+
 </mapper>

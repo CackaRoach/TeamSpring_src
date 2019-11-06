@@ -10,7 +10,6 @@
 </head>
 <script type="text/javascript" src="/kaikei/js/common.js" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</script>
 <body style="max-width: 100%">
     <div id="header">
 	    <div class="div-header"><tiles:insertAttribute name="header" /></div>

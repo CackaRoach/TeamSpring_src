@@ -19,7 +19,7 @@ public class StatementVO {
 	private String mod_id;
 	private String mod_date;
 	private String mod_prog;
-	
+		
 	public String getCompany_cd() {
 		return company_cd;
 	}
@@ -105,6 +105,7 @@ public class StatementVO {
 	}
 	
 	public void setEnt_date(String ent_date) {
+		
 		this.ent_date = ent_date;
 	}
 	

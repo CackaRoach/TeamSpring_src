@@ -15,28 +15,28 @@
 		                    <tr>
 		                        <td>Customer Code</td>
 		                        <td>${customerVO.cus_cd}</td>
-		                    <tr>
 		                    </tr>
+		                    <tr>
 		                        <td>Business License Number</td>
 		                        <td>${customerVO.reg_cd}</td>
-		                    <tr>
 		                    </tr>
+		                    <tr>
 		                        <td>FAX</td>
 		                        <td>${customerVO.fax}</td>
-		                    <tr>
 		                    </tr>
+		                    <tr>
 		                        <td>Domain</td>
 		                        <td>${customerVO.domain}</td>
-		                    <tr>
 		                    </tr>
+		                    <tr>
 		                        <td>CEO</td>
 		                        <td>${customerVO.ceo_name}</td>
-		                    <tr>
 		                    </tr>
+		                    <tr>
 		                        <td>CEO E-mail</td>
 		                        <td>${customerVO.ceo_email}</td>
-		                    <tr>
 		                    </tr>
+		                    <tr>
 		                        <td>Worker</td>
 		                        <td>${customerVO.worker_name}</td>
 		                    </tr>

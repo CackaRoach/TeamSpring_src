@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ts.kaikei.dao.CompanyDAO;
+
 import com.ts.kaikei.services.ManageService;
+
 import com.ts.kaikei.vo.CompanyListVO;
-import com.ts.kaikei.vo.CompanyVO;
 
 @Service("manageService")
 public class ManageServiceImpl implements ManageService {
