@@ -12,90 +12,52 @@
 			<p></p>
 			<table border="1" style="border-collapse:collapse">
 			  <tr>
-			    <th colspan="2">Account Name</th>
-			    <th>Debtor</th>
-			    <th>Credit</th>
+			    <th colspan="2">Subject</th>
+			    <th colspan="2">Amount</th>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">sales</th>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <th style="text-align: left;">Cost of goods sold</th>
-			    <td></td>
+			    <td colspan="2">Revenues</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">Gross profit</th>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <th style="text-align: left;">Ceneral, selling, and administrative expenses</th>
-			    <td></td>
+			    <td colspan="2">Cost of goods sold</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">operating income</th>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <th style="text-align: left;">non-operating income</th>
-			    <td></td>
+			    <td colspan="2">Gross margin</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">non-operating expense</th>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <th style="text-align: left;">ordinary income</th>
-			    <td></td>
+			    <td colspan="2">Selling and administrative expenses</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">extraordinary gain</th>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <th style="text-align: left;">extraordinary losses</th>
-			    <td></td>
+			    <td rowspan="2"></td>
+			    <td>Operating revenue</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">Earnings before tax</th>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <th style="text-align: left;">Tax</th>
-			    <td></td>
+			    <td>non-operating expenses</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th style="text-align: left;">Earnings after tax</th>
-			    <td></td>
+			    <td colspan="2">Income before tax expenses</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  <tr>
-			    <th colspan="2" style="text-align: left;">Total</th>
+			    <td colspan="2">Income taxes</td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			  <tr>
+			    <td colspan="2">net income</td>
 			    <td></td>
 			    <td></td>
 			  </tr>

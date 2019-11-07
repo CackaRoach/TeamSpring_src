@@ -41,13 +41,13 @@ public class ReportServiceImpl implements ReportService {
 	
 	//sorting Account & insert Account Title
 	private ArrayList<ArrayList<StatementVO>> Sorting_Account(){
+		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = new ArrayList<ArrayList<StatementVO>>();
 		ArrayList<StatementVO> statList = new ArrayList<StatementVO>();
 		ArrayList<StatementVO> jasan = new ArrayList<StatementVO>();
 		ArrayList<StatementVO> buche = new ArrayList<StatementVO>();
 		ArrayList<StatementVO> jabon = new ArrayList<StatementVO>();
 		ArrayList<StatementVO> suick = new ArrayList<StatementVO>();
 		ArrayList<StatementVO>  biyong = new ArrayList<StatementVO>();
-		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = new ArrayList<ArrayList<StatementVO>>();
 		
 		statList = statementDAO.getStatementList();
 		
@@ -102,6 +102,12 @@ public class ReportServiceImpl implements ReportService {
 		return Sorted_Acconutlist;
 	}
 	
+	public ArrayList<ArrayList<StatementVO>> get_Sorted_Acconutlist() {
+		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = new ArrayList<ArrayList<StatementVO>>();
+		Sorted_Acconutlist = Sorting_Account();
+		return Sorted_Acconutlist;
+	}
+	
 	@Override
 	// CTB Calcluator 
 	public ArrayList<int[]> CTB_Calculator() {
@@ -114,32 +120,31 @@ public class ReportServiceImpl implements ReportService {
 		// Reference by : http://m.blog.daum.net/_blog/_m/articleView.do?blogid=0DCZr&articleno=17492948
 		// https://modules.tistory.com/141
 		for(int i = 0, j=0, k=0,l=0,m=0,n=0;i < Act_cd.size();i++) {
-			if(Act_cd.get(i) == Sorted_Acconutlist.get(0).get(i).getAccount_cd()) {
+			if(Act_cd.get(i) == Sorted_Acconutlist.get(0).get(j).getAccount_cd()) { //jasan
 				CTB_data[1] = Integer.parseInt(Sorted_Acconutlist.get(0).get(j).getDebtor());
 				CTB_data[2] = Integer.parseInt(Sorted_Acconutlist.get(0).get(j++).getCreditor());
 				CTB_data[0] = CTB_data[1] - CTB_data[2];
 			}
-			else if(Act_cd.get(i) == Sorted_Acconutlist.get(1).get(i).getAccount_cd()) {
+			else if(Act_cd.get(i) == Sorted_Acconutlist.get(0).get(k).getAccount_cd()) {
 				CTB_data[1] = Integer.parseInt(Sorted_Acconutlist.get(1).get(k).getDebtor());
 				CTB_data[2] = Integer.parseInt(Sorted_Acconutlist.get(1).get(k++).getCreditor());
 				CTB_data[3] = CTB_data[2] - CTB_data[1];
 			}
-			else if(Act_cd.get(i) == Sorted_Acconutlist.get(2).get(i).getAccount_cd()) {
+			else if(Act_cd.get(i) == Sorted_Acconutlist.get(0).get(l).getAccount_cd()) {
 				CTB_data[1] = Integer.parseInt(Sorted_Acconutlist.get(2).get(l).getDebtor());
 				CTB_data[2] = Integer.parseInt(Sorted_Acconutlist.get(2).get(l++).getCreditor());
 				CTB_data[3] = CTB_data[2] - CTB_data[1];
 			}
-			else if(Act_cd.get(i) == Sorted_Acconutlist.get(3).get(i).getAccount_cd()) {
+			else if(Act_cd.get(i) == Sorted_Acconutlist.get(0).get(m).getAccount_cd()) {
 				CTB_data[1] = Integer.parseInt(Sorted_Acconutlist.get(3).get(m).getDebtor());
 				CTB_data[2] = Integer.parseInt(Sorted_Acconutlist.get(3).get(m++).getCreditor());
 				CTB_data[3] = CTB_data[2] - CTB_data[1];
 			}
-			else if(Act_cd.get(i) == Sorted_Acconutlist.get(4).get(i).getAccount_cd()) {
+			else if(Act_cd.get(i) == Sorted_Acconutlist.get(0).get(n).getAccount_cd()) {
 				CTB_data[1] = Integer.parseInt(Sorted_Acconutlist.get(4).get(n).getDebtor());
 				CTB_data[2] = Integer.parseInt(Sorted_Acconutlist.get(4).get(n++).getCreditor());
 				CTB_data[0] = CTB_data[1] - CTB_data[2];
 			}
-			
 			CTB_dataList.add(CTB_data);
 		}
 
@@ -157,9 +162,9 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	//GL data find
 	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator() {
+		ArrayList<ArrayList<ArrayList<String>>> GL_dataList = new ArrayList<ArrayList<ArrayList<String>>>();
 		ArrayList<StatementVO> statList = statementDAO.getStatementList();
 		ArrayList<String> Act_cd = Account_CD_List();
-		ArrayList<ArrayList<ArrayList<String>>> GL_dataList = null;
 		int ForwardBalance = getForwardBalance();
 		//input GL data line
 		for(int i =0; i< Act_cd.size();i++) {
@@ -167,7 +172,7 @@ public class ReportServiceImpl implements ReportService {
 			// Make GL dataSet
 			for(int j =0;j<getStatementList().size();j++) {
 				if(Act_cd.get(i) == statList.get(j).getAccount_cd()) {
-					ArrayList<String> GL_data = null;
+					ArrayList<String> GL_data = new ArrayList<String>();
 					int balance = 0;
 					GL_data.add(Integer.toString(ForwardBalance));
 					GL_data.add(statList.get(j).getDate());
@@ -184,7 +189,7 @@ public class ReportServiceImpl implements ReportService {
 			
 			//calc monthly total
 			int lastMonth = 0;
-			ArrayList<String> mothlyData = null;
+			ArrayList<String> mothlyData = new ArrayList<String>();
 			
 			for(int j=0;j<GL_dataList.size();j++) {
 				String month = GL_dataList.get(0).get(j).get(1).substring(3, 4); // get month // 0 = balance, 1 = date
@@ -204,7 +209,7 @@ public class ReportServiceImpl implements ReportService {
 			int total_deb = 0 ;
 			int total_cre = 0;
 			int total_balance = 0;
-			ArrayList<String> total_data = null;
+			ArrayList<String> total_data = new ArrayList<String>();
 			//calc total
 			for(int j =0;j<GL_dataList.get(1).size();j++) {
 				total_deb += Integer.parseInt(GL_dataList.get(1).get(j).get(1)); //deb

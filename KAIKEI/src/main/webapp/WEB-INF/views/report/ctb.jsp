@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 		<div>
 			<h3>Reports - Compound Trial Balance</h3>
 		</div>
@@ -23,26 +26,41 @@
 					<th bgcolor="#F5D0A9">Balance</th>
 				</tr>
 				
+				<c:forEach var="actList" items="${accountList}" varStatus="i">
+					<c:forEach var="data" items="${actList}" varStatus="j">
+						<tr>	
+							<td bgcolor="#CED8F6">	
+								<c:out value="${CTB_dataList[i.index][0]}" />
+							</td>
+							<td bgcolor="#CED8F6">
+								<c:out value="${CTB_dataList[i.index][1]}" />
+							</td>
+							<th bgcolor="#C6C4C4">
+								(${data.account_cd})
+							</th>
+							<td bgcolor="#F79F81">
+								<c:out value="${CTB_dataList[i.index][2]}" />
+							</td>
+							<td bgcolor="#F79F81">
+								<c:out value="${CTB_dataList[i.index][3]}" />
+							</td>
+						</tr>
+					</c:forEach>
+				</c:forEach>
 				<tr>
-					<td bgcolor="#CED8F6"></td>
-					<td bgcolor="#CED8F6"></td>
-					<td bgcolor="#C6C4C4">Cash(0101)</td>
-					<td bgcolor="#F79F81"></td>
-					<td bgcolor="#F79F81"></td>
-				</tr>
-				<tr>
-					<td bgcolor="#819FF7"></td>
-					<td bgcolor="#819FF7"></td>
-					<td bgcolor="#C6C4C4">Deposit(0103)</td>
-					<td bgcolor="#FE9A2E"></td>
-					<td bgcolor="#FE9A2E"></td>
-				</tr>
-				<tr>
-					<td bgcolor="#A4A4A4"></td>
-					<td bgcolor="#A4A4A4"></td>
+					<td bgcolor="#A4A4A4">
+						<c:out value="${CTB_dataList[fn:length(CTB_dataList)-1][0]}" />
+					</td>
+					<td bgcolor="#A4A4A4">
+						<c:out value="${CTB_dataList[fn:length(CTB_dataList)-1][1]}" />
+					</td>
 					<th bgcolor="#A4A4A4">Total</th>
-					<td bgcolor="#A4A4A4"></td>
-					<td bgcolor="#A4A4A4"></td>
+					<td bgcolor="#A4A4A4">
+						<c:out value="${CTB_dataList[fn:length(CTB_dataList)-1][2]}" />
+					</td>
+					<td bgcolor="#A4A4A4">
+						<c:out value="${CTB_dataList[fn:length(CTB_dataList)-1][3]}" />
+					</td>
 				</tr>
 			</table>
 			<p></p>

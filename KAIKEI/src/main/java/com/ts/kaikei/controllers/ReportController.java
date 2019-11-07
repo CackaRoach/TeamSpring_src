@@ -52,16 +52,9 @@ public class ReportController {
 	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
 	public String ledgerCTB(Model model) {
 		logger.info("Call : /report/ctb.do - GET");
-		/*
-		reportService.StatementSort();
-		model.addAttribute("jasan", reportService.getJasanList());
-		model.addAttribute("buche", reportService.getBucheList());
-		model.addAttribute("jabon", reportService.getJabonList());
-		model.addAttribute("suick", reportService.getSuickList());
-		model.addAttribute("biyong", reportService.getBiyongList());
-		model.addAttribute("dataList", reportService.getDataList());
-		model.addAttribute("dataTotal", reportService.getTotal());
-		*/
+		
+		model.addAttribute("accountList", reportService.get_Sorted_Acconutlist());
+		model.addAttribute("CTB_dataList", reportService.CTB_Calculator());
 		return "/report/ctb";
 	}
 	
