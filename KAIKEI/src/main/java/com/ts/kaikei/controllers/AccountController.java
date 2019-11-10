@@ -101,24 +101,16 @@ public class AccountController {
 		return "/account/customerDetail";
 	}
 	
-	@RequestMapping(value = "/account/customerModify.do", method = RequestMethod.GET)
-	public String customerModify(String cus_cd, HttpSession httpSession, Model model) {
-		logger.info("Call : /account/customerModify.do - GET");
-		
-		model.addAttribute("customerVO", accountService.getCustomerDetail(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), cus_cd));
-		
-		return "/account/customerModify";
-	}
-	
-	@RequestMapping(value = "/account/customerModifyExc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/customerModify.do", method = RequestMethod.POST)
 	public String customerModify(CustomerVO customerVO, HttpSession httpSession, Model model) {
-		logger.info("Call : /account/customerModifyExc.do - GET");
+		logger.info("Call : /account/customerModify.do - GET");
 		
 		if(!accountService.updateCustomer(((UserVO)httpSession.getAttribute("userVO")).getCompany_cd(), customerVO,
 				((UserVO)httpSession.getAttribute("userVO")).getId())) {
 			model.addAttribute("errorMsg", "UPDATE CUSTOMER ERROR");
 			return "/error";
 		}
+		
 		
 		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
 	}
