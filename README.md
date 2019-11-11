@@ -26,7 +26,7 @@ SQL파일 Teamspring/구현에 있습니다.
 </details>
 
 <details>	
-<summary>10/29 변경사항</summary>
+  <summary><del>10/29 변경사항</del></summary>
 <div markdown="1">
   <h3>src -> main -> webapp -> WEB-INF -> spring -> root-context.xml userMapper밑에 추가</h3>
   
@@ -66,7 +66,7 @@ creditor : varchar --> integer
 </details>
 
 <details>
-<summary>10/31 변경사항</summary>
+  <summary><del>10/31 변경사항</del></summary>
 <div markdown="1">
   <h3>merge완료</h3>
   <h3>.gitignore 파일 추가</h3>
