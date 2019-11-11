@@ -39,12 +39,9 @@ public class ReportController {
 	@RequestMapping(value = "/report/gl.do", method = RequestMethod.GET)
 	public String ledgerGL(Model model) {
 		logger.info("Call : /report/gl.do - GET");
-		/*
-		reportService.GL_Calculator();
-		model.addAttribute("dataList", reportService.getGL_dataList());
-		model.addAttribute("MonthlyTotal", reportService.getGL_MonthlyTotal());
-		model.addAttribute("Total", reportService.getGL_Total());
-		*/
+		
+		model.addAttribute("GL_dataList", reportService.GL_Calculator());
+		
 		return "/report/gl";
 	}
 	

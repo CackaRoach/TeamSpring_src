@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<div>
 			<h3>Reports - General Ledger</h3>
 		</div>
@@ -22,38 +23,23 @@
 					<th bgcolor="#FE9A2E" style="width:100px">Cred</th>
 					<th bgcolor="#FE9A2E" style="width:100px">Balance</th>
 				</tr>
-				
+		
 				<tr bgcolor="#A4A4A4">
 					<td colspan="5" style="text-align:left">Carried Forward</td>
-					<td></td>
+					<td>
+		    			0
+					</td>
 				</tr>
-				<tr>
-					<c:forEach var="StatementVO" items="${StatementList}">
-						<tr bgcolor="#F8E6E0">
-							<td>${StatementVO.date}</td>
-							<td>${StatementVO.abs}</a></td>
-							<td>${StatementVO.customer_cd}</td>
-							<td>${StatementVO.debtor}</td>
-							<td>${StatementVO.creditor}</td>
-							<td></td>
-						</tr>
-					</c:forEach>
-				</tr>
+			
 				<tr bgcolor="#C6C4C4">
 					<td colspan="5" style="text-align:left">Monthly Total</td>
 					<td></td>
 				</tr>
 				<tr>
-					<c:forEach var="StatementVO" items="${StatementList}">
-						<tr bgcolor="#F8E6E0">
-							<td>${StatementVO.date}</td>
-							<td>${StatementVO.abs}</a></td>
-							<td>${StatementVO.customer_cd}</td>
-							<td>${StatementVO.debtor}</td>
-							<td>${StatementVO.creditor}</td>
-							<td></td>
-						</tr>
-					</c:forEach>
+					<td>	
+						<c:out value="${GL_dataList}" />
+					</td>
+					<td></td>
 				</tr>
 				<tr bgcolor="#C6C4C4">
 					<td colspan="5" style="text-align:left">Monthly Total</td>
