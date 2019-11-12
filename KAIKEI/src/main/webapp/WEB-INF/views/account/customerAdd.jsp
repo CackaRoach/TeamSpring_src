@@ -54,7 +54,7 @@
 		                    </tr>
 		          	      </tbody>
 		         	    </table>
-		         	<div style="float:right;">
+		         	<div>
 			            <input type="submit" style="margin:3px" class="button" value="ADD" onclick="return formCheck();"><br>
 			            <input type="button" style="margin:3px" class="button" value="CANCEL" onclick="location.href='/kaikei/account/customer.do'">
 			        </div>
