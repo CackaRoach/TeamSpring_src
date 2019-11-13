@@ -28,7 +28,7 @@ public class ReportServiceImpl implements ReportService {
 		test.setSeq(3);
 		test.setAccount_cd("101");
 		test.setCustomer_cd("asd");
-		test.setDate("asd");
+		test.setDate("11-21");
 		test.setDebtor("5000");
 		test.setClassify("asd");
 		test.setCreditor("32000");
@@ -41,7 +41,43 @@ public class ReportServiceImpl implements ReportService {
 		test.setMod_prog("asd");
 		
 		statList.add(test);
-		
+		test = new StatementVO();
+		test.setCompany_cd("102");
+		test.setSeq(4);
+		test.setAccount_cd("102");
+		test.setCustomer_cd("fef");
+		test.setDate("10-22");
+		test.setDebtor("10000");
+		test.setClassify("a3d2");
+		test.setCreditor("42231");
+		test.setAbs("102");
+		test.setEnt_id("asd");
+		test.setEnt_date("asd");
+		test.setEnt_prog("asd");
+		test.setMod_id("asd");
+		test.setMod_date("asd");
+		test.setMod_prog("asd");
+
+		statList.add(test);
+
+		test = new StatementVO();
+		test.setCompany_cd("103");
+		test.setSeq(5);
+		test.setAccount_cd("103");
+		test.setCustomer_cd("gge3");
+		test.setDate("11-23");
+		test.setDebtor("1000");
+		test.setClassify("gg34");
+		test.setCreditor("60000");
+		test.setAbs("103");
+		test.setEnt_id("asd3");
+		test.setEnt_date("asd3");
+		test.setEnt_prog("asd3");
+		test.setMod_id("asd3");
+		test.setMod_date("asd3");
+		test.setMod_prog("asd3");
+
+		statList.add(test);
 		boolean flag = true;
 		for(int i=0; i<statList.size(); i++) {
 			flag = true;
@@ -75,7 +111,7 @@ public class ReportServiceImpl implements ReportService {
 		test.setSeq(3);
 		test.setAccount_cd("101");
 		test.setCustomer_cd("asd");
-		test.setDate("asd");
+		test.setDate("10-21");
 		test.setDebtor("5000");
 		test.setClassify("asd");
 		test.setCreditor("32000");
@@ -88,8 +124,44 @@ public class ReportServiceImpl implements ReportService {
 		test.setMod_prog("asd");
 		
 		statList.add(test);
+		test = new StatementVO();
+		test.setCompany_cd("102");
+		test.setSeq(4);
+		test.setAccount_cd("102");
+		test.setCustomer_cd("fef");
+		test.setDate("11-22");
+		test.setDebtor("10000");
+		test.setClassify("a3d2");
+		test.setCreditor("42231");
+		test.setAbs("102");
+		test.setEnt_id("asd");
+		test.setEnt_date("asd");
+		test.setEnt_prog("asd");
+		test.setMod_id("asd");
+		test.setMod_date("asd");
+		test.setMod_prog("asd");
+
+		statList.add(test);
 		
-		
+
+		test = new StatementVO();
+		test.setCompany_cd("103");
+		test.setSeq(5);
+		test.setAccount_cd("103");
+		test.setCustomer_cd("gge3");
+		test.setDate("11-23");
+		test.setDebtor("1000");
+		test.setClassify("gg34");
+		test.setCreditor("60000");
+		test.setAbs("103");
+		test.setEnt_id("asd3");
+		test.setEnt_date("asd3");
+		test.setEnt_prog("asd3");
+		test.setMod_id("asd3");
+		test.setMod_date("asd3");
+		test.setMod_prog("asd3");
+
+		statList.add(test);
 		for(int i=0; i<statList.size(); i++) {
 			// jasan 101 ~ 250, 961 ~ 980
 			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 250 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 961 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 980) {
@@ -180,12 +252,13 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Override
 	//GL data find
-	public ArrayList<ArrayList<ArrayList<ArrayList<String>>>> GL_Calculator() {
-		ArrayList<ArrayList<ArrayList<ArrayList<String>>>> GL_List = new ArrayList<ArrayList<ArrayList<ArrayList<String>>>>();
-		ArrayList<ArrayList<ArrayList<String>>> Daily_dataList = new ArrayList<ArrayList<ArrayList<String>>>();
-		ArrayList<ArrayList<ArrayList<String>>> Monthly_dataList = new ArrayList<ArrayList<ArrayList<String>>>();
-		ArrayList<ArrayList<ArrayList<String>>> Totaly_dataList = new ArrayList<ArrayList<ArrayList<String>>>();
-		ArrayList<ArrayList<String>> dataList;
+	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator() {
+		ArrayList<ArrayList<ArrayList<String>>> GL_List = new ArrayList<ArrayList<ArrayList<String>>>();
+		ArrayList<ArrayList<String>> Daily_dataList = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> Monthly_dataList = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> Totaly_dataList = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> act_cd = new ArrayList<ArrayList<String>>();
+		
 		ArrayList<StatementVO> statList = statementDAO.getStatementList();
 		ArrayList<String> Act_cd = Account_CD_List();
 		int ForwardBalance = getForwardBalance();
@@ -195,7 +268,7 @@ public class ReportServiceImpl implements ReportService {
 		test.setSeq(3);
 		test.setAccount_cd("101");
 		test.setCustomer_cd("asd");
-		test.setDate("asd");
+		test.setDate("10-21");
 		test.setDebtor("5000");
 		test.setClassify("asd");
 		test.setCreditor("32000");
@@ -206,16 +279,57 @@ public class ReportServiceImpl implements ReportService {
 		test.setMod_id("asd");
 		test.setMod_date("asd");
 		test.setMod_prog("asd");
-		
+
 		statList.add(test);
 		
+		test = new StatementVO();
+		test.setCompany_cd("102");
+		test.setSeq(4);
+		test.setAccount_cd("102");
+		test.setCustomer_cd("fef");
+		test.setDate("11-22");
+		test.setDebtor("10000");
+		test.setClassify("a3d2");
+		test.setCreditor("42231");
+		test.setAbs("102");
+		test.setEnt_id("asd");
+		test.setEnt_date("asd");
+		test.setEnt_prog("asd");
+		test.setMod_id("asd");
+		test.setMod_date("asd");
+		test.setMod_prog("asd");
+
+		statList.add(test);
+
+		test = new StatementVO();
+		test.setCompany_cd("103");
+		test.setSeq(5);
+		test.setAccount_cd("103");
+		test.setCustomer_cd("gge3");
+		test.setDate("11-23");
+		test.setDebtor("1000");
+		test.setClassify("gg34");
+		test.setCreditor("60000");
+		test.setAbs("103");
+		test.setEnt_id("asd3");
+		test.setEnt_date("asd3");
+		test.setEnt_prog("asd3");
+		test.setMod_id("asd3");
+		test.setMod_date("asd3");
+		test.setMod_prog("asd3");
+
+		statList.add(test);
 		for(int i =0; i< Act_cd.size();i++) {
 			for(int j =0;j<statList.size();j++) {
 				if(Act_cd.get(i) == statList.get(j).getAccount_cd()) {
-					dataList = new ArrayList<ArrayList<String>>();
-					int Day_balance = 0;
-					ArrayList<String> GL_data = new ArrayList<String>();
+					//add Act_cd
+					ArrayList<String> act = new ArrayList<String>();
+					act.add(statList.get(j).getAccount_cd());
+					act_cd.add(act);
 					
+					//calc daily
+					ArrayList<String> GL_data = new ArrayList<String>();
+					int Day_balance = 0;
 					GL_data.add(Integer.toString(ForwardBalance));
 					GL_data.add(statList.get(j).getDate());
 					GL_data.add(statList.get(j).getAbs());
@@ -226,63 +340,62 @@ public class ReportServiceImpl implements ReportService {
 					GL_data.add(Integer.toString(Day_balance));
 					GL_data.add(statList.get(j).getAccount_cd());
 					
-					dataList.add(GL_data);
-						
-					Daily_dataList.add(dataList);
-					System.out.println("test : " + Daily_dataList.get(0).get(0).get(7));
-					//dataList.clear();
-					//TODO : ñæì˙Å@Ç≤Ç±Ç©ÇÁï™êÕÇµÇ‹ÇµÇÂÇ§ÅB
-					//calc monthly total
-					ArrayList<String> mothlyData = new ArrayList<String>();
-					int lastMonth = 0;
-					int month_deb = 0;
-					int month_cre = 0;
-					int month_balance = 0;
+					Daily_dataList.add(GL_data);
 					
-					for(int k=0;k<Daily_dataList.get(i).size();k++) {
-						String month = Daily_dataList.get(i).get(k).get(1).substring(3, 4); // get month // 0 = balance, 1 = date
-					
-						if(Integer.parseInt(month) != lastMonth) {
-							lastMonth = Integer.parseInt(month);
-							mothlyData.add(Integer.toString(month_deb));
-							mothlyData.add(Integer.toString(month_cre));
-							mothlyData.add(Integer.toString(month_balance));
-							dataList.add(mothlyData);
-							month_deb = month_cre = month_balance = 0;
-						}
-						
-						month_deb += Integer.parseInt(dataList.get(k).get(3)); //deb
-						month_cre += Integer.parseInt(dataList.get(k).get(4)); //cre		
-						month_balance += Integer.parseInt(dataList.get(k).get(5));	
-					}
-					
-					Monthly_dataList.add(dataList);
-					//dataList.clear();
-		
-					int total_deb = 0 ;
-					int total_cre = 0;
-					int total_balance = 0;
-					ArrayList<String> total_data = new ArrayList<String>();
-					
-					//calc total
-					for(int k =0;k<dataList.size();k++) {
-						total_deb += Integer.parseInt(dataList.get(k).get(1)); //deb
-						total_cre += Integer.parseInt(dataList.get(k).get(2)); //cre
-						total_balance = total_deb + total_cre;
-						total_data.add(Integer.toString(total_deb));
-						total_data.add(Integer.toString(total_cre));
-						total_data.add(Integer.toString(total_balance));
-						dataList.add(total_data);
-					}
-					Totaly_dataList.add(dataList);
-
-					GL_List.add(Daily_dataList);
-					GL_List.add(Monthly_dataList);
-					GL_List.add(Totaly_dataList);
-					//System.out.println("test : " + GL_List.get(0).get(0).get(0).get(7));
 				}
 			}
 		}
+		//calc monthly total
+		ArrayList<String> mothlyData;
+		int lastMonth = 0;
+		int month_deb = 0;
+		int month_cre = 0;
+		int month_balance = 0;
+
+		for(int k=0;k<Daily_dataList.size();k++) {
+			mothlyData = new ArrayList<String>();
+			String month = Daily_dataList.get(k).get(1).substring(0, 2); // get month // 0 = balance, 1 = date
+			if(Integer.parseInt(month) != lastMonth) {
+				lastMonth = Integer.parseInt(month);
+				
+			}
+			else {
+				//mothlyData.add("0");
+				month_deb = month_cre = month_balance = 0;
+			}
+			mothlyData.add(month);
+			month_deb += Integer.parseInt(Daily_dataList.get(k).get(4)); //deb
+			month_cre += Integer.parseInt(Daily_dataList.get(k).get(5)); //cre		
+			month_balance += Integer.parseInt(Daily_dataList.get(k).get(6));	
+			
+			mothlyData.add(Integer.toString(month_deb));
+			mothlyData.add(Integer.toString(month_cre));
+			mothlyData.add(Integer.toString(month_balance));
+			Monthly_dataList.add(mothlyData);
+		}
+
+		//calc total
+		ArrayList<String> total_data;
+		int total_deb = 0 ;
+		int total_cre = 0;
+		int total_balance = 0;
+		
+		for(int k =0;k<Monthly_dataList.size();k++) {
+			total_data = new ArrayList<String>();
+			total_deb += Integer.parseInt(Monthly_dataList.get(k).get(0)); //deb
+			total_cre += Integer.parseInt(Monthly_dataList.get(k).get(1)); //cre
+			total_balance = total_deb + total_cre;
+			total_data.add(Integer.toString(total_deb));
+			total_data.add(Integer.toString(total_cre));
+			total_data.add(Integer.toString(total_balance));
+			Totaly_dataList.add(total_data);
+		}
+
+		GL_List.add(Daily_dataList);
+		GL_List.add(Monthly_dataList);
+		GL_List.add(Totaly_dataList);
+		GL_List.add(act_cd);
+		
 		return GL_List;
 	}
 	
