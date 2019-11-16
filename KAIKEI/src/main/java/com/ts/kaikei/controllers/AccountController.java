@@ -70,7 +70,6 @@ public class AccountController {
 	// TODO: Add Contact
 	@RequestMapping(value = "/account/customer.do", method = RequestMethod.GET)
 	public String customer(String searchParam, String pageNum, HttpSession httpSession, Model model) {
-		// TODO: Customer Page Paging;
 		
 		logger.info("Call : /account/customer.do - GET");
 		 
