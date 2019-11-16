@@ -13,22 +13,34 @@
         VALUES(#{company_cd}, #{cus_cd}, #{title}, #{reg_cd}, 
         		#{domain}, #{fax}, #{ceo_name}, #{ceo_phone},
         		#{ceo_email}, #{worker_name}, #{worker_phone}, #{worker_email},
-        		#{memo}, #{ent_id}, NOW(), #{ent_prog},
-        		#{mod_id}, NOW(), #{mod_prog})
+        		#{memo}, #{ent_id}, NOW(), 'Web-kaikei',
+        		#{mod_id}, NOW(), 'Web-kaikei')
         
     </insert>
     
     <select id="getCustomerList" parameterType="map" resultType="CustomerVO" >
     
-        SELECT cus_cd, title, ceo_name, memo
+        SELECT cus_cd, title, ceo_name, worker_name, fax
         FROM customer
         WHERE 1=1
         AND company_cd = #{company_cd}
-        AND cus_cd LIKE '%${searchParam}%'
-        OR title LIKE '%${searchParam}%'
-        OR ceo_name LIKE '%${searchParam}%'
-        OR memo LIKE '%${searchParam}%'
+        AND cus_cd LIKE '%' || #{searchParam} || '%'
+        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
+        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
         ORDER BY cus_cd ASC
+		LIMIT 20 OFFSET ${pageNum} * 20
+        
+    </select>
+    
+        <select id="getCustomerCount" parameterType="map" resultType="int" >
+    
+        SELECT (count(*)+19)/20
+        FROM customer
+        WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND cus_cd LIKE '%' || #{searchParam} || '%'
+        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
+        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
         
     </select>
     

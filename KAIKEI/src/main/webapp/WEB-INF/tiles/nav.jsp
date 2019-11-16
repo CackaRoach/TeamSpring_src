@@ -1,58 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    	<div>
-    		<div align="center" style="height:180px; padding:5px; border: 2px solid #969696; margin:5px 5px 0px 5px;">
-    			<img src="/kaikei/images/${userVO.company_cd}.png">
-    		</div>
-    		<div style="background-color: #3b3b3b; margin:0px 5px 5px 5px;">
-	    		<div style="padding:10px">
-		    		<span style="color:white; font-weight: bold;">${companyTitle}</span><br>
-		    		<span style="color:gray; font-size: 14px;">${companyDomain}</span>
-	    		</div>
-    		</div>
-    	</div>
-		<div class="div-nav-component">
-			<ul class="ul-list">
-				<li style="font-weight: bold;">&gt; <a href="/kaikei/home.do">Home</a></li>
-			</ul>
-			<ul class="ul-list">
-				<li style="font-weight: bold;">&gt; <a href="/kaikei/logout.do">Logout(temp)</a></li>
-			</ul>
-			<c:if test="${userVO.posit_cd eq 'POS002' || userVO.posit_cd eq 'POS003'}">
-			<ul class="ul-list">
-				<li style="font-weight: bold;">&gt; <a href="/kaikei/account/ledger.do">Ledger</a></li>
-			</ul>
-			<ul class="ul-list">
-				<li style="font-weight: bold;">&gt; <a href="/kaikei/account/customer.do">Customer</a></li>
-			</ul>
-			<ul class="ul-list">
-				<li style="font-weight: bold;">Report</li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/report/pl.do">P/L</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/report/bs.do">B/S</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/report/gl.do">General Ledger</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/report/ctb.do">Compound Trial Balance</a></li>
-			</ul>
-			<ul class="ul-list">
-				<li style="font-weight: bold;">Chart</li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/chart/pl.do">P/L</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/chart/bs.do">B/S</a></li>
-			</ul>
+		<div align="center" class="div-nav-component">
+			<div style="display: inline;">
+				<button class="navbtn" onclick="location.href='/home.do'">Home</button>
+				<button class="navbtn" onclick="location.href='/logout.do'">Logout(temp)</button>
+			</div>
+			<c:if test="${posit_cd eq 'POS002' || userVO.posit_cd eq 'POS003'}">
+			<div style="display: inline;">
+				<button class="navbtn" onclick="location.href='/account/ledger.do'">Ledger</button>
+				<button class="navbtn" onclick="location.href='/account/customer.do'">Customer</button>
+			</div>
+			<div align="left" class="dropdown">
+				<button class="navbtn">Report</button>
+				<div class="dropdown-contents">
+					<a href="/report/pl.do">P/L</a>
+					<a href="/report/bs.do">B/S</a>
+					<a href="/report/gl.do">General Ledger</a>
+					<a href="/report/ctb.do">Compound Trial Balance</a>
+				</div>
+			</div>
+			<div align="left" class="dropdown">
+				<button class="navbtn">Chart</button>
+				<div class="dropdown-contents">
+					<a href="/chart/pl.do">P/L</a>
+					<a href="/chart/bs.do">B/S</a>
+				</div>
+			</div>
 			</c:if>
-			<c:if test="${userVO.posit_cd eq 'POS001' }">
-			<ul class="ul-list">
-				<li style="font-weight: bold;">Manage</li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/manage/company.do">Company(admin)</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/manage/users.do">Users(admin)</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/manage/code.do">Code(temp)</a></li>
-			</ul>
+			<c:if test="${posit_cd eq 'POS001' }">
+			<div align="left" class="dropdown">
+				<button class="navbtn">Manage</button>
+				<div class="dropdown-contents">
+					<a href="/manage/company.do">Company(admin)</a>
+					<a href="/manage/users.do">Users(admin)</a>
+					<a href="/manage/code.do">Code(temp)</a>
+				</div>
+			</div>
 			</c:if>
-			<ul class="ul-list">
-				<li style="font-weight: bold;">Setting</li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/setting/personal.do">Personal(user+admin)</a></li>
-				<c:if test="${userVO.posit_cd eq 'POS002' }">
-				<li class="div-nav-item">&gt; <a href="/kaikei/setting/company.do">Company(ceo)</a></li>
-				<li class="div-nav-item">&gt; <a href="/kaikei/setting/employee.do">Employee(ceo)</a></li>
-				</c:if>
-			</ul>
+			<div align="left" class="dropdown">
+				<button class="navbtn">Setting</button>
+				<div class="dropdown-contents">
+					<a href="/kaikei/setting/personal.do">Personal(user+admin)</a>
+					<c:if test="${posit_cd eq 'POS002' }">
+					<a href="/setting/company.do">Company(ceo)</a>
+					<a href="/setting/employee.do">Employee(ceo)</a>
+					</c:if>
+				</div>
+			</div>
 		</div>

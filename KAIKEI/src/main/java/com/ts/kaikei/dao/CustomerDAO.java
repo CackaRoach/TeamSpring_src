@@ -10,14 +10,14 @@ import com.ts.kaikei.vo.CustomerVO;
 @Mapper
 public interface CustomerDAO {
 
-	List<CustomerVO> getCustomerList(Map<String, String> searchParams);
+	List<CustomerVO> getCustomerList(Map<String, String> params);
 	CustomerVO getCustomerDetail(Map<String, String> params);
 	void addCustomer(CustomerVO customerVO);
-	void deleteCustomer(Map<String, String> param);
+	void deleteCustomer(Map<String, String> params);
 	void updateCustomer(CustomerVO customerVO);
-	int customerCodeCheck(Map<String, String> param);
+	int customerCodeCheck(Map<String, String> params);
 
-	public CustomerVO getCustomerOf(String company_cd);
-
+	CustomerVO getCustomerOf(String company_cd);
+	int getCustomerCount(Map<String, String> params);
 }
  

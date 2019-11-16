@@ -12,7 +12,7 @@
 			}
 			
 			$.ajax({
-				url : "/kaikei/checkId.do?id=" + userId,
+				url : "/checkId.do?id=" + userId,
 				type : "get",
 				success : function(data) {					
 					
@@ -38,7 +38,7 @@
 			}
 			
 			$.ajax({
-				url : '/kaikei/checkCode.do?company_cd=' + company_cd,
+				url : "/checkCode.do?company_cd=" + company_cd,
 				type : 'get',
 				success : function(data) {					
 					if(state == "new") {

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 
@@ -53,11 +52,9 @@ public class CommonController {
 			return "/login";
 		}
 	
-		CompanyVO companyVO = commonService.getCompany(getUserVO.getCompany_cd());
-		
-		httpSession.setAttribute("userVO", getUserVO);
-		httpSession.setAttribute("companyTitle", companyVO.getTitle());
-		httpSession.setAttribute("companyDomain", companyVO.getDomain());
+		httpSession.setAttribute("id", getUserVO.getId());
+		httpSession.setAttribute("posit_cd", getUserVO.getPosit_cd());
+		httpSession.setAttribute("company_cd", getUserVO.getCompany_cd());
 		
 		return "redirect:home.do";	
 	}
@@ -67,7 +64,7 @@ public class CommonController {
 	public String home(HttpSession httpSession, Model model) {
 		logger.info("Call : /home.do - GET");
 		
-		if(httpSession.getAttribute("userVO") == null)
+		if(httpSession.getAttribute("id") == null)
 			return "error";
 		
 		return "/common/home";	

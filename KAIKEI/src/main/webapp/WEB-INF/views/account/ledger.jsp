@@ -16,38 +16,49 @@
 		</form>
 		
 	<form action="/kaikei/account/addStatement.do" method="POST">
-		<table id="StatementList">
-		<tr class="title">
-			<td>Date</td>
-			<td>Account</td>
-			<td>Customer</td>
-			<td>Classify</td>
-			<td>Debtor</td>
-			<td>Creditor</td>
-			<td>ABS</td>
-		</tr>
+		<table class="statement">
+			<tbody>
+				<tr class="title">
+					<td>Year</td>
+					<td>Month</td>
+					<td>Date</td>
+					<td>Account</td>
+					<td>Customer</td>
+					<td>Classify</td>
+					<td>Debtor</td>
+					<td>Creditor</td>
+					<td>ABS</td>
+				</tr>
 		
-		<c:forEach var="item" items="${statements}">
-			<tr>
-    			<td><input type="text" value="${item.date}" /></td>
-    			<td><input type="text" value="${item.account_cd}(${item.title})" /></td>
-    			<td><input type="text" value="${item.customer_cd}" /></td>
-    			<td><input type="text" value="${item.classify}" /></td>
-    			<td><input type="text" value="${item.debtor}" /></td>
-    			<td><input type="text" value="${item.creditor}" /></td>
-    			<td><input type="text" value="${item.abs}" /></td>
-			</tr>
-		</c:forEach>
-			<tr>
-    				<td><input type="text" name="date" placeholder="Date"/></td>
-    				<td><input type="text" name="account_cd" placeholder="Account"/></td>
-    				<td><input type="text" name="customer_cd" placeholder="Customer"/></td>
-    				<td><input type="text" name="classify" placeholder="Class"/></td>
-    				<td><input type="text" name="debtor" placeholder="Debtor"/></td>
-    				<td><input type="text" name="creditor" placeholder="Creditor"/></td>
-    				<td><input type="text" name="abs" placeholder="ABS"/></td>
-			</tr>
+				<c:forEach var="item" items="${statements}">
+					<tr>
+						<td><input type="text" name="year" placeholder="Year"/></td>
+	    				<td><input type="text" name="month" placeholder="Month"/></td>
+		    			<td><input type="text" value="${item.date}" /></td>
+		    			<td><input type="text" value="${item.account_cd}(${item.title})" /></td>
+		    			<td><input type="text" value="${item.customer_cd}" /></td>
+		    			<td><input type="text" value="${item.classify}" /></td>
+		    			<td><input type="text" value="${item.debtor}" /></td>
+		    			<td><input type="text" value="${item.creditor}" /></td>
+		    			<td><input type="text" value="${item.abs}" /></td>
+					</tr>
+				</c:forEach>
+				
+				<tr>
+	    				<td><input type="text" name="year" placeholder="Year"/></td>
+	    				<td><input type="text" name="month" placeholder="Month"/></td>
+	    				<td><input type="text" name="date" placeholder="Date"/></td>
+	    				<td><input type="text" name="account_cd" placeholder="Account"/></td>
+	    				<td><input type="text" name="customer_cd" placeholder="Customer"/></td>
+	    				<td><input type="text" name="classify" placeholder="Class"/></td>
+	    				<td><input type="text" name="debtor" placeholder="Debtor"/></td>
+	    				<td><input type="text" name="creditor" placeholder="Creditor"/></td>
+	    				<td><input type="text" name="abs" placeholder="ABS"/></td>
+				</tr>
+			</tbody>
 		</table>
-		<input id="saveBtn" class="button" type="submit" value="Save"/>
+		<div align="right">
+			<input id="saveBtn" class="button" type="submit" value="Save"/>
+		</div>
     </form>
 		
