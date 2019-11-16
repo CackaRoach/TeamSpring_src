@@ -6,36 +6,43 @@
 	        <div style="padding:20px">
 	            <span style="font-size: 2em;">Customer</span>
 	        </div>
-	        <div style="border:1px solid black; padding:20px; margin: 10px">
-	            <form style="margin:0px" action="/kaikei/account/customer.do" method="get">
+	        <div class="search-box">
+	            <form style="margin:0px" action="/account/customer.do" method="get">
 	                <span style="font-size:1.5em;">Search</span>
-	                <div style="float:right">
+	                <div align="right">
 	                    <input type="text" class="input-box" name="searchParam" placeholder="Search">
 	                    <input type="submit" class="button" value="FIND">
 	                </div>
 	            </form>
 	        </div>
 	        <div style="margin:5px">
-	            <table class="table-striped" style="border-collapse: collapse; border-bottom: 2px solid black; width:100%; text-align:center">
+	            <table class="table-striped-blue">
 	            	<tbody>
-		                <tr>
-		                    <td style="background-color: black; color: white">Code</td>
-		                    <td style="background-color: black; color: white">Company</td>
-		                    <td style="background-color: black; color: white">CEO</td>
-		                    <td style="background-color: black; color: white">Memo</td>
+		                <tr class="highlight">
+		                    <td>Code</td>
+		                    <td>Company</td>
+		                    <td>CEO</td>
+		                    <td>Worker</td>
+		                    <td>Fax</td>
 		                </tr>
 		                <c:forEach var="customerVO" items="${customerList}">
 		                <tr>
-		                    <td><a href="/kaikei/account/customerDetail.do?cus_cd=${customerVO.cus_cd}">${customerVO.cus_cd}</a></td>
+		                    <td><a href="/account/customerDetail.do?cus_cd=${customerVO.cus_cd}">${customerVO.cus_cd}</a></td>
 		                    <td>${customerVO.title}</td>
 		                    <td>${customerVO.ceo_name}</td>
-		                    <td>${customerVO.memo}</td>
+		                    <td>${customerVO.worker_name}</td>
+		                    <td>${customerVO.fax}</td>
 		                </tr>
 		                </c:forEach>
 		        	</tbody>
 	            </table>
 	        </div>
-	        <div style="height:50px;">
-	            <input type="button" style="float:right;" class="button" value="ADD" onclick="location.href='customerAdd.do'">
+	        <div align="center">
+	        	<c:forEach var="i" begin="0" end="${pageNum - 1}">
+	        		<a href="/account/customer.do?pageNum=${i}&searchParam=${searchParam}">${i + 1}</a> 
+	        	</c:forEach>
+	        </div>
+	        <div align="right">
+	            <input type="button" style="margin:10px" class="button" value="ADD" onclick="location.href='/account/customerAdd.do'">
 	        </div>
 	    </div>

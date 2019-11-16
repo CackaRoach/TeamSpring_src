@@ -6,9 +6,9 @@
 <head>
     <meta charset="Shift_JIS">
     <title>KAIKEI</title>
-    <link rel= "stylesheet" type="text/css" href="/kaikei/css/layout.css">
+    <link rel= "stylesheet" type="text/css" href="/css/layout.css">
 </head>
-<script type="text/javascript" src="/kaikei/js/common.js" ></script>
+<script type="text/javascript" src="/js/common.js" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <body style="max-width: 100%">
     <div id="header">

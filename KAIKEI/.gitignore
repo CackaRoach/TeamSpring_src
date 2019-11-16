@@ -1,4 +1,3 @@
-
 ### Java-Web ###
 ## ignoring target file
 
@@ -10,4 +9,5 @@ pom.properties
 
 ##class file
 *.class
+
 

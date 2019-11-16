@@ -23,24 +23,15 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	CustomerDAO customerDAO;
 
-
+	/*
+	 * =====================================
+	 *          STATEMEMT SERVICE
+	 * =====================================
+	 */
 	
 	@Override
 	public List<StatementListVO> getStatements(String company_cd) {
 		return statementDAO.getStatementList(company_cd);
-	}
-
-	@Override
-	public List<CustomerVO> getCustomerList(String company_cd, String searchParam) {
-		if(searchParam == null) {
-			searchParam = "";
-		}
-		
-		Map<String, String> searchParams = new HashMap<String, String>();
-		searchParams.put("company_cd", company_cd);
-		searchParams.put("searchParam", searchParam);
-		
-		return customerDAO.getCustomerList(searchParams);
 	}
 	
 	public void addStatement(StatementVO statementVO, String userId, String company_cd) {
@@ -53,17 +44,14 @@ public class AccountServiceImpl implements AccountService {
 		
 		statementDAO.addStatement(statementVO);
 	}
-	
-	@Override
-	public CustomerVO getCustomerDetail(String company_cd, String cus_cd) {
-		
-		Map<String, String>param = new HashMap<String, String>();
-		param.put("company_cd", company_cd);
-		param.put("cus_cd", cus_cd);
-		
-		return customerDAO.getCustomerDetail(param);
-	}
 
+
+	/*
+	 * =====================================
+	 *           CUSTOMER SERVICE
+	 * =====================================
+	 */
+	
 	@Override
 	public boolean addCustomer(String company_cd, CustomerVO customerVO, String userId) {
 		 
@@ -72,13 +60,55 @@ public class AccountServiceImpl implements AccountService {
 		customerVO.setEnt_id(userId);
 		customerVO.setMod_id(userId);
 		
-		customerVO.setEnt_prog("Web-kaikei");
-		customerVO.setMod_prog("Web-kaikei");
-		
 		customerDAO.addCustomer(customerVO);
 		
 		return true;
 		
+	}
+	
+	@Override
+	public int getCustomerCount(String company_cd, String searchParam) {
+		
+		if(searchParam == null) {
+			searchParam = "";
+		}
+		
+		Map<String, String> params = new HashMap<String, String>();
+		
+		params.put("company_cd", company_cd);
+		params.put("searchParam", searchParam);
+
+		return customerDAO.getCustomerCount(params);
+	}
+	
+	@Override
+	public List<CustomerVO> getCustomerList(String company_cd, String searchParam, String pageNum) {
+
+		if(searchParam == null) {
+			searchParam = "";
+		}
+		
+		if(pageNum == null) {
+			pageNum = "0";
+		}
+		
+		Map<String, String> params = new HashMap<String, String>();
+		
+		params.put("company_cd", company_cd);
+		params.put("searchParam", searchParam);
+		params.put("pageNum", pageNum);
+		
+		return customerDAO.getCustomerList(params);
+	}
+	
+	@Override
+	public CustomerVO getCustomerOf(String company_cd, String cus_cd) {
+		
+		Map<String, String>param = new HashMap<String, String>();
+		param.put("company_cd", company_cd);
+		param.put("cus_cd", cus_cd);
+		
+		return customerDAO.getCustomerDetail(param);
 	}
 	
 	@Override
@@ -93,7 +123,7 @@ public class AccountServiceImpl implements AccountService {
 		
 		return true;
 	}
-
+	
 	@Override
 	public boolean deleteCustomer(String company_cd, String cus_cd) {
 		
@@ -105,7 +135,11 @@ public class AccountServiceImpl implements AccountService {
 		
 		return true;
 	}
-
+	
+	/*
+	 *  AJAX
+	 */
+	
 	@Override
 	public int customerCodeCheck(String cus_cd, String company_cd) {
 		
@@ -115,5 +149,5 @@ public class AccountServiceImpl implements AccountService {
 		
 		return customerDAO.customerCodeCheck(param);
 	}
-	
+
 }

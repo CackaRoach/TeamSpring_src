@@ -9,7 +9,7 @@
 <script>
 	function forawrd() {
 		setTimeout(function() {
-			location.href="/kaikei/index.jsp";
+			location.href="/index.jsp";
 		}, 2000);
 	}
 </script>
