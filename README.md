@@ -91,14 +91,24 @@ state_cd --> auth_cd
 <div markdown="1">
 <h3>1. 테마 자문받은 내용대로 수정하였습니다.</h3>
 <h3>2. 세션 수정</h3>
+	
   --> e.g) 회사코드 호출시
+  
   --> String company_cd = httpSession.getAttribute("company_cd").toString(); 으로 부르시면 됩니다.
+  
   현재 세션값
+  
   	httpSession.setAttribute("id", getUserVO.getId()); // 로그인 user id
-		httpSession.setAttribute("posit_cd", getUserVO.getPosit_cd()); // 직급 code
-		httpSession.setAttribute("company_cd", getUserVO.getCompany_cd()); // 회사 code
+	
+	httpSession.setAttribute("posit_cd", getUserVO.getPosit_cd()); // 직급 code
+		
+	httpSession.setAttribute("company_cd", getUserVO.getCompany_cd()); // 회사 code
+	
 <h3>3. 절대경로 /kaikei 제외</h3>
+
   --> Tomcat server.xml 마지막줄 변경
+  
   --> <Context docBase="KAIKEI" path="" reloadable="true" source="org.eclipse.jst.jee.server:KAIKEI"/></Host>
+  
 </div>
 </details>
