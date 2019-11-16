@@ -108,7 +108,7 @@ state_cd --> auth_cd
 
   --> Tomcat server.xml 마지막줄 변경
   
-  --> &gt;Context docBase="KAIKEI" path="" reloadable="true" source="org.eclipse.jst.jee.server:KAIKEI"/>
+  --> Context docBase="KAIKEI" path="" reloadable="true" source="org.eclipse.jst.jee.server:KAIKEI"
   
 </div>
 </details>
