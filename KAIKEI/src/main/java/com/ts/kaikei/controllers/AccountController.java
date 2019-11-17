@@ -30,7 +30,6 @@ public class AccountController {
 	@Autowired 
 	private AccountService accountService;
 	
-	
 	/*
 	 * =====================================
 	 *         STATEMEMT CONTROLLER
@@ -106,7 +105,7 @@ public class AccountController {
 									HttpSession httpSession, 
 									Model model) {
 		
-		logger.info("Call : /account/customerCodeCheck.do - GET" + accountService.customerCodeCheck(cus_cd, httpSession.getAttribute("company_cd").toString()));
+		logger.info("Call : /account/customerCodeCheck.do - GET");
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
@@ -159,7 +158,6 @@ public class AccountController {
 			model.addAttribute("errorMsg", "UPDATE CUSTOMER ERROR");
 			return "/error";
 		}
-		
 		
 		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
 	}
