@@ -6,7 +6,7 @@
 				<button class="navbtn" onclick="location.href='/home.do'">Home</button>
 				<button class="navbtn" onclick="location.href='/logout.do'">Logout(temp)</button>
 			</div>
-			<c:if test="${posit_cd eq 'POS002' || userVO.posit_cd eq 'POS003'}">
+			<c:if test="${posit_cd eq 'POS002' || posit_cd eq 'POS003'}">
 			<div style="display: inline;">
 				<button class="navbtn" onclick="location.href='/account/ledger.do'">Ledger</button>
 				<button class="navbtn" onclick="location.href='/account/customer.do'">Customer</button>
@@ -41,10 +41,10 @@
 			<div align="left" class="dropdown">
 				<button class="navbtn">Setting</button>
 				<div class="dropdown-contents">
-					<a href="/kaikei/setting/personal.do">Personal(user+admin)</a>
+					<a href="/setting/personal.do">Personal(user+admin)</a>
 					<c:if test="${posit_cd eq 'POS002' }">
-					<a href="/setting/company.do">Company(ceo)</a>
-					<a href="/setting/employee.do">Employee(ceo)</a>
+						<a href="/setting/company.do">Company(ceo)</a>
+						<a href="/setting/employee.do">Employee(ceo)</a>
 					</c:if>
 				</div>
 			</div>

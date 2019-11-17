@@ -1,6 +1,7 @@
 package com.ts.kaikei.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,15 +51,16 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
-	public String addStatement(StatementVO statementVO, HttpSession httpSession, Model model) {
+	@ResponseBody
+	public void addStatement(@RequestBody List<Map<String, String>> jsonState, HttpSession httpSession, Model model) {
 		logger.info("Call : /account/addStatement.do - POST");
 		
 		String userId = httpSession.getAttribute("id").toString();
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		accountService.addStatement(statementVO, userId, company_cd);
+		accountService.addStatement(jsonState, userId, company_cd);
 		
-		return "redirect:/account/ledger.do";
+		// return "redirect:/account/ledger.do";
 
 	}
 	
@@ -69,21 +72,29 @@ public class AccountController {
 	
 	// TODO: Add Contact
 	@RequestMapping(value = "/account/customer.do", method = RequestMethod.GET)
-	public String customer(String searchParam, String pageNum, HttpSession httpSession, Model model) {
+	public String customer(	String searchParam, 
+							String crtPage, 
+							HttpSession httpSession, 
+							Model model) {
 		
 		logger.info("Call : /account/customer.do - GET");
+		logger.info("searchParam : " + searchParam);
+		logger.info("crtPage : " + crtPage);
 		 
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		model.addAttribute("pageNum", accountService.getCustomerCount(company_cd, searchParam));
-		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, pageNum));
+		model.addAttribute("pageCnt", accountService.getCustomerCount(company_cd, searchParam));
+		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage));
 		model.addAttribute("searchParam", searchParam);
 		
 		return "/account/customer";
 	}
 	
 	@RequestMapping(value = "/account/customerAdd.do", method = RequestMethod.GET)
-	public String customerAdd(CustomerVO customerVO, HttpSession httpSession, Model model) {
+	public String customerAdd(	CustomerVO customerVO, 
+								HttpSession httpSession, 
+								Model model) {
+		
 		logger.info("Call : /account/customerAdd.do - GET");
 		
 		return "/account/customerAdd";
@@ -91,7 +102,10 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account/customerCodeCheck.do", method = RequestMethod.GET)
 	@ResponseBody
-	public int customerCodeCheck(String cus_cd, HttpSession httpSession, Model model) {
+	public int customerCodeCheck(	String cus_cd, 
+									HttpSession httpSession, 
+									Model model) {
+		
 		logger.info("Call : /account/customerCodeCheck.do - GET" + accountService.customerCodeCheck(cus_cd, httpSession.getAttribute("company_cd").toString()));
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
@@ -100,7 +114,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/account/customerAddExc.do", method = RequestMethod.POST)
-	public String customerAddExc(CustomerVO customerVO, HttpSession httpSession, Model model) {
+	public String customerAddExc(	CustomerVO customerVO, 
+									HttpSession httpSession, 
+									Model model) {
+		
 		logger.info("Call : /account/customerAddExc.do - GET");
 		 
 		String company_cd = httpSession.getAttribute("company_cd").toString();
@@ -115,7 +132,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/account/customerDetail.do", method = RequestMethod.GET)
-	public String customerDetail(String cus_cd, HttpSession httpSession, Model model) {
+	public String customerDetail(	String cus_cd, 
+									HttpSession httpSession, 
+									Model model) {
+		
 		logger.info("Call : /account/customerDetail.do - GET");
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
@@ -126,7 +146,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/account/customerModify.do", method = RequestMethod.POST)
-	public String customerModify(CustomerVO customerVO, HttpSession httpSession, Model model) {
+	public String customerModify(	CustomerVO customerVO, 
+									HttpSession httpSession, 
+									Model model) {
+		
 		logger.info("Call : /account/customerModify.do - GET");
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
@@ -142,7 +165,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/account/customerDelete.do", method = RequestMethod.GET)
-	public String customerDelete(String cus_cd, HttpSession httpSession, Model model) {
+	public String customerDelete(	String cus_cd, 
+									HttpSession httpSession, 
+									Model model) {
+		
 		logger.info("Call : /account/customerDelete.do - GET");
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();

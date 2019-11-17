@@ -84,6 +84,7 @@ public class CommonController {
 		
 		// overlapping check(id)
 		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
+			logger.warn("Code Err");
 			return "/error";
 		}
 		

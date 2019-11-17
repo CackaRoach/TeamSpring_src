@@ -5,12 +5,14 @@
 
     <select id="getStatementList" parameterType="String" resultType="StatementListVO">
     
-    	SELECT STT.account_cd, ACC.title, STT.customer_cd, STT.date, 
+    	SELECT TO_CHAR(STT.date, 'YY') AS year, TO_CHAR(STT.date, 'MM') AS month, TO_CHAR(STT.date, 'DD') AS date,
+    			STT.account_cd, ACC.title, STT.customer_cd, 
     			STT.classify, STT.debtor, STT.creditor, STT.abs
     	FROM statements AS STT, account AS ACC
     	WHERE 1=1
     	AND STT.company_cd = #{company_cd}
     	AND STT.account_cd = ACC.acc_cd
+    	ORDER BY date ASC;
 
     </select>
     
@@ -19,10 +21,10 @@
         INSERT INTO statements
         VALUES(
         #{company_cd}, nextval('seq_company_${company_cd}'), #{account_cd}, 
-        #{customer_cd}, to_date(#{date},'YYYY-MM-DD'), #{classify}, 
+        #{customer_cd}, #{date}::date, #{classify}, 
         #{debtor}, #{creditor}, #{abs}, 
-        #{ent_id}, NOW(), #{ent_prog},
-        #{mod_id}, NOW(), #{mod_prog})
+        #{ent_id}, NOW(), "Web-kaikei", 
+        #{mod_id}, NOW(), "Web-kaikei")
         
     </insert>
 

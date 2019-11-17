@@ -17,14 +17,16 @@
 	        </div>
 	        <div style="margin:5px">
 	            <table class="table-striped-blue">
-	            	<tbody>
-		                <tr class="highlight">
-		                    <td>Code</td>
+	            	<thead>
+		                <tr>
+		                    <td style="width:100px">Code</td>
 		                    <td>Company</td>
 		                    <td>CEO</td>
 		                    <td>Worker</td>
 		                    <td>Fax</td>
 		                </tr>
+		            <thead>
+		            <tbody>
 		                <c:forEach var="customerVO" items="${customerList}">
 		                <tr>
 		                    <td><a href="/account/customerDetail.do?cus_cd=${customerVO.cus_cd}">${customerVO.cus_cd}</a></td>
@@ -38,9 +40,11 @@
 	            </table>
 	        </div>
 	        <div align="center">
-	        	<c:forEach var="i" begin="0" end="${pageNum - 1}">
-	        		<a href="/account/customer.do?pageNum=${i}&searchParam=${searchParam}">${i + 1}</a> 
-	        	</c:forEach>
+ 	        	<c:if test="${pageCnt ne 0}">
+		        	<c:forEach var="i" begin="0" end="${pageCnt - 1}">
+		        		<a class="pagenum" href="/account/customer.do?crtPage=${i}&searchParam=${searchParam}">${i + 1}</a> 
+		        	</c:forEach>
+	        	</c:if>
 	        </div>
 	        <div align="right">
 	            <input type="button" style="margin:10px" class="button" value="ADD" onclick="location.href='/account/customerAdd.do'">

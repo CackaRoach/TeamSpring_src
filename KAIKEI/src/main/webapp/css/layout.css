@@ -36,17 +36,45 @@ table {
 	width: 100px;
 }
 
+.statement {
+	border-collapse: collapse;
+	border: 1px solid gray;
+	width: 100%;
+}
+
+.statement>thead>tr>td {
+	border: 1px solid gray;
+}
+
+.statement>tbody>tr>td {
+	border: 1px solid gray;
+}
+
+.statement>tbody>.exist:nth-of-type(odd) {
+	background-color: #aad5ff;
+}
+
+.statement>tbody>.new:nth-of-type(odd) {
+	background-color: #ffb0b0;
+}
+
+.statement>tbody>tr:hover {
+	background-color: #e6e6e6;
+}
+
 .statement>tbody>tr>td>input[type='text'] {
-	border: 1px solid black;
-	padding: 5px;
-	width: 80px;
+	background-color:transparent;
+	border: 0px;
+	width: 50px;
 }
 
-.statement>tbody>tr>td>input[type='text']:focus {
-	background-color:#eeeeee;
+.statement>tbody>tr>td>input[name='abs'] {
+	background-color:transparent;
+	border: 0px;
+	width: 200px;
 }
 
-.statement .title td {
+.statement>thead>tr>td {
 	font-weight: 900;
 	font-size: 16px;
 	text-align:center;
@@ -147,7 +175,7 @@ table {
 	background-color: #0000ff;
 }
 
-.dropdown-contents a:hover {
+.dropdown-contents>a:hover {
 	background-color: #b6b6b6;
 }
 
@@ -178,8 +206,9 @@ table {
 	text-align:center
 }
 
-.table-striped-blue>tbody>.highlight>td {
-	background-color: #1591ff; color: white
+.table-striped-blue>thead>tr>td {
+	background-color: #1591ff;
+	color: white;
 }
 
 .table-striped-blue>tbody>tr>td {
@@ -199,4 +228,14 @@ table {
 	border: 2px solid #1591ff;
 	padding: 20px; 
 	margin: 5px
+}
+
+.pagenum {
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+.pagenum:hover {
+	font-size: 1.2em;
+	text-decoration: underline;
 }
