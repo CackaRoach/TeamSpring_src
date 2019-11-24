@@ -51,7 +51,10 @@ public class AccountController {
 
 	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void addStatement(@RequestBody List<Map<String, String>> jsonState, HttpSession httpSession, Model model) {
+	public void addStatement(	List<Map<String, String>> jsonState, 
+								HttpSession httpSession, 
+								Model model) {
+		
 		logger.info("Call : /account/addStatement.do - POST");
 		
 		String userId = httpSession.getAttribute("id").toString();

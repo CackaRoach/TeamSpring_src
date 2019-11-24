@@ -10,29 +10,110 @@ table {
 }
 
 #header {
-    width: 100%;
+    background-color: #2B5CAB;
+    height: 50px;
 }
+
+.header-title {
+	width: 220px;
+	height: 50px;
+	float: left; 
+	margin: 0% 60% 0% 9.5%; 
+	background-color: #3F8AFF;
+}
+
+.header-font {
+	color: white;
+	line-height:50px
+}
+
 
 #nav {
-    width: 100%;
+    height: 80px;
+	background-color: white;
+	border-bottom: 1px solid gray;
 }
 
+.nav-menu>li {
+	float: left;
+	
+}
+
+.nav-menu>li>a {
+	padding:0px 25px;
+	text-decoration:none;
+	font-weight: 600;
+	font-size: 1.2em;
+	line-height: 40px;
+	color: gray;
+	list-style: none;
+}
+
+.nav-menu>li>a:hover {
+	color: black;
+}
+
+.nav-menu>li:hover .nav-menu-dropdown {
+	display: block;
+}
+
+.nav-menu-dropdown {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	background-color: rgba(222, 222, 222, 0.5);
+	width: 200px;
+	display: none;
+	position: absolute;
+	z-index: 2;
+}
+
+.nav-menu-dropdown>li {
+	padding: 10px
+}
+
+.nav-menu-dropdown>li>a {
+	text-decoration:none;
+}
+
+.nav-menu-dropdown>li:hover {
+	background-color: #57c9ff;
+}
+
+
 #section {
-    width: 100%;
+	float: left;
+	width: 70%;
+	padding: 0% 5% 0% 4%;
+}
+
+#aside {
+	float: left;
+	width: 21%;
+}
+
+.aside-bar {
+	margin: 0px;
+	padding: 0px;
+}
+
+.aside-bar>li {
+	
+	padding: 15px;
+	list-style: none;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 #footer {
     width: 100%;
-    height: 100px;
-    position: relatiev;
     clear: both;
 }
 
-#div-rowspace {
-	height: 50px;
+.login {
+	display: inline;
 }
 
-#div-colspace {
+.login-box {
 	width: 100px;
 }
 
@@ -80,40 +161,14 @@ table {
 	text-align:center;
 }
 
-.div-header {
-	
-}
-
-.div-nav {
-	
-}
-
 .div-nav-item {
 	margin: 5px 0px;
 	padding: 0px 0px 0px 10px;
 	font-size: 13px;
 }
 
-.div-nav-component {
-	background-color: #1591ff;
-}
-
-.div-section {
-}
-
-.div-section-contents {
-	padding: 5px;
-	border: 2px solid #1591ff;
-	margin: 5px;
-}
-
-.div-footer {
-
-}
-
 .button {
-	width: 180px;
-	background-color: #1591ff;
+	background-color: #106EE0;
 	border: none;
 	color: white;
 	padding: 11px 30px;
@@ -121,11 +176,31 @@ table {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
-	border-radius: 5px;
 }
 
-.button-login {
-	width: 300px;
+.loginbutton {
+	height: 70px;
+	background-color: #106EE0;
+	border: none;
+	color: white;
+	padding: 11px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.logininputbox {
+	width:90%;
+	padding: 5px; 
+	margin:5px 0px;  
+	background-color:#F2F2F2; 
+	border:1px solid #CCCCCC;
+}
+
+.logincheckbox {
+	background-color: white;
+	border:1px solid black;
 }
 
 
@@ -137,6 +212,7 @@ table {
 	box-sizing: border-box;
 	border: 2px solid #1591ff;
 }
+
 
 .input-box-login {
 	width: 300px;

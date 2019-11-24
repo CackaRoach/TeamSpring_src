@@ -146,7 +146,7 @@ function statementSubmit() {
 		type : "json",
 		data : jsonState,
 		success : function() {					
-			console.log("success");
+			console.log("Success");
 		}, error : function() {
 			console.log("Fail");
 		}

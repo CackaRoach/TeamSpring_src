@@ -34,11 +34,11 @@ public class CommonController {
 	} 
 	 
 	// Login Execution
-	@RequestMapping(value = "/loginExe.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
 	public String loginExe(UserVO userVO, HttpSession httpSession, Model model) {
 		// TODO : Security - Log or time
 		
-		logger.info("Call : /loginExe.do - POST");
+		logger.info("Call : /loginExc.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
 
@@ -78,9 +78,9 @@ public class CommonController {
 		return "/signup";	
 	}
 	
-	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/signupExc.do", method = RequestMethod.POST)
 	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
-		logger.info("Call : /signExe.do - POST");
+		logger.info("Call : /signExc.do - POST");
 		
 		// overlapping check(id)
 		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {

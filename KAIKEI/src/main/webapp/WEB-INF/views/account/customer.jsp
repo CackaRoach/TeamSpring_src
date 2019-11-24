@@ -4,8 +4,9 @@
 
 	    <div>
 	        <div style="padding:20px">
-	            <span style="font-size: 2em;">Customer</span>
+	            <span style="font-size: 1.7em;">Customer</span>
 	        </div>
+	        <hr>
 	        <div class="search-box">
 	            <form style="margin:0px" action="/account/customer.do" method="get">
 	                <span style="font-size:1.5em;">Search</span>

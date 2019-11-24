@@ -47,7 +47,6 @@
 		                    </tr>
 		                </tbody>
 		            </table>
-		            
 		        </div>
 		        <div style="margin:0% 0% 0% 80%">
 		            <input type="submit" style="margin:5px" class="button" value="MODIFY" onclick="location.href='/account/customerModify.do?cus_cd=${customerVO.cus_cd}'"><br>

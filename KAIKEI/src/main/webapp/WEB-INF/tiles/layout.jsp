@@ -11,18 +11,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <body style="max-width: 100%">
     <div id="header">
-	    <div class="div-header"><tiles:insertAttribute name="header" /></div>
+	    <tiles:insertAttribute name="header" />
     </div>
     <div id="nav">
-	    <div class="div-nav"><tiles:insertAttribute name="nav" /></div>
+	    <tiles:insertAttribute name="nav" />
+    </div>
+    <div id="aside">
+	    <tiles:insertAttribute name="aside" />
     </div>
     <div id="section">
-    	<div class="div-section">
-    		<div class="div-section-contents"><tiles:insertAttribute name="section" /></div>
-   		</div>
+    	<tiles:insertAttribute name="section" />
     </div>    
     <div id="footer">
-	    <div class="div-footer"><tiles:insertAttribute name="footer" /></div>
+	    <tiles:insertAttribute name="footer" />
    	</div>    
 </body>
 </html>
