@@ -3,14 +3,25 @@
   "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
  
 <tiles-definitions>
-    <definition name=".nav" template="/WEB-INF/tiles/layout.jsp">
+    <definition name=".full" template="/WEB-INF/tiles/layout.jsp">
         <put-attribute name="nav" value="/WEB-INF/tiles/nav.jsp" />
         <put-attribute name="aside" value="/WEB-INF/tiles/aside.jsp" />     
         <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
     </definition>
- 
-	<definition name="/*/*" extends=".nav">
+
+    <definition name=".home" template="/WEB-INF/tiles/layout-home.jsp">
+        <put-attribute name="nav" value="/WEB-INF/tiles/nav.jsp" />   
+        <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+    </definition>
+    
+    <definition name="/*/*" extends=".full">
         <put-attribute name="section" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
+    
+    <definition name="/home" extends=".home">
+        <put-attribute name="section" value="/WEB-INF/views/home.jsp" />
+    </definition>
+    
 </tiles-definitions>

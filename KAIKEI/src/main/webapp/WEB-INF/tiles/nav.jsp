@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-			<div align="center" style="float:left; margin:0% 0% 0% 10%; width:200px; padding:15px">
+			<div align="center" style="float:left; margin:0% 30% 0% 8%; width:200px; padding:15px">
 				<img src="/images/logo.png" style="">
 			</div>
 			<c:if test="${posit_cd eq 'POS002' || posit_cd eq 'POS003'}">

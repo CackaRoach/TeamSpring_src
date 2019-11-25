@@ -67,7 +67,7 @@ public class CommonController {
 		if(httpSession.getAttribute("id") == null)
 			return "error";
 		
-		return "/common/home";	
+		return "/home";	
 	}
 	
 	// SignUp Page Forwarding

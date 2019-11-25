@@ -69,11 +69,13 @@ table {
 }
 
 .nav-menu-dropdown>li {
-	padding: 10px
+	
 }
 
 .nav-menu-dropdown>li>a {
-	text-decoration:none;
+	text-decoration: none;
+	padding: 10px;
+	display: block;
 }
 
 .nav-menu-dropdown>li:hover {
@@ -93,15 +95,35 @@ table {
 }
 
 .aside-bar {
+	display: none;
 	margin: 0px;
 	padding: 0px;
 }
 
 .aside-bar>li {
-	
-	padding: 15px;
 	list-style: none;
 	border-bottom: 1px solid #e0e0e0;
+}
+
+.aside-bar>li>a {
+	display: block;
+	padding: 15px;
+	text-decoration:none;
+}
+
+.aside-bar>li>a:hover {
+	background-color: #cacaca;
+}
+
+.aside-selected {
+	background-color: gray;
+	color: white;
+}
+
+.aside-selected:after {
+	content: "〉";
+	float: right;
+	color: white;
 }
 
 #footer {

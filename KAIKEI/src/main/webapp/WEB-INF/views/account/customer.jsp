@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+		
 	    <div>
 	        <div style="padding:20px">
 	            <span style="font-size: 1.7em;">Customer</span>
