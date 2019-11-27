@@ -34,15 +34,26 @@ public class AccountServiceImpl implements AccountService {
 		return statementDAO.getStatementList(company_cd);
 	}
 	
-	public void addStatement(StatementVO statementVO, String userId, String company_cd) {
+	public void addStatement(List<Map<String, String>> statementList, String userId, String company_cd) {
+		StatementVO statementVO = new StatementVO();
 		
-		statementVO.setCompany_cd(company_cd);
-		statementVO.setEnt_id(userId);
-		statementVO.setEnt_prog("Web_kaikei");
-		statementVO.setMod_id(userId);
-		statementVO.setMod_prog("Web_kaikei");
-		
-		statementDAO.addStatement(statementVO);
+		for(Map<String, String> statement : statementList) {
+			statementVO.setDate(statement.get("DATE"));
+			statementVO.setAccount_cd(statement.get("ACCOUNT_CD"));
+			statementVO.setCustomer_cd(statement.get("CUSTOMER_CD"));
+			statementVO.setClassify(statement.get("CLASSIFY"));
+			statementVO.setDebtor(Integer.parseInt(statement.get("DEBTOR")));
+			statementVO.setCreditor(Integer.parseInt(statement.get("CREDITOR")));
+			statementVO.setAbs(statement.get("ABS"));
+			
+			System.out.println("DATE : " + statement.get("DATE"));
+			
+			statementVO.setCompany_cd(company_cd);
+			statementVO.setEnt_id(userId);
+			statementVO.setMod_id(userId);
+			
+			statementDAO.addStatement(statementVO);
+		}
 	}
 
 

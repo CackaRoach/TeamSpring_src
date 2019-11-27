@@ -12,22 +12,25 @@
         
     </select>
     
-    <select id="getCompany" parameterType="String" resultType="CompanyVO" >
+    <select id="getCompany" parameterType="CompanyVO" resultType="CompanyVO" >
     
-        SELECT title, domain
+        SELECT *
         FROM company
         WHERE 1=1
         AND company_cd = #{company_cd}
         
     </select>
 
-	<insert id="signUpCompany" parameterType="CompanyRegistVO" >
+
+	<insert id="insertCompany" parameterType="CompanyRegistVO" >
+    
+    	CREATE SEQUENCE seq_company_${company_cd};
     
         INSERT INTO company(company_cd, auth_cd, title, reg_cd, fax, phone, 
         					domain, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog)
         VALUES(
         #{company_cd}, #{auth_cd}, #{company_title}, #{company_regist_cd}, #{company_fax}, #{company_phone}, 
-        #{company_domain}, #{ent_id}, NOW(), #{ent_prog}, #{mod_id}, NOW(), #{mod_prog})
+        #{company_domain}, #{ent_id}, NOW(), 'Web-kaikei', #{mod_id}, NOW(), 'Web-kaikei')
         
 	</insert>
 	
@@ -59,5 +62,14 @@
 		AND RN BETWEEN (CAST(#{mPAGE} AS INTEGER) - 1) * 10 + 1 AND CAST(#{mPAGE} AS INTEGER) * 10
 		
 	</select>
+	
+	<update id="updateCompany" parameterType="CompanyVO">
+		UPDATE company
+  		SET company_cd = #{company_cd}, auth_cd = #{auth_cd}, title = #{title}, reg_cd = #{reg_cd},
+  			fax = #{fax}, phone = #{phone}, domain = #{domain}, bank_title = #{bank_title}, bank_acc = #{bank_acc}, 
+  			ent_date = #{ent_date}, ent_prog = #{ent_prog}, mod_id = #{mod_id}, mod_date = #{mod_date}, mod_prog = #{mod_prog}
+  		WHERE company_cd = #{company_cd}
+	</update>
+	
     
 </mapper>

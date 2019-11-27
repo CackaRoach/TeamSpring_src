@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>	
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -12,7 +11,7 @@
 		})
 		
 		function getCompanyList() {
-			var url = "/kaikei/manage/company.do?";
+			var url = "/manage/company.do?";
 			var state_op = $("#stateCompany_selct option:selected").val();
 		  	var input_tx = $("#findCompany-input").val();
 		  	url = url + "mINPUT=" + input_tx + "&STAT_op=" + state_op + "&mPAGE=" + "1";
@@ -57,7 +56,7 @@
 					<td>${status.count}</td>
 					<td>${item.company_cd}</td>
 					<td>
-						<a href="/kaikei/manage/companyDetail.do?id=${item.company_cd}">
+						<a href="/manage/companyDetail.do?id=${item.company_cd}">
 						${item.title}
 						</a>
 					</td>

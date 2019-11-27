@@ -34,11 +34,11 @@ public class CommonController {
 	} 
 	 
 	// Login Execution
-	@RequestMapping(value = "/loginExe.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginExc.do", method = RequestMethod.POST)
 	public String loginExe(UserVO userVO, HttpSession httpSession, Model model) {
 		// TODO : Security - Log or time
 		
-		logger.info("Call : /loginExe.do - POST");
+		logger.info("Call : /loginExc.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
 
@@ -67,7 +67,7 @@ public class CommonController {
 		if(httpSession.getAttribute("id") == null)
 			return "error";
 		
-		return "/common/home";	
+		return "/home";	
 	}
 	
 	// SignUp Page Forwarding
@@ -78,20 +78,16 @@ public class CommonController {
 		return "/signup";	
 	}
 	
-	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/signupExc.do", method = RequestMethod.POST)
 	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
-		logger.info("Call : /signExe.do - POST");
+		logger.info("Call : /signExc.do - POST");
 		
 		// overlapping check(id)
 		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
+			logger.warn("Code Err");
 			return "/error";
 		}
 		
-		if(companyState.equals("new")) {
-			commonService.signUpCompany(companyRegistVO);
-		}
-		
-
 		if(commonService.checkId(userVO.getId()) != 0) {
 			model.addAttribute("errorMsg", "REGIST ID ERROR!");
 
@@ -107,22 +103,12 @@ public class CommonController {
 				return "/error";
 			}
 			
-			if(!commonService.signUpCompany(companyRegistVO)) {
-				model.addAttribute("errorMsg", "REGIST COMPANY ERROR!");
-				return "/error";
-			}
-			
-			if(!commonService.signUpUser(userVO, "POS002")) {
-				model.addAttribute("errorMsg", "REGIST USER ERROR!");
-				return "/error";
-			}
+			commonService.createCompany(companyRegistVO);
+			commonService.createUser(userVO, "POS002");
 			
 		// Select : Exist Company
 		} else {
-			if(!commonService.signUpUser(userVO, "POS003")) {
-				model.addAttribute("errorMsg", "REGIST USER ERROR!");
-				return "/error";
-			}
+			commonService.createUser(userVO, "POS003");
 		}
 		
 		return "/login";

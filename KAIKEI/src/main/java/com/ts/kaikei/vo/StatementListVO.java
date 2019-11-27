@@ -7,12 +7,14 @@ public class StatementListVO {
 	private String account_cd;
 	private String title;
 	private String customer_cd;
+	private String cus_title;
+	private String year;
+	private String month;
 	private String date;
 	private String classify;
 	private int debtor;
 	private int creditor;
 	private String abs;
-	
 	
 	public String getAccount_cd() {
 		return account_cd;
@@ -31,6 +33,24 @@ public class StatementListVO {
 	}
 	public void setCustomer_cd(String customer_cd) {
 		this.customer_cd = customer_cd;
+	}
+	public String getCus_title() {
+		return cus_title;
+	}
+	public void setCus_title(String cus_title) {
+		this.cus_title = cus_title;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
 	}
 	public String getDate() {
 		return date;
@@ -61,7 +81,5 @@ public class StatementListVO {
 	}
 	public void setAbs(String abs) {
 		this.abs = abs;
-	}	
-	
-	
+	}
 }

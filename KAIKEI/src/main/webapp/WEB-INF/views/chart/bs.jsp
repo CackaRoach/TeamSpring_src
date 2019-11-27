@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
+		<div style="padding:20px">
+	            <span style="font-size: 1.7em;">B/S</span>
+	    </div>
+	    <hr>
     	<div align="center">
     	<span style="font-size:2em">
     	<a href="">&lt;</a> 2018-2019 <a href="">&gt;</a>

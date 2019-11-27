@@ -3,6 +3,13 @@
 
 <mapper namespace="com.ts.kaikei.dao.UserDAO">
 	 
+	<select id="getUserById" parameterType="UserVO" resultType="UserVO">
+		SELECT *
+		FROM users
+		WHERE id = #{id}
+	</select>
+	 
+	 
 	<select id="getUser" parameterType="UserVO" resultType="UserVO" >
 	
 		SELECT *
@@ -22,16 +29,23 @@
         
     </select>
     
-    <insert id="signUpUser" parameterType="UserVO" >
+    <insert id="insertUser" parameterType="UserVO" >
     
         INSERT INTO users(id, password, company_cd, posit_cd, auth_cd, state_cd,
         				  name, email, phone, ent_id, ent_date, ent_prog,
         				  mod_id, mod_date, mod_prog)
         VALUES(
         #{id}, #{password}, #{company_cd}, #{posit_cd}, #{auth_cd}, #{state_cd}, 
-        #{name}, #{email}, #{phone}, #{ent_id}, NOW(), #{ent_prog},
-        #{mod_id}, NOW(), #{mod_prog})
+        #{name}, #{email}, #{phone}, #{ent_id}, NOW(), 'Web-kaikei',
+        #{mod_id}, NOW(), 'Web-kaikei')
         
     </insert>
+    
+    <update id="updateUser" parameterType="UserVO">
+  		UPDATE users 
+  		SET password = #{password}, name = #{name}, email = #{email}, phone = #{phone} 
+  		WHERE id = #{id}
+    </update>
+    
   
 </mapper>

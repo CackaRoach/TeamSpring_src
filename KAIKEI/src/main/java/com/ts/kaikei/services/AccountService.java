@@ -1,6 +1,7 @@
 package com.ts.kaikei.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
@@ -10,12 +11,13 @@ import com.ts.kaikei.vo.StatementVO;
 public interface AccountService {
 
 	/*
-	 * 
-	 * 
+	 * =====================================
+	 *         STATEMEMT CONTROLLER
+	 * =====================================
 	 */
 
 	List<StatementListVO> getStatements(String company_cd);
-	void addStatement(StatementVO statementVO, String userId, String company_cd);
+	void addStatement(List<Map<String, String>> statementList, String userId, String company_cd);
 	
 	/*
 	 * =====================================

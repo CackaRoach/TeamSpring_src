@@ -12,11 +12,14 @@ import com.ts.kaikei.vo.CompanyVO;
 @Mapper
 public interface CompanyDAO {
 
-	public void signUpCompany(CompanyRegistVO companyRegisterVO);
+	public void insertCompany(CompanyRegistVO companyRegisterVO);
 	public CompanyVO getCompany(String company_cd);
 	public int checkCode(String company_cd);
 	
 	public List<CompanyVO> selectCompany(Map<String, Object> Params);
+
+	public void updateCompany(CompanyVO companyVO);
+	public CompanyVO getCompany(CompanyVO companyVO);
 
 }
  

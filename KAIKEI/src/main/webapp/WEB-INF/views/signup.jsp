@@ -56,7 +56,7 @@
 	<div align="center" style="padding:10px 0px; background-color:#1591ff;">
 		<span style="font-size:2em">Sign Up</span>
 	</div>
-	<form id="register" name="register" action="/signupExe.do" method="post">
+	<form id="register" name="register" action="/signupExc.do" method="post">
 	<div>
 		<div align="center" style="padding: 10px 30px;">
 			<span style="font-size:1.5em">Account</span>

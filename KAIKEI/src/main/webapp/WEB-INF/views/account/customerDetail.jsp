@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
+    <!-- TODO: Save Message Print -->
 		<div>
 		    <div style="padding:20px">
 		        <span style="font-size: 2em;">Customer</span>
@@ -47,7 +48,6 @@
 		                    </tr>
 		                </tbody>
 		            </table>
-		            
 		        </div>
 		        <div style="margin:0% 0% 0% 80%">
 		            <input type="submit" style="margin:5px" class="button" value="MODIFY" onclick="location.href='/account/customerModify.do?cus_cd=${customerVO.cus_cd}'"><br>
