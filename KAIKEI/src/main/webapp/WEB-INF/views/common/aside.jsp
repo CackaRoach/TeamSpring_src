@@ -21,8 +21,8 @@
 				</ul>
 				<ul id="aside-setting" class="aside-bar">
 					<li id="aside-setting-personal"><a href="/setting/personal.do">Personal</a></li>
-					<li id="aside-chart-bs"><a href="/chart/bs.do">Company</a></li>
-					<li id="aside-chart-c"><a href="/chart/bs.do">Code</a></li>
+					<li id="aside-setting-company"><a href="/setting/company.do">Company</a></li>
+					<li id="aside-setting-code"><a href="/setting/code.do">Code</a></li>
 				</ul>
 			</div>
 		</div>

@@ -66,6 +66,7 @@ function addRow() {
 	rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
 	rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
 	rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
+	rowItem += "<td></td>";
 	rowItem += "<td><a href='javascript:removerow(" + fixedrows + ");'>X</a></td>";
 	rowItem += "</tr>";
 		
@@ -77,18 +78,20 @@ function addRow() {
 
 // Reset Button
 function deleteBtn() {
-	if(confirm("are you sure?")) {
-		$("#statement tbody tr").removeClass("statementchanged");
-		$("#stateReset").css("display", "none");
+	if( !confirm("Reset Statement?")) {
 		return true;
 	}
-	return false;
+	
+	$("#statement tbody tr").removeClass("statementchanged");
+	$("#stateReset").css("display", "none");
+	
+	return true;
 }
 
 // Remove Row
 // TODO: Existing, New state delete
 function removerow(row) {
-	if(confirm("delete state?")) {
+	if(confirm("Delete state?")) {
 		$("#state" + row).remove();
 
 	}
@@ -97,7 +100,7 @@ function removerow(row) {
 // Statement Save
 // JSON - DATA / ACCOUNT_CD / CUSTOMER_CD / CLASSIFY / DEBTOR / CREDITOR / ABS / ISEXIST
 function statementSubmit() {
-
+	
 	var changerow = $("#changerows").val().split(",");
 	var changerowlength = changerow.length - 1;
 	

@@ -3,6 +3,13 @@
 
 <mapper namespace="com.ts.kaikei.dao.UserDAO">
 	 
+	<select id="getUserById" parameterType="UserVO" resultType="UserVO">
+		SELECT *
+		FROM users
+		WHERE id = #{id}
+	</select>
+	 
+	 
 	<select id="getUser" parameterType="UserVO" resultType="UserVO" >
 	
 		SELECT *
@@ -33,5 +40,12 @@
         #{mod_id}, NOW(), 'Web-kaikei')
         
     </insert>
+    
+    <update id="updateUser" parameterType="UserVO">
+  		UPDATE users 
+  		SET password = #{password}, name = #{name}, email = #{email}, phone = #{phone} 
+  		WHERE id = #{id}
+    </update>
+    
   
 </mapper>

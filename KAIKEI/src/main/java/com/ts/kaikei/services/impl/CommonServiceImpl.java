@@ -28,9 +28,6 @@ public class CommonServiceImpl implements CommonService {
 		return userDAO.getUser(userVO);
 	}
 	
-	public CompanyVO getCompany(String company_cd) {
-		return companyDAO.getCompany(company_cd);
-	}
 	
 	@Override
 	public boolean createUser(UserVO userVO, String posit_cd) {

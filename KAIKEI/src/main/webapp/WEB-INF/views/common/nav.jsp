@@ -41,16 +41,26 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="/setting/personal.do">Setting</a></li>
+			<li>
+				<a href="/setting/personal.do">Setting</a>
+				<ul class="nav-menu-dropdown">
+					<li>
+						<a href="/setting/personal.do">Personal</a>
+					</li>
+					<li>
+						<a href="/setting/company.do">Company</a>
+					</li>
+				</ul>
+			</li>
 		</ul>
 		</c:if>
 		<c:if test="${posit_cd eq 'POS001' }">
 		<div align="left" class="dropdown">
 			<button class="navbtn">Manage</button>
 			<div class="dropdown-contents">
-				<a href="/manage/company.do">Company(admin)</a>
-				<a href="/manage/users.do">Users(admin)</a>
-				<a href="/manage/code.do">Code(temp)</a>
+				<a href="/manage/company.do">Company</a>
+				<a href="/manage/users.do">Users</a>
+				<a href="/manage/code.do">Code</a>
 			</div>
 		</div>
 		</c:if>

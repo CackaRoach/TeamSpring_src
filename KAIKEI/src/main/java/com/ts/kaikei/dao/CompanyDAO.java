@@ -18,5 +18,8 @@ public interface CompanyDAO {
 	
 	public List<CompanyVO> selectCompany(Map<String, Object> Params);
 
+	public void updateCompany(CompanyVO companyVO);
+	public CompanyVO getCompany(CompanyVO companyVO);
+
 }
  

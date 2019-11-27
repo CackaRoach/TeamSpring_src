@@ -6,12 +6,15 @@
     <select id="getStatementList" parameterType="String" resultType="StatementListVO">
     
     	SELECT TO_CHAR(STT.date, 'YY') AS year, TO_CHAR(STT.date, 'MM') AS month, TO_CHAR(STT.date, 'DD') AS date,
-    			STT.account_cd, ACC.title, STT.customer_cd, 
+    			STT.account_cd, ACC.title, STT.customer_cd, CUS.title as cus_title,
     			STT.classify, STT.debtor, STT.creditor, STT.abs
-    	FROM statements AS STT, account AS ACC
+    	FROM statements AS STT, account AS ACC, customer as CUS
     	WHERE 1=1
     	AND STT.company_cd = #{company_cd}
+    	AND STT.company_cd = CUS.company_cd
+    	AND STT.customer_cd = CUS.cus_cd
     	AND STT.account_cd = ACC.acc_cd
+ 
     	ORDER BY date ASC;
 
     </select>

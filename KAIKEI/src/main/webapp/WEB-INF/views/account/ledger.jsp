@@ -37,6 +37,7 @@
 						<td style="width:100px">Debtor</td>
 						<td style="width:100px">Creditor</td>
 						<td>ABS</td>
+						<td style="width:150px">Entry date</td>
 						<td style="width:10px"></td>
 					</tr>
 				</thead>
@@ -48,12 +49,13 @@
 		    				<td><input type="text" name="month" value="${item.month}" placeholder="M"/></td>
 			    			<td><input type="text" name="date" value="${item.date}" placeholder="D" /></td>
 			    			<td><input type="text" name="account_cd" value="${item.account_cd}" maxlength="4" placeholder="Account"/><label>${item.title}</label></td>
-			    			<td><input type="text" name="customer_cd" value="${item.customer_cd}" maxlength="5" placeholder="Customer"/></td>
+			    			<td><input type="text" name="customer_cd" value="${item.customer_cd}" maxlength="5" placeholder="Customer"/><label>${item.cus_title}</label></td>
 			    			<td><input type="text" name="classify" value="${item.classify}" placeholder="Classify"/></td>
 			    			<td><input type="text" name="debtor" value="${item.debtor}" placeholder="Debtor"/></td>
 			    			<td><input type="text" name="creditor" value="${item.creditor}" placeholder="Creditor"/></td>
 			    			<td><input type="text" name="abs" value="${item.abs}" placeholder="ABS"/></td>
-			    			<td><a href="">X</a></td>
+			    			<td></td>
+			    			<td><a href="">X</a><input type="hidden" name="seq" value=""></td>
 						</tr>
 					</c:forEach>
 					
