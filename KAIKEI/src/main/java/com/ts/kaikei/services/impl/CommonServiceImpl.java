@@ -12,7 +12,6 @@ import com.ts.kaikei.dao.CompanyDAO;
 import com.ts.kaikei.dao.UserDAO;
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 @Service("commonService")

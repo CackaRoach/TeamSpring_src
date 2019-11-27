@@ -12,8 +12,8 @@
 				<ul id="aside-report" class="aside-bar">
 					<li id="aside-report-pl"><a href="/report/pl.do">P/L</a></li>
 					<li id="aside-report-bs"><a href="/report/bs.do">B/S</a></li>
-					<li id="aside-report-gl"><a href="/report/gl.do">Customer</a></li>
-					<li id="aside-report-ctb"><a href="/report/ctb.do">Customer</a></li>
+					<li id="aside-report-gl"><a href="/report/gl.do">General Ledger</a></li>
+					<li id="aside-report-ctb"><a href="/report/ctb.do">Compound Trial Balance</a></li>
 				</ul>
 				<ul id="aside-chart" class="aside-bar">
 					<li id="aside-chart-pl"><a href="/chart/pl.do">P/L</a></li>

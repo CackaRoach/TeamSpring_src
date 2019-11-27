@@ -1,7 +1,6 @@
 package com.ts.kaikei.services;
 
 import com.ts.kaikei.vo.CompanyRegistVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 

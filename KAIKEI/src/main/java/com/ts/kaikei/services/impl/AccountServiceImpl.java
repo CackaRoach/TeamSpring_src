@@ -42,8 +42,8 @@ public class AccountServiceImpl implements AccountService {
 			statementVO.setAccount_cd(statement.get("ACCOUNT_CD"));
 			statementVO.setCustomer_cd(statement.get("CUSTOMER_CD"));
 			statementVO.setClassify(statement.get("CLASSIFY"));
-			statementVO.setDebtor(Integer.parseInt(statement.get("DEBTOR")));
-			statementVO.setCreditor(Integer.parseInt(statement.get("CREDITOR")));
+			statementVO.setDebtor(statement.get("DEBTOR"));
+			statementVO.setCreditor(statement.get("CREDITOR"));
 			statementVO.setAbs(statement.get("ABS"));
 			
 			System.out.println("DATE : " + statement.get("DATE"));

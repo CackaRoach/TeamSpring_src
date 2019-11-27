@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
-import com.ts.kaikei.vo.StatementVO;
 
 
 public interface AccountService {
