@@ -36,10 +36,10 @@ $(window).load(function() {
 	});
 
 	// changerow color
-	$("#statement tbody tr td input").on("change", function(event) {
+	$("#statement tbody tr").one("change", function(event) {
 		var row = $(event.target.parentElement.parentElement);
 		$("#changerows").val($("#changerows").val() + row[0].id.substring(5) + ",");
-		row[0].classList.add("statementchanged");	
+		row[0].classList.add("statementchanged");
 	});
 	
 });
@@ -86,35 +86,24 @@ function deleteBtn() {
 }
 
 // Remove Row
-function removerow(rows) {
-	if(confirm("delete line?")) {
-		$("#new" + rows).remove();
-		var sort = 0;
-		var maxrow = $("input#newrows").val();
-		
-		for(var i = 0; i <= maxrow; i++) {
-			if($("#new" + i).length == 1) {
-				$("#new" + i).children("td").eq(9).children("a").attr("href", "javascript:removerow(" + sort + ");");
-				$("#new" + i).attr("id", "new" + sort);
-				sort++;
-			}
-		}
-		
-		var row = $("input#newrows").val();
-		row--;
-		
-		$("input#newrows").val(row);
+// TODO: Existing, New state delete
+function removerow(row) {
+	if(confirm("delete state?")) {
+		$("#state" + row).remove();
+
 	}
 }
 
 // Statement Save
 // JSON - DATA / ACCOUNT_CD / CUSTOMER_CD / CLASSIFY / DEBTOR / CREDITOR / ABS / ISEXIST
 function statementSubmit() {
-	// var newrows = $("input#newrows").val();
+
 	var changerow = $("#changerows").val().split(",");
 	var changerowlength = changerow.length - 1;
 	
 	var statement = new Array();
+	
+	console.log(changerowlength);
 	
 	for(var i = 0; i < changerowlength; i++) {
 		var row = new Object();
@@ -142,13 +131,13 @@ function statementSubmit() {
 		
 		statement.push(row);
 	}
-	
-	console.log(statement);
-	
+
 	if(statement.length == 0) {
 		alert("input fail!");
 		return false;
 	}
+	
+	console.table(statement);
 	
 	var jsonState = JSON.stringify(statement);
 	
@@ -158,7 +147,7 @@ function statementSubmit() {
 		contentType: "application/json; charset=SHIFT-JIS",
 		type : "json",
 		data : jsonState,
-		success : function() {					
+		success : function() {
 			console.log("Success");
 		}, error : function() {
 			console.log("Fail");
@@ -170,5 +159,6 @@ function statementSubmit() {
 
 function debuging() {
 	var changerow = $("#changerows").val().split(",");
-	console.log(changerow);
+	var changerowlength = changerow.length - 1;
+	console.log(changerowlength);
 }

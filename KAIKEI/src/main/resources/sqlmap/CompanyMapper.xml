@@ -21,13 +21,15 @@
         
     </select>
 
-	<insert id="signUpCompany" parameterType="CompanyRegistVO" >
+	<insert id="insertCompany" parameterType="CompanyRegistVO" >
+    
+    	CREATE SEQUENCE seq_company_${company_cd};
     
         INSERT INTO company(company_cd, auth_cd, title, reg_cd, fax, phone, 
         					domain, ent_id, ent_date, ent_prog, mod_id, mod_date, mod_prog)
         VALUES(
         #{company_cd}, #{auth_cd}, #{company_title}, #{company_regist_cd}, #{company_fax}, #{company_phone}, 
-        #{company_domain}, #{ent_id}, NOW(), "Web-kaikei", #{mod_id}, NOW(), "Web-kaikei")
+        #{company_domain}, #{ent_id}, NOW(), 'Web-kaikei', #{mod_id}, NOW(), 'Web-kaikei')
         
 	</insert>
 	

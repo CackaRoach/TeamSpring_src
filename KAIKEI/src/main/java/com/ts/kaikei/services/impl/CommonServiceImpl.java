@@ -33,7 +33,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 	
 	@Override
-	public boolean signUpUser(UserVO userVO, String posit_cd) {
+	public boolean createUser(UserVO userVO, String posit_cd) {
 		
 		
 		Pattern idPattern = Pattern.compile("^[a-z0-9]{5,15}$");
@@ -50,13 +50,13 @@ public class CommonServiceImpl implements CommonService {
 		userVO.setEnt_id(userVO.getId());
 		userVO.setMod_id(userVO.getId());
 		
-		userDAO.signUpUser(userVO);
+		userDAO.insertUser(userVO);
 		
 		return true;
 	}
 	
 	@Override
-	public boolean signUpCompany(CompanyRegistVO companyRegisterVO) {
+	public boolean createCompany(CompanyRegistVO companyRegisterVO) {
 	
 		Pattern codePattern = Pattern.compile("^[0-9]{5}$");
 		Matcher codeMatcher = codePattern.matcher(companyRegisterVO.getCompany_cd());
@@ -70,8 +70,8 @@ public class CommonServiceImpl implements CommonService {
 		companyRegisterVO.setEnt_id(companyRegisterVO.getId());
 		companyRegisterVO.setMod_id(companyRegisterVO.getId());
 		
-		companyDAO.signUpCompany(companyRegisterVO);
-		
+		companyDAO.insertCompany(companyRegisterVO);
+
 		return true;
 	}
 	

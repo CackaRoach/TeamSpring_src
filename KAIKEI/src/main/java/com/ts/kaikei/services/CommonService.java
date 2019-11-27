@@ -9,8 +9,8 @@ public interface CommonService {
 	
 	public UserVO getUser(UserVO userVO);
 	public CompanyVO getCompany(String company_cd);
-	public boolean signUpUser(UserVO userVO, String posit_cd);
-	public boolean signUpCompany(CompanyRegistVO companyRegistVO);
+	public boolean createUser(UserVO userVO, String posit_cd);
+	public boolean createCompany(CompanyRegistVO companyRegistVO);
 	public boolean forgotId(String email);
 	public int checkId(String id);
 	public int checkCode(String code);

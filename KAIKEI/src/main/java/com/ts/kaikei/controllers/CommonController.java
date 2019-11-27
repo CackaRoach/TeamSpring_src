@@ -88,11 +88,6 @@ public class CommonController {
 			return "/error";
 		}
 		
-		if(companyState.equals("new")) {
-			commonService.signUpCompany(companyRegistVO);
-		}
-		
-
 		if(commonService.checkId(userVO.getId()) != 0) {
 			model.addAttribute("errorMsg", "REGIST ID ERROR!");
 
@@ -108,22 +103,12 @@ public class CommonController {
 				return "/error";
 			}
 			
-			if(!commonService.signUpCompany(companyRegistVO)) {
-				model.addAttribute("errorMsg", "REGIST COMPANY ERROR!");
-				return "/error";
-			}
-			
-			if(!commonService.signUpUser(userVO, "POS002")) {
-				model.addAttribute("errorMsg", "REGIST USER ERROR!");
-				return "/error";
-			}
+			commonService.createCompany(companyRegistVO);
+			commonService.createUser(userVO, "POS002");
 			
 		// Select : Exist Company
 		} else {
-			if(!commonService.signUpUser(userVO, "POS003")) {
-				model.addAttribute("errorMsg", "REGIST USER ERROR!");
-				return "/error";
-			}
+			commonService.createUser(userVO, "POS003");
 		}
 		
 		return "/login";

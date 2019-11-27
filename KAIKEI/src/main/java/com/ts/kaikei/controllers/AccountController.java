@@ -19,8 +19,6 @@ import com.ts.kaikei.services.AccountService;
 
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
-import com.ts.kaikei.vo.StatementVO;
-import com.ts.kaikei.vo.UserVO;
 
 @Controller
 public class AccountController {
@@ -51,7 +49,7 @@ public class AccountController {
 
 	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void addStatement(	List<Map<String, String>> jsonState, 
+	public void addStatement(@RequestBody List<Map<String, String>> jsonState, 
 								HttpSession httpSession, 
 								Model model) {
 		

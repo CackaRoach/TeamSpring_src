@@ -22,15 +22,15 @@
         
     </select>
     
-    <insert id="signUpUser" parameterType="UserVO" >
+    <insert id="insertUser" parameterType="UserVO" >
     
         INSERT INTO users(id, password, company_cd, posit_cd, auth_cd, state_cd,
         				  name, email, phone, ent_id, ent_date, ent_prog,
         				  mod_id, mod_date, mod_prog)
         VALUES(
         #{id}, #{password}, #{company_cd}, #{posit_cd}, #{auth_cd}, #{state_cd}, 
-        #{name}, #{email}, #{phone}, #{ent_id}, NOW(), "Web-kaikei",
-        #{mod_id}, NOW(), "Web-kaikei")
+        #{name}, #{email}, #{phone}, #{ent_id}, NOW(), 'Web-kaikei',
+        #{mod_id}, NOW(), 'Web-kaikei')
         
     </insert>
   
