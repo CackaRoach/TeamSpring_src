@@ -159,9 +159,3 @@ function statementSubmit() {
 	
 	location.href="/account/ledger.do";
 }
-
-function debuging() {
-	var changerow = $("#changerows").val().split(",");
-	var changerowlength = changerow.length - 1;
-	console.log(changerowlength);
-}

@@ -72,7 +72,4 @@
 				<input type="hidden" id="newrows" value="0"/>
 			</div>
 	    </form>
-    	<div>
-			<button class="button" onclick="debuging();">debug</button>
-		</div>
 		

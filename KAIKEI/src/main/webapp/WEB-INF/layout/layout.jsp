@@ -11,16 +11,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+	// nav bar highlight
  	$(window).load(function() {
    		var path = window.location.pathname.split('/');
 		
 		var p_path = path[1];
 		var c_path = path[2].slice(0, -3);
-
-		if(p_path == "account") {
+		
+		if(p_path == "account" || p_path == "manage") {
 			$("#nav" + "-" + p_path + "-" + c_path).css("color", "black");
 		} else {
-			console.log("#nav" + "-" + p_path);
 			$("#nav" + "-" + p_path).css("color", "black");
 		}
 		

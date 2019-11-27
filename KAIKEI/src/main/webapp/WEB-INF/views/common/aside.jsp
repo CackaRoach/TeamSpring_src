@@ -22,7 +22,12 @@
 				<ul id="aside-setting" class="aside-bar">
 					<li id="aside-setting-personal"><a href="/setting/personal.do">Personal</a></li>
 					<li id="aside-setting-company"><a href="/setting/company.do">Company</a></li>
-					<li id="aside-setting-code"><a href="/setting/code.do">Code</a></li>
+					<li id="aside-setting-code"><a href="/setting/code.do">Employee</a></li>
+				</ul>
+				<ul id="aside-manage" class="aside-bar">
+					<li id="aside-manage-company"><a href="/manage/company.do">Company</a></li>
+					<li id="aside-manage-users"><a href="/manage/users.do">Users</a></li>
+					<li id="aside-manage-code"><a href="/manage/code.do">Code</a></li>
 				</ul>
 			</div>
 		</div>
