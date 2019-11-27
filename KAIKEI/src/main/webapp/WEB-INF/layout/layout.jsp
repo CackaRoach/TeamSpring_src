@@ -17,7 +17,12 @@
 		var p_path = path[1];
 		var c_path = path[2].slice(0, -3);
 
-		$("#nav" + "-" + p_path + "-" + c_path).css("color", "black");
+		if(p_path == "account") {
+			$("#nav" + "-" + p_path + "-" + c_path).css("color", "black");
+		} else {
+			console.log("#nav" + "-" + p_path);
+			$("#nav" + "-" + p_path).css("color", "black");
+		}
 		
    		$("#aside-title").html(p_path.toUpperCase());
        	$("#aside" + "-" + p_path).css("display", "block");

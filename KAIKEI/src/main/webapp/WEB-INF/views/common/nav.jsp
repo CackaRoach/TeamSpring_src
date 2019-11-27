@@ -14,7 +14,7 @@
 				<a id="nav-account-customer" href="/account/customer.do">Customer</a>
 			</li>
 			<li>
-				<a href="/report/pl.do">Report</a>
+				<a id="nav-report" href="/report/pl.do">Report</a>
 				<ul class="nav-menu-dropdown">
 					<li>
 						<a href="/report/pl.do">P/L</a>
@@ -31,7 +31,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="/chart/pl.do">Chart</a>
+				<a id="nav-chart" href="/chart/pl.do">Chart</a>
 				<ul class="nav-menu-dropdown">
 					<li>
 						<a href="/chart/pl.do">P/L</a>
@@ -42,7 +42,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="/setting/personal.do">Setting</a>
+				<a id="nav-setting" href="/setting/personal.do">Setting</a>
 				<ul class="nav-menu-dropdown">
 					<li>
 						<a href="/setting/personal.do">Personal</a>
