@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
+    <!-- TODO: Save Message Print -->
 		<div>
 		    <div style="padding:20px">
 		        <span style="font-size: 2em;">Customer</span>

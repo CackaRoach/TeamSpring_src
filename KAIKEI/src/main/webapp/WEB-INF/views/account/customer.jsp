@@ -17,14 +17,15 @@
 	            </form>
 	        </div>
 	        <div style="margin:5px">
-	            <table class="table-striped-blue">
+	            <table class="customer">
 	            	<thead>
 		                <tr>
 		                    <td style="width:100px">Code</td>
-		                    <td>Company</td>
-		                    <td>CEO</td>
-		                    <td>Worker</td>
-		                    <td>Fax</td>
+		                    <td style="width:250px">Company</td>
+		                    <td style="width:100px">CEO</td>
+		                    <td style="width:100px">Worker</td>
+		                    <td style="width:200px">Fax</td>
+		                    <td>Memo</td>
 		                </tr>
 		            <thead>
 		            <tbody>
@@ -35,6 +36,7 @@
 		                    <td>${customerVO.ceo_name}</td>
 		                    <td>${customerVO.worker_name}</td>
 		                    <td>${customerVO.fax}</td>
+		                    <td></td>
 		                </tr>
 		                </c:forEach>
 		        	</tbody>

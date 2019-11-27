@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
-    	<script>
-    		$(window).load(function() {
-    			var path = window.location.pathname.split('/');
-
-				var p_path = path[1];
-				var c_path = path[2].slice(0, -3);
- 	   			
-    			$("#aside-title").html(p_path.toUpperCase());
-        		$("#aside" + "-" + p_path).css("display", "block");
-        		$("#aside" + "-" + p_path + "-" + c_path).children().addClass("aside-selected");
-        					    
-        	});
-	    </script>
 		<div style="margin:0% 0% 0% 44%;">
 			<div align="center" style="background-color: #3F8AFF; width: 100%; height: 100px">
 				<span id="aside-title" style="font-size: 1.2em; color: white; line-height: 100px"></span>
