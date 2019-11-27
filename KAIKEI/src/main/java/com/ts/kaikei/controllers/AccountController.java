@@ -1,7 +1,8 @@
 package com.ts.kaikei.controllers;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,63 +11,161 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+ 
 import com.ts.kaikei.services.AccountService;
-import java.util.*;
-import com.ts.kaikei.vo.*;
-import com.ts.kaikei.dao.*;
+
+import com.ts.kaikei.vo.CustomerVO;
+import com.ts.kaikei.vo.StatementVO;
+import com.ts.kaikei.vo.UserVO;
 
 @Controller
 public class AccountController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 	
-	@Autowired
+	@Autowired 
 	private AccountService accountService;
-	@Autowired
-	private CustomerDAO customerDAO;
-
-	/*
-	 *  @RequestMapping(value = "/account/*.do")
-	 */
 	
+	
+	/*
+	 * =====================================
+	 *         STATEMEMT CONTROLLER
+	 * =====================================
+	 */
+
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
-	public String ledger(StatementVO sVO, HttpSession httpSession, Model model) {
-		CompanyVO ctl = accountService.getCompanyOf(getCompanyCode(httpSession));
-		logger.info("Call : /account/ledger.jsp - GET by " + ctl.getTitle());
+	public String ledger(String pageNum, String searchString, String searchTarget, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/ledger.do - GET");
+		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		String company_cd = getCompanyCode(httpSession);		
-		List<StatementVO> list = accountService.getStatements(company_cd);
-		accountService.codeToName(list);
+		if(pageNum == null)
+			pageNum = "0";
 		
+		String pageSize = accountService.getPageSize(company_cd);
+		List<StatementVO> list = accountService.getStatementList(company_cd, pageNum, searchString, searchTarget);
+
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("searchString", searchString);
+		model.addAttribute("searchTarget", searchTarget);
 		model.addAttribute("statements", list);
 		
 		return "/account/ledger";
 	}
-	
 
 	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
-	public String addStatement(StatementVO sVO, HttpSession httpSession) {
-		String ccd = getCompanyCode(httpSession);
-		CompanyVO ctl = accountService.getCompanyOf(ccd);		
-		logger.info("Call : /account/addStatement.jsp - POST by " + ctl);
+	public String addStatement(StatementVO statementVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/addStatement.do - POST");
 		
-		sVO.setCompany_cd(ccd);
-		sVO.setSeq(accountService.getMaxSeq(ccd) + 1);
-		sVO.setEnt_id(getUserVO(httpSession).getId());
-		sVO.setEnt_prog("web_kaikei");
-		sVO.setMod_id(getUserVO(httpSession).getId());
-		sVO.setMod_prog("web_kaikei");
+		// check statementVO is written correctly.
 		
-		accountService.addStatement(sVO);
+		String userId = httpSession.getAttribute("id").toString();
+		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		return "/account/ledger";
+		accountService.addStatement(statementVO, userId, company_cd);
+		
+		return "redirect:/account/ledger.do";
 	}
 	
-	private String getCompanyCode(HttpSession httpSession) {
-		return ((UserVO)httpSession.getAttribute("userVO")).getCompany_cd();
+	public String editStatement(StatementVO statementVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/addStatement.do - POST");
+
+		String userId = httpSession.getAttribute("id").toString();
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		
+		return "redirect:/account/ledger.do";
 	}
 	
-	private UserVO getUserVO(HttpSession httpSession) {
-		return ((UserVO)httpSession.getAttribute("userVO"));
+	/*
+	 * =====================================
+	 *          CUSTOMER CONTROLLER
+	 * =====================================
+	 */
+	
+	// TODO: Add Contact
+	@RequestMapping(value = "/account/customer.do", method = RequestMethod.GET)
+	public String customer(String searchParam, String pageNum, HttpSession httpSession, Model model) {
+		// TODO: Customer Page Paging;
+		
+		logger.info("Call : /account/customer.do - GET");
+		 
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		
+		model.addAttribute("pageNum", accountService.getCustomerCount(company_cd, searchParam));
+		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, pageNum));
+		model.addAttribute("searchParam", searchParam);
+		
+		return "/account/customer";
+	}
+	
+	@RequestMapping(value = "/account/customerAdd.do", method = RequestMethod.GET)
+	public String customerAdd(CustomerVO customerVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerAdd.do - GET");
+		
+		return "/account/customerAdd";
+	}
+	
+	@RequestMapping(value = "/account/customerCodeCheck.do", method = RequestMethod.GET)
+	@ResponseBody
+	public int customerCodeCheck(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerCodeCheck.do - GET" + accountService.customerCodeCheck(cus_cd, httpSession.getAttribute("company_cd").toString()));
+		
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		
+		return accountService.customerCodeCheck(cus_cd, company_cd);
+	}
+	
+	@RequestMapping(value = "/account/customerAddExc.do", method = RequestMethod.POST)
+	public String customerAddExc(CustomerVO customerVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerAddExc.do - GET");
+		 
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		String id = httpSession.getAttribute("id").toString();
+		
+		if(!accountService.addCustomer(company_cd, customerVO, id)) {
+			model.addAttribute("errorMsg", "REGIST CUSTOMER ERROR");
+			return "/error";
+		}
+		
+		return "redirect:/account/customer.do";
+	}
+	
+	@RequestMapping(value = "/account/customerDetail.do", method = RequestMethod.GET)
+	public String customerDetail(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerDetail.do - GET");
+		
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		
+		model.addAttribute("customerVO", accountService.getCustomerOf(company_cd, cus_cd));
+		
+		return "/account/customerDetail";
+	}
+	
+	@RequestMapping(value = "/account/customerModify.do", method = RequestMethod.POST)
+	public String customerModify(CustomerVO customerVO, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerModify.do - GET");
+		
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		String id = httpSession.getAttribute("id").toString();
+		
+		if(!accountService.updateCustomer(company_cd, customerVO, id)) {
+			model.addAttribute("errorMsg", "UPDATE CUSTOMER ERROR");
+			return "/error";
+		}
+		
+		
+		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
+	}
+	
+	@RequestMapping(value = "/account/customerDelete.do", method = RequestMethod.GET)
+	public String customerDelete(String cus_cd, HttpSession httpSession, Model model) {
+		logger.info("Call : /account/customerDelete.do - GET");
+		
+		String company_cd = httpSession.getAttribute("company_cd").toString();
+		
+		if(accountService.deleteCustomer(company_cd, cus_cd));
+		
+		return "redirect:/account/customer.do";
 	}
 }

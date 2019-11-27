@@ -3,29 +3,22 @@
 
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
 
-    <select id="getStatementList" resultType="StatementVO">
-	    SELECT company_cd, seq, account_cd, customer_cd, date, classify, debtor, creditor, abs
-	    FROM statements
-	    ORDER BY seq ASC
-    </select>
+    <select id="getStatementList" parameterType="String" resultType="StatementListVO">
     
-    <select id="getStatements" parameterType="String" resultType="StatementVO">
-    	select *
-    	from statements
-    	where company_cd = #{value}
-    </select>
-    
-    <select id="getMaxSeq" parameterType="String" resultType="Integer">
-    	select Max(seq)
-    	from statements
-    	where company_cd = #{value}
+    	SELECT STT.account_cd, ACC.title, STT.customer_cd, STT.date, 
+    			STT.classify, STT.debtor, STT.creditor, STT.abs
+    	FROM statements AS STT, account AS ACC
+    	WHERE 1=1
+    	AND STT.company_cd = #{company_cd}
+    	AND STT.account_cd = ACC.acc_cd
+
     </select>
     
     <insert id="addStatement" parameterType="StatementVO" >
     
         INSERT INTO statements
         VALUES(
-        #{company_cd}, #{seq}, #{account_cd}, 
+        #{company_cd}, nextval('seq_company_${company_cd}'), #{account_cd}, 
         #{customer_cd}, to_date(#{date},'YYYY-MM-DD'), #{classify}, 
         #{debtor}, #{creditor}, #{abs}, 
         #{ent_id}, NOW(), #{ent_prog},
@@ -33,4 +26,20 @@
         
     </insert>
     
+    <select id="getPageSize" parameterType="String" resultType="String">
+    	SELECT COUNT(*) FROM statements as s
+    	WHERE s.company_cd = #{company_cd}
+    </select>
+    
+    
+    <update id="editStatement" parameterType="StatementVO">
+    
+    	UPDATE statement
+    	SET account_cd = #{account_cd}, customer_cd = #{customer_cd}, date = #{date}, classify = #{classify}, debtor = #{debtor}, creditor = #{creditor}, abs = #{abs}
+    	WHERE 1=1
+        AND company_cd = #{company_cd}
+        AND seq = #{seq}
+    
+    </update>
+
 </mapper>

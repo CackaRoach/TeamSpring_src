@@ -2,5 +2,5 @@
     pageEncoding="Shift_JIS"%>
     
 		<div align="center">
-			<h3>Contents</h3>
+			<h3>Welcome!</h3>
 		</div>

@@ -4,7 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("CustomerVO")
 public class CustomerVO {
-	
+
 	private String company_cd;
 	private String cus_cd;
 	private String title;
@@ -16,7 +16,7 @@ public class CustomerVO {
 	private String ceo_email;
 	private String worker_name;
 	private String worker_phone;
-	private String worker_emial;
+	private String worker_email;
 	private String memo;
 	private String ent_id;
 	private String ent_date;
@@ -25,6 +25,7 @@ public class CustomerVO {
 	private String mod_date;
 	private String mod_prog;
 	
+
 	public String getCompany_cd() {
 		return company_cd;
 	}
@@ -113,12 +114,12 @@ public class CustomerVO {
 		this.worker_phone = worker_phone;
 	}
 	
-	public String getWorker_emial() {
-		return worker_emial;
+	public String getWorker_email() {
+		return worker_email;
 	}
 	
-	public void setWorker_emial(String worker_emial) {
-		this.worker_emial = worker_emial;
+	public void setWorker_email(String worker_email) {
+		this.worker_email = worker_email;
 	}
 	
 	public String getMemo() {

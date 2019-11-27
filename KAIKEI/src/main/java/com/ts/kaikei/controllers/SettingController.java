@@ -18,10 +18,6 @@ public class SettingController {
 	
 	@Autowired
 	private SettingService settingService;
-
-	/*
-	 *  @RequestMapping(value = "/setting/*.do")
-	 */
 	
 	@RequestMapping(value = "/setting/personal.do", method = RequestMethod.GET)
 	public String ledger(Model model) {

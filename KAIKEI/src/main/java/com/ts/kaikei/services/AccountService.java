@@ -1,15 +1,35 @@
 package com.ts.kaikei.services;
 
-import java.util.*;
-import com.ts.kaikei.vo.*;
+import java.util.List;
+
+import com.ts.kaikei.vo.CustomerVO;
+import com.ts.kaikei.vo.StatementVO;
+
 
 public interface AccountService {
-	public List<StatementVO> getStatements(String company_cd);
-	public String getCategoryName(int _category);
-	public List<StatementVO> codeToName(List<StatementVO> list);
-	public void addStatement(StatementVO statement);
-	public int getMaxSeq(String company_cd);
-	public CompanyVO getCompanyOf(String company_cd);	
-	public CustomerVO getCustomerOf(String customer_cd);
-	public AccountVO getAccountOf(String account_cd);
+
+	/*
+	 * 
+	 * 
+	 */
+
+	List<StatementVO> getStatementList(String company_cd, String pageNum, String searchString, String searchTarget);
+	void addStatement(StatementVO statementVO, String userId, String company_cd);
+	void editStatment(StatementVO statementVO, String userId, String company_cd);
+	String getPageSize(String company_cd);
+	
+	/*
+	 * =====================================
+	 *           CUSTOMER SERVICE
+	 * =====================================
+	 */
+	
+	boolean addCustomer(String company_cd, CustomerVO customerVO, String userId);
+	int getCustomerCount(String string, String searchParam);
+	List<CustomerVO> getCustomerList(String company_cd, String searchParam, String pageNum);
+	CustomerVO getCustomerOf(String company_cd, String cus_cd);
+	boolean updateCustomer(String company_cd, CustomerVO customerVO, String userId);
+	boolean deleteCustomer(String company_cd, String cus_cd);
+	int customerCodeCheck(String cus_cd, String company_cd);
 }
+

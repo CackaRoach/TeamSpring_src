@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.CommonService;
-import com.ts.kaikei.vo.CompanyVO;
+import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.UserVO;
 
-
-// TODO : Security - bufferOverflow
-// TODO : Logout - Layout(height, width %) modify
 
 @Controller
 public class CommonController {
@@ -34,34 +31,31 @@ public class CommonController {
 		logger.info("Call : /login.do - GET");
 		
 		return "/login";
-	}
-	
-	// Testing
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginP(CompanyVO companyVO, Model model) {
-		logger.info("Call : /login.do - POST");
-		logger.info("Company Code : " + companyVO.getCompany_cd());
-		
-		return "/login";
-	}
+	} 
 	 
 	// Login Execution
 	@RequestMapping(value = "/loginExe.do", method = RequestMethod.POST)
 	public String loginExe(UserVO userVO, HttpSession httpSession, Model model) {
-		// TODO : Company AUT Join LoginExecution
-		// TODO : Security - Log, time
+		// TODO : Security - Log or time
 		
 		logger.info("Call : /loginExe.do - POST");
 		
 		UserVO getUserVO = commonService.getUser(userVO); 
-			
+
+		// ERROR
 		if(getUserVO == null) {
-			logger.info("Login Fail");
-			model.addAttribute("state", "block");
+			model.addAttribute("loginState", "Incorrect ID, Password");
+			return "/login";
+			
+		} else if(!getUserVO.getAuth_cd().equals("AUT001")) {
+			model.addAttribute("loginState", "Unapproved Account");
 			return "/login";
 		}
-
-		httpSession.setAttribute("userVO", getUserVO);
+	
+		httpSession.setAttribute("id", getUserVO.getId());
+		httpSession.setAttribute("posit_cd", getUserVO.getPosit_cd());
+		httpSession.setAttribute("company_cd", getUserVO.getCompany_cd());
+		
 		return "redirect:home.do";	
 	}
 	
@@ -70,7 +64,7 @@ public class CommonController {
 	public String home(HttpSession httpSession, Model model) {
 		logger.info("Call : /home.do - GET");
 		
-		if(httpSession.getAttribute("userVO") == null)
+		if(httpSession.getAttribute("id") == null)
 			return "error";
 		
 		return "/common/home";	
@@ -84,32 +78,58 @@ public class CommonController {
 		return "/signup";	
 	}
 	
-	// TODO : SignUp Execution
 	@RequestMapping(value = "/signupExe.do", method = RequestMethod.POST)
-	public String signupExe(UserVO userVO, CompanyVO companyVO, String companyState, Model model) {
-		logger.info("Call : /signExe.do - GET");
+	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
+		logger.info("Call : /signExe.do - POST");
 		
-		if(commonService.checkCode(companyVO.getCompany_cd()) != 0) {
-			// TODO : �쉶�궗以묐났肄붾뱶 �뿉�윭泥섎━ 援ы쁽
+		// overlapping check(id)
+		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
 			return "/error";
 		}
 		
 		if(companyState.equals("new")) {
-			// TODO : �쉶�썝媛��엯 援ы쁽 - �깉 �쉶�궗 異붽�
-			commonService.signUpCompany(companyVO);
+			commonService.signUpCompany(companyRegistVO);
 		}
 		
+
 		if(commonService.checkId(userVO.getId()) != 0) {
-			// TODO : 以묐났�븘�씠�뵒 �뿉�윭泥섎━ 援ы쁽
+			model.addAttribute("errorMsg", "REGIST ID ERROR!");
+
 			return "/error";
 		}
 		
-		commonService.signUpUser(userVO, companyVO.getCompany_cd());
+		// Select : Create New Company
+		if(companyState.equals("new")) {
+			
+			// overlapping check(code)
+			if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
+				model.addAttribute("errorMsg", "REGIST CODE ERROR!");
+				return "/error";
+			}
+			
+			if(!commonService.signUpCompany(companyRegistVO)) {
+				model.addAttribute("errorMsg", "REGIST COMPANY ERROR!");
+				return "/error";
+			}
+			
+			if(!commonService.signUpUser(userVO, "POS002")) {
+				model.addAttribute("errorMsg", "REGIST USER ERROR!");
+				return "/error";
+			}
+			
+		// Select : Exist Company
+		} else {
+			if(!commonService.signUpUser(userVO, "POS003")) {
+				model.addAttribute("errorMsg", "REGIST USER ERROR!");
+				return "/error";
+			}
+		}
 		
 		return "/login";
+		
 	}
 	
-	// TODO : 以묐났�븘�씠�뵒 泥댄겕 ajax length鍮꾧탳 + �뿉�윭硫붿떆吏�
+
 	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {
@@ -118,16 +138,15 @@ public class CommonController {
 		return commonService.checkId(id);
 	}
 	
-	// TODO : 以묐났�쉶�궗肄붾뱶 泥댄겕 ajax 援ы쁽(front)
 	@RequestMapping(value = "/checkCode.do", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkCode(String company_cd, Model model) {
 		logger.info("Call : /checkCode.do ajax code : " + company_cd);
-		return 1;
-		//return commonService.checkCode(company_cd);
+		
+		return commonService.checkCode(company_cd);
 	}
 	
-	// �븘�씠�뵒 鍮꾨�踰덊샇 李얘린 �럹�씠吏� �룷�썙�뵫
+	// Forgot Page Forawarding
 	@RequestMapping(value = "/forgot.do", method = RequestMethod.GET)
 	public String forgot(Model model) {
 		logger.info("Call : /forgot.do - GET");
@@ -135,16 +154,15 @@ public class CommonController {
 		return "/forgot";	
 	}
 	
-	// TODO : ID, 鍮꾨�踰덊샇 李얘린 援ы쁽
+	// TODO : ID, Password Search
 	@RequestMapping(value = "/forgotExc.do", method = RequestMethod.POST)
 	public String forgotExc(Model model) {
 		logger.info("Call : /forgotExc.do - POST");
 		
-		
 		return "/forgot";	
 	}
 	
-	// 濡쒓렇�븘�썐
+	// Logout
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession httpSession, Model model) {
 		logger.info("Call : /logout.do - GET");
@@ -154,7 +172,7 @@ public class CommonController {
 		return "/login";	
 	}
 	
-	// �뿉�윭�럹�씠吏� �룷�썙�뵫
+	// Error Page Forwarding
 	@RequestMapping(value = "/error.do", method = RequestMethod.GET)
 	public String error(HttpSession httpSession, Model model) {
 		logger.info("Call : /error.do - GET");
