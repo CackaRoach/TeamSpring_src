@@ -10,13 +10,22 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 
 	<bean id="dataSourcePostgre" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver"/>
 		<property name="url" value="jdbc:postgresql://database-postgresql.cniij7hunkr3.us-east-1.rds.amazonaws.com:5432/kaikeitest?sslmode=disable"/>
 		<property name="username" value="test"></property>
 		<property name="password" value="teamspring"></property>
 	</bean>
-
+ 	-->
+ 	
+ 	<bean id="dataSourcePostgre" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:postgresql://database-postgresql.cniij7hunkr3.us-east-1.rds.amazonaws.com:5432/kaikeitest?sslmode=disable"/>
+		<property name="username" value="test"></property>
+		<property name="password" value="teamspring"></property>
+	</bean>
+ 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="dataSourcePostgre" />
     	<property name="configLocation" value="classpath:/mybatis-config.xml" />
