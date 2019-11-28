@@ -1,8 +1,11 @@
+<!-- CompanyList Page.HLS -->
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
-    pageEncoding="Shift_JIS"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
-	<script type="text/javascript">
+	pageEncoding="Shift_JIS"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<link rel="stylesheet" type="text/css" href="/css/manage.css">
+
+<script type="text/javascript">
 		$(document).ready(function(){
 			
 	    	$("#findCompany_btn").click(function () {
@@ -20,28 +23,33 @@
 		 }
 	
 	</script>
-	  
+
+<div class="wrap">
+
 	<div>
 		<h3>Manage - Company</h3>
 	</div>
-	
+
+
 	<div>
-		<input id = "findCompany-input" type = "text" placeholder="Search for Company">
-		<button id = "findCompany_btn">FIND</button>
+		<input id="findCompany-input" type="text"
+			placeholder="Search for Company">
+		<button id="findCompany_btn">FIND</button>
 	</div>
-	
-	<select id = "stateCompany_selct" onchange="getCompanyList()">
+
+	<select id="stateCompany_selct" onchange="getCompanyList()">
+		<option value="">SELECT STATE</option>
 		<option value="00">ALL</option>
 		<option value="01">ACCEPT</option>
 		<option value="02">RESULT</option>
 		<option value="03">HOLD OFF</option>
 	</select>
-	
-	<div>
-	 <table>
+
+
+	<table class="table_list">
 		<thead>
 			<tr>
-				<th></th>
+				<th>    </th>
 				<th>Code</th>
 				<th>Company</th>
 				<th>CEO</th>
@@ -55,11 +63,8 @@
 				<tr>
 					<td>${status.count}</td>
 					<td>${item.company_cd}</td>
-					<td>
-						<a href="/manage/companyDetail.do?id=${item.company_cd}">
-						${item.title}
-						</a>
-					</td>
+					<td><a href="/manage/companyDetail.do?id=${item.company_cd}">
+							${item.title} </a></td>
 					<td>${item.name}</td>
 					<td>${item.domain}</td>
 					<td>${item.phone}</td>
@@ -68,15 +73,4 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
-	<!-- pageing -->
-	<%-- <div>
-	<ul style="list-style-type: none;">
-      <c:forEach var="i" begin="1" end="5">
-        <a>
-        	${i}
-        </a>
-      </c:forEach>
-     </ul>
-	</div> --%>
-		
+</div>

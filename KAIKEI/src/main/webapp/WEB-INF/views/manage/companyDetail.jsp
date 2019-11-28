@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="/css/manage.css">
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
@@ -14,7 +16,7 @@
 	</div>
 	
 	<div>
-		<table>
+		<table class = "detail_table">
 			<tbody>
 				<tr>
 					<td>Company</td>
