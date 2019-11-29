@@ -1,5 +1,5 @@
 
-$(window).load(function() {
+$(window).ready(function() {
 
 	var existrows =  $("#existrows").val();
 	
@@ -113,23 +113,23 @@ function statementSubmit() {
 		
 		if($("#state" + changerow[i]).children("td").eq(2).children("input").val() == "")
 			continue;
-		row.DATE = "20" + $("#state" + changerow[i]).children("td").eq(0).children("input").val();
-		row.DATE += "-"
-		row.DATE += $("#state" + changerow[i]).children("td").eq(1).children("input").val();
-		row.DATE += "-"
-		row.DATE += $("#state" + changerow[i]).children("td").eq(2).children("input").val();
+		row.date = "20" + $("#state" + changerow[i]).children("td").eq(0).children("input").val();
+		row.date += "-"
+		row.date += $("#state" + changerow[i]).children("td").eq(1).children("input").val();
+		row.date += "-"
+		row.date += $("#state" + changerow[i]).children("td").eq(2).children("input").val();
 		
 		if($("#state" + changerow[i]).children("td").eq(3).children("input").val() == "")
 			continue;
-		row.ACCOUNT_CD = $("#state" + changerow[i]).children("td").eq(3).children("input").val();
+		row.account_cd = $("#state" + changerow[i]).children("td").eq(3).children("input").val();
 		
 		if($("#state" + changerow[i]).children("td").eq(4).children("input").val() == "")
 			continue;
-		row.CUSTOMER_CD = $("#state" + changerow[i]).children("td").eq(4).children("input").val();
-		row.CLASSIFY = $("#state" + changerow[i]).children("td").eq(5).children("input").val();
-		row.DEBTOR = $("#state" + changerow[i]).children("td").eq(6).children("input").val();
-		row.CREDITOR = $("#state" + changerow[i]).children("td").eq(7).children("input").val();
-		row.ABS = $("#state" + changerow[i]).children("td").eq(8).children("input").val();
+		row.customer_cd = $("#state" + changerow[i]).children("td").eq(4).children("input").val();
+		row.classify = $("#state" + changerow[i]).children("td").eq(5).children("input").val();
+		row.debtor = $("#state" + changerow[i]).children("td").eq(6).children("input").val();
+		row.creditor = $("#state" + changerow[i]).children("td").eq(7).children("input").val();
+		row.abs = $("#state" + changerow[i]).children("td").eq(8).children("input").val();
 		// TODO: ISEXIST
 		
 		statement.push(row);
@@ -145,7 +145,66 @@ function statementSubmit() {
 	var jsonState = JSON.stringify(statement);
 	
 	$.ajax({
-		url : "/account/addStatement.do",
+		url : "/account/statementSave.do",
+		method : "post",
+		contentType: "application/json; charset=SHIFT-JIS",
+		type : "json",
+		data : jsonState,
+		success : function() {
+			console.log("Success");
+		}, error : function() {
+			console.log("Fail");
+		}
+	});
+	
+	location.href="/account/ledger.do";
+}
+
+function statementSubmitB() {
+	
+	var changerow = $("#changerows").val().split(",");
+	var changerowlength = changerow.length - 1;
+	
+	var statement = new Array();
+	
+	for(var i = 0; i < changerowlength; i++) {
+		var row = new Object();
+		
+		if($("#state" + changerow[i]).children("td").eq(2).children("input").val() == "")
+			continue;
+		row.date = "20" + $("#state" + changerow[i]).children("td").eq(0).children("input").val();
+		row.date += "-"
+		row.date += $("#state" + changerow[i]).children("td").eq(1).children("input").val();
+		row.date += "-"
+		row.date += $("#state" + changerow[i]).children("td").eq(2).children("input").val();
+		
+		if($("#state" + changerow[i]).children("td").eq(3).children("input").val() == "")
+			continue;
+		row.account_cd = $("#state" + changerow[i]).children("td").eq(3).children("input").val();
+		
+		if($("#state" + changerow[i]).children("td").eq(4).children("input").val() == "")
+			continue;
+		row.customer_cd = $("#state" + changerow[i]).children("td").eq(4).children("input").val();
+		row.classify = $("#state" + changerow[i]).children("td").eq(5).children("input").val();
+		row.debtor = $("#state" + changerow[i]).children("td").eq(6).children("input").val();
+		row.creditor = $("#state" + changerow[i]).children("td").eq(7).children("input").val();
+		row.abs = $("#state" + changerow[i]).children("td").eq(8).children("input").val();
+		// TODO: ISEXIST
+		
+		statement.push(row);
+	}
+
+	if(statement.length == 0) {
+		alert("input fail!");
+		return false;
+	}
+	
+	console.table(statement);
+	
+	var jsonState = JSON.stringify(statement);
+	
+	$.ajax({
+		url : "/account/statementSave.do",
 		method : "post",
 		contentType: "application/json; charset=SHIFT-JIS",
 		type : "json",

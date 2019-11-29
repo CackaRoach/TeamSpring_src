@@ -4,48 +4,91 @@
 <mapper namespace="com.ts.kaikei.dao.UserDAO">
 	 
 	<select id="getUserById" parameterType="UserVO" resultType="UserVO">
-		SELECT *
-		FROM users
-		WHERE id = #{id}
+	
+		SELECT 
+			*
+		FROM 
+			users
+		WHERE 1=1
+			AND id = #{id}
+		
 	</select>
 	 
 	 
 	<select id="getUser" parameterType="UserVO" resultType="UserVO" >
 	
-		SELECT *
-		FROM users
+		SELECT 
+			*
+		FROM 
+			users
 		WHERE 1=1
-		AND id = #{id}
-		AND password = #{password}
+			AND id = #{id}
+			AND password = #{password}
         
 	</select>
     
 	<select id="checkId" parameterType="String" resultType="int" >
     
-        SELECT count(*)
-        FROM users
+        SELECT 
+        	count(*)
+        FROM 
+        	users
         WHERE 1=1
-        AND id = #{id}
+        	AND id = #{id}
         
     </select>
     
     <insert id="insertUser" parameterType="UserVO" >
     
-        INSERT INTO users(id, password, company_cd, posit_cd, auth_cd, state_cd,
-        				  name, email, phone, ent_id, ent_date, ent_prog,
-        				  mod_id, mod_date, mod_prog)
+        INSERT INTO users(
+        	id, 
+        	password, 
+        	company_cd, 
+        	posit_cd, 
+        	auth_cd, 
+        	state_cd,
+        	name, 
+        	email, 
+        	phone, 
+        	ent_id, 
+        	ent_date, 
+        	ent_prog,
+        	mod_id, 
+        	mod_date, 
+        	mod_prog
+        )
         VALUES(
-        #{id}, #{password}, #{company_cd}, #{posit_cd}, #{auth_cd}, #{state_cd}, 
-        #{name}, #{email}, #{phone}, #{ent_id}, NOW(), 'Web-kaikei',
-        #{mod_id}, NOW(), 'Web-kaikei')
+        	#{id}, 
+        	#{password}, 
+        	#{company_cd}, 
+        	#{posit_cd}, 
+        	#{auth_cd}, 
+        	#{state_cd}, 
+        	#{name}, 
+        	#{email}, 
+        	#{phone}, 
+        	#{ent_id}, 
+        	NOW(), 
+        	'Web-kaikei',
+        	#{mod_id}, 
+        	NOW(), 
+        	'Web-kaikei'
+        )
         
     </insert>
     
     <update id="updateUser" parameterType="UserVO">
-  		UPDATE users 
-  		SET password = #{password}, name = #{name}, email = #{email}, phone = #{phone} 
-  		WHERE id = #{id}
-    </update>
     
+  		UPDATE 
+  			users 
+  		SET 
+  			password = #{password}, 
+  			name = #{name}, 
+  			email = #{email}, 
+  			phone = #{phone} 
+  		WHERE 1=1
+  			AND id = #{id}
+  		
+    </update>
   
 </mapper>

@@ -81,13 +81,8 @@ public class CommonController {
 	@RequestMapping(value = "/signupExc.do", method = RequestMethod.POST)
 	public String signupExe(UserVO userVO, CompanyRegistVO companyRegistVO, String companyState, Model model) {
 		logger.info("Call : /signExc.do - POST");
-		
+			
 		// overlapping check(id)
-		if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
-			logger.warn("Code Err");
-			return "/error";
-		}
-		
 		if(commonService.checkId(userVO.getId()) != 0) {
 			model.addAttribute("errorMsg", "REGIST ID ERROR!");
 
@@ -97,7 +92,7 @@ public class CommonController {
 		// Select : Create New Company
 		if(companyState.equals("new")) {
 			
-			// overlapping check(code)
+			// overlapping check(company_code)
 			if(commonService.checkCode(companyRegistVO.getCompany_cd()) != 0) {
 				model.addAttribute("errorMsg", "REGIST CODE ERROR!");
 				return "/error";

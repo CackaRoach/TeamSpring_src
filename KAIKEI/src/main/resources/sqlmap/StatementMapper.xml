@@ -5,30 +5,74 @@
 
     <select id="getStatementList" parameterType="String" resultType="StatementListVO">
     
-    	SELECT TO_CHAR(STT.date, 'YY') AS year, TO_CHAR(STT.date, 'MM') AS month, TO_CHAR(STT.date, 'DD') AS date,
-    			STT.account_cd, ACC.title, STT.customer_cd, CUS.title as cus_title,
-    			STT.classify, STT.debtor, STT.creditor, STT.abs
-    	FROM statements AS STT, account AS ACC, customer as CUS
+    	SELECT 
+    		TO_CHAR(STT.date, 'YY') AS year, 
+    		TO_CHAR(STT.date, 'MM') AS month, 
+    		TO_CHAR(STT.date, 'DD') AS date,
+    		STT.account_cd, 
+    		ACC.title, 
+    		STT.customer_cd, 
+    		CUS.title as cus_title,
+    		STT.classify, 
+    		STT.debtor, 
+    		STT.creditor, 
+    		STT.abs
+    	FROM 
+    		statements AS STT, 
+    		account AS ACC, 
+    		customer as CUS
     	WHERE 1=1
-    	AND STT.company_cd = #{company_cd}
-    	AND STT.company_cd = CUS.company_cd
-    	AND STT.customer_cd = CUS.cus_cd
-    	AND STT.account_cd = ACC.acc_cd
+	    	AND STT.company_cd = #{company_cd}
+	    	AND STT.company_cd = CUS.company_cd
+	    	AND STT.customer_cd = CUS.cus_cd
+	    	AND STT.account_cd = ACC.acc_cd
  
     	ORDER BY date ASC;
 
     </select>
     
-    <insert id="addStatement" parameterType="StatementVO" >
+    <insert id="insertStatement" parameterType="Map" >
     
-        INSERT INTO statements
-        VALUES(
-        #{company_cd}, nextval('seq_company_${company_cd}'), #{account_cd}, 
-        #{customer_cd}, #{date}::date, #{classify}, 
-        #{debtor}, #{creditor}, #{abs}, 
-        #{ent_id}, NOW(), 'Web-kaikei', 
-        #{mod_id}, NOW(), 'Web-kaikei')
+        INSERT INTO 
+        	statements (
+	        	company_cd,
+	        	seq,
+	        	account_cd,
+	        	customer_cd,
+	        	date,
+	        	classify,
+	        	debtor,
+	        	creditor,
+	        	abs,
+	        	ent_id,
+	        	ent_date,
+	        	ent_prog,
+	        	mod_id,
+	        	mod_date,
+	        	mod_prog
+	        )
+	        VALUES
+	        <foreach collection="statementList" item="item" separator=",">
+	        (
+	        	#{item.company_cd}, 
+	        	nextval('seq_company_${item.company_cd}'), 
+	        	#{item.account_cd}, 
+	        	#{item.customer_cd}, 
+	        	#{item.date}::DATE, 
+	        	#{item.classify}, 
+	        	#{item.debtor}::INTEGER, 
+	        	#{item.creditor}::INTEGER, 
+	        	#{item.abs}, 
+	       		#{item.ent_id}, 
+	       		NOW(), 
+	       		'Web-kaikei', 
+	        	#{item.mod_id}, 
+	        	NOW(), 
+	        	'Web-kaikei'
+	        )
+	        </foreach>
         
     </insert>
+    
 
 </mapper>

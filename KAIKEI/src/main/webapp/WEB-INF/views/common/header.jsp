@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 		<div align="center" class="header-title">
-			<span class="header-title-font" style="font-size: 1.5em">KAIKEI</span>
+			<label class="header-title-font" style="font-size: 1.5em">KAIKEI</label>
 		</div>
 		<div style="float:left; height:50px">
 			<ul class="header-list">

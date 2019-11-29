@@ -29,7 +29,7 @@
 		                </tr>
 		            <thead>
 		            <tbody>
-		                <c:forEach var="customerVO" items="${customerList}">
+		                <c:forEach var="customerVO" items="${customerList}" begin="1">
 		                <tr>
 		                    <td><a href="/account/customerDetail.do?cus_cd=${customerVO.cus_cd}">${customerVO.cus_cd}</a></td>
 		                    <td>${customerVO.title}</td>
@@ -43,8 +43,9 @@
 	            </table>
 	        </div>
 	        <div align="center">
- 	        	<c:if test="${pageCnt ne 0}">
-		        	<c:forEach var="i" begin="0" end="${pageCnt - 1}">
+ 	        	<c:if test="${customerList[0].fax ne 0}">
+ 	        		<%--  0 index - FAX = PAGE NUM  --%>
+		        	<c:forEach var="i" begin="0" end="${customerList[0].fax - 1}">
 		        		<a class="pagenum" href="/account/customer.do?crtPage=${i}&searchParam=${searchParam}">${i + 1}</a> 
 		        	</c:forEach>
 	        	</c:if>

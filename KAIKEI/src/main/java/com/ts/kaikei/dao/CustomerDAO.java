@@ -10,7 +10,7 @@ import com.ts.kaikei.vo.CustomerVO;
 @Mapper
 public interface CustomerDAO {
 
-	List<CustomerVO> getCustomerList(Map<String, String> params);
+	List<CustomerVO> selectCustomerList(Map<String, String> params);
 	CustomerVO getCustomerDetail(Map<String, String> params);
 	void addCustomer(CustomerVO customerVO);
 	void deleteCustomer(Map<String, String> params);
@@ -18,6 +18,5 @@ public interface CustomerDAO {
 	int customerCodeCheck(Map<String, String> params);
 
 	CustomerVO getCustomerOf(String company_cd);
-	int getCustomerCount(Map<String, String> params);
 }
  

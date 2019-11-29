@@ -10,29 +10,23 @@
 </head>
 <script>
 function submit() {
-	var form = document.createElement("form");
+	var form = document.getElementById("form");
 
+	if(document.getElementById("id").value == "") {
+		alert("IDを入力してください!");
+		document.getElementById("id").focus();
+		return false;
+	}
+
+	if(document.getElementById("password").value == "") {
+		alert("パスワードを入力してください!");
+		document.getElementById("password").focus();
+		return false;
+	}
+	
 	form.setAttribute("charset", "SHIFT-JIS");
 	form.setAttribute("method", "Post"); 
 	form.setAttribute("action", "/loginExc.do");
-
-	var id = document.getElementById("id").value;
-	var password = document.getElementById("password").value;
-
-	hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "id");
-    hiddenField.setAttribute("value", id);
-
-    form.appendChild(hiddenField);
-
-    hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "password");
-    hiddenField.setAttribute("value", password);
-
-    form.appendChild(hiddenField);
-    document.body.appendChild(form);
 
 	form.submit();
 }
@@ -49,14 +43,16 @@ function submit() {
 				</div>
 				<div style="height:80px;">
 					<div align="center" style="float:left; width:20%; height:100%">
-						<p style="margin: 12px">I D</p>
-						<p style="margin: 12px">Password</p>
+						<p style="margin: 12px; font-size: 1em;">I D</p>
+						<p style="margin: 12px; font-size: 1em;">Password</p>
 					</div>
+					<form id="form">
 					<div style="float:left; width:40%; height:100%">
 						<input class="logininputbox" type="text" id="id" name="id" maxlength="15">
 						<br>
 						<input class="logininputbox" id="password" name="password" maxlength="15">
 					</div>
+					</form>
 					<div style="float:left; width:40%; height:100%">
 						<button class="loginbutton" style="margin:5px;" onclick="submit();">Login</button>
 					</div>

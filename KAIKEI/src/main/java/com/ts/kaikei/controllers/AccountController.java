@@ -47,9 +47,9 @@ public class AccountController {
 		return "/account/ledger";
 	}
 
-	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/statementSave.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void addStatement(@RequestBody List<Map<String, String>> jsonState, 
+	public void statementSave(@RequestBody List<Map<String, String>> jsonState, 
 								HttpSession httpSession, 
 								Model model) {
 		
@@ -59,8 +59,6 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
 		accountService.addStatement(jsonState, userId, company_cd);
-		
-		// return "redirect:/account/ledger.do";
 
 	}
 	
@@ -83,8 +81,8 @@ public class AccountController {
 		 
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		model.addAttribute("pageCnt", accountService.getCustomerCount(company_cd, searchParam));
-		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage));
+		/*  0 index - FAX = PAGE NUM  */
+		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage, "20"));
 		model.addAttribute("searchParam", searchParam);
 		
 		return "/account/customer";
@@ -123,10 +121,7 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		String id = httpSession.getAttribute("id").toString();
 		
-		if(!accountService.addCustomer(company_cd, customerVO, id)) {
-			model.addAttribute("errorMsg", "REGIST CUSTOMER ERROR");
-			return "/error";
-		}
+		accountService.addCustomer(company_cd, customerVO, id);
 		
 		return "redirect:/account/customer.do";
 	}
@@ -155,10 +150,7 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		String id = httpSession.getAttribute("id").toString();
 		
-		if(!accountService.updateCustomer(company_cd, customerVO, id)) {
-			model.addAttribute("errorMsg", "UPDATE CUSTOMER ERROR");
-			return "/error";
-		}
+		accountService.updateCustomer(company_cd, customerVO, id);
 		
 		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
 	}
@@ -172,7 +164,7 @@ public class AccountController {
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		if(accountService.deleteCustomer(company_cd, cus_cd));
+		accountService.deleteCustomer(company_cd, cus_cd);
 		
 		return "redirect:/account/customer.do";
 	}
