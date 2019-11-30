@@ -9,7 +9,7 @@ import com.ts.kaikei.vo.*;
 @Mapper
 public interface StatementDAO {
 	public ArrayList<StatementListVO> getStatementList(String company_cd);
-	public void insertStatement(Map<String, Object> statement);
+	public void saveStatement(Map<String, Object> statement);
 	
 	public ArrayList<StatementVO> getStatementList();
 	public ArrayList<ArrayList<StatementVO>> get_Sorted_Acconutlist();

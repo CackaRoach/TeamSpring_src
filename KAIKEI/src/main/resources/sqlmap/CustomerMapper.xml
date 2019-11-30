@@ -64,6 +64,7 @@
 		        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
 		        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%'))
 	     
+	     		ORDER BY cus_cd ASC
 				LIMIT #{size}::INTEGER OFFSET ${pageNum} * #{size}::INTEGER
         )
         UNION
@@ -130,7 +131,7 @@
     		memo = #{memo},
     		mod_id = #{mod_id}, 
     		mod_date = NOW(), 
-    		mod_prog = #{mod_prog}
+    		mod_prog = 'Web-kaikei'
     	WHERE 1=1
 	        AND company_cd = #{company_cd}
 	        AND cus_cd = #{cus_cd}

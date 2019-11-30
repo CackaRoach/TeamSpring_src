@@ -12,7 +12,7 @@
 	                <span style="font-size:1.5em;">Search</span>
 	                <div align="right">
 	                    <input type="text" class="input-box" name="searchParam" placeholder="Search">
-	                    <input type="submit" class="button" value="FIND">
+	                    <input type="submit" class="button" value="Search">
 	                </div>
 	            </form>
 	        </div>

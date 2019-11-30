@@ -15,7 +15,7 @@ public interface AccountService {
 	 * =====================================
 	 */
 
-	List<StatementListVO> getStatements(String company_cd);
+	List<StatementListVO> getStatements(String company_cd, String year, String month);
 	void addStatement(List<Map<String, String>> statementList, String userId, String company_cd);
 	
 	/*

@@ -22,6 +22,10 @@ table {
 	padding: 0px;
 }
 
+label {
+	font-size: 0.8em;
+}
+
 #header {
     background-color: #2B5CAB;
     height: 50px;
@@ -237,7 +241,7 @@ table {
 .statement>tbody>tr>td>input[name='customer_cd'] {
 	background-color: transparent;
 	border: 0px;
-	width: 20%;
+	width: 23%;
 }
 
 .statement>tbody>tr>td>a {
@@ -253,6 +257,10 @@ table {
 
 .statementchanged {
 	background-color: #FFFF80 !important;
+}
+
+.statementdelete {
+	background-color: #FF0000 !important;
 }
 
 

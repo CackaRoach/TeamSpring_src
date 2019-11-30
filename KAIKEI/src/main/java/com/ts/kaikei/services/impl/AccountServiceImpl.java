@@ -33,7 +33,13 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	
 	@Override
-	public List<StatementListVO> getStatements(String company_cd) {
+	public List<StatementListVO> getStatements(String company_cd, String year, String month) {
+		Map<String, String> searchParams = new HashMap<String, String>();
+		
+		searchParams.put("company_cd", company_cd);
+		searchParams.put("year", year);
+		searchParams.put("month", month);
+		
 		return statementDAO.getStatementList(company_cd);
 	}
 	
@@ -48,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
 		
 		statements.put("statementList", statementList);
 		
-		statementDAO.insertStatement(statements);
+		statementDAO.saveStatement(statements);
 	}
 
 
@@ -108,8 +114,6 @@ public class AccountServiceImpl implements AccountService {
 		
 		customerVO.setCompany_cd(company_cd);
 		customerVO.setMod_id(userId);
-		customerVO.setMod_prog("Web-kaikei");
-		
 		
 		customerDAO.updateCustomer(customerVO);
 		

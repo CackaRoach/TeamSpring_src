@@ -1,5 +1,6 @@
 package com.ts.kaikei.controllers;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -35,13 +36,25 @@ public class AccountController {
 	 */
 
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
-	public String ledger(HttpSession httpSession, Model model) {
+	public String ledger(   String year,
+							String month,
+							HttpSession httpSession, 
+							Model model) {
 		logger.info("Call : /account/ledger.do - GET");
-
+		
+		if(year == null) {
+			Calendar cal = Calendar.getInstance();
+			
+			year = String.valueOf(cal.get(Calendar.YEAR));
+			month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+		}
+		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 
-		List<StatementListVO> list = accountService.getStatements(company_cd);
+		List<StatementListVO> list = accountService.getStatements(company_cd, year, month);
 		
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
 		model.addAttribute("statements", list);
 		
 		return "/account/ledger";
@@ -82,6 +95,7 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
 		/*  0 index - FAX = PAGE NUM  */
+		/*  DEFAULT CUSTOMER COUNT PER PAGE = 20  */
 		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage, "20"));
 		model.addAttribute("searchParam", searchParam);
 		
@@ -152,7 +166,7 @@ public class AccountController {
 		
 		accountService.updateCustomer(company_cd, customerVO, id);
 		
-		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
+		return "redirect:/account/customer.do";
 	}
 	
 	@RequestMapping(value = "/account/customerDelete.do", method = RequestMethod.GET)
