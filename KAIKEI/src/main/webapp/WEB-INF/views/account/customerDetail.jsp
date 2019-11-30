@@ -12,7 +12,7 @@
 		                <tbody>
 		                    <tr>
 		                        <td>Customer</td>
-		                        <td style="height:54px"><input type="hidden" value="${customerVO.title}" name="title">${customerVO.title}</td>
+		                        <td><input type="text" class="input-box" value="${customerVO.title}" name="title"></td>
 		                    </tr>
 		                    <tr>
 		                        <td>Customer Code</td>

@@ -1,5 +1,6 @@
 package com.ts.kaikei.controllers;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -35,21 +36,33 @@ public class AccountController {
 	 */
 
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
-	public String ledger(HttpSession httpSession, Model model) {
+	public String ledger(   String year,
+							String month,
+							HttpSession httpSession, 
+							Model model) {
 		logger.info("Call : /account/ledger.do - GET");
-
+		
+		if(year == null) {
+			Calendar cal = Calendar.getInstance();
+			
+			year = String.valueOf(cal.get(Calendar.YEAR));
+			month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+		}
+		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 
-		List<StatementListVO> list = accountService.getStatements(company_cd);
+		List<StatementListVO> list = accountService.getStatements(company_cd, year, month);
 		
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
 		model.addAttribute("statements", list);
 		
 		return "/account/ledger";
 	}
 
-	@RequestMapping(value = "/account/addStatement.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/statementSave.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void addStatement(@RequestBody List<Map<String, String>> jsonState, 
+	public void statementSave(@RequestBody List<Map<String, String>> jsonState, 
 								HttpSession httpSession, 
 								Model model) {
 		
@@ -59,8 +72,6 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
 		accountService.addStatement(jsonState, userId, company_cd);
-		
-		// return "redirect:/account/ledger.do";
 
 	}
 	
@@ -83,8 +94,9 @@ public class AccountController {
 		 
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		model.addAttribute("pageCnt", accountService.getCustomerCount(company_cd, searchParam));
-		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage));
+		/*  0 index - FAX = PAGE NUM  */
+		/*  DEFAULT CUSTOMER COUNT PER PAGE = 20  */
+		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage, "20"));
 		model.addAttribute("searchParam", searchParam);
 		
 		return "/account/customer";
@@ -123,10 +135,7 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		String id = httpSession.getAttribute("id").toString();
 		
-		if(!accountService.addCustomer(company_cd, customerVO, id)) {
-			model.addAttribute("errorMsg", "REGIST CUSTOMER ERROR");
-			return "/error";
-		}
+		accountService.addCustomer(company_cd, customerVO, id);
 		
 		return "redirect:/account/customer.do";
 	}
@@ -155,12 +164,9 @@ public class AccountController {
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		String id = httpSession.getAttribute("id").toString();
 		
-		if(!accountService.updateCustomer(company_cd, customerVO, id)) {
-			model.addAttribute("errorMsg", "UPDATE CUSTOMER ERROR");
-			return "/error";
-		}
+		accountService.updateCustomer(company_cd, customerVO, id);
 		
-		return "redirect:/account/customerDetail.do?cus_cd=" + customerVO.getCus_cd();
+		return "redirect:/account/customer.do";
 	}
 	
 	@RequestMapping(value = "/account/customerDelete.do", method = RequestMethod.GET)
@@ -172,7 +178,7 @@ public class AccountController {
 		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
 		
-		if(accountService.deleteCustomer(company_cd, cus_cd));
+		accountService.deleteCustomer(company_cd, cus_cd);
 		
 		return "redirect:/account/customer.do";
 	}

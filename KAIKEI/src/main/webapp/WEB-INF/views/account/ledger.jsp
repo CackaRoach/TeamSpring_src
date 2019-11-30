@@ -5,12 +5,18 @@
 <!--  
 	TODO: Auto Generator - Account
 	TODO: Auto Generator - Customer
-	TODO: Statement Update
-	TODO: Statement Delete 
+	TODO: regex check
+
   -->
 		<script type="text/javascript" src="/js/ledger.js"></script>
-		<div>
-			<h3>Ledger</h3>
+		<div style="padding: 20px;">
+			<span style="font-size: 1.7em;">Ledger</span>
+		</div>
+		<hr>
+		<div align="center" style="padding: 30px;">
+			<span style="font-size: 1.5em;">${year} - ${month}</span>
+			<input type="hidden" id="year" value="${year}">
+			<input type="hidden" id="month" value="${month}">
 		</div>
 		<div align="right">
 			<form action="/kaikei/account/ledger.do" method="GET">
@@ -31,13 +37,13 @@
 						<td style="width:20px">Y</td>
 						<td style="width:20px">M</td>
 						<td style="width:20px">D</td>
-						<td style="width:200px">Account</td>
-						<td style="width:200px">Customer</td>
+						<td style="width:180px">Account</td>
+						<td style="width:180px">Customer</td>
 						<td style="width:30px">Classify</td>
-						<td style="width:100px">Debtor</td>
-						<td style="width:100px">Creditor</td>
+						<td style="width:60px">Debtor</td>
+						<td style="width:60px">Creditor</td>
 						<td>ABS</td>
-						<td style="width:150px">Entry date</td>
+						<td style="width:100px">Modified</td>
 						<td style="width:10px"></td>
 					</tr>
 				</thead>
@@ -45,17 +51,17 @@
 				
 					<c:forEach var="item" items="${statements}" varStatus="status">
 						<tr id="state${status.index}" class="exist">
-							<td><input type="text" name="year" value="${item.year}" placeholder="Y"/></td>
-		    				<td><input type="text" name="month" value="${item.month}" placeholder="M"/></td>
-			    			<td><input type="text" name="date" value="${item.date}" placeholder="D" /></td>
-			    			<td><input type="text" name="account_cd" value="${item.account_cd}" maxlength="4" placeholder="Account"/><label>${item.title}</label></td>
+							<td><label>${item.year}</label></td>
+		    				<td><label>${item.month}</label></td>
+			    			<td><input type="text" name="date" value="${item.date}" maxlength="2" placeholder="D" /></td>
+			    			<td><input type="text" name="account_cd" value="${item.account_cd}" maxlength="4" placeholder="Account"/><label>${item.acc_title}</label></td>
 			    			<td><input type="text" name="customer_cd" value="${item.customer_cd}" maxlength="5" placeholder="Customer"/><label>${item.cus_title}</label></td>
 			    			<td><input type="text" name="classify" value="${item.classify}" placeholder="Classify"/></td>
 			    			<td><input type="text" name="debtor" value="${item.debtor}" placeholder="Debtor"/></td>
 			    			<td><input type="text" name="creditor" value="${item.creditor}" placeholder="Creditor"/></td>
 			    			<td><input type="text" name="abs" value="${item.abs}" placeholder="ABS"/></td>
-			    			<td></td>
-			    			<td><a href="">X</a><input type="hidden" name="seq" value=""></td>
+			    			<td><label>${item.mod_date}</label></td>
+			    			<td><a href="javascript:removeRow(${status.index});">X</a><input type="hidden" name="seq" value="${item.seq}"></td>
 						</tr>
 					</c:forEach>
 					
@@ -63,13 +69,17 @@
 			</table>
 			</div>
 			<div id="statebtn" align="right">
-				<input id="saveBtn" class="button" style="margin:5px" type="button" onclick="statementSubmit();" value="Save"/>
-				<input type="reset" id="stateReset" class="button" style="display:none" onclick="return deleteBtn();" value='Reset'/>
+				<input type="button" id="saveBtn" class="button" style="display:none" style="margin:5px" onclick="submitStatement();" value="Save"/>
+				<input type="reset" id="resetBtn" class="button" style="display:none" onclick="return resetStatement();" value='Reset'/>
+				<input class="button" style="margin:5px" type="button" onclick="debug();" value="debug"/>
 			</div>
+			<div id="data-dynamic">
+				<input type="hidden" id="changeRow" value=""/>
+			</div>
+		</form>
 			<div id="data-static">
 				<input type="hidden" id="existrows" value="${fn:length(statements)}"/>
-				<input type="hidden" id="changerows" value=""/>
 				<input type="hidden" id="newrows" value="0"/>
 			</div>
-	    </form>
+
 		

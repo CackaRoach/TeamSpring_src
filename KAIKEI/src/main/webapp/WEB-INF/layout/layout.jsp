@@ -27,8 +27,25 @@
    		$("#aside-title").html(p_path.toUpperCase());
        	$("#aside" + "-" + p_path).css("display", "block");
        	$("#aside" + "-" + p_path + "-" + c_path).children().addClass("aside-selected");
-       				    
+
+       	setTimeout(function() {
+	       	$(".gnb-dth1").hover(function() {
+	       		$(".gnb-dth2").stop().slideDown(180);
+				
+	        }, function() {
+	        	$(".gnb-dth2").stop().slideUp(180);
+	        });
+	
+	       	$(".gnb-dth2").hover(function() {
+	       		$(".gnb-dth2").stop().slideDown(180);
+	        }, function() {
+	        	$(".gnb-dth2").stop().slideUp(180);
+        });
+        
+       	}, 300);
     });
+
+
 </script>
 <body style="max-width: 100%">
     <div id="header">

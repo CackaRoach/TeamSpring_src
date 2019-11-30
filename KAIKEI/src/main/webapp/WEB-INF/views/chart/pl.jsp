@@ -6,7 +6,7 @@
 	    <hr>
     	<div align="center">
     	<span style="font-size:2em">
-    	<a href="">&lt;</a> 2018-2019 <a href="">&gt;</a>
+    	<!-- <a href="">&lt;</a> --> 2018-2019 <!-- <a href="">&gt;</a> -->
     	</span>
     	</div>
 		<div id="chartContainer" style="height: 500px; width: 100%;"></div>
@@ -30,14 +30,21 @@
 				axisY: {
 					includeZero: false
 				},
-				toolTip:{
+				toolTip: {
 					shared:true
+				},
+				legend: {
+					cursor:"pointer",
+					verticalAlign: "bottom",
+					horizontalAlign: "left",
+					dockInsidePlotArea: true
 				},
 				data: [{        
 					type: "line",
 					name: "2019",
-					lineColor: "blue",
+					color: "blue",
 					showInLegend: true,
+					markerType: "square",
 					legendText: "2019",
 					dataPoints: [
 						{ y: 1450000, label: "Q1", markerColor: "black"},
@@ -49,8 +56,9 @@
 				{        
 					type: "line",
 					name: "2018",
-					lineColor: "green",
+					color: "green",
 					showInLegend: true,
+					markerType: "square",
 					legendText: "2018",
 					dataPoints: [
 						{ y: 1350000, label: "Q1", markerColor: "black"},

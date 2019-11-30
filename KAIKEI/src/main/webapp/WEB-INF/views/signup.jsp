@@ -50,9 +50,6 @@
 	
 </script>
 <body>
-    <div id="header">
-    	<div align="center" style="font-size: 40px; font-style: italic; padding:30px;">K A I K E I</div>
-    </div>
 	<div align="center" style="padding:10px 0px; background-color:#1591ff;">
 		<span style="font-size:2em">Sign Up</span>
 	</div>

@@ -4,8 +4,9 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("StatementListVO")
 public class StatementListVO {
+	private String seq;
 	private String account_cd;
-	private String title;
+	private String acc_title;
 	private String customer_cd;
 	private String cus_title;
 	private String year;
@@ -15,18 +16,26 @@ public class StatementListVO {
 	private int debtor;
 	private int creditor;
 	private String abs;
+	private String mod_date;
 	
+	
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
 	public String getAccount_cd() {
 		return account_cd;
 	}
 	public void setAccount_cd(String account_cd) {
 		this.account_cd = account_cd;
 	}
-	public String getTitle() {
-		return title;
+	public String getAcc_title() {
+		return acc_title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setAcc_title(String acc_title) {
+		this.acc_title = acc_title;
 	}
 	public String getCustomer_cd() {
 		return customer_cd;
@@ -81,5 +90,11 @@ public class StatementListVO {
 	}
 	public void setAbs(String abs) {
 		this.abs = abs;
+	}
+	public String getMod_date() {
+		return mod_date;
+	}
+	public void setMod_date(String mod_date) {
+		this.mod_date = mod_date;
 	}
 }

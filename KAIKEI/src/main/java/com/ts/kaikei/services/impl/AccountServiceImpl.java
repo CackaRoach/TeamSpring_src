@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ts.kaikei.dao.CustomerDAO;
 import com.ts.kaikei.dao.StatementDAO;
@@ -14,10 +16,11 @@ import com.ts.kaikei.dao.StatementDAO;
 import com.ts.kaikei.services.AccountService;
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
-import com.ts.kaikei.vo.StatementVO;
+
 
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
+	
 	@Autowired
 	StatementDAO statementDAO;
 	@Autowired
@@ -30,30 +33,28 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	
 	@Override
-	public List<StatementListVO> getStatements(String company_cd) {
+	public List<StatementListVO> getStatements(String company_cd, String year, String month) {
+		Map<String, String> searchParams = new HashMap<String, String>();
+		
+		searchParams.put("company_cd", company_cd);
+		searchParams.put("year", year);
+		searchParams.put("month", month);
+		
 		return statementDAO.getStatementList(company_cd);
 	}
 	
 	public void addStatement(List<Map<String, String>> statementList, String userId, String company_cd) {
-		StatementVO statementVO = new StatementVO();
+		Map<String, Object> statements = new HashMap<String, Object>();
 		
-		for(Map<String, String> statement : statementList) {
-			statementVO.setDate(statement.get("DATE"));
-			statementVO.setAccount_cd(statement.get("ACCOUNT_CD"));
-			statementVO.setCustomer_cd(statement.get("CUSTOMER_CD"));
-			statementVO.setClassify(statement.get("CLASSIFY"));
-			statementVO.setDebtor(statement.get("DEBTOR"));
-			statementVO.setCreditor(statement.get("CREDITOR"));
-			statementVO.setAbs(statement.get("ABS"));
-			
-			System.out.println("DATE : " + statement.get("DATE"));
-			
-			statementVO.setCompany_cd(company_cd);
-			statementVO.setEnt_id(userId);
-			statementVO.setMod_id(userId);
-			
-			statementDAO.addStatement(statementVO);
+		for(int i = 0; i < statementList.size(); i++) {
+			statementList.get(i).put("ent_id", userId);
+			statementList.get(i).put("mod_id", userId);
+			statementList.get(i).put("company_cd", company_cd);
 		}
+		
+		statements.put("statementList", statementList);
+		
+		statementDAO.saveStatement(statements);
 	}
 
 
@@ -78,22 +79,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
-	public int getCustomerCount(String company_cd, String searchParam) {
-		
-		if(searchParam == null) {
-			searchParam = "";
-		}
-		
-		Map<String, String> params = new HashMap<String, String>();
-		
-		params.put("company_cd", company_cd);
-		params.put("searchParam", searchParam);
-
-		return customerDAO.getCustomerCount(params);
-	}
-	
-	@Override
-	public List<CustomerVO> getCustomerList(String company_cd, String searchParam, String pageNum) {
+	public List<CustomerVO> getCustomerList(String company_cd, String searchParam, String pageNum, String size) {
 
 		if(searchParam == null) {
 			searchParam = "";
@@ -108,8 +94,9 @@ public class AccountServiceImpl implements AccountService {
 		params.put("company_cd", company_cd);
 		params.put("searchParam", searchParam);
 		params.put("pageNum", pageNum);
+		params.put("size", size);
 		
-		return customerDAO.getCustomerList(params);
+		return customerDAO.selectCustomerList(params);
 	}
 	
 	@Override
@@ -127,8 +114,6 @@ public class AccountServiceImpl implements AccountService {
 		
 		customerVO.setCompany_cd(company_cd);
 		customerVO.setMod_id(userId);
-		customerVO.setMod_prog("Web-kaikei");
-		
 		
 		customerDAO.updateCustomer(customerVO);
 		
