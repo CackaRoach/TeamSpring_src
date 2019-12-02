@@ -16,50 +16,54 @@
 			    <th colspan="2">Amount</th>
 			  </tr>
 			  <tr>
-			    <td colspan="2">Revenues</td>
+			    <td colspan="2">Sales</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[0]}</td>
 			  </tr>
 			  <tr>
-			    <td colspan="2">Cost of goods sold</td>
+			    <td colspan="2">Wonga</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[1]}</td>
 			  </tr>
 			  <tr>
-			    <td colspan="2">Gross margin</td>
+			    <td colspan="2">Gross profit</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[2]}</td>
 			  </tr>
 			  <tr>
-			    <td colspan="2">Selling and administrative expenses</td>
+			    <td colspan="2">Selling and administrative</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[3]}</td>
 			  </tr>
 			  <tr>
-			    <td rowspan="2"></td>
-			    <td>Operating revenue</td>
+			   <td colspan="2">Operating profit</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[4]}</td>
 			  </tr>
 			  <tr>
-			    <td>non-operating expenses</td>
+			   	<td colspan="2">Non-operating Income</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[5]}</td>
 			  </tr>
 			  <tr>
-			    <td colspan="2">Income before tax expenses</td>
+			    <td colspan="2">Non-operating expenses</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[6]}</td>
 			  </tr>
 			  <tr>
-			    <td colspan="2">Income taxes</td>
+			    <td colspan="2">Income before Tax</td>
 			    <td></td>
-			    <td></td>
+			    <td>${PL_dataList[7]}</td>
 			  </tr>
 			  <tr>
-			    <td colspan="2">net income</td>
+			    <td colspan="2">Income Tax</td>
 			    <td></td>
+			    <td>${PL_dataList[8]}</td>
+			  </tr>
+			  <tr>
+			    <td colspan="2">Net Income</td>
 			    <td></td>
+			    <td>${PL_dataList[0]}</td>
 			  </tr>
 			</table>
 			<p></p>

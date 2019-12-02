@@ -46,6 +46,9 @@ public class ReportController {
 	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
 	public String ledgerCTB(Model model) {
 		logger.info("Call : /report/ctb.do - GET");
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println(reportService.getStatementList().size());
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		
 		model.addAttribute("accountList", reportService.get_Sorted_Acconutlist());
 		model.addAttribute("CTB_dataList", reportService.CTB_Calculator());
@@ -56,11 +59,9 @@ public class ReportController {
 	@RequestMapping(value = "/report/pl.do", method = RequestMethod.GET)
 	public String ledgerPL(Model model) {
 		logger.info("Call : /report/pl.do - GET");
-		/*
 		reportService.PL_Calculator();
 		
-		model.addAttribute("dataList", reportService.getPL_dataList());
-		*/
+		model.addAttribute("PL_dataList", reportService.PL_Calculator());
 		return "/report/pl";
 	}
 
