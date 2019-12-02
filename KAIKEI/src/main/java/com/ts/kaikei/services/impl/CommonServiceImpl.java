@@ -2,8 +2,16 @@
 package com.ts.kaikei.services.impl;
 
 
+
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,14 +80,14 @@ public class CommonServiceImpl implements CommonService {
 	}
 	
 	@Override
-	public boolean forgotId(String email) {
-		/*
+	public boolean forgotUser(String id, String email) {
+		
 		String host = "smtp.naver.com";  
 
 		final String username = "";  
 		final String password = "";
 		int port = 465; 
-
+		
 		String recipient = ""; 
 		String subject = ""; 
 		String body = "";
@@ -106,12 +114,12 @@ public class CommonServiceImpl implements CommonService {
 			mimeMessage.setSubject(subject); 
 			mimeMessage.setText(body);
 			Transport.send(mimeMessage); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
 		
-		return false;
+		return true;
 	}
 	
 	@Override

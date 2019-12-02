@@ -63,8 +63,8 @@ function submit() {
 				</div>
 				<div align="right">
 					<hr>
-					<button type="button" class="" onclick="location.href='/signup.do'">Sign Up</button>
-					<button type="button" class="">forgot ID,Password</button>
+					<button type="button" class="logingray" onclick="location.href='/signup.do'">Sign Up</button>
+					<button type="button" class="logingray" onclick="location.href='/forgot.do'">Forgot ID/PW</button>
 					<hr>
 				</div>
 			</div>

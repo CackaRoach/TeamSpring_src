@@ -9,6 +9,25 @@
     <link rel= "stylesheet" type="text/css" href="/css/layout.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(window).load(function() {
+		setTimeout(function() {
+	       	$(".gnb-dth1").hover(function() {
+	       		$(".gnb-dth2").stop().slideDown(180);
+				
+	        }, function() {
+	        	$(".gnb-dth2").stop().slideUp(180);
+	        });
+	
+	       	$(".gnb-dth2").hover(function() {
+	       		$(".gnb-dth2").stop().slideDown(180);
+	        }, function() {
+	        	$(".gnb-dth2").stop().slideUp(180);
+	    });
+	    
+	   	}, 300);
+	});
+</script>
 <body style="max-width: 100%">
     <div id="header">
 	    <tiles:insertAttribute name="header" />
