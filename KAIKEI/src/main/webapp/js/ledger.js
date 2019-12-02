@@ -55,10 +55,12 @@ function addRow() {
 	var yy = today.getFullYear();
 	var mm = today.getMonth();
 	
+	console.log(yy, mm);
+	
 	var rowItem = "";
 	rowItem += "<tr id='state" + fixedrows + "' class='new'>";
-	rowItem += "<td><label>" + String(yy).substring(2) + "</label></td>";
-	rowItem += "<td><label>" + mm + "</label></td>";
+	rowItem += "<td><label>" + $("#year").val().substring(2) + "</label></td>";
+	rowItem += "<td><label>" + $("#month").val() + "</label></td>";
 	rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
 	rowItem += "<td><input type='text' name='account_cd' maxlength='4' placeholder='0000'/></td>";
 	rowItem += "<td><input type='text' name='customer_cd' maxlength='5' placeholder='00000'/></td>";
