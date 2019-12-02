@@ -34,14 +34,18 @@
         
 	</insert>
 	
+	<!-- companyList Select MANAGE -->
 	<select id="selectCompany" parameterType="hashmap" resultType="CompanyListVO">
-		SELECT * FROM(
-		SELECT (ROW_NUMBER() OVER()) AS RN, A.company_cd, A.title, A.phone, A.auth_cd, B.name, A.domain
+		SELECT (ROW_NUMBER() OVER()) AS RN, A.company_cd, A.title, A.phone, 
+		CASE WHEN A.auth_cd = 'AUT001' THEN 'ACCEPT'
+		WHEN A.auth_cd = 'AUT002' THEN 'REJECT'
+		WHEN A.auth_cd = 'AUT003' THEN 'HOLD UP' END AS auth_cd,
+		B.name, A.domain
 		FROM company A, users B
 		WHERE 1=1
 		AND A.company_cd = B.company_cd
 		AND B.posit_cd = 'POS002'
-		AND A.title LIKE '%' || #{mINPUT} || '%'
+		AND UPPER(A.title) LIKE '%' || UPPER(#{mINPUT}) || '%'
 		 <if test = "STAT_op != '00'">
 		 	<choose>
 				<when test = "STAT_op == '01'">
@@ -55,11 +59,7 @@
 				</when>
 			</choose>
 		</if>
-		
 		ORDER BY RN ASC
-		) SUBTABLE 
-		WHERE 1=1
-		AND RN BETWEEN (CAST(#{mPAGE} AS INTEGER) - 1) * 10 + 1 AND CAST(#{mPAGE} AS INTEGER) * 10
 		
 	</select>
 	
@@ -71,5 +71,36 @@
   		WHERE company_cd = #{company_cd}
 	</update>
 	
+	<!-- COMPANY DETAILPAGE INFO MANAGE -->
+	<select id="infoCompany" parameterType="String" resultType="CompanyListVo">
+		SELECT  A.company_cd, A.title, A.phone, A.fax,
+		A.bank_title, A.bank_acc, A.reg_cd, A.ent_date,
+		CASE WHEN A.auth_cd = 'AUT001' THEN 'ACCEPT'
+		WHEN A.auth_cd = 'AUT002' THEN 'REJECT'
+		WHEN A.auth_cd = 'AUT003' THEN 'HOLD UP' END AS auth_cd,
+		B.name, A.domain, B.email, replace(A.auth_cd,'AUT','') as aut
+		
+		FROM company A, users B
+		
+		WHERE 1=1
+		AND A.company_cd = #{company_cd}
+		AND A.company_cd = B.company_cd
+		AND B.posit_cd = 'POS002'
+	</select>	
+	
+	<!-- COMPANY INFO UPDATE MANAGE -->
+	<update id="infoUpdate" parameterType="CompanyListVo">
+		UPDATE company
+  		SET auth_cd = #{auth_cd}, title = #{title}, reg_cd = #{reg_cd},
+  			fax = #{fax}, phone = #{phone}, domain = #{domain}, bank_title = #{bank_title}, bank_acc = #{bank_acc}, 
+  			mod_id = 'Admin', mod_date = (SELECT CURRENT_DATE), mod_prog = 'Web-kaikei'
+  		WHERE company_cd = #{company_cd}
+	</update>
+    
+     <!-- COMPANY DELETE MANAGE -->
+    <delete id="companyDelete" parameterType="String">
+	    DELETE FROM company
+	    WHERE company_cd = #{company_cd}
+    </delete>
     
 </mapper>

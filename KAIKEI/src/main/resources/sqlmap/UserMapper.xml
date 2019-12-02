@@ -47,5 +47,49 @@
   		WHERE id = #{id}
     </update>
     
-  
+  	<!-- USERS DELETE FOR COMPANY DELETE MANAGE -->
+    <delete id="customerDeletecmp" parameterType="String">
+	    DELETE FROM users
+	    WHERE company_cd = #{company_cd}
+    </delete>
+    
+    <!-- User List MANAGE -->
+    <select id="selectUser" parameterType="hashmap" resultType="UserListVO">
+    	SELECT * FROM users A, 
+		(select a.id as BID, case when b.c_cd = a.posit_cd then b.title end as posit_cd_title from users a, childcd b where 1=1 AND b.c_cd = a.posit_cd) B,
+		(SELECT a.id as CID, case when b.c_cd = a.state_cd then b.title end as state_cd_title from users a, childcd b where 1=1 AND b.c_cd = a.state_cd) C,
+		(SELECT users.id AS DID, CASE WHEN company.company_cd = users.company_cd THEN company.title END AS company_name FROM company, users WHERE 1=1 AND company.company_cd = users.company_cd) D
+    	WHERE NOT posit_cd = 'POS001' AND A.id = B.BID AND A.id = C.CID AND A.id = D.DID
+    	AND UPPER(A.id) LIKE '%' || UPPER(#{mINPUT}) || '%'
+    </select>
+    
+    <!-- User Detail info MANAGE -->
+    <select id="infoUsers" parameterType="String" resultType="UserListVO">
+    	SELECT * FROM users A, 
+		(select a.id as BID, case when b.c_cd = a.posit_cd then b.title end as posit_cd_title from users a, childcd b where 1=1 AND b.c_cd = a.posit_cd) B,
+		(SELECT a.id as CID, case when b.c_cd = a.state_cd then b.title end as state_cd_title from users a, childcd b where 1=1 AND b.c_cd = a.state_cd) C,
+		(SELECT users.id AS DID, CASE WHEN company.company_cd = users.company_cd THEN company.title END AS company_name FROM company, users WHERE 1=1 AND company.company_cd = users.company_cd) D
+    	WHERE A.id = #{id} AND A.id = B.BID AND A.id = C.CID AND A.id = D.DID
+    </select>
+    
+    <!-- User Update info MANAGE -->
+    <update id="infoUpdateUser" parameterType="UserListVO">
+    	update users
+		set name = #{name}, email = #{email}, phone = #{phone},
+		mod_id = 'Admin', mod_date = (SELECT CURRENT_DATE), mod_prog = 'Web-kaikei'
+		where id = #{id}
+    </update>
+    
+    <!-- User Delete One Person MANAGE -->
+  	<delete id="userDelete">
+  		DELETE FROM users
+	    WHERE id = #{id}
+  	</delete>
+  	
+  	<!-- Get ADMIN CompanyCode  MANAGE -->
+  	<select id="getCompanyCode" resultType="String">
+  		SELECT A.company_cd FROM users A
+		WHERE RIGHT(A.posit_cd,3) = '001'
+  	</select>
+  	
 </mapper>

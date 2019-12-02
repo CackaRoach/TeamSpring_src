@@ -3,53 +3,52 @@
 	pageEncoding="Shift_JIS"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="/css/manage.css">
 
 <script type="text/javascript">
-		$(document).ready(function(){
-			
-	    	$("#findCompany_btn").click(function () {
-		       getCompanyList();
-		     });
-		})
-		
-		function getCompanyList() {
-			var url = "/manage/company.do?";
-			var state_op = $("#stateCompany_selct option:selected").val();
-		  	var input_tx = $("#findCompany-input").val();
-		  	url = url + "mINPUT=" + input_tx + "&STAT_op=" + state_op + "&mPAGE=" + "1";
-			
-		  	location.href = url;
-		 }
+	$(document).ready(function() {
+
+		$("#findCompany_btn").click(function() {
+			getCompanyList();
+		});
+	})
+
+	function getCompanyList() {
+		var url = "/manage/company.do?";
+		var state_op = $("#stateCompany_selct option:selected").val();
+		var input_tx = $("#findCompany-input").val();
+		url = url + "mINPUT=" + input_tx + "&STAT_op=" + state_op + "&mPAGE="
+				+ "1";
+
+		location.href = url;
+	}
+</script>
+
+<div>
+
+	<div style="padding: 20px">
+		<span style="font-size: 1.7em;">Manage-Company</span>
+	</div>
+
+
+	<div>
+		<div align="right">
+			<select class="button" id="stateCompany_selct"
+				onchange="getCompanyList()">
+				<option value="">SELECT STATE</option>
+				<option value="00">ALL</option>
+				<option value="01">ACCEPT</option>
+				<option value="02">RESULT</option>
+				<option value="03">HOLD OFF</option>
+			</select> <input class="input-box" id="findCompany-input" type="text"
+				placeholder="Search for Company">
+			<button class="button" id="findCompany_btn">FIND</button>
+		</div>
+	</div>
 	
-	</script>
-
-<div class="wrap">
-
-	<div>
-		<h3>Manage - Company</h3>
-	</div>
-
-
-	<div>
-		<input id="findCompany-input" type="text"
-			placeholder="Search for Company">
-		<button id="findCompany_btn">FIND</button>
-	</div>
-
-	<select id="stateCompany_selct" onchange="getCompanyList()">
-		<option value="">SELECT STATE</option>
-		<option value="00">ALL</option>
-		<option value="01">ACCEPT</option>
-		<option value="02">RESULT</option>
-		<option value="03">HOLD OFF</option>
-	</select>
-
-
-	<table class="table_list">
+	<table class="company">
 		<thead>
 			<tr>
-				<th>    </th>
+				<th></th>
 				<th>Code</th>
 				<th>Company</th>
 				<th>CEO</th>

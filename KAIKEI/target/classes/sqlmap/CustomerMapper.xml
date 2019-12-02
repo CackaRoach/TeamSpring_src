@@ -94,5 +94,11 @@
 	    from customer
 	    where cus_cd = #{value}
     </select>
+    
+    <!-- CUSTOMER DELETE FOR COMPANY DELETE MANAGE -->
+    <delete id="customerDeletecmp" parameterType="String">
+	    DELETE FROM customer
+	    WHERE company_cd = #{company_cd}
+    </delete>
 
 </mapper>
