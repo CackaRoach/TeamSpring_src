@@ -329,19 +329,19 @@ label {
 	font-size: 16px;
 }
 
-.logingray {
+.login-gray-btn {
 	background-color: #616161;
 	min-width: 100px;
 	border: none;
 	color: white;
 	padding: 5px;
-	text-align: center;
+	text-align: left;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 0.8em;	
 }
 
-.logingray::after {
+.login-gray-btn::after {
 	content: ">";
 	float: right;
 	font-size: 0.6em;

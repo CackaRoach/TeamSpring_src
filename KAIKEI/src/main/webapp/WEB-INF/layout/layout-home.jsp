@@ -10,7 +10,7 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-	$(window).load(function() {
+	$(window).ready(function() {
 		setTimeout(function() {
 	       	$(".gnb-dth1").hover(function() {
 	       		$(".gnb-dth2").stop().slideDown(180);

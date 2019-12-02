@@ -3,7 +3,7 @@
 
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
 
-    <select id="getStatementList" parameterType="String" resultType="StatementListVO">
+    <select id="selectStatementList" parameterType="Map" resultType="StatementListVO">
     
     	SELECT 
     		seq,
@@ -31,6 +31,7 @@
 	    	AND STT.customer_cd = CUS.cus_cd
 	    	AND STT.account_cd = ACC.acc_cd
 		ORDER BY SEQ ASC
+
 		
     </select>
     

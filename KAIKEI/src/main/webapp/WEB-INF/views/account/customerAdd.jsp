@@ -5,8 +5,8 @@
 		        <span style="font-size: 2em;">Customer</span>
 		    </div>
 		    <form action="/account/customerAddExc.do" method="post">
-		    	<div style="border:1px solid black; padding:15px; margin:5px; height:650px;">
-		    		<div align="center">
+		    	<div style="border:1px solid black; padding:30px; margin:5px; width: 700px;">
+		    		<div>
 			            <table>
 			                <tbody>
 			                    <tr>
@@ -53,11 +53,15 @@
 			                        <td>Worker Email</td>
 			                        <td><input type="text" class="input-box" name="worker_email"></td>
 			                    </tr>
+			                    <tr>
+			                        <td>Memo</td>
+			                        <td><input type="text" class="input-box" name="memo"></td>
+			                    </tr>
 			          		</tbody>
 			        	</table>
 		         	</div>
-		         	<div align="right">
-			            <input type="submit" style="margin:3px" class="button" value="ADD" onclick="return formCheck();"><br>
+		         	<div align="right" style="margin-top: 60px;">
+			            <input type="submit" style="margin:3px" class="button" value="ADD" onclick="return formCheck();">
 			            <input type="button" style="margin:3px" class="button" value="CANCEL" onclick="location.href='/account/customer.do'">
 			        </div>
 	         	</div>
@@ -73,19 +77,18 @@
 					$("#title_error").text("Input Title");
 					$("#title_error").css("display", "block");
 				} else {
-					$("#title_error").text("");
 					$("#title_error").css("display", "none");
 				}
 			});
 
 			$("#cus_cd").blur(function() {
-
-				if($("#cus_cd").val() == "") {
-					$("#cus_cd_error").text("Input Code");
+				var cus_cd = $("#cus_cd").val();
+				
+				if(cus_cd.match(/\D/) || cus_cd.length != 5) {
+					$("#cus_cd_error").text("Code must 5 Number");
 					$("#cus_cd_error").css("display", "block");
 					return false;
 				} else {
-					$("#cus_cd_error").text("");
 					$("#cus_cd_error").css("display", "none");
 				}
 
@@ -111,6 +114,7 @@
 			
 		})
 			
+		
 			
 		function formCheck() {
 			if($("#title").val() == "") {
@@ -118,7 +122,7 @@
 				return false;
 			}
 
-			if($("#cus_cd").val() == "") {
+			if($("#cus_cd_error").css("color") != "rgb(0, 128, 0)") {
 				$("#cus_cd").focus();
 				return false;
 			}

@@ -14,7 +14,7 @@
 		</div>
 		<hr>
 		<div align="center" style="padding: 30px;">
-			<span style="font-size: 1.5em;">${year} - ${month}</span>
+			<span style="font-size: 1.5em;">${year} - ${month - 1} ~ ${year} - ${month}</span>
 			<input type="hidden" id="year" value="${year}">
 			<input type="hidden" id="month" value="${month}">
 		</div>

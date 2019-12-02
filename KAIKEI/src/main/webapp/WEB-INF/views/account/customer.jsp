@@ -29,23 +29,23 @@
 		                </tr>
 		            <thead>
 		            <tbody>
-		                <c:forEach var="customerVO" items="${customerList}" begin="1">
+		                <c:forEach var="item" items="${customerList}">
 		                <tr>
-		                    <td><a href="/account/customerDetail.do?cus_cd=${customerVO.cus_cd}">${customerVO.cus_cd}</a></td>
-		                    <td>${customerVO.title}</td>
-		                    <td>${customerVO.ceo_name}</td>
-		                    <td>${customerVO.worker_name}</td>
-		                    <td>${customerVO.fax}</td>
-		                    <td></td>
+		                    <td><a href="/account/customerDetail.do?cus_cd=${item.cus_cd}">${item.cus_cd}</a></td>
+		                    <td>${item.title}</td>
+		                    <td>${item.ceo_name}</td>
+		                    <td>${item.worker_name}</td>
+		                    <td>${item.fax}</td>
+		                    <td>${item.memo}</td>
 		                </tr>
 		                </c:forEach>
 		        	</tbody>
 	            </table>
 	        </div>
 	        <div align="center">
- 	        	<c:if test="${customerList[0].fax ne 0}">
+ 	        	<c:if test="${customerList[0].pageNum ne 0}">
  	        		<%--  0 index - FAX = PAGE NUM  --%>
-		        	<c:forEach var="i" begin="0" end="${customerList[0].fax - 1}">
+		        	<c:forEach var="i" begin="0" end="${customerList[0].pageNum - 1}">
 		        		<a class="pagenum" href="/account/customer.do?crtPage=${i}&searchParam=${searchParam}">${i + 1}</a> 
 		        	</c:forEach>
 	        	</c:if>
