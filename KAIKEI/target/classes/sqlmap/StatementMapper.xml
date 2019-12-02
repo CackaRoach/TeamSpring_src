@@ -3,7 +3,7 @@
 
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
 
-    <select id="getStatementList" parameterType="String" resultType="StatementListVO">
+    <select id="selectStatementList" parameterType="Map" resultType="StatementListVO">
     
     	SELECT 
     		seq,
@@ -22,15 +22,17 @@
     	FROM 
     		statements AS STT, 
     		account AS ACC, 
-    		customer as CUS
+    		customer AS CUS
     	WHERE 1=1
 	    	AND STT.company_cd = #{company_cd}
 	    	AND STT.date <![CDATA[>=]]> '2019-11-01' 
-	    	AND STT.date <![CDATA[<]]> '2019-12-01'
+	    	AND STT.date <![CDATA[<]]> '2019-12-31'
 	    	AND STT.company_cd = CUS.company_cd
 	    	AND STT.customer_cd = CUS.cus_cd
 	    	AND STT.account_cd = ACC.acc_cd
 		ORDER BY SEQ ASC
+
+		
     </select>
     
     <update id="saveStatement" parameterType="Map">

@@ -18,11 +18,13 @@
 					</ul>
 				</c:if>
 					
-					<c:if test="${posit_cd eq 'POS001'}">
+				<c:if test="${posit_cd eq 'POS001'}">
+					<ul>
 						<li><a id="nav-manage-company" href="/manage/company.do">Manage</a></li>
 						<li><a id="nav-manage-users" href="/manage/users.do">Users</a></li>
 						<li><a id="nav-manage-code" href="/manage/code.do">Code</a></li>
-					</c:if>
+					</ul>
+				</c:if>
 			</div>
 			<div class="gnb-dth2">
 				<ul class="">
@@ -31,14 +33,16 @@
 					<li><a href="/report/gl.do">General Ledger</a></li>
 					<li><a href="/report/ctb.do">Compound Trial Balance</a></li>
 				</ul>
-				<ul class="">
+				<ul>
 					<li><a href="/chart/pl.do">P/L</a></li>
 					<li><a href="/chart/bs.do">B/S</a></li>
 				</ul>
-				<ul class="">
+				<ul>
 					<li><a href="/setting/personal.do">Personal</a></li>
-					<li><a href="/setting/company.do">Company</a></li>
-					<li><a href="/setting/employee.do">Employee</a></li>
+					<c:if test="${posit_cd eq 'POS002'}">
+						<li><a href="/setting/company.do">Company</a></li>
+						<li><a href="/setting/employee.do">Employee</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

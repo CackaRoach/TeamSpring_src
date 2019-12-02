@@ -4,16 +4,17 @@ package com.ts.kaikei.services.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ts.kaikei.dao.CustomerDAO;
 import com.ts.kaikei.dao.StatementDAO;
 
 import com.ts.kaikei.services.AccountService;
+import com.ts.kaikei.vo.CustomerListVO;
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
 
@@ -33,14 +34,20 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	
 	@Override
-	public List<StatementListVO> getStatements(String company_cd, String year, String month) {
+	public List<StatementListVO> getStatements(String company_cd, String year, String month, String crtPage) {
+		
+		if(crtPage == null) {
+			crtPage = "0";
+		}
+		
 		Map<String, String> searchParams = new HashMap<String, String>();
 		
 		searchParams.put("company_cd", company_cd);
 		searchParams.put("year", year);
 		searchParams.put("month", month);
+		searchParams.put("crtPage", crtPage);
 		
-		return statementDAO.getStatementList(company_cd);
+		return statementDAO.selectStatementList(searchParams);
 	}
 	
 	public void addStatement(List<Map<String, String>> statementList, String userId, String company_cd) {
@@ -66,6 +73,13 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public boolean addCustomer(String company_cd, CustomerVO customerVO, String userId) {
+		
+		Pattern codePattern = Pattern.compile("^[0-9]{5}$");
+		Matcher codeMatcher = codePattern.matcher(customerVO.getCus_cd());
+		
+		if( !codeMatcher.find()) {
+			return false;
+		}
 		 
 		customerVO.setCompany_cd(company_cd);
 		
@@ -79,7 +93,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
-	public List<CustomerVO> getCustomerList(String company_cd, String searchParam, String pageNum, String size) {
+	public List<CustomerListVO> getCustomerList(String company_cd, String searchParam, String pageNum, String size) {
 
 		if(searchParam == null) {
 			searchParam = "";
@@ -111,7 +125,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public boolean updateCustomer(String company_cd, CustomerVO customerVO, String userId) {
-		
+
 		customerVO.setCompany_cd(company_cd);
 		customerVO.setMod_id(userId);
 		

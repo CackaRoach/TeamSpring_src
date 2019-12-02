@@ -5,7 +5,7 @@
     
     <insert id="addCustomer" parameterType="CustomerVO">
     
-        INSERT INTO customer(
+        INSERT INTO customer (
         	company_cd, 
         	cus_cd, 
         	title, 
@@ -23,9 +23,10 @@
         	entdate, 
         	ent_prog,
         	mod_id, 
-        	mod_date, mod_prog
+        	mod_date, 
+        	mod_prog
         	)
-        VALUES(
+        VALUES (
         	#{company_cd}, 
         	#{cus_cd}, 
         	#{title}, 
@@ -44,53 +45,47 @@
         	'Web-kaikei',
         	#{mod_id}, 
         	NOW(), 
-        	'Web-kaikei')
+        	'Web-kaikei'
+        	)
         
     </insert>
     
-    <select id="selectCustomerList" parameterType="map" resultType="CustomerVO" >
-    	(
-	        SELECT 
-	        	cus_cd, 
-	        	title, 
-	        	ceo_name, 
-	        	worker_name, 
-	        	fax
-	        FROM 
-	        	customer
-	        WHERE 1=1
-	        	AND company_cd = #{company_cd}
-		        AND (cus_cd LIKE '%' || #{searchParam} || '%'
-		        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
-		        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%'))
-	     
-	     		ORDER BY cus_cd ASC
-				LIMIT #{size}::INTEGER OFFSET ${pageNum} * #{size}::INTEGER
-        )
-        UNION
-        (
-        	SELECT
-			    '0',
-			    '0',
-			    '0',
-			    '0',
-			    ((COUNT(*) + (#{size}::INTEGER - 1))/#{size}::INTEGER)::VARCHAR
-			FROM
-			    customer
-			WHERE
-			    1 = 1
+    <select id="selectCustomerList" parameterType="Map" resultType="CustomerListVO" >
+
+        SELECT 
+        	(SELECT
+        		((COUNT(*) + (#{size}::INTEGER - 1))/#{size}::INTEGER)
+        	FROM
+		    	customer
+			WHERE 1 = 1
 			    AND company_cd = '00001'
 			    AND (
-			        cus_cd LIKE '%' || '' || '%'
-			        OR UPPER(title) LIKE UPPER('%' || '' || '%')
-			        OR UPPER(ceo_name) LIKE UPPER('%' || '' || '%')
+			        cus_cd LIKE '%' || #{searchParam} || '%'
+			        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
+			        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
 			    )
-        )
-        ORDER BY cus_cd ASC
+        	) AS pagenum,
+        	cus_cd, 
+        	title, 
+        	fax,
+        	ceo_name, 
+        	worker_name,
+        	memo
+        FROM 
+        	customer
+        WHERE 1=1
+        	AND company_cd = #{company_cd}
+	        AND (cus_cd LIKE '%' || #{searchParam} || '%'
+	        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
+	        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%'))
+     
+     		ORDER BY cus_cd ASC
+			LIMIT #{size}::INTEGER OFFSET ${pageNum} * #{size}::INTEGER
+
         
     </select>
     
-    <select id="getCustomerDetail" parameterType="map" resultType="CustomerVO" >
+    <select id="getCustomerDetail" parameterType="Map" resultType="CustomerVO" >
     
         SELECT 
         	cus_cd, 
@@ -138,7 +133,7 @@
     
     </update>
     
-    <delete id="deleteCustomer" parameterType="map" >
+    <delete id="deleteCustomer" parameterType="Map" >
     
         DELETE FROM 
         	customer 
@@ -148,7 +143,7 @@
         
     </delete>
     
-        <select id="customerCodeCheck" parameterType="map" resultType="int" >
+        <select id="customerCodeCheck" parameterType="Map" resultType="int" >
     
         SELECT 
         	count(*)

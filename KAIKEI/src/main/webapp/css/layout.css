@@ -329,6 +329,24 @@ label {
 	font-size: 16px;
 }
 
+.login-gray-btn {
+	background-color: #616161;
+	min-width: 100px;
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: left;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 0.8em;	
+}
+
+.login-gray-btn::after {
+	content: ">";
+	float: right;
+	font-size: 0.6em;
+}
+
 .logininputbox {
 	width:90%;
 	padding: 5px; 

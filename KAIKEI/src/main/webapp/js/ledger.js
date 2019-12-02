@@ -2,11 +2,36 @@
 $(window).ready(function() {
 
 	var existrows =  $("#existrows").val();
+	var newrows = 0;
 	
+	var today = new Date($("#year").val(), $("#month").val() - 1);
+	var yy = String(today.getFullYear()).substring(2);
+	var mm = today.getMonth() + 1;
+
 	// Init Row
-	for(var i = 0; i < (30 - existrows); i++)
-		addRow();
+	for(newrows = 0; newrows < (30 - existrows); newrows++) {
+		var fixedrows = existrows + newrows;
+		
+		var rowItem = "";
+		rowItem += "<tr id='state" + fixedrows + "' class='new'>";
+		rowItem += "<td><label>" + yy + "</label></td>";
+		rowItem += "<td><label>" + mm + "</label></td>";
+		rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
+		rowItem += "<td><input type='text' name='account_cd' maxlength='4' placeholder='0000'/></td>";
+		rowItem += "<td><input type='text' name='customer_cd' maxlength='5' placeholder='00000'/></td>";
+		rowItem += "<td><input type='text' name='classify' placeholder='Classify'/></td>";
+		rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
+		rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
+		rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
+		rowItem += "<td></td>";
+		rowItem += "<td><a href='javascript:removeRow(" + fixedrows + ");'>X</a></td>";
+		rowItem += "</tr>";
+		
+		$("#statement").append(rowItem);
+	}
 	
+	$("newrows").val(newrows);
+
 	// Init exist classify display
 	for(var i = 0; i < existrows; i++) {
 		if($("#state" + i).find("input[name=classify]").val() == "cred") {
@@ -43,38 +68,6 @@ $(window).ready(function() {
 	});
 	
 });
-
-
-
-function addRow() {
-	var existrows =  $("#existrows").val();
-	var newrows = $("#newrows").val();
-	var fixedrows = Number(existrows) + Number(newrows);
-	
-	var today = new Date($("#year").val(), $("#month").val());
-	var yy = today.getFullYear();
-	var mm = today.getMonth();
-	
-	var rowItem = "";
-	rowItem += "<tr id='state" + fixedrows + "' class='new'>";
-	rowItem += "<td><label>" + String(yy).substring(2) + "</label></td>";
-	rowItem += "<td><label>" + mm + "</label></td>";
-	rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
-	rowItem += "<td><input type='text' name='account_cd' maxlength='4' placeholder='0000'/></td>";
-	rowItem += "<td><input type='text' name='customer_cd' maxlength='5' placeholder='00000'/></td>";
-	rowItem += "<td><input type='text' name='classify' placeholder='Classify'/></td>";
-	rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
-	rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
-	rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
-	rowItem += "<td></td>";
-	rowItem += "<td><a href='javascript:removeRow(" + fixedrows + ");'>X</a></td>";
-	rowItem += "</tr>";
-		
-	newrows++;
-	$("#newrows").val(newrows);
-	
-	$("#statement").append(rowItem);
-}
 
 // Reset Button
 function resetStatement() {
@@ -119,7 +112,8 @@ function removeRow(row) {
 }
 
 // Statement Save
-// JSON - DATA / ACCOUNT_CD / CUSTOMER_CD / CLASSIFY / DEBTOR / CREDITOR / ABS / ISEXIST
+// JSON - STATE / DATE/ ACCOUNT_CD / CUSTOMER_CD / CLASSIFY / DEBTOR / CREDITOR / ABS / SEQ(Delete, Update)
+// TODO - Change Ajax to XMLRequest
 function submitStatement() {
 	
 	var changerow = $("#changeRow").val().split(",");
@@ -206,19 +200,17 @@ function submitStatement() {
 	
 	$.ajax({
 		url : "/account/statementSave.do",
-		async: false,
 		contentType: "application/json; charset=SHIFT-JIS",
 		method : "post",
 		type : "json",
 		data : jsonState,
 		success : function() {
-			console.log("Success");
+			alert("Save Success!");
+			location.href="/account/ledger.do";
 		}, error : function() {
-			console.log("Fail");
+			alert("Save Fail!");
 		}
 	});
-	
-	location.href="/account/ledger.do";
 
 }
 

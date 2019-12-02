@@ -5,12 +5,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ts.kaikei.vo.CustomerListVO;
 import com.ts.kaikei.vo.CustomerVO;
 
 @Mapper
 public interface CustomerDAO {
 
-	List<CustomerVO> selectCustomerList(Map<String, String> params);
+	List<CustomerListVO> selectCustomerList(Map<String, String> params);
 	CustomerVO getCustomerDetail(Map<String, String> params);
 	void addCustomer(CustomerVO customerVO);
 	void deleteCustomer(Map<String, String> params);

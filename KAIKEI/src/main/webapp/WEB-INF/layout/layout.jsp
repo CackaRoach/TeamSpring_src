@@ -11,6 +11,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+	$(window).ready(function() {
+		setTimeout(function() {
+		   	$(".gnb-dth1").hover(function() {
+		   		$(".gnb-dth2").stop().slideDown(180);
+				
+		    }, function() {
+		    	$(".gnb-dth2").stop().slideUp(180);
+		    });
+		
+		   	$(".gnb-dth2").hover(function() {
+		   		$(".gnb-dth2").stop().slideDown(180);
+		    }, function() {
+		    	$(".gnb-dth2").stop().slideUp(180);
+			});
+	});
+
+	}, 300);
 	// nav bar highlight
  	$(window).load(function() {
    		var path = window.location.pathname.split('/');
@@ -27,22 +44,6 @@
    		$("#aside-title").html(p_path.toUpperCase());
        	$("#aside" + "-" + p_path).css("display", "block");
        	$("#aside" + "-" + p_path + "-" + c_path).children().addClass("aside-selected");
-
-       	setTimeout(function() {
-	       	$(".gnb-dth1").hover(function() {
-	       		$(".gnb-dth2").stop().slideDown(180);
-				
-	        }, function() {
-	        	$(".gnb-dth2").stop().slideUp(180);
-	        });
-	
-	       	$(".gnb-dth2").hover(function() {
-	       		$(".gnb-dth2").stop().slideDown(180);
-	        }, function() {
-	        	$(".gnb-dth2").stop().slideUp(180);
-        });
-        
-       	}, 300);
     });
 
 

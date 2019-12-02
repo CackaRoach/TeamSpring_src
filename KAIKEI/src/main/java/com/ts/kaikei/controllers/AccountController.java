@@ -38,20 +38,21 @@ public class AccountController {
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(   String year,
 							String month,
+							String crtPage,
 							HttpSession httpSession, 
 							Model model) {
 		logger.info("Call : /account/ledger.do - GET");
 		
-		if(year == null) {
-			Calendar cal = Calendar.getInstance();
-			
-			year = String.valueOf(cal.get(Calendar.YEAR));
-			month = String.valueOf(cal.get(Calendar.MONTH) + 1);
-		}
-		
 		String company_cd = httpSession.getAttribute("company_cd").toString();
+		
+		if(year == null) {
+			Calendar calendar = Calendar.getInstance();
+			
+			year = String.valueOf(calendar.get(Calendar.YEAR));
+			month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+		}
 
-		List<StatementListVO> list = accountService.getStatements(company_cd, year, month);
+		List<StatementListVO> list = accountService.getStatements(company_cd, year, month, crtPage);
 		
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
@@ -155,9 +156,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/account/customerModify.do", method = RequestMethod.POST)
-	public String customerModify(	CustomerVO customerVO, 
-									HttpSession httpSession, 
-									Model model) {
+	@ResponseBody
+	public void customerModify(	CustomerVO customerVO, 
+								HttpSession httpSession, 
+								Model model) {
 		
 		logger.info("Call : /account/customerModify.do - GET");
 		
@@ -165,8 +167,7 @@ public class AccountController {
 		String id = httpSession.getAttribute("id").toString();
 		
 		accountService.updateCustomer(company_cd, customerVO, id);
-		
-		return "redirect:/account/customer.do";
+
 	}
 	
 	@RequestMapping(value = "/account/customerDelete.do", method = RequestMethod.GET)

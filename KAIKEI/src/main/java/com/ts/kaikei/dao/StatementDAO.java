@@ -8,7 +8,7 @@ import com.ts.kaikei.vo.*;
 
 @Mapper
 public interface StatementDAO {
-	public ArrayList<StatementListVO> getStatementList(String company_cd);
+	public ArrayList<StatementListVO> selectStatementList(Map<String, String> searchParams);
 	public void saveStatement(Map<String, Object> statement);
 	
 	public ArrayList<StatementVO> getStatementList();

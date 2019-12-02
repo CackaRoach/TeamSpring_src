@@ -44,7 +44,7 @@ function submit() {
 				<div style="height:80px;">
 					<div align="center" style="float:left; width:20%; height:100%">
 						<p style="margin: 12px; font-size: 1em;">I D</p>
-						<p style="margin: 12px; font-size: 1em;">Password</p>
+						<p style="margin: 12px; font-size: 1em;">PW</p>
 					</div>
 					<form id="form">
 					<div style="float:left; width:40%; height:100%">
@@ -63,8 +63,8 @@ function submit() {
 				</div>
 				<div align="right">
 					<hr>
-					<button type="button" class="" onclick="location.href='/signup.do'">Sign Up</button>
-					<button type="button" class="">forgot ID,Password</button>
+					<button type="button" class="login-gray-btn" onclick="location.href='/signup.do'">Sign Up</button>
+					<button type="button" class="login-gray-btn" onclick="location.href='/forgot.do'">Forgot ID/PW</button>
 					<hr>
 				</div>
 			</div>

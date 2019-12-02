@@ -15,7 +15,6 @@ import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
 import com.ts.kaikei.vo.UserVO;
 
-
 @Controller
 public class CommonController {
 	
@@ -135,12 +134,14 @@ public class CommonController {
 		return "/forgot";	
 	}
 	
-	// TODO : ID, Password Search
-	@RequestMapping(value = "/forgotExc.do", method = RequestMethod.POST)
-	public String forgotExc(Model model) {
-		logger.info("Call : /forgotExc.do - POST");
+	// Forgot User
+	@RequestMapping(value = "/forgotUser.do", method = RequestMethod.POST)
+	public String forgotUser(String id, String email, Model model) {
+		logger.info("Call : /forgotUser.do - POST");
 		
-		return "/forgot";	
+		commonService.forgotUser(id, email);
+		
+		return "/forgot";
 	}
 	
 	// Logout
@@ -160,4 +161,5 @@ public class CommonController {
 		
 		return "/error";	
 	}
+	
 }

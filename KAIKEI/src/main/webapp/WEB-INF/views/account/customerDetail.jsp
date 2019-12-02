@@ -5,18 +5,21 @@
 		    <div style="padding:20px">
 		        <span style="font-size: 2em;">Customer</span>
 		    </div>
-		    <div style="border:1px solid black; padding:15px; margin: 5px;">
-		  		<form action="/account/customerModify.do" method="post">
+		    <div style="border:1px solid black; padding:15px; margin: 5px; width: 700px;">
+		  		<form id="customerForm" name="customerForm">
 		        <div>
-		            <table style="text-align:center; padding:10px; margin:10px">
+		            <table style="text-align:center; padding:15px; margin:10px">
 		                <tbody>
 		                    <tr>
 		                        <td>Customer</td>
-		                        <td><input type="text" class="input-box" value="${customerVO.title}" name="title"></td>
+		                        <td>
+			                        <input type="text" class="input-box" value="${customerVO.title}" name="title">
+			                        <span id="title_error" class="h6error" style="color:red; display:none">Input Title!</span>
+		                        </td>
 		                    </tr>
 		                    <tr>
 		                        <td>Customer Code</td>
-		                        <td style="height:54px"><input type="hidden" value="${customerVO.cus_cd}" name="cus_cd">${customerVO.cus_cd}</td>
+		                        <td style="height:54px">${customerVO.cus_cd}<input type="hidden" value="${customerVO.cus_cd}" name="cus_cd"></td>
 		                    </tr>
 		                    <tr>
 		                        <td>Business License Number</td>
@@ -46,13 +49,18 @@
 		                        <td>Worker E-mail</td>
 		                        <td><input type="text" class="input-box" name="worker_email" value='${customerVO.worker_email}'></td>
 		                    </tr>
+		                    <tr>
+			                        <td>Memo</td>
+			                        <td><input type="text" class="input-box" name="memo" value='${customerVO.memo}'></td>
+			                </tr>
 		                </tbody>
 		            </table>
 		        </div>
-		        <div style="margin:0% 0% 0% 80%">
-		            <input type="submit" style="margin:5px" class="button" value="MODIFY" onclick="location.href='/account/customerModify.do?cus_cd=${customerVO.cus_cd}'"><br>
-		            <input type="button" style="margin:5px" class="button" value="DELETE" onclick="isDelete();">		            
-		            <input type="button" style="margin:5px" class="button" value="LIST" onclick="location.href='/account/customer.do'"><br>
+		        <div align="right">
+		            <input type="button" style="margin:5px; width:120px;" class="button" value="MODIFY" onclick="submitCustomer();">
+		            <input type="button" style="margin:5px; width:120px;" class="button" value="LIST" onclick="location.href='/account/customer.do'">
+		            <hr>
+		            <input type="button" style="margin:5px; width:120px; background-color:gray;" class="button" value="DELETE" onclick="isDelete();">
 		        </div>
 		        </form>
 		    </div>
@@ -69,24 +77,37 @@
 
 			$(window).load(function() {
 				
-				$("#title").blur(function() {
+				$("input[name=title]").blur(function() {
 
-					if($("#title").val() == "")
+					if($("input[name=title]").val() == "")
 						$("#title_error").css("display", "block");
 					else
 						$("#title_error").css("display", "none");
 				});
 				
 			})
-				
-				
-			function formCheck() {
-				if($("#title").val() == "") {
-					$("#title").focus();
+			
+			
+			function submitCustomer() {
+				if($("input[name=title]").val() == "") {
+					$("input[name=title]").focus();
 					return false;
 				}
+				
+				var queryString = $("#customerForm").serialize();
 
-				return true;
+				$.ajax({
+					method: "post",
+					url: "/account/customerModify.do",
+					data: queryString,
+					type: "json",
+					error: function() {
+						alert("Save Fail!");
+					},
+					success: function() {
+						alert("Save Success!");
+					}
+				});
 			}
 
 		</script>
