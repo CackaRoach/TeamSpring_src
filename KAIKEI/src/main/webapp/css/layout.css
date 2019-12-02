@@ -447,3 +447,68 @@ label {
 	font-size: 1.2em;
 	text-decoration: underline;
 }
+
+/*manage-company*/
+.company {
+	border-collapse: collapse;
+	border-bottom: 2px solid black;
+	width:100%;
+	text-align:center
+}
+
+.company>thead>tr>th {
+	background-color: #1591ff;
+	color: white;
+}
+
+.company>tbody>tr>td {
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+}
+
+.company>tbody>tr>td>a {
+	color: #0000ff;
+	text-decoration: none;
+}
+
+/* .company>tbody>tr:nth-of-type(odd) {
+    background-color: #b7dbff;
+} */
+
+.company>tbody>tr:hover {
+	background-color: #91c8ff;
+}
+
+.company>tbody>tr:hover a {
+	text-decoration: underline;
+}
+
+/* manage-detail */
+.detail{
+	width:100%;
+	border-collapse: collapse;
+	text-align: center;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	border-left: 3px solid #369;
+	margin: 10px;
+}
+
+.detail>thead>tr>th {
+	width: 147px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: middle;
+	color: #153d73;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.detail>tbody>tr>td {
+	width: 349px;
+	padding: 10px;
+	vertical-align: middle;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+

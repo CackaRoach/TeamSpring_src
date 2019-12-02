@@ -12,9 +12,13 @@
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+<<<<<<< HEAD
         		
         <property name="java-output-path" value="target/classes"/>
                 
+=======
+		<property name="java-output-path" value="target/classes"/>
+>>>>>>> refs/remotes/origin/한이슬
         <property name="context-root" value="kaikei"/>
         	
     </wb-module>

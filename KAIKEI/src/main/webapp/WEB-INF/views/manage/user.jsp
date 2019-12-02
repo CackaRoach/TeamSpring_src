@@ -1,8 +1,7 @@
-<!-- CompanyList Page.HLS -->
+<!-- UserList Page.HLS -->
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
 	pageEncoding="Shift_JIS"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -13,7 +12,7 @@
 	})
 
 	function getCompanyList() {
-		var url = "/manage/company.do?";
+		var url = "/manage/users.do?";
 		var state_op = $("#stateCompany_selct option:selected").val();
 		var input_tx = $("#findCompany-input").val();
 		url = url + "mINPUT=" + input_tx + "&STAT_op=" + state_op + "&mPAGE="
@@ -26,21 +25,22 @@
 <div>
 
 	<div style="padding: 20px">
-		<span style="font-size: 1.7em;">Manage-Company</span>
+		<span style="font-size: 1.7em;">Manage-User</span>
 	</div>
 
 
 	<div>
 		<div align="right">
-			<select class="button" id="stateCompany_selct"
+			<!-- <select class="button" id="stateCompany_selct"
 				onchange="getCompanyList()">
 				<option value="">SELECT STATE</option>
 				<option value="00">ALL</option>
 				<option value="01">ACCEPT</option>
 				<option value="02">RESULT</option>
 				<option value="03">HOLD OFF</option>
-			</select> <input class="input-box" id="findCompany-input" type="text"
-				placeholder="Search for Company">
+			</select> --> 
+			<input class="input-box" id="findCompany-input" type="text"
+				placeholder="Search for User">
 			<button class="button" id="findCompany_btn">FIND</button>
 		</div>
 	</div>
@@ -49,25 +49,24 @@
 		<thead>
 			<tr>
 				<th></th>
-				<th>Code</th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>E-mail</th>
 				<th>Company</th>
-				<th>CEO</th>
-				<th>Domain</th>
-				<th>Phone</th>
+				<th>Position</th>
 				<th>State</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items='${companyList}' var="item" varStatus="status">
+			<c:forEach items='${userList}' var="item" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
-					<td>${item.company_cd}</td>
-					<td><a href="/manage/companyDetail.do?id=${item.company_cd}">
-							${item.title} </a></td>
+					<td><a href="/manage/userDetail.do?id=${item.id}">${item.id}</a></td>
 					<td>${item.name}</td>
-					<td>${item.domain}</td>
-					<td>${item.phone}</td>
-					<td>${item.auth_cd}</td>
+					<td>${item.email}</td>
+					<td>${item.company_name}</td>
+					<td>${item.posit_cd_title}</td>
+					<td>${item.state_cd_title}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

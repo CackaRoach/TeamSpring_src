@@ -19,5 +19,9 @@ public interface CustomerDAO {
 	int customerCodeCheck(Map<String, String> params);
 
 	CustomerVO getCustomerOf(String company_cd);
+	int getCustomerCount(Map<String, String> params);
+	
+	public void customerDeletecmp(String id);//manage
+
 }
  

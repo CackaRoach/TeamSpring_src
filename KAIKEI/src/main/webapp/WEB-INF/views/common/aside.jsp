@@ -27,7 +27,7 @@
 				<ul id="aside-manage" class="aside-bar">
 					<li id="aside-manage-company"><a href="/manage/company.do">Company</a></li>
 					<li id="aside-manage-users"><a href="/manage/users.do">Users</a></li>
-					<li id="aside-manage-code"><a href="/manage/code.do">Code</a></li>
+					<!-- <li id="aside-manage-code"><a href="/manage/code.do">Code</a></li> -->
 				</ul>
 			</div>
 		</div>
