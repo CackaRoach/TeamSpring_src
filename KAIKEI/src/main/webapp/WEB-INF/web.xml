@@ -2,7 +2,7 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
+ 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -71,7 +71,7 @@
     	<error-code>500</error-code>
     	<location>/WEB-INF/views/error.jsp</location>
     </error-page>
-
+ 
     <error-page>
     	<exception-type>java.lang.Throwable</exception-type>
     	<location>/WEB-INF/jsp/common/error/error.jsp</location>

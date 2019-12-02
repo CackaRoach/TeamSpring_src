@@ -11,9 +11,8 @@ import com.ts.kaikei.dao.CustomerDAO;
 import com.ts.kaikei.dao.UserDAO;
 import com.ts.kaikei.services.ManageService;
 import com.ts.kaikei.vo.CompanyListVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserListVO;
-import com.ts.kaikei.vo.UserVO;
+
 
 @Service("manageService")
 public class ManageServiceImpl implements ManageService {

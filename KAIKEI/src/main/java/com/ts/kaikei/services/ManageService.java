@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.ts.kaikei.vo.CompanyListVO;
 import com.ts.kaikei.vo.UserListVO;
-import com.ts.kaikei.vo.UserVO;
-
 
 public interface ManageService {
 	

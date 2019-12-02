@@ -20,7 +20,7 @@
 					
 				<c:if test="${posit_cd eq 'POS001'}">
 					<ul>
-						<li><a id="nav-manage-company" href="/manage/company.do">Manage</a></li>
+						<li><a id="nav-manage-company" href="/manage/company.do">Company</a></li>
 						<li><a id="nav-manage-users" href="/manage/users.do">Users</a></li>
 						<li><a id="nav-manage-code" href="/manage/code.do">Code</a></li>
 					</ul>
