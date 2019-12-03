@@ -94,7 +94,9 @@ state_cd --> auth_cd
 	
   --> e.g) 회사코드 호출시
   
-  --> String company_cd = httpSession.getAttribute("company_cd").toString(); 으로 부르시면 됩니다.
+  --> <del>String company_cd = httpSession.getAttribute("company_cd").toString(); 으로 부르시면 됩니다.<del>
+  
+  --> String company_cd = (String)httpSession.getAttribute("company_cd"); 로 부르시면 됩니다.(TypeCast)
   
   현재 세션값
   
