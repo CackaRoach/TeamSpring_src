@@ -22,6 +22,8 @@ public interface CustomerDAO {
 	int getCustomerCount(Map<String, String> params);
 	
 	public void customerDeletecmp(String id);//manage
+	
+	List<CustomerVO> selectCustomerTitle(Map<String, String> searchParams);
 
 }
  

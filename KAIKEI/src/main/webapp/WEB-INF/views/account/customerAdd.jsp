@@ -2,12 +2,13 @@
     pageEncoding="Shift_JIS"%>
 		<div>
 		    <div style="padding:20px">
-		        <span style="font-size: 2em;">Customer</span>
+		        <span style="font-size: 1.7em;">Customer</span>
 		    </div>
+		    <hr>
 		    <form action="/account/customerAddExc.do" method="post">
-		    	<div style="border:1px solid black; padding:30px; margin:5px; width: 700px;">
+		    	<div style="border:1px solid black; padding:30px; margin:5px; width: 1100px;">
 		    		<div>
-			            <table>
+			            <table class="cus-table">
 			                <tbody>
 			                    <tr>
 			                        <td>Customer<span style="color:red">*</span></td>
@@ -37,6 +38,10 @@
 			                        <td>Domain</td>
 			                        <td><input type="text" class="input-box" name="domain"></td>
 			                    </tr>
+			                </tbody>
+			            </table>
+			            <table class="cus-table">
+			            	<tbody>
 			                    <tr>
 			                        <td>CEO</td>
 			                        <td><input type="text" class="input-box" name="ceo_name"></td>
@@ -55,7 +60,7 @@
 			                    </tr>
 			                    <tr>
 			                        <td>Memo</td>
-			                        <td><input type="text" class="input-box" name="memo"></td>
+			                        <td><textarea class="input-box" style="height:200px; resize:none;" name="memo"/></textarea></td>
 			                    </tr>
 			          		</tbody>
 			        	</table>
@@ -93,7 +98,7 @@
 				}
 
 				$.ajax({
-					url : "/account/customerCodeCheck.do?cus_cd=" + $("#cus_cd").val(),
+					url : "/account/customerCodeCheck.ajax?cus_cd=" + $("#cus_cd").val(),
 					type : "get",
 					success : function(data) {					
 						console.log(data);

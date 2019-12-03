@@ -35,7 +35,7 @@ label {
 	width: 220px;
 	height: 50px;
 	float: left; 
-	margin: 0% 60% 0% 9.5%; 
+	margin-left: 9.5%; 
 	background-color: #3F8AFF;
 }
 
@@ -223,7 +223,7 @@ label {
 
 
 .statement>tbody>tr:hover {
-	border: 2px solid red;
+	background-color: #e4e4e4;
 }
 
 .statement>tbody>tr>td>input[type='text'] {
@@ -232,16 +232,16 @@ label {
 	width: 100%;
 }
 
-.statement>tbody>tr>td>input[name='account_cd'] {
+.statement>tbody>tr>td>input[name='acc_title'] {
 	background-color: transparent;
 	border: 0px;
-	width: 20%;
+	width: 80%;
 }
 
-.statement>tbody>tr>td>input[name='customer_cd'] {
+.statement>tbody>tr>td>input[name='cus_title'] {
 	background-color: transparent;
 	border: 0px;
-	width: 23%;
+	width: 80%;
 }
 
 .statement>tbody>tr>td>a {
@@ -297,6 +297,18 @@ label {
 .customer>tbody>tr:hover a {
 	text-decoration: underline;
 }
+
+.cus-table {
+	text-align:center;
+	padding:15px;
+	margin: 10px;
+	display: inline;
+}
+
+.cus-table>tbody>tr>td {
+	min-width: 200px;
+}
+
 
 .div-nav-item {
 	margin: 5px 0px;
@@ -471,9 +483,9 @@ label {
 	text-decoration: none;
 }
 
-/* .company>tbody>tr:nth-of-type(odd) {
+.company>tbody>tr:nth-of-type(odd) {
     background-color: #b7dbff;
-} */
+}
 
 .company>tbody>tr:hover {
 	background-color: #91c8ff;
@@ -512,3 +524,22 @@ label {
 	border-bottom: 1px solid #ccc;
 }
 
+/* Ledger AutoComplete */
+#autocompleteList {
+	min-width: 190px;
+	padding: 0px;
+	margin: 0px;
+	display:none;
+	position: absolute;
+	z-index: 200;
+	background-color: white;
+}
+
+#autocompleteList>ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+#autocompleteList>ul>li:hover {
+	background-color: #91c8ff;
+}

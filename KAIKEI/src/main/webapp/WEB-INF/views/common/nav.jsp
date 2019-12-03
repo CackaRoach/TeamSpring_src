@@ -17,12 +17,24 @@
 						<li><a id="nav-setting" href="/setting/personal.do">Setting</a></li>
 					</ul>
 				</c:if>
-					
-				<c:if test="${posit_cd eq 'POS001'}">
+				
+				<c:if test="${posit_cd eq 'POS001' && company_cd ne '00000'}">
+					<ul>
+						<li><a id="nav-account-ledger" href="/account/ledger.do">Ledger</a></li>
+						<li><a id="nav-account-customer" href="/account/customer.do">Customer</a></li>
+					</ul>
+					<ul class="gnb-dth1">
+						<li><a id="nav-report" href="/report/pl.do">Report</a></li>
+						<li><a id="nav-chart" href="/chart/pl.do">Chart</a></li>
+						<li><a id="nav-setting" href="/setting/personal.do">Setting</a></li>
+					</ul>
+				</c:if>
+				
+				<c:if test="${posit_cd eq 'POS001' && company_cd eq '00000'}">
 					<ul>
 						<li><a id="nav-manage-company" href="/manage/company.do">Company</a></li>
 						<li><a id="nav-manage-users" href="/manage/users.do">Users</a></li>
-						<li><a id="nav-manage-code" href="/manage/code.do">Code</a></li>
+						<!-- <li><a id="nav-manage-code" href="/manage/code.do">Code</a></li> -->
 					</ul>
 				</c:if>
 			</div>
@@ -38,12 +50,13 @@
 					<li><a href="/chart/bs.do">B/S</a></li>
 				</ul>
 				<ul>
-					<li><a href="/setting/personal.do">Personal</a></li>
-					<c:if test="${posit_cd eq 'POS002'}">
+					<c:if test="${posit_cd ne 'POS001'}">
+						<li><a href="/setting/personal.do">Personal</a></li>
+					</c:if>
+					<c:if test="${posit_cd ne 'POS003'}">
 						<li><a href="/setting/company.do">Company</a></li>
 						<li><a href="/setting/employee.do">Employee</a></li>
 					</c:if>
 				</ul>
 			</div>
 		</div>
-					

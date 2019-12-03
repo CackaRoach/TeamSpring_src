@@ -28,13 +28,14 @@
 	});
 
 	}, 300);
-	// nav bar highlight
+	
  	$(window).load(function() {
    		var path = window.location.pathname.split('/');
-		
+   		var pattern = /[\.A-Z]/g;
+   		
 		var p_path = path[1];
-		var c_path = path[2].slice(0, -3);
-		
+		var c_path = path[2].slice(0, pattern.exec(path[2]).index);
+
 		if(p_path == "account" || p_path == "manage") {
 			$("#nav" + "-" + p_path + "-" + c_path).css("color", "black");
 		} else {
@@ -43,6 +44,7 @@
 		
    		$("#aside-title").html(p_path.toUpperCase());
        	$("#aside" + "-" + p_path).css("display", "block");
+		// aside bar highlight
        	$("#aside" + "-" + p_path + "-" + c_path).children().addClass("aside-selected");
     });
 

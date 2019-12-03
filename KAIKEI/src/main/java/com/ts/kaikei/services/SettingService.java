@@ -5,9 +5,10 @@ import com.ts.kaikei.vo.UserVO;
 
 public interface SettingService {
 	
-	public UserVO getUserById(UserVO userVO);
+	public UserVO getUserById(String id);
 	public void updateUser(UserVO userVO);
-	public CompanyVO getCompany(CompanyVO companyVO);
+	
+	public CompanyVO getCompany(String company_cd);
 	public void updateCompany(CompanyVO companyVO);
 	
 }

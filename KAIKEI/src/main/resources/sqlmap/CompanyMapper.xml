@@ -94,11 +94,23 @@
 	
 	<update id="updateCompany" parameterType="CompanyVO">
 	
-		UPDATE company
-  		SET company_cd = #{company_cd}, auth_cd = #{auth_cd}, title = #{title}, reg_cd = #{reg_cd},
-  			fax = #{fax}, phone = #{phone}, domain = #{domain}, bank_title = #{bank_title}, bank_acc = #{bank_acc}, 
-  			ent_date = #{ent_date}, ent_prog = #{ent_prog}, mod_id = #{mod_id}, mod_date = #{mod_date}, mod_prog = #{mod_prog}
-  		WHERE company_cd = #{company_cd}
+		UPDATE 
+			company
+  		SET 
+  			company_cd = #{company_cd}, 
+  			auth_cd = #{auth_cd}, 
+  			title = #{title}, 
+  			reg_cd = #{reg_cd},
+  			fax = #{fax}, 
+  			phone = #{phone}, 
+  			domain = #{domain}, 
+  			bank_title = #{bank_title}, 
+  			bank_acc = #{bank_acc}, 
+  			mod_id = #{mod_id}, 
+  			mod_date = NOW(), 
+  			mod_prog = 'Web-kaikei'
+  		WHERE
+  			company_cd = #{company_cd}
   		
 	</update>
 	

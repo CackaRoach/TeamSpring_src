@@ -3,4 +3,17 @@
 
 <mapper namespace="com.ts.kaikei.dao.AccountDAO">
 
+	<select id="selectAccountTitle" parameterType="String" resultType="AccountVO" >
+    
+        SELECT
+        	acc_cd,
+        	title
+        FROM
+        	account
+        WHERE 1=1
+	        AND company_cd = '00000'
+	        AND UPPER(title) LIKE UPPER(#{title} || '%')
+        
+    </select>
+	
 </mapper>

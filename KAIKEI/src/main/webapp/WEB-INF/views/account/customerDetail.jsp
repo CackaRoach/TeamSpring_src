@@ -2,13 +2,14 @@
     pageEncoding="Shift_JIS"%>
     <!-- TODO: Save Message Print -->
 		<div>
-		    <div style="padding:20px">
-		        <span style="font-size: 2em;">Customer</span>
+		    <div style="padding:20px;">
+		        <span style="font-size: 1.7em;">Customer</span>
 		    </div>
-		    <div style="border:1px solid black; padding:15px; margin: 5px; width: 700px;">
+		    <hr>
+		    <div style="border:1px solid black; padding:15px; margin: 5px; width: 1100px;">
 		  		<form id="customerForm" name="customerForm">
-		        <div>
-		            <table style="text-align:center; padding:15px; margin:10px">
+		        <div style="margin-bottom: 30px;">
+		            <table class="cus-table">
 		                <tbody>
 		                    <tr>
 		                        <td>Customer</td>
@@ -23,7 +24,7 @@
 		                    </tr>
 		                    <tr>
 		                        <td>Business License Number</td>
-		                        <td><input type="text" class="input-box" name="reg_cd" value='${customerVO.reg_cd}'></td>
+		                        <td><input type="text" class="input-box" name="reg_cd" value='${customerVO.reg_cd}'></td>	                        
 		                    </tr>
 		                    <tr>
 		                        <td>FAX</td>
@@ -33,9 +34,13 @@
 		                        <td>Domain</td>
 		                        <td><input type="text" class="input-box" name="domain" value='${customerVO.domain}'></td>
 		                    </tr>
+		                </tbody>
+		            </table>
+		            <table class="cus-table">
+		            	<tbody>
 		                    <tr>
-		                        <td>CEO</td>
-		                        <td><input type="text" class="input-box" name="ceo_name" value='${customerVO.ceo_name}'></td>
+		                       <td>CEO</td>
+		                       <td><input type="text" class="input-box" name="ceo_name" value='${customerVO.ceo_name}'></td>
 		                    </tr>
 		                    <tr>
 		                        <td>CEO E-mail</td>
@@ -43,16 +48,16 @@
 		                    </tr>
 		                    <tr>
 		                        <td>Worker</td>
-		                        <td><input type="text" class="input-box" name="worker_name" value='${customerVO.worker_name}'></td>
+		                        <td><input type="text" class="input-box" name="worker_name" value='${customerVO.worker_name}'></td>		                        
 		                    </tr>
 		                    <tr>
 		                        <td>Worker E-mail</td>
 		                        <td><input type="text" class="input-box" name="worker_email" value='${customerVO.worker_email}'></td>
 		                    </tr>
 		                    <tr>
-			                        <td>Memo</td>
-			                        <td><input type="text" class="input-box" name="memo" value='${customerVO.memo}'></td>
-			                </tr>
+		                        <td>Memo</td>
+			                    <td><textarea class="input-box" style="height:200px; resize:none;" name="memo">${customerVO.memo}</textarea></td>
+		                    </tr>
 		                </tbody>
 		            </table>
 		        </div>
@@ -60,7 +65,7 @@
 		            <input type="button" style="margin:5px; width:120px;" class="button" value="MODIFY" onclick="submitCustomer();">
 		            <input type="button" style="margin:5px; width:120px;" class="button" value="LIST" onclick="location.href='/account/customer.do'">
 		            <hr>
-		            <input type="button" style="margin:5px; width:120px; background-color:gray;" class="button" value="DELETE" onclick="isDelete();">
+		            <input type="button" style="margin:5px; width:120px; background-color:red;" class="button" value="DELETE" onclick="isDelete();">
 		        </div>
 		        </form>
 		    </div>
@@ -98,7 +103,7 @@
 
 				$.ajax({
 					method: "post",
-					url: "/account/customerModify.do",
+					url: "/account/customerModify.ajax",
 					data: queryString,
 					type: "json",
 					error: function() {

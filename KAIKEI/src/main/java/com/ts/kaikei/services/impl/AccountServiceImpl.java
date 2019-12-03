@@ -10,10 +10,12 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ts.kaikei.dao.AccountDAO;
 import com.ts.kaikei.dao.CustomerDAO;
 import com.ts.kaikei.dao.StatementDAO;
 
 import com.ts.kaikei.services.AccountService;
+import com.ts.kaikei.vo.AccountVO;
 import com.ts.kaikei.vo.CustomerListVO;
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
@@ -22,6 +24,8 @@ import com.ts.kaikei.vo.StatementListVO;
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
 	
+	@Autowired
+	AccountDAO accountDAO;
 	@Autowired
 	StatementDAO statementDAO;
 	@Autowired
@@ -62,6 +66,20 @@ public class AccountServiceImpl implements AccountService {
 		statements.put("statementList", statementList);
 		
 		statementDAO.saveStatement(statements);
+	}
+	
+	public List<AccountVO> getAccountTitle(String title) {
+		return accountDAO.selectAccountTitle(title);
+	}
+	
+	@Override
+	public List<CustomerVO> getCustomerTitle(String title, String company_cd) {
+		Map<String, String> searchParams = new HashMap<String, String>();
+		
+		searchParams.put("title", title);
+		searchParams.put("company_cd", company_cd);
+		
+		return customerDAO.selectCustomerTitle(searchParams);
 	}
 
 

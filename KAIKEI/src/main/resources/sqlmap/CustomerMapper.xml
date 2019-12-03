@@ -155,17 +155,34 @@
 	        
     </select>
     
-    <select id="getCustomerOf" resultType="CustomerVO" parameterType="String">
+    <select id="getCustomerOf" parameterType="String" resultType="CustomerVO" >
     
 	    SELECT *
 	    from customer
 	    where cus_cd = #{value}
+	    
+    </select>
+    
+    <select id="selectCustomerTitle" parameterType="String" resultType="CustomerVO">
+    
+    	SELECT
+        	cus_cd,
+        	title
+        FROM
+        	customer
+        WHERE 1=1
+	        AND company_cd = #{company_cd}
+	        AND UPPER(title) LIKE UPPER(#{title} || '%')
+    
     </select>
     
     <!-- CUSTOMER DELETE FOR COMPANY DELETE MANAGE -->
     <delete id="customerDeletecmp" parameterType="String">
+    
 	    DELETE FROM customer
 	    WHERE company_cd = #{company_cd}
+	    
     </delete>
+    
 
 </mapper>

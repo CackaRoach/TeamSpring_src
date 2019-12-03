@@ -3,10 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!--  
-	TODO: Auto Generator - Account
-	TODO: Auto Generator - Customer
 	TODO: regex check
-
   -->
 		<script type="text/javascript" src="/js/ledger.js"></script>
 		<div style="padding: 20px;">
@@ -54,8 +51,8 @@
 							<td><label>${item.year}</label></td>
 		    				<td><label>${item.month}</label></td>
 			    			<td><input type="text" name="date" value="${item.date}" maxlength="2" placeholder="D" /></td>
-			    			<td><input type="text" name="account_cd" value="${item.account_cd}" maxlength="4" placeholder="Account"/><label>${item.acc_title}</label></td>
-			    			<td><input type="text" name="customer_cd" value="${item.customer_cd}" maxlength="5" placeholder="Customer"/><label>${item.cus_title}</label></td>
+			    			<td><input type="text" name="acc_title" value="${item.acc_title}" placeholder="Account"/><label class="account_cd">${item.account_cd}</label></td>
+			    			<td><input type="text" name="cus_title" value="${item.cus_title}" placeholder="Customer"/><label class="customer_cd">${item.customer_cd}</label></td>
 			    			<td><input type="text" name="classify" value="${item.classify}" placeholder="Classify"/></td>
 			    			<td><input type="text" name="debtor" value="${item.debtor}" placeholder="Debtor"/></td>
 			    			<td><input type="text" name="creditor" value="${item.creditor}" placeholder="Creditor"/></td>
@@ -67,19 +64,23 @@
 					
 				</tbody>
 			</table>
-			</div>
-			<div id="statebtn" align="right">
-				<input type="button" id="saveBtn" class="button" style="display:none" style="margin:5px" onclick="submitStatement();" value="Save"/>
-				<input type="reset" id="resetBtn" class="button" style="display:none" onclick="return resetStatement();" value='Reset'/>
-				<input class="button" style="margin:5px" type="button" onclick="debug();" value="debug"/>
-			</div>
-			<div id="data-dynamic">
-				<input type="hidden" id="changeRow" value=""/>
-			</div>
+		</div>
+		<div id="statebtn" align="right">
+			<input type="button" id="saveBtn" class="button" style="display:none" style="margin:5px" onclick="submitStatement();" value="Save"/>
+		</div>
+		<div id="data-dynamic">
+			<input type="hidden" id="changeRow" value=""/>
+		</div>
 		</form>
-			<div id="data-static">
-				<input type="hidden" id="existrows" value="${fn:length(statements)}"/>
-				<input type="hidden" id="newrows" value="0"/>
-			</div>
+		<div id="data-static">
+			<input type="hidden" id="existrows" value="${fn:length(statements)}"/>
+			<input type="hidden" id="newrows" value="0"/>
+		</div>
+		<div id="autocompleteList">
+			<ul id="autocomplete-ul">
+
+			</ul>
+		</div>
+			
 
 		

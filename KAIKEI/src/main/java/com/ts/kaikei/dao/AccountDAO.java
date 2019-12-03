@@ -1,5 +1,7 @@
 package com.ts.kaikei.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ts.kaikei.vo.*;
@@ -7,8 +9,8 @@ import com.ts.kaikei.vo.*;
 
 @Mapper
 public interface AccountDAO {
-
-	public AccountVO getAccountOf(String account_cd);
+	
+	public List<AccountVO> selectAccountTitle(String title);
 
 }
  
