@@ -61,6 +61,7 @@ $(window).ready(function() {
 	var elemNum = -1;
 	var elemMax = -1;
 	var preInput = null;
+	var timer;
 	
 	// autocomplete - window
 	// account
@@ -98,6 +99,11 @@ $(window).ready(function() {
 		var input = $(event.target).val();
 		
 		if(event.keyCode == undefined) {
+			return;
+		}
+		else if(event.keyCode == 27) {
+			$("#autocompleteList").css("display", "none");
+			$("#autocomplete-ul li").remove();
 			return;
 		}
 		// Enter
@@ -145,27 +151,39 @@ $(window).ready(function() {
 		} else {
 			preInput = input;
 			
-			$("#autocomplete-ul li").remove();
-
-			if(input.length == 0)
+			if(input.length == 0) {
+				$("#autocompleteList").css("display", "none");
+				$("#autocomplete-ul li").remove();
 				return false;
+			}
+		
+			// debouncing
+			if (timer) {
+				clearTimeout(timer);
+			}
 			
-			$.ajax({
-				url : "/account/getAccountTitle.ajax?title=" + input,
-				method : "get",
-				success : function(data) {
-					$("#autocompleteList").css("display", "block");
-					elemMax = data.length;
-					for(var i = 0; i < data.length; i++) {
-						$("#autocomplete-ul").append("<li><a href='javascript:setAcc(\"" + row[0].id + "\", \"" + data[i].title + "\", \"" + data[i].acc_cd + "\");'>"
-								+ data[i].title + " - " + data[i].acc_cd + "</a></li>");
-						$("#autocomplete-ul").append("<li style='display:none'>" + data[i].title + "</li>");
-						$("#autocomplete-ul").append("<li style='display:none'>" + data[i].acc_cd + "</li>");
+			timer = setTimeout(function() {
+				$("#autocomplete-ul li").remove();
+				
+				$.ajax({
+					url : "/account/getAccountTitle.ajax?title=" + input,
+					method : "get",
+					success : function(data) {
+						$("#autocompleteList").css("display", "block");
+						elemMax = data.length;
+						for(var i = 0; i < data.length; i++) {
+							$("#autocomplete-ul").append("<li><a href='javascript:setAcc(\"" + row[0].id + "\", \"" + data[i].title + "\", \"" + data[i].acc_cd + "\");'>"
+									+ data[i].title + " - " + data[i].acc_cd + "</a></li>");
+							$("#autocomplete-ul").append("<li style='display:none'>" + data[i].title + "</li>");
+							$("#autocomplete-ul").append("<li style='display:none'>" + data[i].acc_cd + "</li>");
+							debounce = true;
+						}
+					}, error : function() {
+						console.log("Connection Fail!");
+						debounce = true;
 					}
-				}, error : function() {
-					console.log("Connection Fail!");
-				}
-			});
+				});
+			}, 250);
 		}
 	});
 	
@@ -175,6 +193,11 @@ $(window).ready(function() {
 		var input = $(event.target).val();
 
 		if(event.keyCode == undefined) {
+			return;
+		}
+		else if(event.keyCode == 27) {
+			$("#autocompleteList").css("display", "none");
+			$("#autocomplete-ul li").remove();
 			return;
 		}
 		// Enter
@@ -222,27 +245,37 @@ $(window).ready(function() {
 		} else {
 			preInput = input;
 
-			$("#autocomplete-ul li").remove();
-
-			if(input.length == 0)
+			if(input.length == 0) {
+				$("#autocompleteList").css("display", "none");
+				$("#autocomplete-ul li").remove();
 				return false;
+			}
 			
-			$.ajax({
-				url : "/account/getCustomerTitle.ajax?title=" + input,
-				method : "get",
-				success : function(data) {
-					$("#autocompleteList").css("display", "block");
-					elemMax = data.length;
-					for(var i = 0; i < data.length; i++) {
-						$("#autocomplete-ul").append("<li><a href='javascript:setCus(\"" + row[0].id + "\", \"" + data[i].title + "\", \"" + data[i].cus_cd + "\");'>"
-								+ data[i].title + " - " + data[i].cus_cd + "</a></li>");
-						$("#autocomplete-ul").append("<li style='display:none'>" + data[i].title + "</li>");
-						$("#autocomplete-ul").append("<li style='display:none'>" + data[i].cus_cd + "</li>");
+			// debouncing
+			if (timer) {
+				clearTimeout(timer);
+			}
+			
+			timer = setTimeout(function() {
+				$("#autocomplete-ul li").remove();
+				
+				$.ajax({
+					url : "/account/getCustomerTitle.ajax?title=" + input,
+					method : "get",
+					success : function(data) {
+						$("#autocompleteList").css("display", "block");
+						elemMax = data.length;
+						for(var i = 0; i < data.length; i++) {
+							$("#autocomplete-ul").append("<li><a href='javascript:setCus(\"" + row[0].id + "\", \"" + data[i].title + "\", \"" + data[i].cus_cd + "\");'>"
+									+ data[i].title + " - " + data[i].cus_cd + "</a></li>");
+							$("#autocomplete-ul").append("<li style='display:none'>" + data[i].title + "</li>");
+							$("#autocomplete-ul").append("<li style='display:none'>" + data[i].cus_cd + "</li>");
+						}
+					}, error : function() {
+						console.log("Connection Fail!");
 					}
-				}, error : function() {
-					console.log("Connection Fail!");
-				}
-			});
+				});
+			}, 250);
 		}
 	});
 	
@@ -413,3 +446,13 @@ function submitStatement() {
 
 }
 
+var timer;
+function debug() {
+	
+	if (timer) {
+	  clearTimeout(timer);
+	}
+	timer = setTimeout(function() {
+	  console.log('Request ajax');
+	}, 1000);
+}

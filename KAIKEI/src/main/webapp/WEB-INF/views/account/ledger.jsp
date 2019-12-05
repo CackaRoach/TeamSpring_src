@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!--  
 	TODO: regex check
+	TODO: Paging
   -->
 		<script type="text/javascript" src="/js/ledger.js"></script>
 		<div style="padding: 20px;">
@@ -67,6 +68,7 @@
 		</div>
 		<div id="statebtn" align="right">
 			<input type="button" id="saveBtn" class="button" style="display:none" style="margin:5px" onclick="submitStatement();" value="Save"/>
+			<button type="button" class="button" style="margin:5px" onclick="debug();">Debug</button>
 		</div>
 		<div id="data-dynamic">
 			<input type="hidden" id="changeRow" value=""/>

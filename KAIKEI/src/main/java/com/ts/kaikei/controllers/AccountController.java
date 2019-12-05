@@ -121,7 +121,7 @@ public class AccountController {
 		
 		/*  0 index - FAX = PAGE NUM  */
 		/*  DEFAULT CUSTOMER COUNT PER PAGE = 20  */
-		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage, "20"));
+		model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage, "30"));
 		model.addAttribute("searchParam", searchParam);
 		
 		return "/account/customer";
