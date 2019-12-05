@@ -27,6 +27,6 @@ public class ChartController {
 	public String viewChartBS(String year, Model model) {
 		logger.info("Call : /chart/bs.do - GET");
 
-		return "/chart/bs";
+		return "/chart/bs"; 
 	}
 }
