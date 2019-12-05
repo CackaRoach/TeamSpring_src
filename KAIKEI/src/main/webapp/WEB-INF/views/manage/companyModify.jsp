@@ -46,7 +46,7 @@
 					</tr>
 					<tr>
 						<td>Company Code</td>
-						<td><input class="input-box" type="text" name = "company_cd" value="${companyInfo.company_cd}" minlength="5" maxlength="5" required></td>
+						<td><input class="input-box" type="text" name = "company_cd" value="${companyInfo.company_cd}" maxlength="5" required></td>
 					</tr>
 					<tr>
 						<td>Logo</td>
