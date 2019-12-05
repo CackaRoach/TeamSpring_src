@@ -32,14 +32,7 @@
 
 	<div>
 		<div align="right">
-			<select class="button" id="stateCompany_selct"
-				onchange="getCompanyList()">
-				<option value="">SELECT STATE</option>
-				<option value="00">ALL</option>
-				<option value="01">ACCEPT</option>
-				<option value="02">RESULT</option>
-				<option value="03">HOLD OFF</option>
-			</select> <input class="input-box" id="findCompany-input" type="text"
+			 <input class="input-box" id="findCompany-input" type="text"
 				placeholder="Search for Company">
 			<button class="button" id="findCompany_btn">FIND</button>
 		</div>
@@ -54,7 +47,14 @@
 				<th>CEO</th>
 				<th>Domain</th>
 				<th>Phone</th>
-				<th>State</th>
+				<th><select class="button" id="stateCompany_selct"
+				onchange="getCompanyList()" style="background-color: #1591ff;">
+				<option value="">State</option>
+				<option value="00">ALL</option>
+				<option value="01">ACCEPT</option>
+				<option value="02">RESULT</option>
+				<option value="03">HOLD OFF</option>
+			</select></th>
 			</tr>
 		</thead>
 		<tbody>

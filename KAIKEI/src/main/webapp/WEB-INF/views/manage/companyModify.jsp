@@ -41,12 +41,12 @@
 
 					<tr>
 						<td>Company</td>
-						<td><input class="input-box" type="text" name = "title" value="${companyInfo.title}" placeholder="Company-Name">
+						<td><input class="input-box" type="text" name = "title" value="${companyInfo.title}" placeholder="Company-Name" required>
 						</td>
 					</tr>
 					<tr>
 						<td>Company Code</td>
-						<td><input class="input-box" type="text" name = "company_cd" value="${companyInfo.company_cd}" readonly></td>
+						<td><input class="input-box" type="text" name = "company_cd" value="${companyInfo.company_cd}" minlength="5" maxlength="5" required></td>
 					</tr>
 					<tr>
 						<td>Logo</td>
@@ -64,11 +64,11 @@
 					</tr>
 					<tr>
 						<td>Accept Date</td>
-						<td><input class="input-box" type="text" name = "ent_date" value="${companyInfo.ent_date}" readonly></td>
+						<td>${companyInfo.ent_date}</td>
 					</tr>
 					<tr>
 						<td>Buisiness License Number</td>
-						<td><input class="input-box" type="text" name = "reg_cd" value="${companyInfo.reg_cd}" placeholder="Buisiness License Number"></td>
+						<td><input class="input-box" type="text" name = "reg_cd" value="${companyInfo.reg_cd}" placeholder="Buisiness License Number" required></td>
 					</tr>
 					<tr>
 						<td>Fax</td>

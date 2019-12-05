@@ -31,14 +31,6 @@
 
 	<div>
 		<div align="right">
-			<!-- <select class="button" id="stateCompany_selct"
-				onchange="getCompanyList()">
-				<option value="">SELECT STATE</option>
-				<option value="00">ALL</option>
-				<option value="01">ACCEPT</option>
-				<option value="02">RESULT</option>
-				<option value="03">HOLD OFF</option>
-			</select> --> 
 			<input class="input-box" id="findCompany-input" type="text"
 				placeholder="Search for User">
 			<button class="button" id="findCompany_btn">FIND</button>
@@ -54,7 +46,15 @@
 				<th>E-mail</th>
 				<th>Company</th>
 				<th>Position</th>
-				<th>State</th>
+				<th>
+					<select class="button" id="stateCompany_selct" onchange="getCompanyList()" style="background-color: #1591ff;">
+					<option value="">State</option>
+					<option value="00">ALL</option>
+					<option value="01">WORK</option>
+					<option value="02">RETIRE</option>
+					<option value="03">Extended leave</option>
+				</select>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -64,7 +64,7 @@
 					<td><a href="/manage/userDetail.do?id=${item.id}">${item.id}</a></td>
 					<td>${item.name}</td>
 					<td>${item.email}</td>
-					<td>${item.company_name}</td>
+					<td>${item.company_name} (${item.company_cd})</td>
 					<td>${item.posit_cd_title}</td>
 					<td>${item.state_cd_title}</td>
 				</tr>

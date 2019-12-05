@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ts.kaikei.services.ManageService;
 import com.ts.kaikei.vo.CompanyListVO;
 import com.ts.kaikei.vo.UserListVO;
+
 @Controller
 public class ManageController {
 
@@ -25,7 +26,7 @@ public class ManageController {
 
 	@Autowired
 	private ManageService manageService;
-		
+
 	// COMPANY - LIST(FIND)
 	@RequestMapping(value = "/manage/company.do", method = RequestMethod.GET)
 	public ModelAndView companylist(@RequestParam(value = "mPAGE", required = false) String mPAGE,
@@ -62,7 +63,7 @@ public class ManageController {
 	@RequestMapping(value = "/manage/companyDetail.do", method = RequestMethod.GET)
 	public ModelAndView companyinfo(@RequestParam(value = "id", required = false) String code,
 			@RequestParam(value = "mod", required = false) String isMod, // modify check
-			ModelAndView model) {
+			ModelAndView model, HttpSession httpsession) {
 		logger.info("Call : /manage/company.do - GET");
 
 		Map<String, Object> Params = new HashMap<String, Object>();
@@ -79,17 +80,31 @@ public class ManageController {
 		Params.put("company_cd", code);
 		CompanyListVO companyInfo = manageService.infoCompany(code);
 
+		httpsession.setAttribute("cmp_Cd", companyInfo.getCompany_cd());
+
 		model.addObject("companyInfo", companyInfo);
 		return model;
 	}
 
-	// COMPANY - INFO MODIFY
+	// COMPANY - INFO MODIFY (UPLOAD)
 	@RequestMapping(value = "/manage/companyModify.do", method = RequestMethod.POST)
-	public String companyMod(CompanyListVO vo) {
+	public String companyMod(CompanyListVO vo, HttpSession httpsession) {
 
 		logger.info("Call : /manage/companyModify.do - POST");
-
-		manageService.infoUpdate(vo);
+		
+		String cmpCd = (String) httpsession.getAttribute("cmp_Cd");
+		
+		//change Code
+		if(!cmpCd.equals(vo.getCompany_cd())) {
+			Map<String, Object> Params = new HashMap<String, Object>();
+			
+			Params.put("org", cmpCd);
+			Params.put("new", vo.getCompany_cd());  
+			
+			manageService.companyCodeCh(Params);
+		}
+		
+		 manageService.infoUpdate(vo); 
 		String id = vo.getCompany_cd();
 		return "redirect:/manage/companyDetail.do?mod=M?&id=" + id;
 	}
@@ -99,7 +114,7 @@ public class ManageController {
 	public String deleteCompany(@RequestParam(value = "id", required = false) String code) {
 
 		logger.info("Call : /manage/companyDelete.do - GET");
-		
+
 		manageService.companyDelete(code);
 
 		return "redirect:/manage/company.do";
@@ -107,29 +122,32 @@ public class ManageController {
 
 	// COMPANY - FORWARD COMPANY PAGE
 	@RequestMapping(value = "/manage/companySite.do", method = RequestMethod.GET)
-	public ModelAndView CmtSite(@RequestParam(value="id", required = false) String id,
-			HttpSession httpSession,
+	public ModelAndView CmtSite(@RequestParam(value = "id", required = false) String id, HttpSession httpSession,
 			ModelAndView model) {
 
 		logger.info("Call : manage/companySite.do - GET");
 
-		httpSession.setAttribute("company_cd", id);
-		
 		model.setViewName("/manage/companyModify");
+
+		/* httpSession.setAttribute("posit_cd", "POS002"); */
+
+		httpSession.setAttribute("company_cd", id);
+
+
 		model.setViewName("/manage/goCompanySite");
-		
+
 		return model;
 	}
-	
-	// COMPANY - MANAGE
+
+	// COMPANY - FWARD MANAGE PAGE
 	@RequestMapping(value = "/manage/manage.do", method = RequestMethod.GET)
 	public ModelAndView manageBack(HttpSession httpSession, ModelAndView model) {
 		logger.info("Call : manage/manage.do - GET");
-		
-		String code = manageService.getCompanyCode(); 
+
+		String code = manageService.getCompanyCode();
 
 		httpSession.setAttribute("company_cd", code);
-		
+
 		model.setViewName("/manage/goCompanySite");
 		return model;
 	}
@@ -165,7 +183,7 @@ public class ManageController {
 		return model;
 	}
 
-	//USER - DETAIL INFO
+	// USER - DETAIL INFO
 	@RequestMapping(value = "/manage/userDetail.do", method = RequestMethod.GET)
 	public ModelAndView userdetailInfo(@RequestParam(value = "id", required = false) String code,
 			@RequestParam(value = "mod", required = false) String isMod, // modify check
@@ -183,25 +201,24 @@ public class ManageController {
 			model.setViewName("/manage/userDetail");
 		}
 
-		
-		  Params.put("id", code); 
-		  UserListVO userInfo =manageService.infoUsers(code);
-		  
-		  model.addObject("userInfo", userInfo);
-		 
+		Params.put("id", code);
+		UserListVO userInfo = manageService.infoUsers(code);
+
+		model.addObject("userInfo", userInfo);
+
 		return model;
 	}
-	
-	//USER - INDO UPLOAD
+
+	// USER - INDO UPLOAD
 	@RequestMapping(value = "/manage/userModify.do", method = RequestMethod.POST)
 	public String usermod(UserListVO vo) {
-		
+
 		logger.info("Call : /manage/userModify.do - POST");
 		manageService.infoUpdateUser(vo);
 		String id = vo.getId();
 		return "redirect:/manage/userDetail.do?mod=M?&id=" + id;
 	}
-	
+
 	@RequestMapping(value = "/manage/userDelete.do", method = RequestMethod.GET)
 	public String deleteUsers(@RequestParam(value = "id", required = false) String code) {
 

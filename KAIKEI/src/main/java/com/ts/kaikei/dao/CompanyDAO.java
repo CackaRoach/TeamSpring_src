@@ -26,5 +26,7 @@ public interface CompanyDAO {
 	public void infoUpdate(CompanyListVO vo);//manage
 	
 	public void companyDelete(String id);//manage
+	
+	public void companyCodeCh(Map<String, Object> Params);//manage - company code change
 }
  

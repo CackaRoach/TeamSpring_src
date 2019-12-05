@@ -146,4 +146,11 @@
 	    WHERE company_cd = #{company_cd}
     </delete>
     
+    <!-- Change Company Code in company -->
+    <update id="companyCodeCh" parameterType = "hashmap">
+    	UPDATE company
+    	SET company_cd = #{new}
+    	WHERE company_cd = #{org}
+    </update>
+    
 </mapper>

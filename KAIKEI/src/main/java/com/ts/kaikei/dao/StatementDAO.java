@@ -18,5 +18,7 @@ public interface StatementDAO {
 	public ArrayList<Integer> BS_Calculator();
 	public ArrayList<int[]> CTB_Calculator();
 	
+	public void stateCompanyDelete(String id);	//manage
+	public void companyCodeCh_std(Map<String, Object> Parmas);	//manage
 }
 

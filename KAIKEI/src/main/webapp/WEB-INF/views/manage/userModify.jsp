@@ -14,7 +14,30 @@
 		$("#cancelBtn").click(function(){
 			location.href = "/manage/userDetail.do?id=${userInfo.id}";
 		});
+
+		$("#state-select_pos").change(function(){
+			if('${userInfo.posit_cd}' != $("#state-select_pos").val()){
+				var ch = confirm("There must be one CEO in a company.\n Would you like to hand over your seat to another CEO?");
+				
+				if(ch){
+					/* location.href = "/manage/userDetail.do?id=${userInfo.id}"; */
+					alert("");
+				}else{
+					$("#state-select_pos").val('${userInfo.posit_cd}').prop("selected", true);
+				}
+			}
+		});
+
+		default_val();
 	});
+
+	function default_val() {
+		var id = '${userInfo.state_cd}';
+		$("#state-select").val(id).prop("selected", true);
+
+		var idpos = '${userInfo.posit_cd}';
+		$("#state-select_pos").val(idpos).prop("selected", true);
+	}
 </script>
 
 <div>
@@ -37,15 +60,25 @@
 				</tr>
 				<tr>
 					<td>Name</td>
-					<td><input class="input-box" type="text" name = "name" value="${userInfo.name}"></td>
+					<td><input class="input-box" type="text" name = "name" value="${userInfo.name}" required></td>
 				</tr>
 				<tr>
-					<td>Position</td>
-					<td><input class="input-box" type="text" value="${userInfo.posit_cd_title}" readonly></td>
+					<td>Position (POS)</td>
+					<td>
+						<select class="button" id="state-select_pos" name = "posit_cd">
+								<option value="POS002">President</option>
+								<option value="POS003">Excutive</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
-					<td>State</td>
-					<td><input class="input-box" type="text" value="${userInfo.state_cd_title}" readonly></td>
+					<td>State (STT)</td>
+					<td><select class="button" id="state-select" name = "state_cd">
+								<option value="STT001">WORK</option>
+								<option value="STT002">RETIRE</option>
+								<option value="STT003">Extended leave</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td>E-mail</td>
@@ -57,11 +90,15 @@
 				</tr>
 				<tr>
 					<td>Company</td>
-					<td><input class="input-box" type="text" value="${userInfo.company_name}" readonly></td>
+					<td><input class="input-box" type="text" value="${userInfo.company_name}" readonly style="display:none">
+						${userInfo.company_name}
+					</td>
 				</tr>
 				<tr>
 					<td>Company Code</td>
-					<td><input class="input-box" type="text" name = "company_cd" value="${userInfo.company_cd}"	readonly></td>
+					<td><input class="input-box" type="text" name = "company_cd" value="${userInfo.company_cd}"	readonly style="display:none">
+						${userInfo.company_cd}
+					</td>
 				</tr>
 
 			</tbody>

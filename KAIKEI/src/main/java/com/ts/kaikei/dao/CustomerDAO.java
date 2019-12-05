@@ -20,10 +20,10 @@ public interface CustomerDAO {
 
 	CustomerVO getCustomerOf(String company_cd);
 	int getCustomerCount(Map<String, String> params);
-	
+
 	public void customerDeletecmp(String id);//manage
+	public void companyCodeCh_cst(Map<String, Object> Params);//manage change cmpcd
 	
 	List<CustomerVO> selectCustomerTitle(Map<String, String> searchParams);
-
 }
  

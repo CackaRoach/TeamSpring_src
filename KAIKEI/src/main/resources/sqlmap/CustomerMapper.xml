@@ -183,6 +183,17 @@
 	    WHERE company_cd = #{company_cd}
 	    
     </delete>
-    
+	
+	<!-- Change Company Code in customer -->
+	<update id="companyCodeCh_cst" parameterType="hashmap">
+		UPDATE customer
+    	SET 
+    		company_cd = #{new},
+    		mod_id = 'Admin',
+    		mod_date = (SELECT CURRENT_DATE),
+    		mod_prog = 'Web-kaikei'
+    	WHERE 1=1
+    		AND	company_cd = #{org}
+	</update>
 
 </mapper>
