@@ -25,7 +25,7 @@ import com.ts.kaikei.vo.StatementListVO;
 public class AccountController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
-	
+	 
 	@Autowired 
 	private AccountService accountService;
 	
