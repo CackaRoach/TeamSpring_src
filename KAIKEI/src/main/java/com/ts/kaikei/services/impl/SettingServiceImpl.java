@@ -28,13 +28,13 @@ public class SettingServiceImpl implements SettingService {
 	}
 
 	@Override
-	public CompanyVO getCompany(CompanyVO companyVO) {
-		return companyDAO.getCompany(companyVO);
+	public CompanyVO getCompany(String company_cd) {
+		return companyDAO.getCompany(company_cd);
 	}
 	
 	@Override
-	public UserVO getUserById(UserVO userVO) {
-		return userDAO.getUserById(userVO);
+	public UserVO getUserById(String id) {
+		return userDAO.getUserById(id);
 	}
 }
  

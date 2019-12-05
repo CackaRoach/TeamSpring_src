@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 		<div>
+			<div style="padding: 30px">
+				<span style="font-size: 2em">Personal</span>
+			</div>
+			<hr>
+			<div>
 				<table>
 					<tr>
 						<th>ID</th><td>${userVO.id }</td>
@@ -19,6 +24,7 @@
 						<th>Company</th><td>${userVO.company_cd }</td>
 					</tr>
 				</table>
+			</div>
 			<!-- <a href = "/kaikei/setting/personalChangePage.do">Modify</a> -->
-			<button onClick = "location.href='/setting/personalChangePage.do'">Modify</button>
+			<button class="button" onClick="location.href='/setting/personalChangePage.do'">Modify</button>
 		</div>

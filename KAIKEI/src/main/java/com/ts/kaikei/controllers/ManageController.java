@@ -113,11 +113,9 @@ public class ManageController {
 
 		logger.info("Call : manage/companySite.do - GET");
 
-		model.setViewName("/manage/companyModify");
-		
-		httpSession.setAttribute("posit_cd", "POS002");
 		httpSession.setAttribute("company_cd", id);
 		
+		model.setViewName("/manage/companyModify");
 		model.setViewName("/manage/goCompanySite");
 		
 		return model;

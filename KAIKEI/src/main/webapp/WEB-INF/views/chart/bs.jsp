@@ -48,7 +48,7 @@
 					dataPoints: [
 						{ y: 1450000, label: "Q1", markerColor: "black"},
 						{ y: 1410000, label: "Q2", markerColor: "black"},
-						{ y: 1520000, label: "Q3", markerColor: "black"},
+						{ y: 1440000, label: "Q3", markerColor: "black"},
 						{ y: 1460000, label: "Q4", markerColor: "black"}
 					]
 				},

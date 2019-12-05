@@ -1,6 +1,5 @@
 package com.ts.kaikei.controllers;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -26,47 +25,32 @@ public class SettingController {
 	
 	/* go to personal info page */
 	@RequestMapping(value = "/setting/personal.do", method =  RequestMethod.GET)
-	public String ledger(HttpServletRequest request, Model model) {
+	public String ledger(HttpSession session, Model model) {
 		logger.info("Call : /setting/personal.do - GET");
-		
-		HttpSession session = request.getSession();
-		
+
 		String id = (String) session.getAttribute("id");
-		UserVO userVO = new UserVO();
-		userVO.setId(id);
-		userVO = settingService.getUserById(userVO);
-		model.addAttribute("userVO", userVO);
+
+		model.addAttribute("userVO", settingService.getUserById(id));
+		
 		return "/setting/personal";
 	}
 	
 	/* go to change personal info  page */
 	@RequestMapping(value = "/setting/personalChangePage.do", method = RequestMethod.GET)
-	public String personalChangePage(HttpServletRequest request,Model model) {
-		HttpSession session = request.getSession();
-		
+	public String personalChangePage(HttpSession session, Model model) {
+		logger.info("Call : /setting/personalChangePage.do - GET");
+	
 		String id = (String)session.getAttribute("id");
 		
-		UserVO userVO = new UserVO();
-		userVO.setId(id);
-		userVO = settingService.getUserById(userVO);
+		model.addAttribute("userVO", settingService.getUserById(id));
 		
-		model.addAttribute("userVO", userVO);
-		
-		logger.info("Call : /setting/personalChangePage.do - GET");
 		return "/setting/personalChangePage";
 	}
 	
 	/* change personal info */
 	@RequestMapping(value = "/setting/personalChange.do", method = RequestMethod.POST)
-	public String personalChange(HttpServletRequest request) {
-		
-		UserVO userVO = new UserVO();
-		
-		userVO.setId(request.getParameter("id"));
-		userVO.setPassword(request.getParameter("password"));
-		userVO.setName(request.getParameter("name"));
-		userVO.setEmail(request.getParameter("email"));
-		userVO.setPhone(request.getParameter("phone"));
+	public String personalChange(UserVO userVO, Model model) {
+		logger.info("Call : /setting/personalChange.do - POST");
 		
 		settingService.updateUser(userVO);
 		
@@ -75,64 +59,45 @@ public class SettingController {
 	
 	/* go to company info page */
 	@RequestMapping(value = "/setting/company.do", method = RequestMethod.GET)
-	public String companyPage(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
+	public String companyPage(HttpSession session, Model model) {
+		logger.info("Call : /setting/company.do - GET");
 		
-		UserVO userVO = new UserVO();
-		userVO.setId((String) session.getAttribute("id"));
-		userVO  = settingService.getUserById(userVO);
+		String posit_cd = (String)session.getAttribute("posit_cd");
 		
-		String company_cd = userVO.getCompany_cd();
+		if(posit_cd.equals("POS003")) {
+			return "redirect:/error.do";
+		}
 		
-		CompanyVO companyVO = new CompanyVO();
-		
-		companyVO.setCompany_cd(company_cd);
-		companyVO = settingService.getCompany(companyVO);
-		
-		model.addAttribute("companyVO", companyVO);
-		
-		logger.info("Call : /setting/companyPage.do - GET");
+		String company_cd = (String)session.getAttribute("company_cd");
+
+		model.addAttribute("companyVO", settingService.getCompany(company_cd));
 		
 		return "/setting/company";
 	}
 	
 	/* go to change company info page */
 	@RequestMapping(value = "/setting/companyChangePage.do", method = RequestMethod.GET)
-	public String companyChangePage(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		
-		UserVO userVO = new UserVO();
-		
-		userVO.setId((String) session.getAttribute("id"));
-		userVO  = settingService.getUserById(userVO);
-		
-		CompanyVO companyVO = new CompanyVO();
-		
-		String company_cd = userVO.getCompany_cd();
-		
-		companyVO.setCompany_cd(company_cd);
-		companyVO = settingService.getCompany(companyVO);
-		model.addAttribute("companyVO", companyVO);
-		
+	public String companyChangePage(HttpSession session, Model model) {
 		logger.info("Call : /setting/companyChangePage.do - GET");
+		
+		String posit_cd = (String)session.getAttribute("posit_cd");
+		
+		if(posit_cd.equals("POS003")) {
+			return "redirect:/error.do";
+		}
+
+		String company_cd = (String)session.getAttribute("company_cd");
+
+		model.addAttribute("companyVO", settingService.getCompany(company_cd));
 		
 		return "/setting/companyChangePage";
 	}
 	
 	/* change company info */
 	@RequestMapping(value = "/setting/companyChange.do", method = RequestMethod.POST)
-	public String companyChange(HttpServletRequest request) {
-		
-		CompanyVO companyVO = new CompanyVO();
-		
-		companyVO.setCompany_cd(request.getParameter("company_cd"));
-		// companyVO.company_logo
-		companyVO.setRegist_cd(request.getParameter("reg_cd"));
-		companyVO.setFax(request.getParameter("fax"));
-		companyVO.setPhone(request.getParameter("phone"));
-		companyVO.setDomain(request.getParameter("domain"));
-		companyVO.setBank_title(request.getParameter("bank_title"));
-		
+	public String companyChange(CompanyVO companyVO) {
+		logger.info("Call : /setting/companyChange.do - POST");
+
 		settingService.updateCompany(companyVO);
 		
 		return "/setting/company";

@@ -15,13 +15,13 @@
 						<th>Password Check</th><td><input type="password" name="passwordCheck"></td>
 					</tr>
 					<tr>
-						<th>Name</th><td><input type="text" name="name" placeholder="${userVO.name }"></td>
+						<th>Name</th><td><input type="text" name="name" value="${userVO.name }"></td>
 					</tr>
 					<tr>
-						<th>E-Mail</th><td><input type="text" name="email" placeholder="${userVO.email }"></td>
+						<th>E-Mail</th><td><input type="text" name="email" value="${userVO.email }"></td>
 					</tr>
 					<tr>
-						<th>Phone</th><td><input type="text" name="phone" placeholder="${userVO.phone }"></td>
+						<th>Phone</th><td><input type="text" name="phone" value="${userVO.phone }"></td>
 					</tr>
 				</table>
 				<input type="submit" value="Modify" onClick = "return pChangeCheck()">

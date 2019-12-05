@@ -97,11 +97,13 @@ public class CommonController {
 				return "/error";
 			}
 			
+			// POS002 - CEO
 			commonService.createCompany(companyRegistVO);
 			commonService.createUser(userVO, "POS002");
 			
 		// Select : Exist Company
 		} else {
+			// POS003 - Employee
 			commonService.createUser(userVO, "POS003");
 		}
 		
@@ -110,18 +112,18 @@ public class CommonController {
 	}
 	
 
-	@RequestMapping(value = "/checkId.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkId.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkId(String id, Model model) {
-		logger.info("Call : /checkId.do ajax id : " + id);
+		logger.info("Call : /checkId.ajax id : " + id);
 
 		return commonService.checkId(id);
 	}
 	
-	@RequestMapping(value = "/checkCode.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkCode.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public int checkCode(String company_cd, Model model) {
-		logger.info("Call : /checkCode.do ajax code : " + company_cd);
+		logger.info("Call : /checkCode.ajax code : " + company_cd);
 		
 		return commonService.checkCode(company_cd);
 	}
@@ -158,6 +160,8 @@ public class CommonController {
 	@RequestMapping(value = "/error.do", method = RequestMethod.GET)
 	public String error(HttpSession httpSession, Model model) {
 		logger.info("Call : /error.do - GET");
+		
+		httpSession.invalidate();
 		
 		return "/error";	
 	}

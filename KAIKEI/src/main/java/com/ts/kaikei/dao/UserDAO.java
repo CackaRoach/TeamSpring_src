@@ -10,18 +10,33 @@ import com.ts.kaikei.vo.UserVO;
 
 @Mapper
 public interface UserDAO {
+	/*
+	 * ========================
+	 * 			Common
+	 * ========================
+	 */
 	public UserVO getUser(UserVO userVO);
 	public void insertUser(UserVO userVO);
 	public int checkId(String id);
 	
-	public UserVO getUserById(UserVO userVO);
+	/*
+	 * ========================
+	 * 			Setting
+	 * ========================
+	 */
+	public UserVO getUserById(String id);
 	public void updateUser(UserVO userVO);
 	
-	public void userDeletecmp(String id);	//manage
-	public List<UserListVO> selectUser(Map<String, Object> Params);	//manage
-	public UserListVO infoUsers(String id);	//manage
-	public void infoUpdateUser(UserListVO vo);	//manage
-	public void userDelete(String code);	//manage
-	public String getCompanyCode();	//manage
+	/*
+	 * ========================
+	 * 			Manage
+	 * ========================
+	 */
+	public void userDeletecmp(String id);
+	public List<UserListVO> selectUser(Map<String, Object> Params);
+	public UserListVO infoUsers(String id);
+	public void infoUpdateUser(UserListVO vo);
+	public void userDelete(String code);
+	public String getCompanyCode();
 }
  

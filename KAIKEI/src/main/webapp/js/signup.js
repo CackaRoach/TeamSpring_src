@@ -10,7 +10,7 @@ $(window).load(function() {
 		}
 		
 		$.ajax({
-			url : "/checkId.do?id=" + userId,
+			url : "/checkId.ajax?id=" + userId,
 			type : "get",
 			success : function(data) {					
 				
@@ -36,7 +36,7 @@ $(window).load(function() {
 		}
 		
 		$.ajax({
-			url : "/checkCode.do?company_cd=" + company_cd,
+			url : "/checkCode.ajax?company_cd=" + company_cd,
 			type : "get",
 			success : function(data) {					
 				if(state == "new") {

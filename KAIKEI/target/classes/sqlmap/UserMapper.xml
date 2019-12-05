@@ -85,17 +85,14 @@
   			password = #{password}, 
   			name = #{name}, 
   			email = #{email}, 
-  			phone = #{phone} 
+  			phone = #{phone},
+  			mod_id = #{id}, 
+        	mod_date = NOW(), 
+        	mod_prog = 'Web-kaikei'
   		WHERE 1=1
   			AND id = #{id}
   		
     </update>
-
-  	<!-- USERS DELETE FOR COMPANY DELETE MANAGE -->
-    <delete id="customerDeletecmp" parameterType="String">
-	    DELETE FROM users
-	    WHERE company_cd = #{company_cd}
-    </delete>
     
     <!-- User List MANAGE -->
     <select id="selectUser" parameterType="hashmap" resultType="UserListVO">

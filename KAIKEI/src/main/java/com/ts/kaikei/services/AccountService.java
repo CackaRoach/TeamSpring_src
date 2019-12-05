@@ -3,6 +3,7 @@ package com.ts.kaikei.services;
 import java.util.List;
 import java.util.Map;
 
+import com.ts.kaikei.vo.AccountVO;
 import com.ts.kaikei.vo.CustomerListVO;
 import com.ts.kaikei.vo.CustomerVO;
 import com.ts.kaikei.vo.StatementListVO;
@@ -18,6 +19,9 @@ public interface AccountService {
 
 	List<StatementListVO> getStatements(String company_cd, String year, String month, String crtPage);
 	void addStatement(List<Map<String, String>> statementList, String userId, String company_cd);
+	
+	List<AccountVO> getAccountTitle(String title);
+	List<CustomerVO> getCustomerTitle(String title, String company_cd);
 	
 	/*
 	 * =====================================
