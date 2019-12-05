@@ -5,91 +5,167 @@
     
     <insert id="addCustomer" parameterType="CustomerVO">
     
-        INSERT INTO customer(company_cd, cus_cd, title, reg_cd, 
-        					domain, fax, ceo_name, ceo_phone, 
-        					ceo_email, worker_name, worker_phone, worker_email, 
-        					memo, ent_id, entdate, ent_prog,
-        					mod_id, mod_date, mod_prog)
-        VALUES(#{company_cd}, #{cus_cd}, #{title}, #{reg_cd}, 
-        		#{domain}, #{fax}, #{ceo_name}, #{ceo_phone},
-        		#{ceo_email}, #{worker_name}, #{worker_phone}, #{worker_email},
-        		#{memo}, #{ent_id}, NOW(), 'Web-kaikei',
-        		#{mod_id}, NOW(), 'Web-kaikei')
+        INSERT INTO customer (
+        	company_cd, 
+        	cus_cd, 
+        	title, 
+        	reg_cd, 
+        	domain, 
+        	fax, 
+        	ceo_name, 
+        	ceo_phone, 
+        	ceo_email, 
+        	worker_name, 
+        	worker_phone, 
+        	worker_email, 
+        	memo, 
+        	ent_id, 
+        	entdate, 
+        	ent_prog,
+        	mod_id, 
+        	mod_date, 
+        	mod_prog
+        	)
+        VALUES (
+        	#{company_cd}, 
+        	#{cus_cd}, 
+        	#{title}, 
+        	#{reg_cd}, 
+        	#{domain}, 
+        	#{fax}, 
+        	#{ceo_name}, 
+        	#{ceo_phone},
+        	#{ceo_email}, 
+        	#{worker_name}, 
+        	#{worker_phone}, 
+        	#{worker_email},
+        	#{memo}, 
+        	#{ent_id}, 
+        	NOW(), 
+        	'Web-kaikei',
+        	#{mod_id}, 
+        	NOW(), 
+        	'Web-kaikei'
+        	)
         
     </insert>
     
-    <select id="getCustomerList" parameterType="map" resultType="CustomerVO" >
-    
-        SELECT cus_cd, title, ceo_name, worker_name, fax
-        FROM customer
+    <select id="selectCustomerList" parameterType="Map" resultType="CustomerListVO" >
+
+        SELECT 
+        	(SELECT
+        		((COUNT(*) + (#{size}::INTEGER - 1))/#{size}::INTEGER)
+        	FROM
+		    	customer
+			WHERE 1 = 1
+			    AND company_cd = '00001'
+			    AND (
+			        cus_cd LIKE '%' || #{searchParam} || '%'
+			        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
+			        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
+			    )
+        	) AS pagenum,
+        	cus_cd, 
+        	title, 
+        	fax,
+        	ceo_name, 
+        	worker_name,
+        	memo
+        FROM 
+        	customer
         WHERE 1=1
-        AND company_cd = #{company_cd}
-        AND cus_cd LIKE '%' || #{searchParam} || '%'
-        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
-        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
-        ORDER BY cus_cd ASC
-		LIMIT 20 OFFSET ${pageNum} * 20
+        	AND company_cd = #{company_cd}
+	        AND (cus_cd LIKE '%' || #{searchParam} || '%'
+	        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
+	        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%'))
+     
+     		ORDER BY cus_cd ASC
+			LIMIT #{size}::INTEGER OFFSET ${pageNum} * #{size}::INTEGER
+
         
     </select>
     
-        <select id="getCustomerCount" parameterType="map" resultType="int" >
+    <select id="getCustomerDetail" parameterType="Map" resultType="CustomerVO" >
     
-        SELECT (count(*)+19)/20
-        FROM customer
+        SELECT 
+        	cus_cd, 
+        	title, 
+        	reg_cd, 
+        	domain, 
+        	fax, 
+        	ceo_name, 
+        	ceo_phone, 
+        	ceo_email, 
+        	worker_name, 
+        	worker_phone, 
+        	worker_email, 
+        	memo
+        FROM 
+        	customer
         WHERE 1=1
-        AND company_cd = #{company_cd}
-        AND cus_cd LIKE '%' || #{searchParam} || '%'
-        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
-        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
-        
-    </select>
-    
-    <select id="getCustomerDetail" parameterType="map" resultType="CustomerVO" >
-    
-        SELECT cus_cd, title, reg_cd, domain, fax, ceo_name, ceo_phone, ceo_email, worker_name, worker_phone, worker_email, memo
-        FROM customer
-        WHERE 1=1
-        AND company_cd = #{company_cd}
-        AND cus_cd = #{cus_cd}
+	        AND company_cd = #{company_cd}
+	        AND cus_cd = #{cus_cd}
         
     </select>
     
     <update id="updateCustomer" parameterType="CustomerVO">
     
-    	UPDATE customer
-    	SET title = #{title}, reg_cd = #{reg_cd}, domain = #{domain}, fax = #{fax},
-    		ceo_name = #{ceo_name}, ceo_phone = #{ceo_phone}, ceo_email = #{ceo_email}, worker_name = #{worker_name},
-    		worker_phone = #{worker_phone}, worker_email = #{worker_email}, memo = #{memo},
-    		mod_id = #{mod_id}, mod_date = NOW(), mod_prog = #{mod_prog}
+    	UPDATE 
+    		customer
+    	SET 
+    		title = #{title}, 
+    		reg_cd = #{reg_cd}, 
+    		domain = #{domain}, 
+    		fax = #{fax},
+    		ceo_name = #{ceo_name}, 
+    		ceo_phone = #{ceo_phone}, 
+    		ceo_email = #{ceo_email}, 
+    		worker_name = #{worker_name},
+    		worker_phone = #{worker_phone}, 
+    		worker_email = #{worker_email}, 
+    		memo = #{memo},
+    		mod_id = #{mod_id}, 
+    		mod_date = NOW(), 
+    		mod_prog = 'Web-kaikei'
     	WHERE 1=1
-        AND company_cd = #{company_cd}
-        AND cus_cd = #{cus_cd}
+	        AND company_cd = #{company_cd}
+	        AND cus_cd = #{cus_cd}
     
     </update>
     
-    <delete id="deleteCustomer" parameterType="map" >
+    <delete id="deleteCustomer" parameterType="Map" >
     
-        DELETE FROM customer 
+        DELETE FROM 
+        	customer 
         WHERE 1=1
-        AND company_cd = #{company_cd}
-        AND cus_cd = #{cus_cd}
+	        AND company_cd = #{company_cd}
+	        AND cus_cd = #{cus_cd}
         
     </delete>
     
-        <select id="customerCodeCheck" parameterType="map" resultType="int" >
+        <select id="customerCodeCheck" parameterType="Map" resultType="int" >
     
-        SELECT count(*)
-        FROM customer
+        SELECT 
+        	count(*)
+        FROM 
+        	customer
         WHERE 1=1
-        AND company_cd = #{company_cd}
-        AND cus_cd = #{cus_cd}
-        
+	        AND company_cd = #{company_cd}
+	        AND cus_cd = #{cus_cd}
+	        
     </select>
     
     <select id="getCustomerOf" resultType="CustomerVO" parameterType="String">
+    
 	    SELECT *
 	    from customer
 	    where cus_cd = #{value}
     </select>
+    
+    <!-- CUSTOMER DELETE FOR COMPANY DELETE MANAGE -->
+    <delete id="customerDeletecmp" parameterType="String">
+	    DELETE FROM customer
+	    WHERE company_cd = #{company_cd}
+    </delete>
 
 </mapper>

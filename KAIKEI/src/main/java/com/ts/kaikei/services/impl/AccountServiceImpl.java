@@ -2,9 +2,10 @@ package com.ts.kaikei.services.impl;
 
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,17 +14,18 @@ import com.ts.kaikei.dao.CustomerDAO;
 import com.ts.kaikei.dao.StatementDAO;
 
 import com.ts.kaikei.services.AccountService;
+import com.ts.kaikei.vo.CustomerListVO;
 import com.ts.kaikei.vo.CustomerVO;
-import com.ts.kaikei.vo.StatementVO;
+import com.ts.kaikei.vo.StatementListVO;
+
 
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
+	
 	@Autowired
 	StatementDAO statementDAO;
 	@Autowired
 	CustomerDAO customerDAO;
-	
-	public static int pageSize = 20;
 
 	/*
 	 * =====================================
@@ -32,56 +34,35 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	
 	@Override
-	public List<StatementVO> getStatementList(String company_cd, String pageNum, String searchString, String searchTarget) {
-		List<StatementVO> list = statementDAO.getStatementList(company_cd);
-		List<StatementVO> result = new LinkedList<StatementVO>();
-		
-		if(searchTarget != null && searchString != null) {
-			for(int i = 0; i < list.size(); i++) {
-				if(searchTarget == "account_cd" && list.get(i).getAccount_cd() == searchString)
-					result.add(list.get(i));
-				else if(searchTarget == "customer_cd" && list.get(i).getCustomer_cd() == searchString)
-					result.add(list.get(i));
-				else if(searchTarget == "date" && list.get(i).getDate() == searchString)
-					result.add(list.get(i));
-				else if(searchTarget == "classify" && list.get(i).getClassify() == searchString)
-					result.add(list.get(i));
-				else if(searchTarget == "abs" && list.get(i).getAbs() == searchString)
-					result.add(list.get(i));
-			}
+	public List<StatementListVO> getStatements(String company_cd, String year, String month, String crtPage) {		
+		if(crtPage == null) {
+			crtPage = "0";
 		}
 		
-		for(int i = 0; i < 20; i++)
-			result.add(list.get(Integer.parseInt(pageNum) + i));
+		Map<String, String> searchParams = new HashMap<String, String>();
 		
-		return result;
-	}
-	
-	@Override
-	public void addStatement(StatementVO statementVO, String userId, String company_cd) {		
-		statementVO.setCompany_cd(company_cd);
-		statementVO.setEnt_id(userId);
-		statementVO.setEnt_prog("Web_kaikei");
-		statementVO.setMod_id(userId);
-		statementVO.setMod_prog("Web_kaikei");
+		searchParams.put("company_cd", company_cd);
+		searchParams.put("year", year);
+		searchParams.put("month", month);
+		searchParams.put("crtPage", crtPage);
 		
-		statementDAO.addStatement(statementVO);
+		return statementDAO.selectStatementList(searchParams);
 	}
 	
-	@Override
-	public String getPageSize(String company_cd) {
-		return statementDAO.getPageSize(String.valueOf(Integer.parseInt(company_cd) / this.pageSize));
-	}
-	
-	@Override
-	public void editStatment(StatementVO statementVO, String userId, String company_cd) {
-		statementVO.setCompany_cd(company_cd);
-		statementVO.setMod_id(userId);
-		statementVO.setMod_prog("Web_kaikei");
+	public void addStatement(List<Map<String, String>> statementList, String userId, String company_cd) {
+		Map<String, Object> statements = new HashMap<String, Object>();
 		
-		statementDAO.editStatement(statementVO);
+		for(int i = 0; i < statementList.size(); i++) {
+			statementList.get(i).put("ent_id", userId);
+			statementList.get(i).put("mod_id", userId);
+			statementList.get(i).put("company_cd", company_cd);
+		}
+		
+		statements.put("statementList", statementList);
+		
+		statementDAO.saveStatement(statements);
 	}
-	
+
 
 	/*
 	 * =====================================
@@ -91,6 +72,13 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public boolean addCustomer(String company_cd, CustomerVO customerVO, String userId) {
+		
+		Pattern codePattern = Pattern.compile("^[0-9]{5}$");
+		Matcher codeMatcher = codePattern.matcher(customerVO.getCus_cd());
+		
+		if( !codeMatcher.find()) {
+			return false;
+		}
 		 
 		customerVO.setCompany_cd(company_cd);
 		
@@ -104,22 +92,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
-	public int getCustomerCount(String company_cd, String searchParam) {
-		
-		if(searchParam == null) {
-			searchParam = "";
-		}
-		
-		Map<String, String> params = new HashMap<String, String>();
-		
-		params.put("company_cd", company_cd);
-		params.put("searchParam", searchParam);
-
-		return customerDAO.getCustomerCount(params);
-	}
-	
-	@Override
-	public List<CustomerVO> getCustomerList(String company_cd, String searchParam, String pageNum) {
+	public List<CustomerListVO> getCustomerList(String company_cd, String searchParam, String pageNum, String size) {
 
 		if(searchParam == null) {
 			searchParam = "";
@@ -134,8 +107,9 @@ public class AccountServiceImpl implements AccountService {
 		params.put("company_cd", company_cd);
 		params.put("searchParam", searchParam);
 		params.put("pageNum", pageNum);
+		params.put("size", size);
 		
-		return customerDAO.getCustomerList(params);
+		return customerDAO.selectCustomerList(params);
 	}
 	
 	@Override
@@ -150,11 +124,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public boolean updateCustomer(String company_cd, CustomerVO customerVO, String userId) {
-		
+
 		customerVO.setCompany_cd(company_cd);
 		customerVO.setMod_id(userId);
-		customerVO.setMod_prog("Web-kaikei");
-		
 		
 		customerDAO.updateCustomer(customerVO);
 		

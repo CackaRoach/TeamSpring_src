@@ -10,8 +10,8 @@ public class StatementVO {
 	private String customer_cd;
 	private String date;
 	private String classify;
-	private int debtor;
-	private int creditor;
+	private String debtor;
+	private String creditor;
 	private String abs;			// Abstract
 	private String ent_id;
 	private String ent_date;
@@ -68,19 +68,19 @@ public class StatementVO {
 		this.classify = classify;
 	}
 	
-	public int getDebtor() {
+	public String getDebtor() {
 		return debtor;
 	}
 	
-	public void setDebtor(int debtor) {
+	public void setDebtor(String debtor) {
 		this.debtor = debtor;
 	}
 	
-	public int getCreditor() {
+	public String getCreditor() {
 		return creditor;
 	}
 	
-	public void setCreditor(int creditor) {
+	public void setCreditor(String creditor) {
 		this.creditor = creditor;
 	}
 	

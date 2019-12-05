@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
+<!-- TODO: Login Fail Alert Window -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,36 +9,69 @@
     <link rel= "stylesheet" type="text/css" href="/css/layout.css">
 </head>
 <script>
+function submit() {
+	var form = document.getElementById("form");
+
+	if(document.getElementById("id").value == "") {
+		alert("IDを入力してください!");
+		document.getElementById("id").focus();
+		return false;
+	}
+
+	if(document.getElementById("password").value == "") {
+		alert("パスワードを入力してください!");
+		document.getElementById("password").focus();
+		return false;
+	}
+	
+	form.setAttribute("charset", "SHIFT-JIS");
+	form.setAttribute("method", "Post"); 
+	form.setAttribute("action", "/loginExc.do");
+
+	form.submit();
+}
 </script>
 <body>
-   	<div align="center" style="min-width:400px; padding: 100px 0px; margin: 0% 20%;">
-		<div style="font-size: 40px; font-style: italic;">K A I K E I</div>
-	</div>
-	<div align="center" style="min-width:400px; padding: 30px;">
-		<form action="loginExe.do" method="post">
-			<table>
-				<tr>
-					<td><input class="input-box input-box-login" type="text" name="id" placeholder="Enter ID" maxlength="15"></td>
-				</tr>
-				<tr>
-					<td style="text-align:center;"><span class="spanLoginFont">${loginState}</span></td>
-				</tr>
-				<tr>
-					<td><input class="input-box input-box-login" type="password" name="password" placeholder="Enter Password" maxlength="15"></td>
-				</tr>
-			</table>
-			<div style="height:20px">
+	<div style="min-width:400px; padding: 15% 30% 0% 30%">
+		<div style="padding: 10px; border:1px solid black; height:226px;">
+			<div style="float:left; width:40%">
+				<img src="/images/login.png">
 			</div>
-			<input class="button button-login" type="submit" value="Login">
-		</form><br>
-		<input class="button button-login" type="button" value="Sign Up" onclick="location.href='/signup.do'">
-		<table style="text-align:center">
-			<tr>
-				<td style="padding:10px 0px"><!--<a href="forgot.do"></a>-->forgot ID,Password</td>
-			</tr>
-		</table>
+			<div style="float:left; width:60%;">
+				<div>
+					<label style="color:#07E0DB; font-size: 2em">KAIKEI</label>
+				</div>
+				<div style="height:80px;">
+					<div align="center" style="float:left; width:20%; height:100%">
+						<p style="margin: 12px; font-size: 1em;">I D</p>
+						<p style="margin: 12px; font-size: 1em;">PW</p>
+					</div>
+					<form id="form">
+					<div style="float:left; width:40%; height:100%">
+						<input class="logininputbox" type="text" id="id" name="id" maxlength="15">
+						<br>
+						<input class="logininputbox" id="password" name="password" maxlength="15">
+					</div>
+					</form>
+					<div style="float:left; width:40%; height:100%">
+						<button class="loginbutton" style="margin:5px;" onclick="submit();">Login</button>
+					</div>
+				</div>
+				<div align="right" style="margin:10px">
+					<input type="checkbox" class="logincheckbox" id="saveid"> Save ID
+					<input type="checkbox" class="logincheckbox" id="autologin"> Auto Login
+				</div>
+				<div align="right">
+					<hr>
+					<button type="button" class="login-gray-btn" onclick="location.href='/signup.do'">Sign Up</button>
+					<button type="button" class="login-gray-btn" onclick="location.href='/forgot.do'">Forgot ID/PW</button>
+					<hr>
+				</div>
+			</div>
+		</div>
     </div>
     <div align="center">asd, asd = Admin Page<br>qwe, qwe = CEO Page<br>zxc, zxc = 社員ページ</div>
+    <span class="spanLoginFont">${loginState}</span>
 </body>
 </html>
 		

@@ -2,8 +2,16 @@
 package com.ts.kaikei.services.impl;
 
 
+
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +20,6 @@ import com.ts.kaikei.dao.CompanyDAO;
 import com.ts.kaikei.dao.UserDAO;
 import com.ts.kaikei.services.CommonService;
 import com.ts.kaikei.vo.CompanyRegistVO;
-import com.ts.kaikei.vo.CompanyVO;
 import com.ts.kaikei.vo.UserVO;
 
 @Service("commonService")
@@ -28,12 +35,9 @@ public class CommonServiceImpl implements CommonService {
 		return userDAO.getUser(userVO);
 	}
 	
-	public CompanyVO getCompany(String company_cd) {
-		return companyDAO.getCompany(company_cd);
-	}
 	
 	@Override
-	public boolean signUpUser(UserVO userVO, String posit_cd) {
+	public boolean createUser(UserVO userVO, String posit_cd) {
 		
 		
 		Pattern idPattern = Pattern.compile("^[a-z0-9]{5,15}$");
@@ -50,17 +54,13 @@ public class CommonServiceImpl implements CommonService {
 		userVO.setEnt_id(userVO.getId());
 		userVO.setMod_id(userVO.getId());
 		
-		userVO.setEnt_prog("Web-kaikei");
-		userVO.setMod_prog("Web-kaikei");
-		
-		
-		userDAO.signUpUser(userVO);
+		userDAO.insertUser(userVO);
 		
 		return true;
 	}
 	
 	@Override
-	public boolean signUpCompany(CompanyRegistVO companyRegisterVO) {
+	public boolean createCompany(CompanyRegistVO companyRegisterVO) {
 	
 		Pattern codePattern = Pattern.compile("^[0-9]{5}$");
 		Matcher codeMatcher = codePattern.matcher(companyRegisterVO.getCompany_cd());
@@ -74,23 +74,20 @@ public class CommonServiceImpl implements CommonService {
 		companyRegisterVO.setEnt_id(companyRegisterVO.getId());
 		companyRegisterVO.setMod_id(companyRegisterVO.getId());
 		
-		companyRegisterVO.setEnt_prog("Web-kaikei");
-		companyRegisterVO.setMod_prog("Web-kaikeip");
-		
-		companyDAO.signUpCompany(companyRegisterVO);
-		
+		companyDAO.insertCompany(companyRegisterVO);
+
 		return true;
 	}
 	
 	@Override
-	public boolean forgotId(String email) {
-		/*
+	public boolean forgotUser(String id, String email) {
+		
 		String host = "smtp.naver.com";  
 
 		final String username = "";  
 		final String password = "";
 		int port = 465; 
-
+		
 		String recipient = ""; 
 		String subject = ""; 
 		String body = "";
@@ -117,12 +114,12 @@ public class CommonServiceImpl implements CommonService {
 			mimeMessage.setSubject(subject); 
 			mimeMessage.setText(body);
 			Transport.send(mimeMessage); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
 		
-		return false;
+		return true;
 	}
 	
 	@Override
