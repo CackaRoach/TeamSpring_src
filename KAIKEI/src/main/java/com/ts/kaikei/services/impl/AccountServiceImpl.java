@@ -34,8 +34,7 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	
 	@Override
-	public List<StatementListVO> getStatements(String company_cd, String year, String month, String crtPage) {
-		
+	public List<StatementListVO> getStatements(String company_cd, String year, String month, String crtPage) {		
 		if(crtPage == null) {
 			crtPage = "0";
 		}

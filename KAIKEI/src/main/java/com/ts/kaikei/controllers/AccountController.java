@@ -51,7 +51,7 @@ public class AccountController {
 			year = String.valueOf(calendar.get(Calendar.YEAR));
 			month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
 		}
-
+			
 		List<StatementListVO> list = accountService.getStatements(company_cd, year, month, crtPage);
 		
 		model.addAttribute("year", year);

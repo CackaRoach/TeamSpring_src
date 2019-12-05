@@ -135,5 +135,31 @@
   		SELECT A.company_cd FROM users A
 		WHERE RIGHT(A.posit_cd,3) = '001'
   	</select>
- 
+  	
+  	<select id="getAcceptedUserList" resultType="UserVO" parameterType="String">
+  		select * from users
+  		where company_cd like #{company_cd}
+  		and auth_cd like 'AUT001'
+  	</select>
+  	  	
+  	<select id="getWaitingUserList" resultType="UserVO" parameterType="String">
+  		select * from users
+  		where company_cd like #{company_cd}
+  		and auth_cd like 'AUT003'
+  	</select>
+  	
+  	<update id="acceptUser" parameterType="String">
+  		update users set auth_cd = 'AUT001'
+  		where id like #{id}
+  	</update>
+ 	
+ 	<update id="rejectUser" parameterType="String">
+  		update users set auth_cd = 'AUT002'
+  		where id like #{id}
+  	</update>
+  	
+  	<update id="deleteUser" parameterType="String">
+  		update users set auth_cd = 'AUT003'
+  		where id like #{id}
+  	</update>
 </mapper>
