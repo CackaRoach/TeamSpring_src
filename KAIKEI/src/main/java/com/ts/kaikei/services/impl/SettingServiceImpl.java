@@ -1,7 +1,5 @@
 package com.ts.kaikei.services.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,31 +35,6 @@ public class SettingServiceImpl implements SettingService {
 	@Override
 	public UserVO getUserById(UserVO userVO) {
 		return userDAO.getUserById(userVO);
-	}
-	
-	@Override
-	public List<UserVO> getAcceptedUserList(String company_cd) {
-		return userDAO.getAcceptedUserList(company_cd);
-	}
-	
-	@Override
-	public List<UserVO> getWaitingUserList(String company_cd) {
-		return userDAO.getWaitingUserList(company_cd);
-	}
-
-	@Override
-	public void acceptUser(String id) {
-		userDAO.acceptUser(id);
-	}
-	
-//	@Override
-//	public void rejectUser(String id) {
-//		userDAO.rejectUser(id);
-//	}
-	
-	@Override
-	public void deleteUser(String id) {
-		userDAO.deleteUser(id);
 	}
 }
  

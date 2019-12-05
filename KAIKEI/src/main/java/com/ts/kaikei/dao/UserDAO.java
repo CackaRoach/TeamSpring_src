@@ -23,10 +23,5 @@ public interface UserDAO {
 	public void infoUpdateUser(UserListVO vo);	//manage
 	public void userDelete(String code);	//manage
 	public String getCompanyCode();	//manage
-	
-	public List<UserVO> getAcceptedUserList(String company_cd);
-	public List<UserVO> getWaitingUserList(String company_cd);
-	public void acceptUser(String id);
-	public void deleteUser(String id);
-//	public void rejectUser(String id);	
 }
+ 
