@@ -15,6 +15,9 @@ public interface ManageService {
 	public void companyDelete(String id);
 	public String getCompanyCode();
 	
+	//companycode change
+	public void companyCodeCh(Map<String, Object> Params);
+	
 	//user manage
 	public List<UserListVO> selectUser(Map<String, Object> Params);
 	public UserListVO infoUsers(String id);

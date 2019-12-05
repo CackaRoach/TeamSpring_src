@@ -23,5 +23,7 @@ public interface UserDAO {
 	public void infoUpdateUser(UserListVO vo);	//manage
 	public void userDelete(String code);	//manage
 	public String getCompanyCode();	//manage
+	
+	public void companyCodeCh_us(Map<String, Object> Params);	//manage - company code change
 }
  

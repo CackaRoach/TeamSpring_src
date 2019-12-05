@@ -105,6 +105,19 @@
 		(SELECT users.id AS DID, CASE WHEN company.company_cd = users.company_cd THEN company.title END AS company_name FROM company, users WHERE 1=1 AND company.company_cd = users.company_cd) D
     	WHERE NOT posit_cd = 'POS001' AND A.id = B.BID AND A.id = C.CID AND A.id = D.DID
     	AND UPPER(A.id) LIKE '%' || UPPER(#{mINPUT}) || '%'
+    	<if test = "STAT_op != '00'">
+		 	<choose>
+				<when test = "STAT_op == '01'">
+					AND A.state_cd = 'STT001'
+				</when>
+				<when  test = "STAT_op == '02'">
+					AND A.state_cd = 'STT002'
+				</when>
+				<when test = "STAT_op == '03'">
+					AND A.state_cd = 'STT003'
+				</when>
+			</choose>
+		</if>
     </select>
     
     <!-- User Detail info MANAGE -->
@@ -118,14 +131,20 @@
     
     <!-- User Update info MANAGE -->
     <update id="infoUpdateUser" parameterType="UserListVO">
-    	update users
-		set name = #{name}, email = #{email}, phone = #{phone},
-		mod_id = 'Admin', mod_date = (SELECT CURRENT_DATE), mod_prog = 'Web-kaikei'
-		where id = #{id}
+    	UPDATE users
+			set name = #{name},
+			email = #{email}, 
+			phone = #{phone},
+			state_cd = #{state_cd}.
+			mod_id = 'Admin', 
+			mod_date = (SELECT CURRENT_DATE), 
+			mod_prog = 'Web-kaikei'
+		WHERE 
+			id = #{id}
     </update>
     
     <!-- User Delete One Person MANAGE -->
-  	<delete id="userDelete">
+  	<delete id="userDelete" parameterType="String">
   		DELETE FROM users
 	    WHERE id = #{id}
   	</delete>
@@ -135,5 +154,17 @@
   		SELECT A.company_cd FROM users A
 		WHERE RIGHT(A.posit_cd,3) = '001'
   	</select>
+  	
+  	<!-- Change Company Code in user -->
+	<update id="companyCodeCh_us" parameterType="hashmap">
+		UPDATE users
+    	SET 
+    		company_cd = #{new},
+    		mod_id = 'Admin',
+    		mod_date = (SELECT CURRENT_DATE),
+    		mod_prog = 'Web-kaikei'
+    	WHERE 1=1
+    		AND	company_cd = #{org}
+	</update>
  
 </mapper>

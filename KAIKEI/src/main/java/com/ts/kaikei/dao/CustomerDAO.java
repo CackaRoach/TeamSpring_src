@@ -22,6 +22,6 @@ public interface CustomerDAO {
 	int getCustomerCount(Map<String, String> params);
 	
 	public void customerDeletecmp(String id);//manage
-
+	public void companyCodeCh_cst(Map<String, Object> Params);//manage change cmpcd
 }
  

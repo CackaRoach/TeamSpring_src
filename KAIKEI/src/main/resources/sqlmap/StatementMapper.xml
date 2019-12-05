@@ -112,5 +112,23 @@
      	</foreach>
      	
     </update>
+    
+    <!-- COMPANY DELETE MANAGE in statements -->
+    <delete id="stateCompanyDelete" parameterType="String">
+	    DELETE FROM statements
+	    WHERE company_cd = #{company_cd}
+    </delete>
+    
+    <!-- Change Company Code in statements -->
+	<update id="companyCodeCh_std" parameterType="hashmap">
+		UPDATE statements
+    	SET 
+    		company_cd = #{new},
+    		mod_id = 'Admin',
+    		mod_date = (SELECT CURRENT_DATE),
+    		mod_prog = 'Web-kaikei'
+    	WHERE 1=1
+    		AND	company_cd = #{org}
+	</update>
 
 </mapper>
