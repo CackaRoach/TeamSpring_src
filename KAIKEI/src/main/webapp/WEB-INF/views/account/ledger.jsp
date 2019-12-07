@@ -17,8 +17,9 @@
 			<input type="hidden" id="month" value="${month}">
 		</div>
 		<div align="right">
+		<!-- 
 			<form action="/kaikei/account/ledger.do" method="GET">
-				<select class="button" style="width: 230px" name="job">
+				<select class="select-menu" style="width: 230px" name="job">
 	    			<option value="account_cd">Account Code</option>
 	    			<option value="customer_cd">Customer Code</option>
 	    			<option value="classify">Classify</option>
@@ -26,6 +27,7 @@
 				<input type="text" class="input-box" name="searchKeyword"/>
 				<input type="submit" class="button" value="Search"/>
 			</form>
+		-->
 		</div>
 		<form action="/account/addStatement.do" method="POST">
 		<div>
@@ -65,6 +67,11 @@
 					
 				</tbody>
 			</table>
+		</div>
+		<div align="center">
+			<c:forEach var="i" begin="0" end="${statements[0].pangenum - 1}">
+				<a href="/account/ledger.do?pagenum=${i}">${i}</a>
+			</c:forEach>
 		</div>
 		<div id="statebtn" align="right">
 			<input type="button" id="saveBtn" class="button" style="display:none" style="margin:5px" onclick="submitStatement();" value="Save"/>

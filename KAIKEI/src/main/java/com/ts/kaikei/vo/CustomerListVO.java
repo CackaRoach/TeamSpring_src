@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("CustomerListVO")
 public class CustomerListVO {
 
-	private String pageNum;
+	private String pagenum;
 	private String cus_cd;
 	private String title;
 	private String fax;
@@ -14,10 +14,10 @@ public class CustomerListVO {
 	private String memo;
 	
 	public String getPageNum() {
-		return pageNum;
+		return pagenum;
 	}
 	public void setPageNum(String pageNum) {
-		this.pageNum = pageNum;
+		this.pagenum = pageNum;
 	}
 
 	public String getCus_cd() {

@@ -5,7 +5,17 @@
 
     <select id="selectStatementList" parameterType="Map" resultType="StatementListVO">
     
-    	SELECT 
+    	SELECT 	
+			(
+			SELECT 
+				((COUNT(*) + 14) / 15) 
+			FROM
+				statements
+			WHERE 1=1
+		    	AND company_cd = '00001'
+		    	AND date  <![CDATA[>=]]>  '2019-11-01' 
+		    	AND date  <![CDATA[<]]>  '2019-12-31'
+			)as pagenum,
     		seq,
     		TO_CHAR(STT.date, 'YY') AS year, 
     		TO_CHAR(STT.date, 'MM') AS month, 
@@ -24,12 +34,13 @@
     		account AS ACC, 
     		customer AS CUS
     	WHERE 1=1
-	    	AND STT.company_cd = #{company_cd}
-	    	AND STT.date <![CDATA[>=]]> '2019-11-01' 
-	    	AND STT.date <![CDATA[<]]> '2019-12-31'
+	    	AND STT.company_cd = '00001'
+	    	AND STT.date  <![CDATA[>=]]>  '2019-11-01' 
+	    	AND STT.date  <![CDATA[<]]>  '2019-12-31'
 	    	AND STT.company_cd = CUS.company_cd
 	    	AND STT.customer_cd = CUS.cus_cd
 	    	AND STT.account_cd = ACC.acc_cd
+	    LIMIT 15 OFFSET ${pagenum} * 15
 		ORDER BY SEQ ASC
 		
     </select>

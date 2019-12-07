@@ -50,7 +50,7 @@ function submit() {
 					<div style="float:left; width:40%; height:100%">
 						<input class="logininputbox" type="text" id="id" name="id" maxlength="15">
 						<br>
-						<input class="logininputbox" id="password" name="password" maxlength="15">
+						<input class="logininputbox" type="password" id="password" name="password" maxlength="15">
 					</div>
 					</form>
 					<div style="float:left; width:40%; height:100%">
@@ -70,7 +70,7 @@ function submit() {
 			</div>
 		</div>
     </div>
-    <div align="center">asd, asd = Admin Page<br>qwe, qwe = CEO Page<br>zxc, zxc = 社員ページ</div>
+    <!-- <div align="center">asd, asd = Admin Page<br>qwe, qwe = CEO Page<br>zxc, zxc = 社員ページ</div> -->
     <span class="spanLoginFont">${loginState}</span>
 </body>
 </html>

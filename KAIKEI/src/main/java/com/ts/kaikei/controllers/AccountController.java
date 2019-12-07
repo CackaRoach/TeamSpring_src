@@ -38,7 +38,7 @@ public class AccountController {
 	@RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)
 	public String ledger(   String year,
 							String month,
-							String crtPage,
+							String pagenum,
 							HttpSession httpSession, 
 							Model model) {
 		logger.info("Call : /account/ledger.do - GET");
@@ -52,7 +52,7 @@ public class AccountController {
 			month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
 		}
 
-		List<StatementListVO> list = accountService.getStatements(company_cd, year, month, crtPage);
+		List<StatementListVO> list = accountService.getStatements(company_cd, year, month, pagenum);
 		
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);

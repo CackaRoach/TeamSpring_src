@@ -4,6 +4,8 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("StatementListVO")
 public class StatementListVO {
+	
+	private String pagenum;
 	private String seq;
 	private String account_cd;
 	private String acc_title;
