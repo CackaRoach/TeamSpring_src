@@ -24,61 +24,7 @@ public class ReportServiceImpl implements ReportService {
 	private ArrayList<String> Account_CD_List(){
 		ArrayList<StatementVO> statList = statementDAO.getStatementList();
 		ArrayList<String> Act_cd = new ArrayList<String>();
-		StatementVO test = new StatementVO();
-		test.setCompany_cd("101");
-		test.setSeq(3);
-		test.setAccount_cd("101");
-		test.setCustomer_cd("asd");
-		test.setDate("11-21");
-		test.setDebtor("5000");
-		test.setClassify("asd");
-		test.setCreditor("32000");
-		test.setAbs("101");
-		test.setEnt_id("asd");
-		test.setEnt_date("asd");
-		test.setEnt_prog("asd");
-		test.setMod_id("asd");
-		test.setMod_date("asd");
-		test.setMod_prog("asd");
-		
-		statList.add(test);
-		test = new StatementVO();
-		test.setCompany_cd("102");
-		test.setSeq(4);
-		test.setAccount_cd("102");
-		test.setCustomer_cd("fef");
-		test.setDate("10-22");
-		test.setDebtor("10000");
-		test.setClassify("a3d2");
-		test.setCreditor("42231");
-		test.setAbs("102");
-		test.setEnt_id("asd");
-		test.setEnt_date("asd");
-		test.setEnt_prog("asd");
-		test.setMod_id("asd");
-		test.setMod_date("asd");
-		test.setMod_prog("asd");
 
-		statList.add(test);
-
-		test = new StatementVO();
-		test.setCompany_cd("103");
-		test.setSeq(5);
-		test.setAccount_cd("103");
-		test.setCustomer_cd("gge3");
-		test.setDate("11-23");
-		test.setDebtor("1000");
-		test.setClassify("gg34");
-		test.setCreditor("60000");
-		test.setAbs("103");
-		test.setEnt_id("asd3");
-		test.setEnt_date("asd3");
-		test.setEnt_prog("asd3");
-		test.setMod_id("asd3");
-		test.setMod_date("asd3");
-		test.setMod_prog("asd3");
-
-		statList.add(test);
 		boolean flag = true;
 		for(int i=0; i<statList.size(); i++) {
 			flag = true;
@@ -106,63 +52,7 @@ public class ReportServiceImpl implements ReportService {
 		ArrayList<StatementVO>  biyong = new ArrayList<StatementVO>();
 		
 		statList = statementDAO.getStatementList();
-		
-		StatementVO test = new StatementVO();
-		test.setCompany_cd("101");
-		test.setSeq(3);
-		test.setAccount_cd("101");
-		test.setCustomer_cd("asd");
-		test.setDate("10-21");
-		test.setDebtor("5000");
-		test.setClassify("asd");
-		test.setCreditor("32000");
-		test.setAbs("101");
-		test.setEnt_id("asd");
-		test.setEnt_date("asd");
-		test.setEnt_prog("asd");
-		test.setMod_id("asd");
-		test.setMod_date("asd");
-		test.setMod_prog("asd");
-		
-		statList.add(test);
-		test = new StatementVO();
-		test.setCompany_cd("102");
-		test.setSeq(4);
-		test.setAccount_cd("102");
-		test.setCustomer_cd("fef");
-		test.setDate("11-22");
-		test.setDebtor("10000");
-		test.setClassify("a3d2");
-		test.setCreditor("42231");
-		test.setAbs("102");
-		test.setEnt_id("asd");
-		test.setEnt_date("asd");
-		test.setEnt_prog("asd");
-		test.setMod_id("asd");
-		test.setMod_date("asd");
-		test.setMod_prog("asd");
 
-		statList.add(test);
-		
-
-		test = new StatementVO();
-		test.setCompany_cd("103");
-		test.setSeq(5);
-		test.setAccount_cd("103");
-		test.setCustomer_cd("gge3");
-		test.setDate("11-23");
-		test.setDebtor("1000");
-		test.setClassify("gg34");
-		test.setCreditor("60000");
-		test.setAbs("103");
-		test.setEnt_id("asd3");
-		test.setEnt_date("asd3");
-		test.setEnt_prog("asd3");
-		test.setMod_id("asd3");
-		test.setMod_date("asd3");
-		test.setMod_prog("asd3");
-
-		statList.add(test);
 		for(int i=0; i<statList.size(); i++) {
 			// jasan 101 ~ 250, 961 ~ 980
 			if(Integer.parseInt(statList.get(i).getAccount_cd()) >= 101 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 250 || Integer.parseInt(statList.get(i).getAccount_cd()) >= 961 && Integer.parseInt(statList.get(i).getAccount_cd()) <= 980) {
@@ -264,62 +154,6 @@ public class ReportServiceImpl implements ReportService {
 		ArrayList<String> Act_cd = Account_CD_List();
 		int ForwardBalance = getForwardBalance();
 		
-		StatementVO test = new StatementVO();
-		test.setCompany_cd("101");
-		test.setSeq(3);
-		test.setAccount_cd("101");
-		test.setCustomer_cd("asd");
-		test.setDate("10-21");
-		test.setDebtor("5000");
-		test.setClassify("asd");
-		test.setCreditor("32000");
-		test.setAbs("101");
-		test.setEnt_id("asd");
-		test.setEnt_date("asd");
-		test.setEnt_prog("asd");
-		test.setMod_id("asd");
-		test.setMod_date("asd");
-		test.setMod_prog("asd");
-
-		statList.add(test);
-		
-		test = new StatementVO();
-		test.setCompany_cd("102");
-		test.setSeq(4);
-		test.setAccount_cd("102");
-		test.setCustomer_cd("fef");
-		test.setDate("11-22");
-		test.setDebtor("10000");
-		test.setClassify("a3d2");
-		test.setCreditor("42231");
-		test.setAbs("102");
-		test.setEnt_id("asd");
-		test.setEnt_date("asd");
-		test.setEnt_prog("asd");
-		test.setMod_id("asd");
-		test.setMod_date("asd");
-		test.setMod_prog("asd");
-
-		statList.add(test);
-
-		test = new StatementVO();
-		test.setCompany_cd("103");
-		test.setSeq(5);
-		test.setAccount_cd("103");
-		test.setCustomer_cd("gge3");
-		test.setDate("11-23");
-		test.setDebtor("1000");
-		test.setClassify("gg34");
-		test.setCreditor("60000");
-		test.setAbs("103");
-		test.setEnt_id("asd3");
-		test.setEnt_date("asd3");
-		test.setEnt_prog("asd3");
-		test.setMod_id("asd3");
-		test.setMod_date("asd3");
-		test.setMod_prog("asd3");
-
-		statList.add(test);
 		for(int i =0; i< Act_cd.size();i++) {
 			for(int j =0;j<statList.size();j++) {
 				if(Act_cd.get(i) == statList.get(j).getAccount_cd()) {
