@@ -46,10 +46,6 @@ public class ReportController {
 	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
 	public String ledgerCTB(Model model) {
 		logger.info("Call : /report/ctb.do - GET");
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		System.out.println(reportService.getStatementList().size());
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		
 		model.addAttribute("accountList", reportService.get_Sorted_Acconutlist());
 		model.addAttribute("CTB_dataList", reportService.CTB_Calculator());
 		return "/report/ctb";
