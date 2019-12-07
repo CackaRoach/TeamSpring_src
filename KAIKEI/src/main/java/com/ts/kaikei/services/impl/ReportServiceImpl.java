@@ -24,7 +24,7 @@ public class ReportServiceImpl implements ReportService {
 	private ArrayList<String> Account_CD_List(){
 		ArrayList<StatementVO> statList = statementDAO.getStatementList();
 		ArrayList<String> Act_cd = new ArrayList<String>();
-
+		//asdfdfd
 		boolean flag = true;
 		for(int i=0; i<statList.size(); i++) {
 			flag = true;
