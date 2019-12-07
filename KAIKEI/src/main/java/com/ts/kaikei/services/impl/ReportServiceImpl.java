@@ -50,10 +50,6 @@ public class ReportServiceImpl implements ReportService {
 		ArrayList<StatementVO>  biyong = new ArrayList<StatementVO>();
 		
 		statList = getStatementList();
-		System.out.println("-----------------------------");
-		System.out.println("stateMent Size : " + getStatementList().get(0).getAccount_cd());
-		System.out.println("stateMent Size : " + statList.get(0).getAccount_cd());
-		System.out.println("-----------------------------");
 
 		for(int i=0; i<statList.size(); i++) {
 			
@@ -248,7 +244,6 @@ public class ReportServiceImpl implements ReportService {
 		// http://blog.naver.com/PostView.nhn?blogId=ako92&logNo=220534204188&parentCategoryNo=&categoryNo=22&viewDate=&isShowPopularPosts=false&from=postView
 		// https://post.naver.com/viewer/postView.nhn?volumeNo=15893236&memberNo=9353678
 	public ArrayList<Integer> BS_Calculator() {
-		//TODO
 		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = Sorting_Account();
 		ArrayList<Integer> BS_dataList = new ArrayList<Integer>();
 		
@@ -305,6 +300,7 @@ public class ReportServiceImpl implements ReportService {
 	// PL Logic 
 	// ref : https://j-dono.tistory.com/entry/%EC%86%90%EC%9D%B5%EA%B3%84%EC%82%B0%EC%84%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EC%84%B1%ED%95%A0%EA%B9%8C
 	public ArrayList<Integer> PL_Calculator() {
+		//TODO
 		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = Sorting_Account();
 		ArrayList<Integer> PL_dataList = new ArrayList<Integer>();
 		
@@ -397,13 +393,11 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<int[]> CTB_Calculator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

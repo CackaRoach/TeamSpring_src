@@ -63,7 +63,7 @@
 			  <tr>
 			    <td colspan="2">Net Income</td>
 			    <td></td>
-			    <td>${PL_dataList[0]}</td>
+			    <td>${PL_dataList[9]}</td>
 			  </tr>
 			</table>
 			<p></p>
