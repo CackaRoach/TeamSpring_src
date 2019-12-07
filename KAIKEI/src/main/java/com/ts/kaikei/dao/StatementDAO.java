@@ -11,8 +11,8 @@ public interface StatementDAO {
 	public ArrayList<StatementListVO> getStatementList(String company_cd);
 	public void addStatement(StatementVO statementVO);
 	
-	public ArrayList<StatementVO> getStatementList();
-	public ArrayList<ArrayList<StatementVO>> get_Sorted_Acconutlist();
+	public ArrayList<StatementListVO> getStatementList();
+	public ArrayList<ArrayList<StatementListVO>> get_Sorted_Acconutlist();
 	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator();
 	public ArrayList<Integer> PL_Calculator();
 	public ArrayList<Integer> BS_Calculator();
