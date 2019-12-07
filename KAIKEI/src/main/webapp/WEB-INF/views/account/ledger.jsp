@@ -69,7 +69,7 @@
 			</table>
 		</div>
 		<div align="center">
-			<c:forEach var="i" begin="0" end="${statements[0].pangenum - 1}">
+			<c:forEach var="i" begin="1" end="${statements[0].pagenum - 1}">
 				<a href="/account/ledger.do?pagenum=${i}">${i}</a>
 			</c:forEach>
 		</div>

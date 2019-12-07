@@ -43,7 +43,7 @@
 	            </table>
 	        </div>
 	        <div align="center">
- 	        	<c:if test="${customerList[0].pageNum ne 0}">
+ 	        	<c:if test="${customerList[0].pagenum ne 0}">
  	        		<%--  0 index - FAX = PAGE NUM  --%>
 		        	<c:forEach var="i" begin="0" end="${customerList[0].pagenum - 1}">
 		        		<a class="pagenum" href="/account/customer.do?crtPage=${i}&searchParam=${searchParam}">${i + 1}</a> 

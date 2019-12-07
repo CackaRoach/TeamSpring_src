@@ -40,8 +40,9 @@
 	    	AND STT.company_cd = CUS.company_cd
 	    	AND STT.customer_cd = CUS.cus_cd
 	    	AND STT.account_cd = ACC.acc_cd
+	    	
+	    ORDER BY SEQ ASC
 	    LIMIT 15 OFFSET ${pagenum} * 15
-		ORDER BY SEQ ASC
 		
     </select>
     

@@ -20,7 +20,12 @@ public class StatementListVO {
 	private String abs;
 	private String mod_date;
 	
-	
+	public String getPagenum() {
+		return pagenum;
+	}
+	public void setPagenum(String pagenum) {
+		this.pagenum = pagenum;
+	}
 	public String getSeq() {
 		return seq;
 	}
@@ -99,4 +104,6 @@ public class StatementListVO {
 	public void setMod_date(String mod_date) {
 		this.mod_date = mod_date;
 	}
+	
+	
 }

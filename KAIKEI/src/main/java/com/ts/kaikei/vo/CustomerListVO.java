@@ -13,11 +13,11 @@ public class CustomerListVO {
 	private String worker_name;
 	private String memo;
 	
-	public String getPageNum() {
+	public String getPagenum() {
 		return pagenum;
 	}
-	public void setPageNum(String pageNum) {
-		this.pagenum = pageNum;
+	public void setPagenum(String pagenum) {
+		this.pagenum = pagenum;
 	}
 
 	public String getCus_cd() {
