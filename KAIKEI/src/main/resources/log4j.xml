@@ -64,7 +64,7 @@
 	</logger>
 	
 	<logger name="jdbc.resultsettable">
-		<level value="OFF"/>
+		<level value="INFO"/>
 	</logger>
 	
 	<logger name="jdbc.audit">
