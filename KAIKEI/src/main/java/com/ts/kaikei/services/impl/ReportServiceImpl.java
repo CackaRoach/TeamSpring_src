@@ -2,13 +2,21 @@
 package com.ts.kaikei.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ts.kaikei.dao.StatementDAO;
+
 import com.ts.kaikei.services.ReportService;
+
 import com.ts.kaikei.vo.StatementVO;
+import com.ts.kaikei.vo.StatementListVO;
+import com.ts.kaikei.vo.TBTotalVO;
 
 @Service("reportService")
 public class ReportServiceImpl implements ReportService {
@@ -399,6 +407,11 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public ArrayList<int[]> CTB_Calculator() {
 		return null;
+	}
+
+	@Override
+	public List<TBTotalVO> getTbtList(String company_cd) {
+		return statementDAO.selectTBTotal(company_cd);
 	}
 
 }

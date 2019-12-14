@@ -2,6 +2,8 @@ package com.ts.kaikei.controllers;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +44,18 @@ public class ReportController {
 		return "/report/gl";
 	}
 	
-	//CTB page
-	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
-	public String ledgerCTB(Model model) {
-		logger.info("Call : /report/ctb.do - GET");
-		model.addAttribute("accountList", reportService.get_Sorted_Acconutlist());
-		model.addAttribute("CTB_dataList", reportService.CTB_Calculator());
-		return "/report/ctb";
+	// TBT page
+	// NOW WARNING - Server side rendering & Classify
+	// RECOMMEND - Client side rendering & Classify
+	@RequestMapping(value = "/report/tbt.do", method = RequestMethod.GET)
+	public String ledgerCTB(HttpSession session, Model model) {
+		logger.info("Call : /report/tbt.do - GET");
+		
+		String company_cd = (String)session.getAttribute("company_cd");
+		
+		model.addAttribute("tbtList", reportService.getTbtList(company_cd));
+
+		return "/report/tbt";
 	}
 	
 	//CL page

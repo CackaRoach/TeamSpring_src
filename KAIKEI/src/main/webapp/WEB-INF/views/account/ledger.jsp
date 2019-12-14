@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS" pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-<!--  
-	TODO: regex check
-	TODO: Paging
-  -->
+    <!--  
+	-- TODO: regex check
+	-- TODO: Paging
+    -->
 		<script type="text/javascript" src="/js/ledger.js"></script>
 		<div style="padding: 20px;">
 			<span style="font-size: 1.7em;">Ledger</span>
@@ -69,8 +69,8 @@
 			</table>
 		</div>
 		<div align="center">
-			<c:forEach var="i" begin="1" end="${statements[0].pagenum - 1}">
-				<a href="/account/ledger.do?pagenum=${i}">${i}</a>
+			<c:forEach var="i" begin="0" end="${statements[0].pagenum - 1}">
+				<a href="/account/ledger.do?pagenum=${i}">${i + 1}</a>
 			</c:forEach>
 		</div>
 		<div id="statebtn" align="right">
