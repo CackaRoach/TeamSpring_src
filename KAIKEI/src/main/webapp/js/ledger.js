@@ -450,13 +450,3 @@ function submitStatement() {
 
 }
 
-var timer;
-function debug() {
-	
-	if (timer) {
-	  clearTimeout(timer);
-	}
-	timer = setTimeout(function() {
-	  console.log('Request ajax');
-	}, 1000);
-}

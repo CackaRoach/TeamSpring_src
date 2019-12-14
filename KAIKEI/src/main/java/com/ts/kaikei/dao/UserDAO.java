@@ -27,6 +27,11 @@ public interface UserDAO {
 	public UserVO getUserById(String id);
 	public void updateUser(UserVO userVO);
 	
+	public List<UserVO> getAcceptedUserList(String company_cd);
+	public List<UserVO> getWaitingUserList(String company_cd);
+	public void acceptUser(String id);
+	public void deleteUser(String id);
+	
 	/*
 	 * ========================
 	 * 			Manage
