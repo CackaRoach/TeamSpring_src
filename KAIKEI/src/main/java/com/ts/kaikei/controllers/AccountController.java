@@ -99,8 +99,6 @@ public class AccountController {
     public String customer(String searchParam, String crtPage, HttpSession httpSession, Model model) {
 
         logger.info("Call : /account/customer.do - GET");
-        logger.info("searchParam : " + searchParam);
-        logger.info("crtPage : " + crtPage);
 
         String company_cd = (String) httpSession.getAttribute("company_cd");
 

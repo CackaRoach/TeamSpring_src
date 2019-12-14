@@ -45,8 +45,6 @@ public class ReportController {
 	}
 	
 	// TBT page
-	// NOW WARNING - Server side rendering & Classify
-	// RECOMMEND - Client side rendering & Classify
 	@RequestMapping(value = "/report/tbt.do", method = RequestMethod.GET)
 	public String ledgerCTB(HttpSession session, Model model) {
 		logger.info("Call : /report/tbt.do - GET");
