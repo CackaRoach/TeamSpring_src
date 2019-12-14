@@ -555,3 +555,18 @@ label {
 #autocompleteList>ul>li:hover {
 	background-color: #91c8ff;
 }
+
+.tbt-table {
+	margin-bottom: 30px;
+	border-collapse: collapse;
+	text-align: center;	
+}
+
+.tbt-table td {
+	border: 1px solid black;
+}
+
+.tbt-table th {
+	border: 1px solid black;
+	background-color: #91c8ff;
+}

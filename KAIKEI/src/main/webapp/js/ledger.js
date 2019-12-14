@@ -8,26 +8,30 @@ $(window).ready(function() {
 	var yy = String(today.getFullYear()).substring(2);
 	var mm = today.getMonth() + 1;
 
+	if(window.location.href.indexOf("?") < 0 || window.location.href.indexOf("?pagenum=0") > 0) {
 	// Init Row
-	for(newrows = 0; newrows < (30 - existrows); newrows++) {
-		var fixedrows = Number(existrows) + Number(newrows);
-		
-		var rowItem = "";
-		rowItem += "<tr id='state" + fixedrows + "' class='new'>";
-		rowItem += "<td><label>" + yy + "</label></td>";
-		rowItem += "<td><label>" + mm + "</label></td>";
-		rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
-		rowItem += "<td><input type='text' name='acc_title' placeholder='0000'/><label class='account_cd'></label></td>";
-		rowItem += "<td><input type='text' name='cus_title' placeholder='00000'/><label class='customer_cd'></label></td>";
-		rowItem += "<td><input type='text' name='classify' placeholder='Classify'/></td>";
-		rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
-		rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
-		rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
-		rowItem += "<td></td>";
-		rowItem += "<td><a href='javascript:removeRow(" + fixedrows + ");'>X</a></td>";
-		rowItem += "</tr>";
-		
-		$("#statement").append(rowItem);
+		for(newrows = 0; newrows < (30 - existrows); newrows++) {
+			
+			
+			var fixedrows = Number(existrows) + Number(newrows);
+			
+			var rowItem = "";
+			rowItem += "<tr id='state" + fixedrows + "' class='new'>";
+			rowItem += "<td><label>" + yy + "</label></td>";
+			rowItem += "<td><label>" + mm + "</label></td>";
+			rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
+			rowItem += "<td><input type='text' name='acc_title' placeholder='0000'/><label class='account_cd'></label></td>";
+			rowItem += "<td><input type='text' name='cus_title' placeholder='00000'/><label class='customer_cd'></label></td>";
+			rowItem += "<td><input type='text' name='classify' placeholder='Classify'/></td>";
+			rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
+			rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
+			rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
+			rowItem += "<td></td>";
+			rowItem += "<td><a href='javascript:removeRow(" + fixedrows + ");'>X</a></td>";
+			rowItem += "</tr>";
+			
+			$("#statement").append(rowItem);
+		}
 	}
 	
 	$("newrows").val(newrows);

@@ -55,12 +55,12 @@
         SELECT 
         	(SELECT
         		((COUNT(*) + (#{size}::INTEGER - 1))/#{size}::INTEGER)
-        	FROM
-		    	customer
-			WHERE 1 = 1
-			    AND company_cd = '00001'
-			    AND (
-			        cus_cd LIKE '%' || #{searchParam} || '%'
+            FROM
+            	customer
+            WHERE 1 = 1
+                AND company_cd = '00001'
+                AND (
+                    cus_cd LIKE '%' || #{searchParam} || '%'
 			        OR UPPER(title) LIKE UPPER('%' || #{searchParam} || '%')
 			        OR UPPER(ceo_name) LIKE UPPER('%' || #{searchParam} || '%')
 			    )
@@ -103,8 +103,8 @@
         FROM 
         	customer
         WHERE 1=1
-	        AND company_cd = #{company_cd}
-	        AND cus_cd = #{cus_cd}
+            AND company_cd = #{company_cd}
+            AND cus_cd = #{cus_cd}
         
     </select>
     

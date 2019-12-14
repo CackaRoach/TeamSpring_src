@@ -1,14 +1,19 @@
 
 package com.ts.kaikei.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import com.ts.kaikei.vo.*;
+
+import com.ts.kaikei.vo.StatementListVO;
+import com.ts.kaikei.vo.TBTotalVO;
+
 
 @Mapper
 public interface StatementDAO {
-	public ArrayList<StatementListVO> selectStatementList(Map<String, String> searchParams);
+	public List<StatementListVO> selectStatementList(Map<String, String> searchParams);
 	public void saveStatement(Map<String, Object> statement);
 	
 	public ArrayList<StatementListVO> getStatementList();
@@ -20,5 +25,7 @@ public interface StatementDAO {
 	
 	public void stateCompanyDelete(String id);	//manage
 	public void companyCodeCh_std(Map<String, Object> Parmas);	//manage
+	
+	public List<TBTotalVO> selectTBTotal(String company_cd);
 }
 

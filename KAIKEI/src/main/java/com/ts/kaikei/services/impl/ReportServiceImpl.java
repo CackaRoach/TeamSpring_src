@@ -2,6 +2,10 @@
 package com.ts.kaikei.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.ts.kaikei.dao.StatementDAO;
 import com.ts.kaikei.services.ReportService;
 import com.ts.kaikei.vo.StatementListVO;
+import com.ts.kaikei.vo.TBTotalVO;
 
 @Service("reportService")
 public class ReportServiceImpl implements ReportService {
@@ -19,24 +24,6 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public ArrayList<StatementListVO> getStatementList() {
 		return statementDAO.getStatementList();
-	}
-	
-	private ArrayList<String> Account_CD_List(){
-
-		ArrayList<StatementListVO> statList = statementDAO.getStatementList();
-		ArrayList<String> Act_cd = new ArrayList<String>();
-		
-		for(int i=0; i<statList.size(); i++) {
-
-			for(int j=0; j<Act_cd.size(); j++) {
-				if(!Act_cd.contains(statList.get(i).getAccount_cd())) {
-					Act_cd.add(statList.get(i).getAccount_cd());
-
-				}
-			}
-		}
-		
-		return Act_cd;
 	}
 	
 	//sorting Account & insert Account Title
@@ -404,6 +391,11 @@ public class ReportServiceImpl implements ReportService {
 	public ArrayList<int[]> CTB_Calculator() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<TBTotalVO> getTbtList(String company_cd) {
+		return statementDAO.selectTBTotal(company_cd);
 	}
 
 }

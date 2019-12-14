@@ -43,7 +43,7 @@
 					<li><a href="/report/pl.do">P/L</a></li>
 					<li><a href="/report/bs.do">B/S</a></li>
 					<li><a href="/report/gl.do">General Ledger</a></li>
-					<li><a href="/report/ctb.do">Compound Trial Balance</a></li>
+					<li><a href="/report/tbt.do">Trial Balance of Totals</a></li>
 				</ul>
 				<ul>
 					<li><a href="/chart/pl.do">P/L</a></li>
