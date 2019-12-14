@@ -58,13 +58,13 @@ public class ReportController {
 		return "/report/tbt";
 	}
 	
-	//CL page
+	//PL page
 	@RequestMapping(value = "/report/pl.do", method = RequestMethod.GET)
 	public String ledgerPL(Model model) {
 		logger.info("Call : /report/pl.do - GET");
-		reportService.PL_Calculator();
 		
 		model.addAttribute("PL_dataList", reportService.PL_Calculator());
+		
 		return "/report/pl";
 	}
 

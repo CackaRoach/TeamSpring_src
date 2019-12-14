@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ts.kaikei.services.AccountService;
 import com.ts.kaikei.vo.AccountVO;
 import com.ts.kaikei.vo.CustomerVO;
-import com.ts.kaikei.vo.StatementListVO;
 
 @Controller
 public class AccountController {

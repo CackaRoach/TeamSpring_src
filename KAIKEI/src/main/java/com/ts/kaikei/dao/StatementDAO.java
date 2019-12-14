@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ts.kaikei.vo.StatementListVO;
+import com.ts.kaikei.vo.StatementVO;
 import com.ts.kaikei.vo.TBTotalVO;
 
 
