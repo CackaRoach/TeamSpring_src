@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-		<script type="text/javascript" src="/js/tdt.js"></script>
+		<script type="text/javascript" src="/js/tbt.js"></script>
 		<div>
 			<h3>Reports - Trial Balance of Total</h3>
 		</div>

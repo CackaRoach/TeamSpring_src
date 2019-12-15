@@ -14,31 +14,22 @@
 	$(window).ready(function() {
 		setTimeout(function() {
 			$(".gnb-dth1").hover(function() {
+				$(".gnb-bg").css("display", "block");
 				$(".gnb-dth2").stop().slideDown(180);
 			}, function() {
+				$(".gnb-bg").css("display", "none");
 				$(".gnb-dth2").stop().slideUp(180);
 			});
 		
 			$(".gnb-dth2").hover(function() {
+				$(".gnb-bg").css("display", "block");
 				$(".gnb-dth2").stop().slideDown(180);
 			}, function() {
+				$(".gnb-bg").css("display", "none");
 				$(".gnb-dth2").stop().slideUp(180);
 			});
-
-			$(".gnb-dth1").hover(function() {
-				$(".gnb-bg").css("display", "block");
-			}, function() {
-				$(".gnb-bg").css("display", "none");
-			});
-
-			$(".gnb-dth2").hover(function() {
-				$(".gnb-bg").css("display", "block");
-			}, function() {
-				$(".gnb-bg").css("display", "none");
-			});
+		}, 300);
 	});
-
-	}, 300);
 	
  	$(window).load(function() {
    		var path = window.location.pathname.split('/');
