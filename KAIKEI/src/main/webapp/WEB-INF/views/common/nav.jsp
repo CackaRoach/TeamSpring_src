@@ -38,18 +38,22 @@
 					</ul>
 				</c:if>
 			</div>
+			
 			<div class="gnb-dth2">
-				<ul class="">
+				<ul>
+					<li>Report</li>
 					<li><a href="/report/pl.do">P/L</a></li>
 					<li><a href="/report/bs.do">B/S</a></li>
 					<li><a href="/report/gl.do">General Ledger</a></li>
 					<li><a href="/report/tbt.do">Trial Balance of Totals</a></li>
 				</ul>
 				<ul>
+					<li>Chart</li>
 					<li><a href="/chart/pl.do">P/L</a></li>
 					<li><a href="/chart/bs.do">B/S</a></li>
 				</ul>
 				<ul>
+					<li>Setting</li>
 					<c:if test="${posit_cd ne 'POS001'}">
 						<li><a href="/setting/personal.do">Personal</a></li>
 					</c:if>
@@ -60,3 +64,4 @@
 				</ul>
 			</div>
 		</div>
+		<div class="gnb-bg"></div>

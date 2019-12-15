@@ -44,7 +44,7 @@
 		    	AND STT.customer_cd = CUS.cus_cd
 		    	AND STT.account_cd = ACC.acc_cd
 		    	
-		    ORDER BY STT.date DESC
+		    ORDER BY STT.date DESC, seq DESC
 		    <if test="pagenum == 0">
 		    	LIMIT 15 OFFSET ${pagenum} * 15
 			</if>

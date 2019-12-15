@@ -286,7 +286,7 @@ public class ReportServiceImpl implements ReportService {
 	// PL Logic 
 	// ref : https://j-dono.tistory.com/entry/%EC%86%90%EC%9D%B5%EA%B3%84%EC%82%B0%EC%84%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EC%84%B1%ED%95%A0%EA%B9%8C
 	public ArrayList<Integer> PL_Calculator() {
-		//TODO
+
 		ArrayList<ArrayList<StatementVO>> Sorted_Acconutlist = Sorting_Account();
 		ArrayList<Integer> PL_dataList = new ArrayList<Integer>();
 		

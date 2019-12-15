@@ -16,6 +16,7 @@ public class ChartController {
 	// @Autowired
 	// private ChartService chartService;
 
+	// TODO: PL -> Graph
 	@RequestMapping(value = "/chart/pl.do", method = RequestMethod.GET)
 	public String viewChartPS(String year, Model model) {
 		logger.info("Call : /chart/pl.do - GET");
@@ -23,6 +24,7 @@ public class ChartController {
 		return "/chart/pl"; 
 	}
 	
+	// TODO: BS -> Graph
 	@RequestMapping(value = "/chart/bs.do", method = RequestMethod.GET)
 	public String viewChartBS(String year, Model model) {
 		logger.info("Call : /chart/bs.do - GET");

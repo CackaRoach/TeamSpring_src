@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 		<div style="padding:20px">
-	            <span style="font-size: 1.7em;">B/S</span>
+	            <span style="font-size: 1.7em;">B/SÅ@ñ¢äÆê¨</span>
 	    </div>
 	    <hr>
     	<div align="center">

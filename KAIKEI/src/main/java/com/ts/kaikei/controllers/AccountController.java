@@ -34,6 +34,7 @@ public class AccountController {
      * =====================================
      */
 
+    // TODO: Statement Search
     @RequestMapping(value = "/account/ledger.do", method = RequestMethod.GET)  
     public String ledger(String year, String month, String pagenum, HttpSession httpSession, Model model) {
         logger.info("Call : /account/ledger.do - GET");
@@ -54,6 +55,7 @@ public class AccountController {
         return "/account/ledger";
     }
 
+    // Statement Save(INSERT, UPDATE DELETE)
     @RequestMapping(value = "/account/statementSave.ajax", method = RequestMethod.POST)
     @ResponseBody
     public void statementSave(@RequestBody List<Map<String, String>> jsonState, HttpSession httpSession, Model model) {
@@ -68,6 +70,7 @@ public class AccountController {
         }
     }
 
+    // Autocomplete Ajax - AccountTitle
     @RequestMapping(value = "/account/getAccountTitle.ajax", method = RequestMethod.GET)
     @ResponseBody
     public List<AccountVO> getAccountTitle(String title, HttpSession httpSession, Model model) {
@@ -77,6 +80,7 @@ public class AccountController {
         return accountService.getAccountTitle(title);
     }
 
+    // Autocomplete Ajax - Customer
     @RequestMapping(value = "/account/getCustomerTitle.ajax", method = RequestMethod.GET)
     @ResponseBody
     public List<CustomerVO> getCustomerTitle(String title, HttpSession httpSession, Model model) {
