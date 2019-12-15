@@ -2,12 +2,16 @@
 package com.ts.kaikei.services.impl;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ts.kaikei.dao.StatementDAO;
 import com.ts.kaikei.services.ReportService;
+import com.ts.kaikei.vo.AccountVO;
+import com.ts.kaikei.vo.ReportGlVO;
 import com.ts.kaikei.vo.StatementVO;
 
 @Service("reportService")
@@ -145,103 +149,102 @@ public class ReportServiceImpl implements ReportService {
 		return CTB_dataList;
 	}
 	
-	@Override
-	//GL data find
-	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator() {
-		ArrayList<ArrayList<ArrayList<String>>> GL_List = new ArrayList<ArrayList<ArrayList<String>>>();
-		ArrayList<ArrayList<String>> Daily_dataList = new ArrayList<ArrayList<String>>();
-		ArrayList<ArrayList<String>> Monthly_dataList = new ArrayList<ArrayList<String>>();
-		ArrayList<ArrayList<String>> Totaly_dataList = new ArrayList<ArrayList<String>>();
-		ArrayList<ArrayList<String>> act_cd = new ArrayList<ArrayList<String>>();
-		
-		ArrayList<StatementVO> statList = statementDAO.getStatementList();
-		ArrayList<String> Act_cd = Account_CD_List();
-		int ForwardBalance = getForwardBalance();
-		
-		for(int i =0; i< Act_cd.size();i++) {
-			for(int j =0;j<statList.size();j++) {
-				if(Act_cd.get(i) == statList.get(j).getAccount_cd()) {
-					//add Act_cd
-					ArrayList<String> act = new ArrayList<String>();
-					act.add(statList.get(j).getAccount_cd());
-					act_cd.add(act);
-					
-					//calc daily
-					ArrayList<String> GL_data = new ArrayList<String>();
-					int Day_balance = 0;
-					GL_data.add(Integer.toString(ForwardBalance));
-					GL_data.add(statList.get(j).getDate());
-					GL_data.add(statList.get(j).getAbs());
-					GL_data.add(statList.get(j).getCustomer_cd());
-					GL_data.add(statList.get(j).getDebtor());
-					GL_data.add(statList.get(j).getCreditor());
-					Day_balance += Integer.parseInt(statList.get(j).getDebtor()) + Integer.parseInt(statList.get(j).getCreditor());
-					GL_data.add(Integer.toString(Day_balance));
-					GL_data.add(statList.get(j).getAccount_cd());
-					
-					Daily_dataList.add(GL_data);
-					
-				}
-			}
-		}
-		//calc monthly total
-		ArrayList<String> mothlyData;
-		int lastMonth = 0;
-		int month_deb = 0;
-		int month_cre = 0;
-		int month_balance = 0;
-
-		for(int k=0;k<Daily_dataList.size();k++) {
-			mothlyData = new ArrayList<String>();
-			String month = Daily_dataList.get(k).get(1).substring(0, 2); // get month // 0 = balance, 1 = date
-			if(Integer.parseInt(month) != lastMonth) {
-				lastMonth = Integer.parseInt(month);
-				
-			}
-			else {
-				//mothlyData.add("0");
-				month_deb = month_cre = month_balance = 0;
-			}
-			mothlyData.add(month);
-			month_deb += Integer.parseInt(Daily_dataList.get(k).get(4)); //deb
-			month_cre += Integer.parseInt(Daily_dataList.get(k).get(5)); //cre		
-			month_balance += Integer.parseInt(Daily_dataList.get(k).get(6));	
-			
-			mothlyData.add(Integer.toString(month_deb));
-			mothlyData.add(Integer.toString(month_cre));
-			mothlyData.add(Integer.toString(month_balance));
-			Monthly_dataList.add(mothlyData);
-		}
-
-		//calc total
-		ArrayList<String> total_data;
-		int total_deb = 0 ;
-		int total_cre = 0;
-		int total_balance = 0;
-		
-		for(int k =0;k<Monthly_dataList.size();k++) {
-			total_data = new ArrayList<String>();
-			total_deb += Integer.parseInt(Monthly_dataList.get(k).get(0)); //deb
-			total_cre += Integer.parseInt(Monthly_dataList.get(k).get(1)); //cre
-			total_balance = total_deb + total_cre;
-			total_data.add(Integer.toString(total_deb));
-			total_data.add(Integer.toString(total_cre));
-			total_data.add(Integer.toString(total_balance));
-			Totaly_dataList.add(total_data);
-		}
-
-		GL_List.add(Daily_dataList);
-		GL_List.add(Monthly_dataList);
-		GL_List.add(Totaly_dataList);
-		GL_List.add(act_cd);
-		
-		return GL_List;
+	//GL forward balance find
+	@Override 
+	public  List<ReportGlVO>  Forward_balance(Map<String, Object> Parmas) {
+		return statementDAO.Forward_balance(Parmas); 
 	}
 	
-	private int getForwardBalance() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	//GL data find 
+	@Override 
+	  public List<ReportGlVO> GL_Calculator(Map<String, Object> Parmas){
+		  List<ReportGlVO> vo = statementDAO.GeneralLedgerList(Parmas); 
+		 
+		  return vo;
+	  }
+	  
+	 //GL account title list
+	@Override 
+	  public List<AccountVO> Account_title(String company_cd){
+		  return statementDAO.Account_title(company_cd);
+	  }
+	 
+	
+	/*
+	 * public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator() {
+	 * ArrayList<ArrayList<ArrayList<String>>> GL_List = new
+	 * ArrayList<ArrayList<ArrayList<String>>>(); ArrayList<ArrayList<String>>
+	 * Daily_dataList = new ArrayList<ArrayList<String>>();
+	 * ArrayList<ArrayList<String>> Monthly_dataList = new
+	 * ArrayList<ArrayList<String>>(); ArrayList<ArrayList<String>> Totaly_dataList
+	 * = new ArrayList<ArrayList<String>>(); ArrayList<ArrayList<String>> act_cd =
+	 * new ArrayList<ArrayList<String>>();
+	 * 
+	 * ArrayList<StatementVO> statList = statementDAO.getStatementList();
+	 * ArrayList<String> Act_cd = Account_CD_List(); int ForwardBalance =
+	 * getForwardBalance();
+	 * 
+	 * for(int i =0; i< Act_cd.size();i++) { for(int j =0;j<statList.size();j++) {
+	 * if(Act_cd.get(i) == statList.get(j).getAccount_cd()) { //add Act_cd
+	 * ArrayList<String> act = new ArrayList<String>();
+	 * act.add(statList.get(j).getAccount_cd()); act_cd.add(act);
+	 * 
+	 * //calc daily ArrayList<String> GL_data = new ArrayList<String>(); int
+	 * Day_balance = 0; GL_data.add(Integer.toString(ForwardBalance));
+	 * GL_data.add(statList.get(j).getDate());
+	 * GL_data.add(statList.get(j).getAbs());
+	 * GL_data.add(statList.get(j).getCustomer_cd());
+	 * GL_data.add(statList.get(j).getDebtor());
+	 * GL_data.add(statList.get(j).getCreditor()); Day_balance +=
+	 * Integer.parseInt(statList.get(j).getDebtor()) +
+	 * Integer.parseInt(statList.get(j).getCreditor());
+	 * GL_data.add(Integer.toString(Day_balance));
+	 * GL_data.add(statList.get(j).getAccount_cd());
+	 * 
+	 * Daily_dataList.add(GL_data);
+	 * 
+	 * } } } //calc monthly total ArrayList<String> mothlyData; int lastMonth = 0;
+	 * int month_deb = 0; int month_cre = 0; int month_balance = 0;
+	 * 
+	 * for(int k=0;k<Daily_dataList.size();k++) { mothlyData = new
+	 * ArrayList<String>(); String month = Daily_dataList.get(k).get(1).substring(0,
+	 * 2); // get month // 0 = balance, 1 = date if(Integer.parseInt(month) !=
+	 * lastMonth) { lastMonth = Integer.parseInt(month);
+	 * 
+	 * } else { //mothlyData.add("0"); month_deb = month_cre = month_balance = 0; }
+	 * mothlyData.add(month); month_deb +=
+	 * Integer.parseInt(Daily_dataList.get(k).get(4)); //deb month_cre +=
+	 * Integer.parseInt(Daily_dataList.get(k).get(5)); //cre month_balance +=
+	 * Integer.parseInt(Daily_dataList.get(k).get(6));
+	 * 
+	 * mothlyData.add(Integer.toString(month_deb));
+	 * mothlyData.add(Integer.toString(month_cre));
+	 * mothlyData.add(Integer.toString(month_balance));
+	 * Monthly_dataList.add(mothlyData); }
+	 * 
+	 * //calc total ArrayList<String> total_data; int total_deb = 0 ; int total_cre
+	 * = 0; int total_balance = 0;
+	 * 
+	 * for(int k =0;k<Monthly_dataList.size();k++) { total_data = new
+	 * ArrayList<String>(); total_deb +=
+	 * Integer.parseInt(Monthly_dataList.get(k).get(0)); //deb total_cre +=
+	 * Integer.parseInt(Monthly_dataList.get(k).get(1)); //cre total_balance =
+	 * total_deb + total_cre; total_data.add(Integer.toString(total_deb));
+	 * total_data.add(Integer.toString(total_cre));
+	 * total_data.add(Integer.toString(total_balance));
+	 * Totaly_dataList.add(total_data); }
+	 * 
+	 * GL_List.add(Daily_dataList); GL_List.add(Monthly_dataList);
+	 * GL_List.add(Totaly_dataList); GL_List.add(act_cd);
+	 * 
+	 * return GL_List; }
+	 */
+	 
+	
+	/*
+	 * private int getForwardBalance() { // TODO Auto-generated method stub return
+	 * 0; }
+	 */
 
 	@Override
 		// Balance sheet Logic

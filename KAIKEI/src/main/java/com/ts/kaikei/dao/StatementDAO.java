@@ -20,5 +20,9 @@ public interface StatementDAO {
 	
 	public void stateCompanyDelete(String id);	//manage
 	public void companyCodeCh_std(Map<String, Object> Parmas);	//manage
+	
+	public List<ReportGlVO> GeneralLedgerList(Map<String, Object> Params);	//general ledger report list
+	public List<ReportGlVO> Forward_balance(Map<String, Object> Parmas);	//general ledger report list [Carried Forward]
+	public List<AccountVO> Account_title(String id);	//general ledger report list [account title]
 }
 

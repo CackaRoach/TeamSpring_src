@@ -144,5 +144,91 @@
     	WHERE 1=1
     		AND	company_cd = #{org}
 	</update>
+	
+	<!-- Report General Ledger List Select -->
+	<select id="GeneralLedgerList" parameterType="hashmap" resultType="ReportGlVO">
+		SELECT
+			STT.account_cd,
+			CASE WHEN STT.account_cd = ACC.acc_cd 
+				THEN ACC.title END AS ACC_TITLE,
+			EXTRACT(MONTH FROM STT.date) AS MONTH,
+			COUNT(*) AS COUNT_TOTAL,
+			SUM(STT.creditor) AS SUM_CRED,
+			SUM(STT.debtor) AS SUM_DEB,
+			SUM(STT.debtor)-SUM(STT.creditor) AS BALANCE,
+			TEXT(EXTRACT(QUARTER FROM STT.date)) AS QUARTER,
+			TEXT(EXTRACT(YEAR FROM STT.date)) AS YEAR
+			
+		FROM statements STT, account ACC
+			
+		WHERE 1=1
+		AND TEXT(EXTRACT(QUARTER FROM STT.date)) = #{QUARTER}
+		AND TEXT(EXTRACT(YEAR FROM STT.date)) = #{YEAR}
+		AND STT.company_cd = #{company_cd}
+		AND ACC.acc_cd = STT.account_cd
+			
+		GROUP BY 
+			MONTH,
+			STT.account_cd,
+			ACC.acc_cd,
+			ACC.title,
+			QUARTER,
+			YEAR
+			
+		ORDER BY STT.account_cd
+	</select>
+	
+	<!-- Report General Ledger List Select find forward balance -->
+	<select id="Forward_balance" parameterType="hashmap" resultType="ReportGlVO">
+		SELECT
+			STT.account_cd,
+			CASE WHEN STT.account_cd = ACC.acc_cd THEN ACC.title END AS ACC_TITLE,
+			SUM(STT.debtor) - SUM(STT.creditor) AS BALANCE
+			
+		FROM statements STT, account ACC
+			
+		WHERE 1=1
+		<choose>
+			<when test="QUARTER == 1">
+				AND EXTRACT(QUARTER FROM STT.date) = '4'
+				AND EXTRACT(YEAR FROM STT.date) = ${YEAR} - 1
+			</when>
+			<when test="QUARTER != 1">
+				AND EXTRACT(QUARTER FROM STT.date) = ${QUARTER} -1
+				AND EXTRACT(YEAR FROM STT.date) = ${YEAR}
+			</when>
+		</choose>
+		
+		AND STT.company_cd = #{company_cd}
+		AND ACC.acc_cd = STT.account_cd
+			
+		GROUP BY 
+			STT.account_cd,
+			ACC.acc_cd,
+			ACC.title
+			
+		ORDER BY STT.account_cd
+	</select>
+	
+	<!-- Report General Ledger List Select find account title list -->
+	<select id="Account_title" parameterType="String" resultType="AccountVO">
+		SELECT
+			STT.account_cd AS acc_cd,
+			CASE WHEN STT.account_cd = ACC.acc_cd 
+				THEN ACC.title END AS title
+			
+		FROM statements STT, account ACC
+			
+		WHERE 1=1
+			AND STT.company_cd = #{company_cd}
+			AND ACC.acc_cd = STT.account_cd
+			
+		GROUP BY 
+			STT.account_cd,
+			ACC.acc_cd,
+			ACC.title
+			
+		ORDER BY STT.account_cd
+	</select>
 
 </mapper>
