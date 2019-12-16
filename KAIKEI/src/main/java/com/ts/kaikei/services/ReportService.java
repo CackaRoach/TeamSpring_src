@@ -1,3 +1,4 @@
+
 package com.ts.kaikei.services;
 
 import java.util.ArrayList;
@@ -15,4 +16,8 @@ public interface ReportService {
 	public ArrayList<Integer> BS_Calculator();
 
 	public List<TBTotalVO> getTbtList(String company_cd);
+  
+  public List<ReportGlVO> GL_Calculator(Map<String, Object> Parmas);	//GL REPORT
+	public List<ReportGlVO> Forward_balance(Map<String, Object> Parmas);	//GL Report Forward_balance [Carried Forward]
+	public List<AccountVO> Account_title(String id);	//GL Report Forward_balance [account title]
 }

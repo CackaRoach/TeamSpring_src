@@ -560,6 +560,39 @@ label {
 	background-color: #91c8ff;
 }
 
+/* Report General Ledger */
+.greport {
+	border-collapse: collapse;
+	border-bottom: 2px solid black;
+	width:100%;
+	text-align:center;
+	margin: 15px;
+}
+
+.greport th,.greport td{
+	padding: 15px;
+}
+
+.greport>thead>tr:nth-of-type(odd)  {
+	background-color: #ff8000;
+	border-bottom: 2px solid #ffffff;
+	color: white;
+}
+
+.greport>thead>tr {
+	background-color: #fdcb02;
+	border-bottom: 3px solid #ffffff;
+	color: white;
+}
+
+.greport>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9ce;
+}
+
+.greport>tbody>tr:hover {
+	background-color: #91c8ff;
+}
+
 .tbt-table {
 	margin-bottom: 30px;
 	border-collapse: collapse;

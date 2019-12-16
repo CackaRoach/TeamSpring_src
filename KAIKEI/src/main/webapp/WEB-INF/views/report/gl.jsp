@@ -1,10 +1,102 @@
 <%@ page language="java" contentType="text/html; charset=Shift_JIS"
     pageEncoding="Shift_JIS"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<div>
-			<h3>Reports - General Ledger</h3>
-		</div>
-		<div align="center">
+
+<c:set var="QT_DATE" value="${GL_dataList}"/>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$("#pre_qt").click(function() {
+			alert("Not yet");
+		});
+
+		$("#aft_qt").click(function() {
+			alert("Not yet");
+		});
+	})
+</script>
+
+	<div style="padding: 20px">
+		<span style="font-size: 1.7em;">Reports - General Ledger</span>
+	</div>
+	
+	<div align="center">
+		<input id="pre_qt" class="button" type="button" value="<" style="background-color:#fdcb02;">
+			${QT_DATE[0].YEAR} - ${QT_DATE[0].QUARTER}Q
+		<input id="aft_qt" class="button" type="button" value=">" style="background-color:#fdcb02;">
+	</div>
+	
+	<c:forEach var="accList" items='${accList}'>
+	
+		<c:set var="sum_deb" value="0"></c:set>
+		<c:set var="sum_cred" value="0"></c:set>
+		<c:set var="balance" value="0"></c:set>
+		<c:set var="fod_balance" value="0"></c:set>
+	
+		<table class="greport">
+			<thead>
+				<tr>
+					<th colspan="5" style="text-align:left"> ${accList.title} (${accList.acc_cd}) </th>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<th>Abstract</th>
+					<th>Deb</th>
+					<th>Cred</th>
+					<th>Balance</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items='${Fod_blc}' var="Fod_blc">
+					<c:if test="${Fod_blc.ACC_TITLE eq accList.title}"> 
+						<c:set var="fod_balance" value="${Fod_blc.BALANCE}"></c:set>
+					</c:if>
+				</c:forEach>
+				
+				<tr>
+					<td colspan="4" style="text-align:left">
+						Carried Forward
+					</td>
+					<td><c:out value="${fod_balance}"></c:out></td>
+				</tr>
+				
+				<c:forEach items='${GL_dataList}' var="GL_dataList">
+					<c:if test="${GL_dataList.ACC_TITLE eq accList.title}"> 
+						<tr>
+							<td style="text-align:left"> ${GL_dataList.MONTH} ŒŽ</td>
+							<td>Total ${GL_dataList.COUNT_TOTAL}</td>
+							<td>${GL_dataList.SUM_DEB}</td>
+							<td>${GL_dataList.SUM_CRED}</td>
+							<td>${GL_dataList.BALANCE}</td>
+						</tr>
+						<c:set var="sum_deb" value="${sum_deb + GL_dataList.SUM_DEB}"></c:set>
+						<c:set var="sum_cred" value="${sum_cred + GL_dataList.SUM_CRED}"></c:set>
+						<c:set var="balance" value="${balance + GL_dataList.BALANCE}"></c:set>
+					</c:if>
+					
+				</c:forEach>
+				<tr>
+					<td colspan="2" style="text-align:left">
+						Monthly Total
+					</td>
+					<td><c:out value="${sum_deb}"></c:out></td>
+					<td><c:out value="${sum_cred}"></c:out></td>
+					<td><c:out value="${balance}"></c:out></td>
+				</tr>
+				<tr>
+					<td colspan="4" style="text-align:left">
+						Total
+					</td>
+					<td>${balance + fod_balance}</td>
+				</tr>
+			</tbody>
+		</table>
+	</c:forEach>
+	
+			
+			
+		<%-- <div align="center">
 			<div>
 				<input type="button" onClick="" value="<">
 				2019 - 3Q
@@ -121,4 +213,4 @@
 			</table>
 			<p></p>
 		</div>
-		
+		 --%>

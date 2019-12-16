@@ -1,4 +1,3 @@
-
 package com.ts.kaikei.services.impl;
 
 import java.util.ArrayList;
@@ -237,5 +236,26 @@ public class ReportServiceImpl implements ReportService {
 	public List<TBTotalVO> getTbtList(String company_cd) {
 		return statementDAO.selectTBTotal(company_cd);
 	}
+  
+  //GL forward balance find
+	@Override 
+	public  List<ReportGlVO>  Forward_balance(Map<String, Object> Parmas) {
+		return statementDAO.Forward_balance(Parmas); 
+	}
+	
+	//GL data find 
+	@Override 
+	  public List<ReportGlVO> GL_Calculator(Map<String, Object> Parmas){
+		  List<ReportGlVO> vo = statementDAO.GeneralLedgerList(Parmas); 
+		 
+		  return vo;
+	  }
+	  
+	//GL account title list
+	@Override 
+	  public List<AccountVO> Account_title(String company_cd){
+		  return statementDAO.Account_title(company_cd);
+	  }
+
 
 }
