@@ -566,11 +566,19 @@ label {
 	text-align: center;	
 }
 
+.tbt-table th {
+	border: 1px solid black;
+	background-color: #808080!important;
+}
+
 .tbt-table td {
 	border: 1px solid black;
 }
 
-.tbt-table th {
-	border: 1px solid black;
-	background-color: #91c8ff;
+.tbt-table .deb,.debbal {
+	background-color: #CED8F6;
+}
+
+.tbt-table .cred,.credbal {
+	background-color: #F5D0A9;
 }

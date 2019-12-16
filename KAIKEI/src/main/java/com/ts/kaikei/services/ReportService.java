@@ -13,7 +13,6 @@ public interface ReportService {
 	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator();
 	public ArrayList<Integer> PL_Calculator();
 	public ArrayList<Integer> BS_Calculator();
-	public ArrayList<int[]> CTB_Calculator();
-	
+
 	public List<TBTotalVO> getTbtList(String company_cd);
 }

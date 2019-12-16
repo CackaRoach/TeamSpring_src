@@ -8,6 +8,7 @@ $(window).ready(function() {
 	sum.cred = 0;
 	sum.credbal = 0;
 	
+	// Get acc_list
 	acc_list.forEach(function(item) {
 		sum.debbal = 0;
 		sum.deb = 0;
@@ -30,6 +31,7 @@ $(window).ready(function() {
 	$(".Profit").children(".debbal").text("");
 	$(".Cost").children(".credbal").text("");
 
+	// Get total
 	acc_list.forEach(function(item) {
 		sum.debbal += Number($("." + item + ":eq(0)").children(".debbal").text());
 		sum.deb += Number($("." + item + ":eq(0)").children(".deb").text());
