@@ -22,9 +22,7 @@
 	</div>
 	
 	<div align="center">
-		<input id="pre_qt" class="button" type="button" value="<" style="background-color:#fdcb02;">
-			${QT_DATE[0].YEAR} - ${QT_DATE[0].QUARTER}Q
-		<input id="aft_qt" class="button" type="button" value=">" style="background-color:#fdcb02;">
+		${QT_DATE[0].YEAR} - ${QT_DATE[0].QUARTER}Q
 	</div>
 	
 	<c:forEach var="accList" items='${accList}'>

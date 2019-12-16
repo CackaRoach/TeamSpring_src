@@ -1,7 +1,5 @@
 package com.ts.kaikei.controllers;
 
-import java.util.Hashtable;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;

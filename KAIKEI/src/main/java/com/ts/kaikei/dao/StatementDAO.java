@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ts.kaikei.vo.AccountVO;
+import com.ts.kaikei.vo.ReportGlVO;
 import com.ts.kaikei.vo.StatementListVO;
 import com.ts.kaikei.vo.StatementVO;
 import com.ts.kaikei.vo.TBTotalVO;
@@ -21,7 +23,6 @@ public interface StatementDAO {
 	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator();
 	public ArrayList<Integer> PL_Calculator();
 	public ArrayList<Integer> BS_Calculator();
-	public ArrayList<int[]> CTB_Calculator();
 
 	public void stateCompanyDelete(String id);	//manage
 	public void companyCodeCh_std(Map<String, Object> Parmas);	//manage
@@ -29,6 +30,6 @@ public interface StatementDAO {
 	public List<ReportGlVO> GeneralLedgerList(Map<String, Object> Params);	//general ledger report list
 	public List<ReportGlVO> Forward_balance(Map<String, Object> Parmas);	//general ledger report list [Carried Forward]
 	public List<AccountVO> Account_title(String id);	//general ledger report list [account title]
-  
-  public List<TBTotalVO> selectTBTotal(String company_cd);
+
+	public List<TBTotalVO> selectTBTotal(String company_cd);
 }

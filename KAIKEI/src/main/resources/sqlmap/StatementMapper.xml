@@ -134,7 +134,6 @@
      	
     </update>
     
-
     <select id="getStatementList" resultType="StatementVO">
     
     	SELECT 
@@ -251,6 +250,7 @@
 			ACC.title
 			
 		ORDER BY STT.account_cd
+	</select>
     
 	<select id="selectTBTotal" parameterType="String" resultType="TBTotalVO">
 

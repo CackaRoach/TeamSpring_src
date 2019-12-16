@@ -2,6 +2,7 @@ package com.ts.kaikei.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Service;
 import com.ts.kaikei.dao.StatementDAO;
 
 import com.ts.kaikei.services.ReportService;
-
+import com.ts.kaikei.vo.AccountVO;
+import com.ts.kaikei.vo.ReportGlVO;
 import com.ts.kaikei.vo.StatementVO;
 import com.ts.kaikei.vo.TBTotalVO;
 
@@ -228,11 +230,6 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public ArrayList<ArrayList<ArrayList<String>>> GL_Calculator() {
-		return null;
-	}
-
-	@Override
 	public List<TBTotalVO> getTbtList(String company_cd) {
 		return statementDAO.selectTBTotal(company_cd);
 	}
@@ -246,9 +243,7 @@ public class ReportServiceImpl implements ReportService {
 	//GL data find 
 	@Override 
 	  public List<ReportGlVO> GL_Calculator(Map<String, Object> Parmas){
-		  List<ReportGlVO> vo = statementDAO.GeneralLedgerList(Parmas); 
-		 
-		  return vo;
+		  return statementDAO.GeneralLedgerList(Parmas);
 	  }
 	  
 	//GL account title list
