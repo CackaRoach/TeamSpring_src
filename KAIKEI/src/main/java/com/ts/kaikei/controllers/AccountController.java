@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.kaikei.services.AccountService;
+
 import com.ts.kaikei.vo.AccountVO;
+import com.ts.kaikei.vo.CustomerListVO;
 import com.ts.kaikei.vo.CustomerVO;
+import com.ts.kaikei.vo.StatementListVO;
+
 
 @Controller
 public class AccountController {
@@ -40,17 +45,19 @@ public class AccountController {
         logger.info("Call : /account/ledger.do - GET");
 
         String company_cd = (String) httpSession.getAttribute("company_cd");
-
+        
         if (year == null) {
             Calendar calendar = Calendar.getInstance();
 
             year = String.valueOf(calendar.get(Calendar.YEAR));
             month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         }
+        
+        List<StatementListVO> statementList = accountService.getStatements(company_cd, year, month, pagenum);
 
         model.addAttribute("year", year);
         model.addAttribute("month", month);
-        model.addAttribute("statements", accountService.getStatements(company_cd, year, month, pagenum));
+        model.addAttribute("statementList", statementList);
 
         return "/account/ledger";
     }
@@ -74,7 +81,7 @@ public class AccountController {
     @RequestMapping(value = "/account/getAccountTitle.ajax", method = RequestMethod.GET)
     @ResponseBody
     public List<AccountVO> getAccountTitle(String title, HttpSession httpSession, Model model) {
-
+    	
         logger.info("Call : /account/getAccountTitle.ajax - GET title : " + title);
 
         return accountService.getAccountTitle(title);
@@ -106,9 +113,10 @@ public class AccountController {
 
         String company_cd = (String) httpSession.getAttribute("company_cd");
 
-        /* 0 index - FAX = PAGE NUM */
+        List<CustomerListVO> customerList = accountService.getCustomerList(company_cd, searchParam, crtPage, "20");
+        
         /* DEFAULT CUSTOMER COUNT PER PAGE = 20 */
-        model.addAttribute("customerList", accountService.getCustomerList(company_cd, searchParam, crtPage, "20"));
+        model.addAttribute("customerList", customerList);
         model.addAttribute("searchParam", searchParam);
 
         return "/account/customer";
@@ -153,7 +161,9 @@ public class AccountController {
 
         String company_cd = (String) httpSession.getAttribute("company_cd");
 
-        model.addAttribute("customerVO", accountService.getCustomerOf(company_cd, cus_cd));
+        CustomerVO customerVO = accountService.getCustomerOf(company_cd, cus_cd);
+        
+        model.addAttribute("customerVO", customerVO);
 
         return "/account/customerDetail";
     }

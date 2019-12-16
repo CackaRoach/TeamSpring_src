@@ -48,7 +48,7 @@
 				</thead>
 				<tbody>
 				
-					<c:forEach var="item" items="${statements}" varStatus="status">
+					<c:forEach var="item" items="${statementList}" varStatus="status">
 						<tr id="state${status.index}" class="exist">
 							<td><input type="text" name="year" value="${item.year}" maxlength="2" placeholder="Y" /></td>
 		    				<td><input type="text" name="month" value="${item.month}" maxlength="2" placeholder="M" /></td>
@@ -69,11 +69,11 @@
 		</div>
 		
 		<div id="statebtn" align="right" style="padding: 15px">
-			<input type="button" id="saveBtn" class="button" style="display:none" style="margin:5px" onclick="submitStatement();" value="Save"/>
+			<input type="button" id="saveBtn" class="button" style="display:none" style="margin: 5px" onclick="submitStatement();" value="Save"/>
 		</div>
 		
 		<div align="center" style="padding: 30px">
-			<c:forEach var="i" begin="0" end="${statements[0].pagenum - 1}">
+			<c:forEach var="i" begin="0" end="${statementList[0].pagenum - 1}">
 				<a href="/account/ledger.do?pagenum=${i}">${i + 1}</a>
 			</c:forEach>
 		</div>
@@ -83,7 +83,7 @@
 		</div>
 		</form>
 		<div id="data-static">
-			<input type="hidden" id="existrows" value="${fn:length(statements)}"/>
+			<input type="hidden" id="existrows" value="${fn:length(statementList)}"/>
 			<input type="hidden" id="newrows" value="0"/>
 		</div>
 		

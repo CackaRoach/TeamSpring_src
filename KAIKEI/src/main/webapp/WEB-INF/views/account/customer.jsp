@@ -42,15 +42,15 @@
 		        	</tbody>
 	            </table>
 	        </div>
-	        <div align="center">
+	        <div align="right">
+	            <input type="button" style="margin:10px" class="button" value="ADD" onclick="location.href='/account/customerAdd.do'">
+	        </div>
+	        <div align="center" style="margin-bottom: 50px">
  	        	<c:if test="${customerList[0].pagenum ne 0}">
- 	        		<%--  0 index - FAX = PAGE NUM  --%>
 		        	<c:forEach var="i" begin="0" end="${customerList[0].pagenum - 1}">
 		        		<a class="pagenum" href="/account/customer.do?crtPage=${i}&searchParam=${searchParam}">${i + 1}</a> 
 		        	</c:forEach>
 	        	</c:if>
 	        </div>
-	        <div align="right">
-	            <input type="button" style="margin:10px" class="button" value="ADD" onclick="location.href='/account/customerAdd.do'">
-	        </div>
+
 	    </div>

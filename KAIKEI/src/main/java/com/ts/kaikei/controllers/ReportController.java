@@ -2,6 +2,8 @@ package com.ts.kaikei.controllers;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ts.kaikei.services.ReportService;
+import com.ts.kaikei.vo.TBTotalVO;
 
 
 @Controller
@@ -51,7 +54,9 @@ public class ReportController {
 		
 		String company_cd = (String)session.getAttribute("company_cd");
 		
-		model.addAttribute("tbtList", reportService.getTbtList(company_cd));
+		List<TBTotalVO> tbtList = reportService.getTbtList(company_cd);
+		
+		model.addAttribute("tbtList", tbtList);
 
 		return "/report/tbt";
 	}

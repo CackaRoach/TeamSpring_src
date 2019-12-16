@@ -25,7 +25,6 @@
 					</tr>
 				</table>
 				<input type="submit" value="Modify" onClick = "return pChangeCheck()">
-				<input type="reset" value="Reset">
 				<input type="button" onClick = "location.href='/setting/personal.do'" value="Cancel">
 			</form>
 		</div>

@@ -1,5 +1,7 @@
 package com.ts.kaikei.controllers;
 
+import java.util.Hashtable;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ import com.ts.kaikei.vo.UserVO;
 public class CommonController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
-	
+
 	@Autowired
 	private CommonService commonService;
 
@@ -50,7 +52,7 @@ public class CommonController {
 			model.addAttribute("loginState", "Unapproved Account");
 			return "/login";
 		}
-	
+		
 		httpSession.setAttribute("id", getUserVO.getId());
 		httpSession.setAttribute("posit_cd", getUserVO.getPosit_cd());
 		httpSession.setAttribute("company_cd", getUserVO.getCompany_cd());

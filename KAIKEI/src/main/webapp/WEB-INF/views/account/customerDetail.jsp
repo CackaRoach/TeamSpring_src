@@ -6,7 +6,7 @@
 		        <span style="font-size: 1.7em;">Customer</span>
 		    </div>
 		    <hr>
-		    <div style="border:1px solid black; padding:15px; margin: 5px; width: 1100px;">
+		    <div style="border:1px solid black; padding:15px; margin: 5px;">
 		  		<form id="customerForm" name="customerForm">
 		        <div style="margin-bottom: 30px;">
 		            <table class="cus-table">
