@@ -13,13 +13,13 @@ function submit() {
 	var form = document.getElementById("form");
 
 	if(document.getElementById("id").value == "") {
-		alert("IDを入力してください!");
+		alert("ID繧貞�･蜉帙＠縺ｦ縺上□縺輔＞!");
 		document.getElementById("id").focus();
 		return false;
 	}
 
 	if(document.getElementById("password").value == "") {
-		alert("パスワードを入力してください!");
+		alert("繝代せ繝ｯ繝ｼ繝峨ｒ蜈･蜉帙＠縺ｦ縺上□縺輔＞!");
 		document.getElementById("password").focus();
 		return false;
 	}
@@ -70,7 +70,6 @@ function submit() {
 			</div>
 		</div>
     </div>
-    
     <span class="spanLoginFont">${loginState}</span>
 </body>
 </html>

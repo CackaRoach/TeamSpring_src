@@ -26,6 +26,11 @@ label {
 	font-size: 0.8em;
 }
 
+#ln {
+	margin: 0px;
+	border-bottom: 0px;
+}
+
 #header {
     background-color: #2B5CAB;
     height: 50px;
@@ -76,7 +81,6 @@ label {
 #nav {
     height: 80px;
 	background-color: white;
-	border-bottom: 1px solid gray;
 }
 
 .gnb {
@@ -111,31 +115,55 @@ label {
 	color: black;
 }
 
+.gnb-bg {
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 100;
+}
+
 .gnb-dth2 {
 	float: right;
-	width: 55%;
+	width: 100%;
 	display: none;
-	background-color: #e3e3e3;
+	background-color: white;
+	border-top: 3px solid #1188ff;
 	box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
 	z-index: 300;
 }
 
 .gnb-dth2>ul {
+	height: 267px;
 	float: left;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 10px;
 	list-style: none;
-	width: 33.3%;
+	width: 29%;
 }
 
+.gnb-dth2>ul:not(:first-child) {
+	border-left: 1px solid gray;
+}
+
+
+.gnb-dth2>ul>li:first-child {
+	padding: 10px;
+	border-bottom: 1px dotted gray;
+	font-size: 1.1em;
+	cursor: default;
+}
 
 .gnb-dth2>ul>li>a {
 	color: blue;
-	padding: 10px;
+	padding: 15px;
 	display: block;
 }
 
-.gnb-dth2>ul>li:hover {
+.gnb-dth2>ul>li>a:hover {
 	text-decoration: underline;
 }
 
@@ -329,6 +357,18 @@ label {
 	cursor: pointer;
 }
 
+.select-menu {
+	border: 2px solid #106EE0;
+	color: black;
+	padding: 8px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
 .loginbutton {
 	height: 70px;
 	background-color: #106EE0;
@@ -418,30 +458,6 @@ label {
 
 .navbtn:hover {
 	background-color: #0000ff;
-}
-
-.dropdown-contents>a:hover {
-	background-color: #b6b6b6;
-}
-
-.dropdown:hover .dropdown-contents {
-	display: block;
-}
-
-.dropdown-contents {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-}
-
-.dropdown-contents a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
 }
 
 .search-box {
@@ -569,8 +585,6 @@ label {
 	color: white;
 }
 
-
-
 .greport>tbody>tr:nth-of-type(odd) {
     background-color: #f9f9ce;
 }
@@ -579,4 +593,25 @@ label {
 	background-color: #91c8ff;
 }
 
+.tbt-table {
+	margin-bottom: 30px;
+	border-collapse: collapse;
+	text-align: center;	
+}
 
+.tbt-table th {
+	border: 1px solid black;
+	background-color: #808080!important;
+}
+
+.tbt-table td {
+	border: 1px solid black;
+}
+
+.tbt-table .deb,.debbal {
+	background-color: #CED8F6;
+}
+
+.tbt-table .cred,.credbal {
+	background-color: #F5D0A9;
+}

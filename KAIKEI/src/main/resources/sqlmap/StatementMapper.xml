@@ -4,33 +4,55 @@
 <mapper namespace="com.ts.kaikei.dao.StatementDAO">
 
     <select id="selectStatementList" parameterType="Map" resultType="StatementListVO">
-    
-    	SELECT 
-    		seq,
-    		TO_CHAR(STT.date, 'YY') AS year, 
-    		TO_CHAR(STT.date, 'MM') AS month, 
-    		TO_CHAR(STT.date, 'DD') AS date,
-    		STT.account_cd, 
-    		ACC.title as acc_title, 
-    		STT.customer_cd, 
-    		CUS.title as cus_title,
-    		STT.classify, 
-    		STT.debtor, 
-    		STT.creditor, 
-    		STT.abs,
-    		STT.mod_date
-    	FROM 
-    		statements AS STT, 
-    		account AS ACC, 
-    		customer AS CUS
-    	WHERE 1=1
-	    	AND STT.company_cd = #{company_cd}
-	    	AND STT.date <![CDATA[>=]]> '2019-11-01' 
-	    	AND STT.date <![CDATA[<]]> '2019-12-31'
-	    	AND STT.company_cd = CUS.company_cd
-	    	AND STT.customer_cd = CUS.cus_cd
-	    	AND STT.account_cd = ACC.acc_cd
-		ORDER BY SEQ ASC
+    	SELECT
+    		*
+    	FROM
+    		(
+	    	SELECT 	
+				(
+				SELECT 
+					((COUNT(*) - 1) / 15) 
+				FROM
+					statements
+				WHERE 1=1
+			    	AND company_cd = '00001'
+			    	AND date  <![CDATA[>=]]>  '2019-11-01' 
+			    	AND date  <![CDATA[<]]>  '2019-12-31'
+				)as pagenum,
+	    		seq,
+	    		TO_CHAR(STT.date, 'YY') AS year, 
+	    		TO_CHAR(STT.date, 'MM') AS month, 
+	    		TO_CHAR(STT.date, 'DD') AS date,
+	    		STT.account_cd, 
+	    		ACC.title as acc_title, 
+	    		STT.customer_cd, 
+	    		CUS.title as cus_title,
+	    		STT.classify, 
+	    		STT.debtor, 
+	    		STT.creditor, 
+	    		STT.abs,
+	    		STT.mod_date
+	    	FROM 
+	    		statements AS STT, 
+	    		account AS ACC, 
+	    		customer AS CUS
+	    	WHERE 1=1
+		    	AND STT.company_cd = '00001'
+		    	AND STT.date  <![CDATA[>=]]>  '2019-11-01' 
+		    	AND STT.date  <![CDATA[<]]>  '2019-12-31'
+		    	AND STT.company_cd = CUS.company_cd
+		    	AND STT.customer_cd = CUS.cus_cd
+		    	AND STT.account_cd = ACC.acc_cd
+		    	
+		    ORDER BY STT.date DESC, seq DESC
+		    <if test="pagenum == 0">
+		    	LIMIT 15 OFFSET ${pagenum} * 15
+			</if>
+			<if test="pagenum != 0">
+		    	LIMIT 30 OFFSET ${pagenum} * 30 - 15
+			</if>
+			) AS foo
+		ORDER BY year ASC, month ASC, date ASC
 		
     </select>
     
@@ -229,6 +251,41 @@
 			ACC.title
 			
 		ORDER BY STT.account_cd
+    
+	<select id="selectTBTotal" parameterType="String" resultType="TBTotalVO">
+
+		SELECT
+			STT.acc_cd,
+			CASE
+				WHEN STT.acc_cd::INTEGER > 980 THEN 'Cost'
+				WHEN STT.acc_cd::INTEGER > 960 THEN 'Asset'
+				WHEN STT.acc_cd::INTEGER > 450 THEN 'Cost'
+				WHEN STT.acc_cd::INTEGER > 400 THEN 'Profit'
+				WHEN STT.acc_cd::INTEGER > 330 THEN 'Capital'
+				WHEN STT.acc_cd::INTEGER > 250 THEN 'Debt'
+				WHEN STT.acc_cd::INTEGER > 100 THEN 'Asset'
+			END AS classify,
+			ACC.title,
+			STT.deb,
+			STT.deb - STT.cred AS debbal,
+			STT.cred,
+			STT.cred - STT.deb AS credbal
+		FROM
+			(
+			SELECT
+				account_cd AS acc_cd,
+				SUM(debtor) AS deb,
+				SUM(creditor) AS cred
+			FROM
+				statements
+			WHERE 1=1
+				AND company_cd = #{company_cd}
+			GROUP BY account_cd
+			) AS STT, account AS ACC
+		WHERE
+			ACC.acc_cd = STT.acc_cd
+		ORDER BY ACC.acc_cd ASC
+
 	</select>
 
 </mapper>

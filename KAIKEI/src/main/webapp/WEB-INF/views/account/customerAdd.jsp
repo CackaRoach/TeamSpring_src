@@ -6,7 +6,7 @@
 		    </div>
 		    <hr>
 		    <form action="/account/customerAddExc.do" method="post">
-		    	<div style="border:1px solid black; padding:30px; margin:5px; width: 1100px;">
+		    	<div style="border:1px solid black; padding:30px; margin:5px;">
 		    		<div>
 			            <table class="cus-table">
 			                <tbody>

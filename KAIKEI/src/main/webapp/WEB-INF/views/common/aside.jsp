@@ -14,16 +14,20 @@
 					<li id="aside-report-pl"><a href="/report/pl.do">P/L</a></li>
 					<li id="aside-report-bs"><a href="/report/bs.do">B/S</a></li>
 					<li id="aside-report-gl"><a href="/report/gl.do">General Ledger</a></li>
-					<li id="aside-report-ctb"><a href="/report/ctb.do">Compound Trial Balance</a></li>
+					<li id="aside-report-tbt"><a href="/report/tbt.do">Trial Balance of Totals</a></li>
 				</ul>
 				<ul id="aside-chart" class="aside-bar">
 					<li id="aside-chart-pl"><a href="/chart/pl.do">P/L</a></li>
 					<li id="aside-chart-bs"><a href="/chart/bs.do">B/S</a></li>
 				</ul>
 				<ul id="aside-setting" class="aside-bar">
-					<li id="aside-setting-personal"><a href="/setting/personal.do">Personal</a></li>
-					<li id="aside-setting-company"><a href="/setting/company.do">Company</a></li>
-					<li id="aside-setting-code"><a href="/setting/code.do">Employee</a></li>
+					<c:if test="${posit_cd ne 'POS001'}">
+						<li id="aside-setting-personal"><a href="/setting/personal.do">Personal</a></li>
+					</c:if>
+					<c:if test="${posit_cd ne 'POS003'}">
+						<li id="aside-setting-company"><a href="/setting/company.do">Company</a></li>
+						<li id="aside-setting-employee"><a href="/setting/employee.do">Employee</a></li>
+					</c:if>
 				</ul>
 				<ul id="aside-manage" class="aside-bar">
 					<li id="aside-manage-company"><a href="/manage/company.do">Company</a></li>

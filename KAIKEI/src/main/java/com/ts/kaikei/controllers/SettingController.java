@@ -1,5 +1,7 @@
 package com.ts.kaikei.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -101,5 +103,47 @@ public class SettingController {
 		settingService.updateCompany(companyVO);
 		
 		return "/setting/company";
+	}
+	
+	@RequestMapping(value = "/setting/employee.do", method = RequestMethod.GET)
+	public String employeeMain(HttpSession session, Model model) {
+		logger.info("Call : /setting/employee.do - GET");
+		String company_cd = session.getAttribute("company_cd").toString();
+
+		List<UserVO> acceptedList = settingService.getAcceptedUserList(company_cd);
+		List<UserVO> waitingList = settingService.getWaitingUserList(company_cd);
+
+		for(UserVO u : acceptedList)
+			if(u.getPosit_cd() == "POS001")
+				u.setPosit_cd("Admin");
+			else if(u.getPosit_cd() == "POS002")
+					u.setPosit_cd("CEO");
+			else
+				u.setPosit_cd("Employee");
+
+		model.addAttribute("acceptedList", acceptedList);
+		model.addAttribute("acceptedListSize", acceptedList.size());
+		model.addAttribute("waitingList", waitingList);
+		model.addAttribute("waitingListSize", waitingList.size());
+
+		return "/setting/employee";
+	}
+
+	@RequestMapping(value = "/setting/employeeAccept.do", method = RequestMethod.GET)
+	public String employeeAccept(String id, HttpSession session, Model model) {
+		logger.info("Call : /setting/employeeAccept.do - GET");
+
+		settingService.acceptUser(id);
+
+		return "redirect:/setting/employee.do";
+	}
+
+	@RequestMapping(value = "/setting/employeeDelete.do", method = RequestMethod.GET)
+	public String employeeDelete(String id, HttpSession session, Model model) {
+		logger.info("Call : /setting/employeeDelete.do - GET");
+
+		settingService.deleteUser(id);
+
+		return "redirect:/setting/employee.do";
 	}
 }

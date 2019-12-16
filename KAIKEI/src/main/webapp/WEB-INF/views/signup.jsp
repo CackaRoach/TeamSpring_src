@@ -47,7 +47,6 @@
 		
 	}
 	
-	
 </script>
 <body>
 	<div align="center" style="padding:10px 0px; background-color:#1591ff;">

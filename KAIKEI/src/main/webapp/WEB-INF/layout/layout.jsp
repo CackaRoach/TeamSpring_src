@@ -13,21 +13,23 @@
 <script>
 	$(window).ready(function() {
 		setTimeout(function() {
-		   	$(".gnb-dth1").hover(function() {
-		   		$(".gnb-dth2").stop().slideDown(180);
-				
-		    }, function() {
-		    	$(".gnb-dth2").stop().slideUp(180);
-		    });
-		
-		   	$(".gnb-dth2").hover(function() {
-		   		$(".gnb-dth2").stop().slideDown(180);
-		    }, function() {
-		    	$(".gnb-dth2").stop().slideUp(180);
+			$(".gnb-dth1").hover(function() {
+				$(".gnb-bg").css("display", "block");
+				$(".gnb-dth2").stop().slideDown(180);
+			}, function() {
+				$(".gnb-bg").css("display", "none");
+				$(".gnb-dth2").stop().slideUp(180);
 			});
+		
+			$(".gnb-dth2").hover(function() {
+				$(".gnb-bg").css("display", "block");
+				$(".gnb-dth2").stop().slideDown(180);
+			}, function() {
+				$(".gnb-bg").css("display", "none");
+				$(".gnb-dth2").stop().slideUp(180);
+			});
+		}, 300);
 	});
-
-	}, 300);
 	
  	$(window).load(function() {
    		var path = window.location.pathname.split('/');
@@ -57,12 +59,14 @@
     <div id="nav">
 	    <tiles:insertAttribute name="nav" />
     </div>
+    <hr id="ln">
     <div id="aside">
 	    <tiles:insertAttribute name="aside" />
     </div>
     <div id="section">
     	<tiles:insertAttribute name="section" />
-    </div>    
+    </div>
+    <hr id="ln">
     <div id="footer">
 	    <tiles:insertAttribute name="footer" />
    	</div>    

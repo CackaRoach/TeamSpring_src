@@ -1,6 +1,7 @@
 package com.ts.kaikei.services.impl;
 
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,10 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	
 	@Override
-	public List<StatementListVO> getStatements(String company_cd, String year, String month, String crtPage) {
+	public List<StatementListVO> getStatements(String company_cd, String year, String month, String pagenum) {
 		
-		if(crtPage == null) {
-			crtPage = "0";
+		if(pagenum == null) {
+			pagenum = "0";
 		}
 		
 		Map<String, String> searchParams = new HashMap<String, String>();
@@ -49,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
 		searchParams.put("company_cd", company_cd);
 		searchParams.put("year", year);
 		searchParams.put("month", month);
-		searchParams.put("crtPage", crtPage);
+		searchParams.put("pagenum", pagenum);
 		
 		return statementDAO.selectStatementList(searchParams);
 	}

@@ -1,7 +1,5 @@
 package com.ts.kaikei.controllers;
 
-
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -22,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ts.kaikei.services.ReportService;
+
 import com.ts.kaikei.vo.AccountVO;
 import com.ts.kaikei.vo.ReportGlVO;
+import com.ts.kaikei.vo.TBTotalVO;
 
 
 @Controller
@@ -43,20 +43,6 @@ public class ReportController {
 		
 		return "/report/bs";
 	}
-	
-	
-	  //GL page
-	  
-	/*
-	 * @RequestMapping(value = "/report/gl.do", method = RequestMethod.GET) public
-	 * String ledgerGL(Model model) { logger.info("Call : /report/gl.do - GET");
-	 * 
-	 * model.addAttribute("GL_dataList", reportService.GL_Calculator());
-	 * 
-	 * return "/report/gl"; }
-	 */
-	 
-	
 	
 	  //General Ledger List Page (GL Page)
 	  @RequestMapping(value = "/report/gl.do", method = RequestMethod.GET) 
@@ -94,28 +80,28 @@ public class ReportController {
 		  model.setViewName("/report/gl"); 
 		  return model; 
 	  }
-	 
 	
-	//CTB page
-	@RequestMapping(value = "/report/ctb.do", method = RequestMethod.GET)
-	public String ledgerCTB(Model model) {
-		logger.info("Call : /report/ctb.do - GET");
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		System.out.println(reportService.getStatementList().size());
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	// TBT page
+	@RequestMapping(value = "/report/tbt.do", method = RequestMethod.GET)
+	public String ledgerCTB(HttpSession session, Model model) {
+		logger.info("Call : /report/tbt.do - GET");
 		
-		model.addAttribute("accountList", reportService.get_Sorted_Acconutlist());
-		model.addAttribute("CTB_dataList", reportService.CTB_Calculator());
-		return "/report/ctb";
+		String company_cd = (String)session.getAttribute("company_cd");
+		
+		List<TBTotalVO> tbtList = reportService.getTbtList(company_cd);
+		
+		model.addAttribute("tbtList", tbtList);
+
+		return "/report/tbt";
 	}
 	
-	//CL page
+	//PL page
 	@RequestMapping(value = "/report/pl.do", method = RequestMethod.GET)
 	public String ledgerPL(Model model) {
 		logger.info("Call : /report/pl.do - GET");
-		reportService.PL_Calculator();
 		
 		model.addAttribute("PL_dataList", reportService.PL_Calculator());
+		
 		return "/report/pl";
 	}
 

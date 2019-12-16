@@ -8,26 +8,30 @@ $(window).ready(function() {
 	var yy = String(today.getFullYear()).substring(2);
 	var mm = today.getMonth() + 1;
 
+	if(window.location.href.indexOf("?") < 0 || window.location.href.indexOf("?pagenum=0") > 0) {
 	// Init Row
-	for(newrows = 0; newrows < (30 - existrows); newrows++) {
-		var fixedrows = Number(existrows) + Number(newrows);
-		
-		var rowItem = "";
-		rowItem += "<tr id='state" + fixedrows + "' class='new'>";
-		rowItem += "<td><label>" + yy + "</label></td>";
-		rowItem += "<td><label>" + mm + "</label></td>";
-		rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
-		rowItem += "<td><input type='text' name='acc_title' placeholder='0000'/><label class='account_cd'></label></td>";
-		rowItem += "<td><input type='text' name='cus_title' placeholder='00000'/><label class='customer_cd'></label></td>";
-		rowItem += "<td><input type='text' name='classify' placeholder='Classify'/></td>";
-		rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
-		rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
-		rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
-		rowItem += "<td></td>";
-		rowItem += "<td><a href='javascript:removeRow(" + fixedrows + ");'>X</a></td>";
-		rowItem += "</tr>";
-		
-		$("#statement").append(rowItem);
+		for(newrows = 0; newrows < (30 - existrows); newrows++) {
+			
+			
+			var fixedrows = Number(existrows) + Number(newrows);
+			
+			var rowItem = "";
+			rowItem += "<tr id='state" + fixedrows + "' class='new'>";
+			rowItem += "<td><input type='text' name='year' value='" + yy +"' maxlength='2' placeholder='Y'/></td>";
+			rowItem += "<td><input type='text' name='month' value='" + mm +"' maxlength='2' placeholder='M'/></td>";
+			rowItem += "<td><input type='text' name='date' maxlength='2' placeholder='D'/></td>";
+			rowItem += "<td><input type='text' name='acc_title' placeholder='Title'/><label class='account_cd'></label></td>";
+			rowItem += "<td><input type='text' name='cus_title' placeholder='Customer'/><label class='customer_cd'></label></td>";
+			rowItem += "<td><input type='text' name='classify' placeholder='Classify'/></td>";
+			rowItem += "<td><input type='text' name='debtor' placeholder='Debtor'/></td>";
+			rowItem += "<td><input type='text' name='creditor' placeholder='Creditor'/></td>";
+			rowItem += "<td><input type='text' name='abs' placeholder='ABS'/></td>";
+			rowItem += "<td></td>";
+			rowItem += "<td><a href='javascript:removeRow(" + fixedrows + ");'>X</a></td>";
+			rowItem += "</tr>";
+			
+			$("#statement").append(rowItem);
+		}
 	}
 	
 	$("newrows").val(newrows);
@@ -282,7 +286,6 @@ $(window).ready(function() {
 	// autocomplete
 	// account
 	$("#statement tbody tr td input[name=acc_title]").on("blur", function(event) {
-		// var row = $(event.target.parentElement.parentElement);
 		elemNum = -1;
 		elemMax = -1;
 		preInput = null;
@@ -296,7 +299,6 @@ $(window).ready(function() {
 	
 	// customer
 	$("#statement tbody tr td input[name=cus_title]").on("blur", function(event) {
-		// var row = $(event.target.parentElement.parentElement);
 		elemNum = -1;
 		elemMax = -1;
 		preInput = null;
@@ -359,76 +361,65 @@ function removeRow(row) {
 // JSON - STATE / DATE/ ACCOUNT_CD / CUSTOMER_CD / CLASSIFY / DEBTOR / CREDITOR / ABS / SEQ(Delete, Update)
 function submitStatement() {
 	
-	var changerow = $("#changeRow").val().split(",");
-	
+	var changerows = $("#changeRow").val().split(",");
 	var statement = new Array();
-	var today = new Date($("#year").val(), $("#month").val());
-	var date = today.toISOString().substring(0, 7)
-	
-	
-	// Perfomance Issue (Check All -> Processing All)
-	for(var i = 0; i < changerow.length - 1; i++) {
+
+	for(var i = 0; i < changerows.length - 1; i++) {
 		var row = new Object();
+		var changerow = $("#state" + changerows[i]);
 		
-		if($("#state" + changerow[i]).hasClass("new statementchanged")) {
-			row.state = "insert";
-			
-			if($("#state" + changerow[i]).find("input[name=date]").val() == ""
-				|| $("#state" + changerow[i]).find("label[class=account_cd]").text() == ""
-					|| $("#state" + changerow[i]).find("label[class=customer_cd]").text() == ""
-						|| $("#state" + changerow[i]).find("input[name=classify]").val() == "") {
-				alert("Check your data field!");
-				return false;
-			}
-			
-			row.date = date + "-" + $("#state" + changerow[i]).find("input[name=date]").val();
-			row.account_cd = $("#state" + changerow[i]).find("label[class=account_cd]").text();
-			row.customer_cd = $("#state" + changerow[i]).find("label[class=customer_cd]").text();
-			row.classify = $("#state" + changerow[i]).find("input[name=classify]").val();
-			row.debtor = $("#state" + changerow[i]).find("input[name=debtor]").val();
-			row.creditor = $("#state" + changerow[i]).find("input[name=creditor]").val();
-			row.abs = $("#state" + changerow[i]).find("input[name=abs]").val();
-			
-			statement.push(row);
-			
-		} else if($("#state" + changerow[i]).hasClass("exist statementchanged")) {
-			row.state = "update";
-			
-			if($("#state" + changerow[i]).find("input[name=date]").val() == ""
-				|| $("#state" + changerow[i]).find("label[class=account_cd]").text() == ""
-					|| $("#state" + changerow[i]).find("label[class=customer_cd]").text() == ""
-						|| $("#state" + changerow[i]).find("input[name=classify]").val() == "") {
-				alert("Check your data field!");
-				return false;
-			}
-			
-			row.seq = $("#state" + changerow[i]).find("input[name=seq]").val();
-			
-			row.date = date + "-" + $("#state" + changerow[i]).find("input[name=date]").val();
-			row.account_cd = $("#state" + changerow[i]).find("label[class=account_cd]").text();
-			row.customer_cd = $("#state" + changerow[i]).find("label[class=customer_cd]").text();
-			row.classify = $("#state" + changerow[i]).find("input[name=classify]").val();
-			row.debtor = $("#state" + changerow[i]).find("input[name=debtor]").val();
-			row.creditor = $("#state" + changerow[i]).find("input[name=creditor]").val();
-			row.abs = $("#state" + changerow[i]).find("input[name=abs]").val();
-			
-			statement.push(row);
-			
-		} else if($("#state" + changerow[i]).hasClass("exist statementdelete")) {
+		//DELETE
+		if(changerow.hasClass("exist statementdelete")) {
 			row.state = "delete";
-			row.seq = $("#state" + changerow[i]).find("input[name=seq]").val();
+			row.seq = changerow.find("input[name=seq]").val();
 			
 			statement.push(row);
-		} 
+		
+		// INSERT, UPDATE
+		} else {
+			
+			if(changerow.find("input[name=year]").val() == ""
+				||	changerow.find("input[name=month]").val() == ""
+					|| changerow.find("input[name=date]").val() == ""
+						|| changerow.find("label[class=account_cd]").text() == ""
+							|| changerow.find("label[class=customer_cd]").text() == ""
+								|| changerow.find("input[name=classify]").val() == "") {
+				alert("Check your data field!");
+				return false;
+			}
+			
+			row.date = "20";
+			row.date += changerow.find("input[name=year]").val() + "-";
+			row.date += changerow.find("input[name=month]").val()  + "-";
+			row.date += changerow.find("input[name=date]").val();
+			
+			row.account_cd = changerow.find("label[class=account_cd]").text();
+			row.customer_cd = changerow.find("label[class=customer_cd]").text();
+			row.classify = changerow.find("input[name=classify]").val();
+			row.debtor = changerow.find("input[name=debtor]").val();
+			row.creditor = changerow.find("input[name=creditor]").val();
+			row.abs = changerow.find("input[name=abs]").val();
+			
+			// INSERT
+			if(changerow.hasClass("new statementchanged")) {
+				row.state = "insert";
+				
+			// UPDATE
+			} else {
+				row.state = "update";
+				row.seq = changerow.find("input[name=seq]").val();
+			}
+			
+			statement.push(row);
+		}
 	}
 
 	if(statement.length == 0) {
 		location.href="/account/ledger.do";
 		return false;
 	}
-	
-	var jsonState = JSON.stringify(statement);
 
+	var jsonState = JSON.stringify(statement);
 	
 	$.ajax({
 		url : "/account/statementSave.ajax",
@@ -446,13 +437,3 @@ function submitStatement() {
 
 }
 
-var timer;
-function debug() {
-	
-	if (timer) {
-	  clearTimeout(timer);
-	}
-	timer = setTimeout(function() {
-	  console.log('Request ajax');
-	}, 1000);
-}

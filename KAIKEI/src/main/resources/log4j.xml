@@ -6,30 +6,43 @@
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+			<param name="ConversionPattern" value="%-5p: %d{HH:mm:ss} %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- Appenders for jdbc --> 
+	<appender name="console-jdbc" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %d{HH:mm:ss} %c %n\t\t%m%n" />
 		</layout>
 	</appender>
 	
 	 <!--  Application Loggers  --> 
 	<logger name="com.ts.kaikei">
 		<level value="info" />
+		<appender-ref ref="console" />
 	</logger>
-	
+
 	<!-- 3rdparty Loggers --> 
 	<logger name="org.springframework.core">
 		<level value="info" />
+		<appender-ref ref="console" />
 	</logger>	
 	
 	<logger name="org.springframework.beans">
 		<level value="info" />
+		<appender-ref ref="console" />
 	</logger>
 	
 	<logger name="org.springframework.context">
 		<level value="info" />
+		<appender-ref ref="console" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="OFF" />
+		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- Mybatis Logger -->
@@ -43,6 +56,7 @@
 
     <logger name="jdbc.sqltiming">
     	<level value="INFO"/>
+    	<appender-ref ref="console-jdbc" />
     </logger>
 	
 	<logger name="jdbc.resultset">
@@ -50,7 +64,7 @@
 	</logger>
 	
 	<logger name="jdbc.resultsettable">
-		<level value="OFF"/>
+		<level value="INFO"/>
 	</logger>
 	
 	<logger name="jdbc.audit">
@@ -58,11 +72,13 @@
 	</logger>
 	
 
-	 <!-- Root Logger --> 
+	<!-- Root Logger --> 
+	<!-- 
 	<root>
 		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
+	-->
 	
 </log4j:configuration>
 

@@ -12,20 +12,22 @@
 <script>
 	$(window).ready(function() {
 		setTimeout(function() {
-	       	$(".gnb-dth1").hover(function() {
-	       		$(".gnb-dth2").stop().slideDown(180);
-				
-	        }, function() {
-	        	$(".gnb-dth2").stop().slideUp(180);
-	        });
-	
-	       	$(".gnb-dth2").hover(function() {
-	       		$(".gnb-dth2").stop().slideDown(180);
-	        }, function() {
-	        	$(".gnb-dth2").stop().slideUp(180);
-	    });
-	    
-	   	}, 300);
+			$(".gnb-dth1").hover(function() {
+				$(".gnb-bg").css("display", "block");
+				$(".gnb-dth2").stop().slideDown(180);
+			}, function() {
+				$(".gnb-bg").css("display", "none");
+				$(".gnb-dth2").stop().slideUp(180);
+			});
+		
+			$(".gnb-dth2").hover(function() {
+				$(".gnb-bg").css("display", "block");
+				$(".gnb-dth2").stop().slideDown(180);
+			}, function() {
+				$(".gnb-bg").css("display", "none");
+				$(".gnb-dth2").stop().slideUp(180);
+			});
+		}, 300);
 	});
 </script>
 <body style="max-width: 100%">

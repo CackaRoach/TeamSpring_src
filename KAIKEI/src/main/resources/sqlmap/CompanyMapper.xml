@@ -6,11 +6,11 @@
 	<select id="checkCode" parameterType="String" resultType="int" >
     
         SELECT
-        	count(*)
+            count(*)
         FROM
-        	company
+            company
         WHERE 1=1
-        	AND company_cd = #{company_cd}
+            AND company_cd = #{company_cd}
         
     </select>
     
@@ -24,72 +24,72 @@
     </select>
 
 
-	<insert id="insertCompany" parameterType="CompanyRegistVO" >
+    <insert id="insertCompany" parameterType="CompanyRegistVO" >
     
-    	CREATE
-    		SEQUENCE seq_company_${company_cd};
-    
+        CREATE
+            SEQUENCE seq_company_${company_cd};
+            
         INSERT INTO
-        	company(
-        		company_cd, 
-        		auth_cd, 
-        		title, 
-        		reg_cd, 
-        		fax, 
-        		phone, 
-        		domain, 
-        		ent_id, 
-        		ent_date, 
-        		ent_prog, 
-        		mod_id, 
-        		mod_date, 
-        		mod_prog
-        	)
+           company(
+               company_cd, 
+               auth_cd, 
+               title, 
+               reg_cd, 
+               fax, 
+               phone, 
+               domain, 
+               ent_id, 
+               ent_date, 
+               ent_prog, 
+               mod_id, 
+               mod_date, 
+               mod_prog
+           )
         VALUES (
-        	#{company_cd}, 
-        	#{auth_cd}, 
-        	#{company_title}, 
-        	#{company_regist_cd}, 
-        	#{company_fax}, 
-        	#{company_phone}, 
-        	#{company_domain}, 
-        	#{ent_id}, 
-        	NOW(), 
-        	'Web-kaikei', 
-        	#{mod_id}, 
-        	NOW(), 
-        	'Web-kaikei'
-        	)
+           #{company_cd}, 
+           #{auth_cd}, 
+           #{company_title}, 
+           #{company_regist_cd}, 
+           #{company_fax}, 
+           #{company_phone}, 
+           #{company_domain}, 
+           #{ent_id}, 
+           NOW(), 
+           'Web-kaikei', 
+           #{mod_id}, 
+           NOW(), 
+           'Web-kaikei'
+           )
         
-	</insert>
+    </insert>
 	
 	<!-- companyList Select MANAGE -->
-	<select id="selectCompany" parameterType="hashmap" resultType="CompanyListVO">
-		SELECT (ROW_NUMBER() OVER()) AS RN, A.company_cd, A.title, A.phone, 
-		CASE WHEN A.auth_cd = 'AUT001' THEN 'ACCEPT'
-		WHEN A.auth_cd = 'AUT002' THEN 'REJECT'
-		WHEN A.auth_cd = 'AUT003' THEN 'HOLD UP' END AS auth_cd,
-		B.name, A.domain
-		FROM company A, users B
-		WHERE 1=1
-		AND A.company_cd = B.company_cd
-		AND B.posit_cd = 'POS002'
-		AND UPPER(A.title) LIKE '%' || UPPER(#{mINPUT}) || '%'
-		 <if test = "STAT_op != '00'">
-		 	<choose>
-				<when test = "STAT_op == '01'">
-					AND A.auth_cd = 'AUT001'
-				</when>
-				<when  test = "STAT_op == '02'">
-					AND A.auth_cd = 'AUT002'
-				</when>
-				<when test = "STAT_op == '03'">
-					AND A.auth_cd = 'AUT003'
-				</when>
-			</choose>
-		</if>
-		ORDER BY RN ASC
-		
+    <select id="selectCompany" parameterType="hashmap" resultType="CompanyListVO">
+        SELECT (ROW_NUMBER() OVER()) AS RN, A.company_cd, A.title, A.phone, 
+        CASE WHEN A.auth_cd = 'AUT001' THEN 'ACCEPT'
+        WHEN A.auth_cd = 'AUT002' THEN 'REJECT'
+        WHEN A.auth_cd = 'AUT003' THEN 'HOLD UP' END AS auth_cd,
+        B.name, A.domain
+        FROM company A, users B
+        WHERE 1=1
+        AND A.company_cd = B.company_cd
+        AND B.posit_cd = 'POS002'
+        AND UPPER(A.title) LIKE '%' || UPPER(#{mINPUT}) || '%'
+        <if test = "STAT_op != '00'">
+            <choose>
+                <when test = "STAT_op == '01'">
+                    AND A.auth_cd = 'AUT001'
+                </when>
+                <when  test = "STAT_op == '02'">
+                    AND A.auth_cd = 'AUT002'
+                </when>
+                <when test = "STAT_op == '03'">
+                    AND A.auth_cd = 'AUT003'
+                </when>
+            </choose>
+        </if>
+        ORDER BY RN ASC
+       
 	</select>
 	
 	<update id="updateCompany" parameterType="CompanyVO">
